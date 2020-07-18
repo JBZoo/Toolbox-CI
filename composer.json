@@ -1,7 +1,7 @@
 {
     "name"              : "jbzoo/toolbox-ci",
     "type"              : "library",
-    "description"       : "__DESCRIPTION__",
+    "description"       : "Toolbox for continuous integration system",
     "license"           : "MIT",
 
     "authors"           : [
@@ -13,7 +13,8 @@
     ],
 
     "require"           : {
-        "php" : "^7.2"
+        "php"             : "^7.2",
+        "symfony/console" : "^4.4||^5.0"
     },
 
     "require-dev"       : {
