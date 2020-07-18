@@ -1,19 +1,22 @@
-# JBZoo - Skeleton (PHP)
+# JBZoo / Toolbox-CI
+
+[![Build Status](https://travis-ci.org/JBZoo/Toolbox-CI.svg?branch=master)](https://travis-ci.org/JBZoo/Toolbox-CI)    [![Coverage Status](https://coveralls.io/repos/JBZoo/Toolbox-CI/badge.svg)](https://coveralls.io/github/JBZoo/Toolbox-CI?branch=master)    [![Psalm Coverage](https://shepherd.dev/github/JBZoo/Toolbox-CI/coverage.svg)](https://shepherd.dev/github/JBZoo/Toolbox-CI)    
+[![Stable Version](https://poser.pugx.org/jbzoo/toolbox-ci/version)](https://packagist.org/packages/jbzoo/toolbox-ci)    [![Latest Unstable Version](https://poser.pugx.org/jbzoo/toolbox-ci/v/unstable)](https://packagist.org/packages/jbzoo/toolbox-ci)    [![Dependents](https://poser.pugx.org/jbzoo/toolbox-ci/dependents)](https://packagist.org/packages/jbzoo/toolbox-ci/dependents?order_by=downloads)    [![GitHub Issues](https://img.shields.io/github/issues/jbzoo/toolbox-ci)](https://github.com/JBZoo/Toolbox-CI/issues)    [![Total Downloads](https://poser.pugx.org/jbzoo/toolbox-ci/downloads)](https://packagist.org/packages/jbzoo/toolbox-ci/stats)    [![GitHub License](https://img.shields.io/github/license/jbzoo/toolbox-ci)](https://github.com/JBZoo/Toolbox-CI/blob/master/LICENSE)
 
 
-[![Build Status](https://travis-ci.org/JBZoo/Skeleton-Php.svg?branch=master)](https://travis-ci.org/JBZoo/Skeleton-Php)    [![GitHub Issues](https://img.shields.io/github/issues/JBZoo/Skeleton-Php)](https://github.com/JBZoo/Skeleton-Php/issues)    [![GitHub License](https://img.shields.io/github/license/JBZoo/Skeleton-Php)](https://github.com/JBZoo/Skeleton-Php/blob/master/LICENSE)
+
+### Installing
+
+```sh
+composer require jbzoo/toolbox-ci
+```
 
 
-This is not a completed library, but only a blank.
-It aims to clean up the minds of programmers and standardize the development of open-source libraries for JBZoo.
-
-
-### Action plan
-
- * Create a new repository (MIT, without .gitignore).
- * Make a checkout of a clean repository for a working machine.
- * [Download the latest version of the skeleton](https://github.com/JBZoo/Skeleton/archive/master.zip).
- * Run the skeleton script for your package through `php ./create-new-project.php Skeleton-Php`
+## Unit tests and check code style
+```sh
+make update
+make test-all
+```
 
 
 ### License
