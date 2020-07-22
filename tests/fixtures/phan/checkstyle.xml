@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<checkstyle version="6.5">
+    <file name="src/JUnit/JUnitXml.php">
+        <error line="37" severity="warning"
+               message="Assigning $this-&amp;gt;rootElement of type \DOMElement|false to property but \JBZoo\ToolboxCI\JUnit\JUnitXml-&amp;gt;rootElement is \DOMElement (false is incompatible)"
+               source="PhanPossiblyFalseTypeMismatchProperty"/>
+        <error line="44" severity="warning"
+               message="Can use \JBZoo\ToolboxCI\JUnit\TestSuiteElement as a return type of addTestSuite"
+               source="PhanPluginCanUseReturnType"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="34" severity="warning" message="Can use string as the type of parameter $name of setName"
+               source="PhanPluginCanUseParamType"/>
+        <error line="36" severity="warning"
+               message="Suspicious order for argument name - This is getting passed to parameter #1 (string $name) of \JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute(string $name, string $value)"
+               source="PhanPluginSuspiciousParamPositionInternal"/>
+        <error line="42" severity="warning" message="Can use string as the type of parameter $classname of setClassname"
+               source="PhanPluginCanUseParamType"/>
+        <error line="52" severity="warning" message="Can use float as the type of parameter $time of setTime"
+               source="PhanPluginCanUseParamType"/>
+        <error line="54" severity="warning"
+               message="Argument 2 ($value) is $time of type float but \JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="63" severity="warning" message="Can use string as the type of parameter $error of addError"
+               source="PhanPluginCanUseParamType"/>
+        <error line="63" severity="warning"
+               message="Can use string as the type of parameter $exceptionMessage of addError"
+               source="PhanPluginCanUseParamType"/>
+        <error line="63" severity="warning" message="Can use string as the type of parameter $type of addError"
+               source="PhanPluginCanUseParamType"/>
+        <error line="63" severity="warning" message="Can use \DOMElement as a return type of addError"
+               source="PhanPluginCanUseReturnType"/>
+        <error line="66" severity="warning"
+               message="Call to method setAttribute on type \DOMElement|false that could be a non-object"
+               source="PhanPossiblyNonClassMethodCall"/>
+        <error line="69" severity="warning"
+               message="Call to method setAttribute on type \DOMElement|false that could be a non-object"
+               source="PhanPossiblyNonClassMethodCall"/>
+        <error line="77" severity="warning"
+               message="Returning $errorElement of type \DOMElement|false but addError() is declared to return \DOMElement (false is incompatible)"
+               source="PhanPossiblyFalseTypeReturn"/>
+        <error line="86" severity="warning" message="Can use string as the type of parameter $error of addFailure"
+               source="PhanPluginCanUseParamType"/>
+        <error line="86" severity="warning"
+               message="Can use string as the type of parameter $exceptionMessage of addFailure"
+               source="PhanPluginCanUseParamType"/>
+        <error line="86" severity="warning" message="Can use string as the type of parameter $type of addFailure"
+               source="PhanPluginCanUseParamType"/>
+        <error line="86" severity="warning" message="Can use \DOMElement as a return type of addFailure"
+               source="PhanPluginCanUseReturnType"/>
+        <error line="89" severity="warning"
+               message="Call to method setAttribute on type \DOMElement|false that could be a non-object"
+               source="PhanPossiblyNonClassMethodCall"/>
+        <error line="92" severity="warning"
+               message="Call to method setAttribute on type \DOMElement|false that could be a non-object"
+               source="PhanPossiblyNonClassMethodCall"/>
+        <error line="100" severity="warning"
+               message="Returning $failureElement of type \DOMElement|false but addFailure() is declared to return \DOMElement (false is incompatible)"
+               source="PhanPossiblyFalseTypeReturn"/>
+        <error line="109" severity="warning"
+               message="Argument 2 ($value) is ((int)($this-&amp;gt;getAttribute('failures')) + 1) of type int but \JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="111" severity="warning"
+               message="Argument 2 ($value) is 1 of type 1 but \JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="121" severity="warning"
+               message="Argument 2 ($value) is ((int)($this-&amp;gt;getAttribute('errors')) + 1) of type int but \JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="123" severity="warning"
+               message="Argument 2 ($value) is 1 of type 1 but \JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="35" severity="warning" message="Can use string as the type of parameter $name of setName"
+               source="PhanPluginCanUseParamType"/>
+        <error line="37" severity="warning"
+               message="Suspicious order for argument name - This is getting passed to parameter #1 (string $name) of \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute(string $name, string $value)"
+               source="PhanPluginSuspiciousParamPositionInternal"/>
+        <error line="55" severity="warning" message="Can use float as the type of parameter $duration of setTime"
+               source="PhanPluginCanUseParamType"/>
+        <error line="57" severity="warning"
+               message="Argument 2 ($value) is $duration of type float but \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="65" severity="warning" message="Can use string as the type of parameter $hostname of setHostname"
+               source="PhanPluginCanUseParamType"/>
+        <error line="73" severity="warning"
+               message="Can use \JBZoo\ToolboxCI\JUnit\TestCaseElement as a return type of addTestCase"
+               source="PhanPluginCanUseReturnType"/>
+        <error line="86" severity="warning" message="Can use php 7.1's void as a return type of incrementTestCount"
+               source="PhanPluginCanUsePHP71Void"/>
+        <error line="89" severity="warning"
+               message="Argument 2 ($value) is ((int)($this-&amp;gt;getAttribute('tests')) + 1) of type int but \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="91" severity="warning"
+               message="Argument 2 ($value) is 1 of type 1 but \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="101" severity="warning"
+               message="Argument 2 ($value) is ((int)($this-&amp;gt;getAttribute('failures')) + 1) of type int but \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="103" severity="warning"
+               message="Argument 2 ($value) is 1 of type 1 but \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="113" severity="warning"
+               message="Argument 2 ($value) is ((int)($this-&amp;gt;getAttribute('errors')) + 1) of type int but \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+        <error line="115" severity="warning"
+               message="Argument 2 ($value) is 1 of type 1 but \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute() takes string"
+               source="PhanTypeMismatchArgumentInternal"/>
+    </file>
+</checkstyle>

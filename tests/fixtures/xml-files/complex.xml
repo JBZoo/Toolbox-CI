@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="All" tests="42" assertions="139" errors="6" warnings="1" failures="3" skipped="2" time="0.048083">
+    <testsuite name="JBZoo\PHPUnit\ToolboxCIReadmeTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCIReadmeTest.php" tests="1" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.003932">
+      <testcase name="testReadmeHeader" class="JBZoo\PHPUnit\ToolboxCIReadmeTest" classname="JBZoo.PHPUnit.ToolboxCIReadmeTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCIReadmeTest.php" line="97" assertions="2" time="0.003932"/>
+    </testsuite>
+    <testsuite name="JBZoo\PHPUnit\ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" tests="12" assertions="6" errors="3" warnings="1" failures="2" skipped="2" time="0.004339">
+      <testcase name="testEcho" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="53" assertions="1" time="0.000154">
+        <system-out>Some echo output</system-out>
+      </testcase>
+      <testcase name="testFail" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="48" assertions="1" time="0.000564">
+        <failure type="PHPUnit\Framework\AssertionFailedError">JBZoo\PHPUnit\ExampleTest::testFail
+Some reason to fail
+
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:51
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:50
+</failure>
+      </testcase>
+      <testcase name="testWarning" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="80" assertions="0" time="0.000362">
+        <warning type="PHPUnit\Framework\Warning">JBZoo\PHPUnit\ExampleTest::testWarning
+Some warning
+
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:82
+</warning>
+      </testcase>
+      <testcase name="testIncomplete" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="43" assertions="0" time="0.000725">
+        <skipped/>
+      </testcase>
+      <testcase name="testNotice" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="75" assertions="0" time="0.000200">
+        <error type="PHPUnit\Framework\Error\Notice">JBZoo\PHPUnit\ExampleTest::testNotice
+Undefined variable: aaa
+
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:77
+</error>
+      </testcase>
+      <testcase name="testNoAssert" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="71" assertions="0" time="0.000063">
+        <error type="PHPUnit\Framework\RiskyTestError">Risky Test
+</error>
+      </testcase>
+      <testcase name="testException" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="85" assertions="0" time="0.000608">
+        <error type="JBZoo\PHPUnit\Exception">JBZoo\PHPUnit\ExampleTest::testException
+JBZoo\PHPUnit\Exception: Exception message
+
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:88
+</error>
+        <system-out>Some echo output
+</system-out>
+      </testcase>
+      <testcase name="testInValid" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="33" assertions="1" time="0.000178">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">JBZoo\PHPUnit\ExampleTest::testInValid
+Failed asserting that false is true.
+
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:107
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:35
+</failure>
+      </testcase>
+      <testcase name="testSkipped" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="38" assertions="0" time="0.000628">
+        <skipped/>
+      </testcase>
+      <testcase name="testErrOutput" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="65" assertions="1" time="0.000718"/>
+      <testcase name="testStdOutput" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="59" assertions="1" time="0.000080"/>
+      <testcase name="testValid" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="28" assertions="1" time="0.000060"/>
+    </testsuite>
+    <testsuite name="JBZoo\PHPUnit\HelperTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/HelperTest.php" tests="3" assertions="4" errors="1" warnings="0" failures="0" skipped="0" time="0.001884">
+      <testcase name="testDom2Array" class="JBZoo\PHPUnit\HelperTest" classname="JBZoo.PHPUnit.HelperTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/HelperTest.php" line="28" assertions="3" time="0.001556"/>
+      <testcase name="testArray2Dom" class="JBZoo\PHPUnit\HelperTest" classname="JBZoo.PHPUnit.HelperTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/HelperTest.php" line="107" assertions="1" time="0.000264"/>
+      <testcase name="testComplexArrayToXml" class="JBZoo\PHPUnit\HelperTest" classname="JBZoo.PHPUnit.HelperTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/HelperTest.php" line="186" assertions="0" time="0.000064">
+        <error type="PHPUnit\Framework\RiskyTestError">Risky Test
+</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="JBZoo\PHPUnit\ConvertersTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ConvertersTest.php" tests="2" assertions="0" errors="2" warnings="0" failures="0" skipped="0" time="0.000983">
+      <testcase name="testPhpmdJson2JUnit" class="JBZoo\PHPUnit\ConvertersTest" classname="JBZoo.PHPUnit.ConvertersTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ConvertersTest.php" line="29" assertions="0" time="0.000730">
+        <error type="PHPUnit\Framework\Error\Warning">JBZoo\PHPUnit\ConvertersTest::testPhpmdJson2JUnit
+DOMDocument::loadXML(): Start tag expected, '&lt;' not found in Entity, line: 1
+
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/Converters/PhpmdJson2JUnit.php:33
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ConvertersTest.php:116
+</error>
+      </testcase>
+      <testcase name="testJUnit2TeamCity" class="JBZoo\PHPUnit\ConvertersTest" classname="JBZoo.PHPUnit.ConvertersTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ConvertersTest.php" line="121" assertions="0" time="0.000253">
+        <error type="Error">JBZoo\PHPUnit\ConvertersTest::testJUnit2TeamCity
+Error: Call to undefined method JBZoo\ToolboxCI\Helper::arrayFilterRecursive()
+
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/Converters/PhpmdJson2JUnit.php:35
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ConvertersTest.php:124
+</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="JBZoo\PHPUnit\ToolboxCIComposerTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCIComposerTest.php" tests="3" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.001659">
+      <testcase name="testPhpRequirements" class="JBZoo\PHPUnit\ToolboxCIComposerTest" classname="JBZoo.PHPUnit.ToolboxCIComposerTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCIComposerTest.php" line="80" assertions="1" time="0.001440"/>
+      <testcase name="testDevMasterAlias" class="JBZoo\PHPUnit\ToolboxCIComposerTest" classname="JBZoo.PHPUnit.ToolboxCIComposerTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCIComposerTest.php" line="72" assertions="1" time="0.000106"/>
+      <testcase name="testAuthor" class="JBZoo\PHPUnit\ToolboxCIComposerTest" classname="JBZoo.PHPUnit.ToolboxCIComposerTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCIComposerTest.php" line="54" assertions="3" time="0.000113"/>
+    </testsuite>
+    <testsuite name="JBZoo\PHPUnit\ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" tests="12" assertions="41" errors="0" warnings="0" failures="1" skipped="0" time="0.019648">
+      <testcase name="testHeadersHtaccess" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="376" assertions="1" time="0.003989"/>
+      <testcase name="testHeadersSql" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="345" assertions="1" time="0.001077"/>
+      <testcase name="testHeadersXml" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="315" assertions="2" time="0.001068"/>
+      <testcase name="testHeadersLess" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="308" assertions="1" time="0.000970"/>
+      <testcase name="testHeadersIni" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="325" assertions="1" time="0.001037"/>
+      <testcase name="testHeadersPhp" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="279" assertions="24" time="0.004024">
+        <failure type="PHPUnit\Framework\ExpectationFailedException">JBZoo\PHPUnit\ToolboxCICopyrightTest::testHeadersPhp
+The file has no valid copyright in header
+See: /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/TeamCity/Writers/StdoutWriter.php
+Expected file header:
+--------------------------------------------------------------------------------
+&lt;?php
+
+/**
+ * JBZoo Toolbox - Toolbox-CI
+ *
+ * This file is part of the JBZoo Toolbox project.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @package    Toolbox-CI
+ * @license    MIT
+ * @copyright  Copyright (C) JBZoo.com, All rights reserved.
+ * @link       https://github.com/JBZoo/Toolbox-CI
+--------------------------------------------------------------------------------
+Failed asserting that false is true.
+
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:107
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/AbstractCopyrightTest.php:478
+/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/AbstractCopyrightTest.php:291
+</failure>
+      </testcase>
+      <testcase name="testHeadersJs" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="294" assertions="1" time="0.001189"/>
+      <testcase name="testHeadersConfigs" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="386" assertions="4" time="0.001473"/>
+      <testcase name="testHeadersCss" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="301" assertions="1" time="0.000990"/>
+      <testcase name="testHeadersYaml" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="366" assertions="2" time="0.001400"/>
+      <testcase name="testHeadersSh" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="335" assertions="1" time="0.000955"/>
+      <testcase name="testHeadersMakefile" class="JBZoo\PHPUnit\ToolboxCICopyrightTest" classname="JBZoo.PHPUnit.ToolboxCICopyrightTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICopyrightTest.php" line="355" assertions="2" time="0.001476"/>
+    </testsuite>
+    <testsuite name="JBZoo\PHPUnit\JUnitTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/JUnitTest.php" tests="6" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="0.004928">
+      <testcase name="testJUnitPhpCsXsd" class="JBZoo\PHPUnit\JUnitTest" classname="JBZoo.PHPUnit.JUnitTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/JUnitTest.php" line="141" assertions="2" time="0.000882"/>
+      <testcase name="testJUnitPhpUnitExpectedXsd" class="JBZoo\PHPUnit\JUnitTest" classname="JBZoo.PHPUnit.JUnitTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/JUnitTest.php" line="131" assertions="2" time="0.000578"/>
+      <testcase name="testJUnitPsalmXsd" class="JBZoo\PHPUnit\JUnitTest" classname="JBZoo.PHPUnit.JUnitTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/JUnitTest.php" line="151" assertions="2" time="0.000643"/>
+      <testcase name="testJunitBuilder" class="JBZoo\PHPUnit\JUnitTest" classname="JBZoo.PHPUnit.JUnitTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/JUnitTest.php" line="32" assertions="3" time="0.001237"/>
+      <testcase name="testJUnitPhpUnitXsd" class="JBZoo\PHPUnit\JUnitTest" classname="JBZoo.PHPUnit.JUnitTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/JUnitTest.php" line="136" assertions="2" time="0.001003"/>
+      <testcase name="testJUnitPhpStanXsd" class="JBZoo\PHPUnit\JUnitTest" classname="JBZoo.PHPUnit.JUnitTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/JUnitTest.php" line="146" assertions="2" time="0.000585"/>
+    </testsuite>
+    <testsuite name="JBZoo\PHPUnit\ToolboxCICodestyleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICodestyleTest.php" tests="3" assertions="68" errors="0" warnings="0" failures="0" skipped="0" time="0.010710">
+      <testcase name="testCyrillic" class="JBZoo\PHPUnit\ToolboxCICodestyleTest" classname="JBZoo.PHPUnit.ToolboxCICodestyleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICodestyleTest.php" line="118" assertions="1" time="0.006143"/>
+      <testcase name="testMakefilePhony" class="JBZoo\PHPUnit\ToolboxCICodestyleTest" classname="JBZoo.PHPUnit.ToolboxCICodestyleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICodestyleTest.php" line="142" assertions="2" time="0.002390"/>
+      <testcase name="testFiles" class="JBZoo\PHPUnit\ToolboxCICodestyleTest" classname="JBZoo.PHPUnit.ToolboxCICodestyleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ToolboxCICodestyleTest.php" line="72" assertions="65" time="0.002177"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

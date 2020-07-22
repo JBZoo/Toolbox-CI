@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="34" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setName does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="42" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setClassname does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="52" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setTime does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="54" column="37" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute expects string, float provided"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="65" column="47" severity="error"
+               message="PossiblyNullReference: Cannot call method createElement on possibly null value"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="88" column="49" severity="error"
+               message="PossiblyNullReference: Cannot call method createElement on possibly null value"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="106" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::incrementFailureCount does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="109" column="45" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute expects string, int provided"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="111" column="45" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute expects string, int(1) provided"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="118" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::incrementErrorCount does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="121" column="43" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute expects string, int provided"/>
+    </file>
+    <file name="src/JUnit/TestCaseElement.php">
+        <error line="123" column="43" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute expects string, int(1) provided"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="35" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::setName does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="45" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::setTimestamp does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="55" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::setTime does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="57" column="37" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute expects string, float provided"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="65" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::setHostname does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="86" column="22" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::incrementTestCount does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="89" column="42" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute expects string, int provided"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="91" column="42" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute expects string, int(1) provided"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="98" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::incrementFailureCount does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="101" column="45" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute expects string, int provided"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="103" column="45" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute expects string, int(1) provided"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="110" column="21" severity="error"
+               message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::incrementErrorCount does not have a return type, expecting void"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="113" column="43" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute expects string, int provided"/>
+    </file>
+    <file name="src/JUnit/TestSuiteElement.php">
+        <error line="115" column="43" severity="error"
+               message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute expects string, int(1) provided"/>
+    </file>
+</checkstyle>
