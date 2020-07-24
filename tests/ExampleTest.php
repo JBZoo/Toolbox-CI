@@ -27,7 +27,7 @@ class ExampleTest extends PHPUnit
 {
     protected function setUp(): void
     {
-        skip("It's only for local development");
+        //skip("It's only for local development");
     }
 
     public function testValid()
@@ -91,5 +91,15 @@ class ExampleTest extends PHPUnit
     {
         echo 'Some echo output';
         throw new Exception('Exception message');
+    }
+
+    public function testCompareArrays()
+    {
+        isSame([], [1]);
+    }
+
+    public function testCompareString()
+    {
+        isSame('132', '123');
     }
 }

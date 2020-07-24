@@ -13,13 +13,13 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Teamcity\Writers;
+namespace JBZoo\ToolboxCI\Teamcity\Writer;
 
 /**
- * Contract defines method {@link Writer::write()} that is capable
- * to take any message and writes it somewhere.
+ * Interface AbstractWriter
+ * @package JBZoo\ToolboxCI\Teamcity\Writer
  */
-interface Writer
+interface AbstractWriter
 {
     /**
      * Writes a message.
@@ -32,5 +32,5 @@ interface Writer
      * @param string $message The message.
      * @return void
      */
-    public function write($message);
+    public function write(string $message);
 }

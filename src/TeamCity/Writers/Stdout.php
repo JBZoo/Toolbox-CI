@@ -13,12 +13,15 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Teamcity\Writers;
+namespace JBZoo\ToolboxCI\Teamcity\Writer;
+
+use JBZoo\Utils\Cli;
 
 /**
- * Instance echoes messages to standard output.
+ * Class Stdout
+ * @package JBZoo\ToolboxCI\Teamcity\Writer
  */
-class StdoutWriter implements Writer
+class Stdout implements AbstractWriter
 {
     /**
      * Writes a message to standard output.
@@ -26,8 +29,8 @@ class StdoutWriter implements Writer
      * @param string $message The message.
      * @return void
      */
-    public function write($message)
+    public function write(string $message)
     {
-        echo $message;
+        Cli::out($message);
     }
 }

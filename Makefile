@@ -31,4 +31,4 @@ test-example:
 	@-php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit.xml.dist ./tests/ExampleTest.php --order-by=default
 	@cp ./build/coverage_junit/main.xml ./tests/fixtures/phpunit/junit.xml
 	@-php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit.xml.dist ./tests/ExampleTest.php \
-        --order-by=default --teamcity > ./tests/fixtures/phpunit/teamcity.txt
+        --order-by=default --teamcity > ./tests/fixtures/phpunit/teamcity-real.txt

@@ -13,12 +13,13 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Teamcity\Writers;
+namespace JBZoo\ToolboxCI\Teamcity\Writer;
 
 /**
- * Instance passes messages to the callback.
+ * Class Callback
+ * @package JBZoo\ToolboxCI\Teamcity\Writer
  */
-class CallbackWriter implements Writer
+class Callback implements AbstractWriter
 {
     /**
      * @var callable
@@ -26,21 +27,21 @@ class CallbackWriter implements Writer
     private $callback;
 
     /**
-     * @param callable $callback Callback accepting string as first argument, returning void.
-     */
-    public function __construct(callable $callback)
-    {
-        $this->callback = $callback;
-    }
-
-    /**
      * Passes message to the callback.
      *
      * @param string $message The message.
      * @return void
      */
-    public function write($message)
+    public function write(string $message)
     {
         call_user_func($this->callback, $message);
+    }
+
+    /**
+     * @param callable $callback $callback
+     */
+    public function setCallback(callable $callback)
+    {
+        $this->callback = $callback;
     }
 }

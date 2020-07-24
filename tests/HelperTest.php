@@ -27,12 +27,19 @@ class HelperTest extends PHPUnit
 {
     public function testDom2Array()
     {
-        isSame([], Helper::dom2Array(new \DOMDocument()));
-        isSame(['testsuites' => []], Helper::dom2Array((new JUnit())->getDom()));
+        isSame(['#attributes' => []], Helper::dom2Array(new \DOMDocument()));
+        isSame([
+            '#attributes' => [],
+            'testsuites'  => [
+                '#attributes' => []
+            ]
+        ], Helper::dom2Array((new JUnit())->getDom()));
 
         isSame([
-            'testsuites' => [
-                'testsuite' => [
+            '#attributes' => [],
+            'testsuites'  => [
+                '#attributes' => [],
+                'testsuite'   => [
                     [
                         '#attributes' => [
                             'name'       => 'Package #1',
@@ -56,7 +63,10 @@ class HelperTest extends PHPUnit
                             ],
                             [
                                 '#attributes' => ['name' => 'Test case 2'],
-                                'system-out'  => ['#text' => 'Custom message']
+                                'system-out'  => [
+                                    '#attributes' => [],
+                                    '#text'       => 'Custom message'
+                                ]
                             ]
                         ]
                     ],
@@ -83,7 +93,7 @@ class HelperTest extends PHPUnit
                             ],
                             [
                                 '#attributes' => ['name' => 'Test case 4'],
-                                'system-out'  => []
+                                'system-out'  => ['#attributes' => []]
                             ]
                         ]
                     ],

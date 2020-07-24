@@ -21,6 +21,10 @@ use DateTimeInterface;
 use InvalidArgumentException;
 use LogicException;
 
+/**
+ * Class Util
+ * @package JBZoo\ToolboxCI\Teamcity
+ */
 class Util
 {
     const TIMESTAMP_FORMAT = 'Y-m-d\TH:i:s.uO';
@@ -75,7 +79,7 @@ class Util
     public static function ensureValidJavaId($value)
     {
         if (!preg_match('/^[a-z][-a-z0-9]+$/i', $value)) {
-            throw new InvalidArgumentException("Value '$value' is not valid Java ID.");
+            throw new InvalidArgumentException("Value \"{$value}\" is not valid Java ID.");
         }
     }
 
@@ -125,11 +129,13 @@ class Util
             '/([\'\n\r|[\]])|\\\\u(\d{4})/', function ($matches) use ($escapeCharacterMap) {
             if ($matches[1]) {
                 return $escapeCharacterMap[$matches[1]];
-            } elseif ($matches[2]) {
-                return '|0x' . $matches[2];
-            } else {
-                throw new LogicException('Unexpected match combination.');
             }
+
+            if ($matches[2]) {
+                return '|0x' . $matches[2];
+            }
+
+            throw new LogicException('Unexpected match combination.');
         }, $value);
     }
 

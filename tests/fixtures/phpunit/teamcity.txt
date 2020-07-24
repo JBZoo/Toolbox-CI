@@ -1,82 +1,82 @@
-PHPUnit 8.5.8 by Sebastian Bergmann and contributors.
 
-Error:         No code coverage driver is available
+##teamcity[testCount count='14' flowId='12182']
 
+##teamcity[testSuiteStarted name='JBZoo\PHPUnit\ExampleTest' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest' flowId='12182']
 
-##teamcity[testCount count='12' flowId='74321']
+##teamcity[testStarted name='testValid' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testValid' flowId='12182']
 
-##teamcity[testSuiteStarted name='JBZoo\PHPUnit\ExampleTest' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest' flowId='74321']
+##teamcity[testFinished name='testValid' duration='7' flowId='12182']
 
-##teamcity[testStarted name='testValid' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testValid' flowId='74321']
+##teamcity[testStarted name='testInValid' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testInValid' flowId='12182']
 
-##teamcity[testFinished name='testValid' duration='3' flowId='74321']
+##teamcity[testFailed name='testInValid' message='Failed asserting that false is true.' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:107|n /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:40|n ' duration='1' flowId='12182']
 
-##teamcity[testStarted name='testInValid' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testInValid' flowId='74321']
+##teamcity[testFinished name='testInValid' duration='1' flowId='12182']
 
-##teamcity[testFailed name='testInValid' message='Failed asserting that false is true.' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:107|n /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:35|n ' duration='1' flowId='74321']
+##teamcity[testStarted name='testSkipped' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testSkipped' flowId='12182']
 
-##teamcity[testFinished name='testInValid' duration='1' flowId='74321']
+##teamcity[testIgnored name='testSkipped' duration='0' flowId='12182']
 
-##teamcity[testStarted name='testSkipped' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testSkipped' flowId='74321']
+##teamcity[testFinished name='testSkipped' duration='0' flowId='12182']
 
-##teamcity[testIgnored name='testSkipped' message='Some reason to skip' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:31|n /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:40|n ' duration='0' flowId='74321']
+##teamcity[testStarted name='testIncomplete' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testIncomplete' flowId='12182']
 
-##teamcity[testFinished name='testSkipped' duration='0' flowId='74321']
+##teamcity[testIgnored name='testIncomplete' duration='1' flowId='12182']
 
-##teamcity[testStarted name='testIncomplete' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testIncomplete' flowId='74321']
+##teamcity[testFinished name='testIncomplete' duration='1' flowId='12182']
 
-##teamcity[testIgnored name='testIncomplete' message='Some reason to incomplete' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:41|n /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:45|n ' duration='0' flowId='74321']
+##teamcity[testStarted name='testFail' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testFail' flowId='12182']
 
-##teamcity[testFinished name='testIncomplete' duration='0' flowId='74321']
+##teamcity[testFailed name='testFail' message='Some reason to fail' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:51|n /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:55|n ' duration='0' flowId='12182']
 
-##teamcity[testStarted name='testFail' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testFail' flowId='74321']
+##teamcity[testFinished name='testFail' duration='0' flowId='12182']
 
-##teamcity[testFailed name='testFail' message='Some reason to fail' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:51|n /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:50|n ' duration='0' flowId='74321']
-
-##teamcity[testFinished name='testFail' duration='0' flowId='74321']
-
-##teamcity[testStarted name='testEcho' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testEcho' flowId='74321']
+##teamcity[testStarted name='testEcho' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testEcho' flowId='12182']
 Some echo output
-##teamcity[testFinished name='testEcho' duration='0' flowId='74321']
+##teamcity[testFinished name='testEcho' duration='0' flowId='12182']
 
-##teamcity[testStarted name='testStdOutput' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testStdOutput' flowId='74321']
-Some std output
+##teamcity[testStarted name='testStdOutput' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testStdOutput' flowId='12182']
 
-##teamcity[testFinished name='testStdOutput' duration='1' flowId='74321']
+##teamcity[testFinished name='testStdOutput' duration='1' flowId='12182']
 
-##teamcity[testStarted name='testErrOutput' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testErrOutput' flowId='74321']
+##teamcity[testStarted name='testErrOutput' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testErrOutput' flowId='12182']
 
-##teamcity[testFinished name='testErrOutput' duration='0' flowId='74321']
+##teamcity[testFinished name='testErrOutput' duration='0' flowId='12182']
 
-##teamcity[testStarted name='testNoAssert' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testNoAssert' flowId='74321']
+##teamcity[testStarted name='testNoAssert' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testNoAssert' flowId='12182']
 
-##teamcity[testFailed name='testNoAssert' message='This test did not perform any assertions|n|n/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:71' details=' ' duration='0' flowId='74321']
+##teamcity[testFailed name='testNoAssert' duration='0' flowId='12182']
 
-##teamcity[testFinished name='testNoAssert' duration='0' flowId='74321']
+##teamcity[testFinished name='testNoAssert' duration='0' flowId='12182']
 
-##teamcity[testStarted name='testNotice' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testNotice' flowId='74321']
+##teamcity[testStarted name='testNotice' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testNotice' flowId='12182']
 
-##teamcity[testFailed name='testNotice' message='Undefined variable: aaa' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:77|n ' duration='0' flowId='74321']
+##teamcity[testFailed name='testNotice' message='Undefined variable: aaa' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:82|n ' duration='0' flowId='12182']
 
-##teamcity[testFinished name='testNotice' duration='0' flowId='74321']
+##teamcity[testFinished name='testNotice' duration='0' flowId='12182']
 
-##teamcity[testStarted name='testWarning' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testWarning' flowId='74321']
+##teamcity[testStarted name='testWarning' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testWarning' flowId='12182']
 
-##teamcity[testFailed name='testWarning' message='Some warning' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:82|n ' duration='0' flowId='74321']
+##teamcity[testFailed name='testWarning' message='Some warning' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:87|n ' duration='0' flowId='12182']
 
-##teamcity[testFinished name='testWarning' duration='0' flowId='74321']
+##teamcity[testFinished name='testWarning' duration='0' flowId='12182']
 
-##teamcity[testStarted name='testException' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testException' flowId='74321']
+##teamcity[testStarted name='testException' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testException' flowId='12182']
 
-##teamcity[testFailed name='testException' message='JBZoo\PHPUnit\Exception : Exception message' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:88|n ' duration='0' flowId='74321']
+##teamcity[testFailed name='testException' message='JBZoo\PHPUnit\Exception: Exception message' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:93|n ' duration='1' flowId='12182']
 Some echo output
-##teamcity[testFinished name='testException' duration='0' flowId='74321']
+##teamcity[testFinished name='testException' duration='1' flowId='12182']
 
-##teamcity[testSuiteFinished name='JBZoo\PHPUnit\ExampleTest' flowId='74321']
+##teamcity[testStarted name='testCompareArrays' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testCompareArrays' flowId='12182']
 
+##teamcity[testFailed name='testCompareArrays' message='Failed asserting that two arrays are identical.' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:197|n /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:98|n ' duration='1' type='comparisonFailure' actual='Array &0 (|n    0 => 1|n)' expected='Array &0 ()' flowId='12182']
 
-Time: 105 ms, Memory: 8.00 MB
+##teamcity[testFinished name='testCompareArrays' duration='1' flowId='12182']
 
+##teamcity[testStarted name='testCompareString' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php::\JBZoo\PHPUnit\ExampleTest::testCompareString' flowId='12182']
 
-ERRORS!
-Tests: 12, Assertions: 6, Errors: 2, Failures: 2, Warnings: 1, Skipped: 1, Incomplete: 1, Risky: 1.
+##teamcity[testFailed name='testCompareString' message='Failed asserting that two strings are identical.' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:197|n /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:103|n ' duration='0' type='comparisonFailure' actual='|'123|'' expected='|'132|'' flowId='12182']
+
+##teamcity[testFinished name='testCompareString' duration='0' flowId='12182']
+
+##teamcity[testSuiteFinished name='JBZoo\PHPUnit\ExampleTest' flowId='12182']

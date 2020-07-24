@@ -15,26 +15,15 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\Converters\JUnit2TeamCity;
 use JBZoo\ToolboxCI\Converters\PhpmdJson2JUnit;
 
 /**
- * Class ConvertersTest
+ * Class PhpmdJson2JUnitTest
  *
  * @package JBZoo\PHPUnit
  */
-class ConvertersTest extends PHPUnit
+class PhpmdJson2JUnitTest extends PHPUnit
 {
-    private $rootPath = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci';
-
-    public function testJUnit2TeamCity()
-    {
-        $actual = (new JUnit2TeamCity($this->rootPath))
-            ->convert(file_get_contents(__DIR__ . '/fixtures/phpunit/junit-expected.xml'));
-
-        dump($actual);
-    }
-
     public function testPhpmdJson2JUnit()
     {
         $expected = implode("\n", [
@@ -121,8 +110,8 @@ class ConvertersTest extends PHPUnit
             '',
         ]);
 
-        $actual = (new PhpmdJson2JUnit($this->rootPath))
-            ->convert(file_get_contents(__DIR__ . '/fixtures/phpmd/json.json'));
+        $actual = (new PhpmdJson2JUnit('/Users/smetdenis/Work/projects/jbzoo-toolbox-ci'))
+            ->convert(file_get_contents(__DIR__ . '/../fixtures/phpmd/json.json'));
 
         isSame($expected, $actual);
     }
