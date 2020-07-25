@@ -13,24 +13,35 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Teamcity\Writer;
+namespace JBZoo\ToolboxCI\Formats\Text\Teamcity\Writer;
 
 /**
- * Interface AbstractWriter
+ * Class Callback
  * @package JBZoo\ToolboxCI\Teamcity\Writer
  */
-interface AbstractWriter
+class Callback implements AbstractWriter
 {
     /**
-     * Writes a message.
-     *
-     * Method _SHOULD NOT_ perform any message post-processing
-     * and _SHOULD_ accept any contents as a message.
-     *
-     * The message _SHOULD_ end with `PHP_EOL`.
+     * @var callable
+     */
+    private $callback;
+
+    /**
+     * Passes message to the callback.
      *
      * @param string $message The message.
      * @return void
      */
-    public function write(string $message);
+    public function write(string $message)
+    {
+        call_user_func($this->callback, $message);
+    }
+
+    /**
+     * @param callable $callback $callback
+     */
+    public function setCallback(callable $callback)
+    {
+        $this->callback = $callback;
+    }
 }

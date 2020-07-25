@@ -13,35 +13,24 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Teamcity\Writer;
+namespace JBZoo\ToolboxCI\Formats\Text\Teamcity\Writer;
+
+use JBZoo\Utils\Cli;
 
 /**
- * Class Callback
+ * Class Stdout
  * @package JBZoo\ToolboxCI\Teamcity\Writer
  */
-class Callback implements AbstractWriter
+class Stdout implements AbstractWriter
 {
     /**
-     * @var callable
-     */
-    private $callback;
-
-    /**
-     * Passes message to the callback.
+     * Writes a message to standard output.
      *
      * @param string $message The message.
      * @return void
      */
     public function write(string $message)
     {
-        call_user_func($this->callback, $message);
-    }
-
-    /**
-     * @param callable $callback $callback
-     */
-    public function setCallback(callable $callback)
-    {
-        $this->callback = $callback;
+        Cli::out($message);
     }
 }

@@ -13,32 +13,24 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Teamcity\Writer;
+namespace JBZoo\ToolboxCI\Formats\Text\Teamcity\Writer;
 
 /**
- * Class Buffer
+ * Interface AbstractWriter
  * @package JBZoo\ToolboxCI\Teamcity\Writer
  */
-class Buffer implements AbstractWriter
+interface AbstractWriter
 {
     /**
-     * @var array
+     * Writes a message.
+     *
+     * Method _SHOULD NOT_ perform any message post-processing
+     * and _SHOULD_ accept any contents as a message.
+     *
+     * The message _SHOULD_ end with `PHP_EOL`.
+     *
+     * @param string $message The message.
+     * @return void
      */
-    private $buffer = [];
-
-    /**
-     * @param string $message
-     */
-    public function write(string $message)
-    {
-        $this->buffer[] = $message;
-    }
-
-    /**
-     * @return array
-     */
-    public function getBuffer(): array
-    {
-        return $this->buffer;
-    }
+    public function write(string $message);
 }

@@ -15,7 +15,7 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\Converters\PhpmdJson2JUnit;
+use JBZoo\ToolboxCI\Formats\Text\Converters\PhpmdJson2JUnit;
 
 /**
  * Class PhpmdJson2JUnitTest
@@ -111,7 +111,7 @@ class PhpmdJson2JUnitTest extends PHPUnit
         ]);
 
         $actual = (new PhpmdJson2JUnit('/Users/smetdenis/Work/projects/jbzoo-toolbox-ci'))
-            ->convert(file_get_contents(__DIR__ . '/../fixtures/phpmd/json.json'));
+            ->convert(file_get_contents(Fixtures::PHPMD_JSON));
 
         isSame($expected, $actual);
     }

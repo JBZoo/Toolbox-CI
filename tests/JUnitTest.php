@@ -15,7 +15,7 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\JUnit;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Error\Notice;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -123,34 +123,18 @@ class JUnitTest extends PHPUnit
         $this->validateXml($junit->__toString());
 
         $expectedXml = new \DOMDocument();
-        $expectedXml->loadXML(file_get_contents(PROJECT_ROOT . '/tests/fixtures/phpunit/junit-expected.xml'));
+        $expectedXml->loadXML(file_get_contents(Fixtures::PHPUNIT_JUNIT_EXPECTED));
 
         isSame($expectedXml->saveXML(), $junit->__toString());
     }
 
     public function testJUnitPhpUnitExpectedXsd()
     {
-        $this->validateXml(file_get_contents(PROJECT_ROOT . '/tests/fixtures/phpunit/junit-expected.xml'));
-    }
+        $xmlExamples = glob(realpath(Fixtures::ROOT) . '/**/**/junit.xml');
 
-    public function testJUnitPhpUnitXsd()
-    {
-        $this->validateXml(file_get_contents(PROJECT_ROOT . '/tests/fixtures/phpunit/junit.xml'));
-    }
-
-    public function testJUnitPhpCsXsd()
-    {
-        $this->validateXml(file_get_contents(PROJECT_ROOT . '/tests/fixtures/phpcs/junit.xml'));
-    }
-
-    public function testJUnitPhpStanXsd()
-    {
-        $this->validateXml(file_get_contents(PROJECT_ROOT . '/tests/fixtures/phpstan/junit.xml'));
-    }
-
-    public function testJUnitPsalmXsd()
-    {
-        $this->validateXml(file_get_contents(PROJECT_ROOT . '/tests/fixtures/psalm/junit.xml'));
+        foreach ($xmlExamples as $junitXmlFile) {
+            $this->validateXml(file_get_contents($junitXmlFile));
+        }
     }
 
     /**

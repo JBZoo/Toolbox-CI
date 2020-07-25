@@ -13,11 +13,11 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\JUnit\TestCaseOutput;
+namespace JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput;
 
 /**
  * Class Failure
- * @package JBZoo\ToolboxCI\JUnit\TestCaseOutput
+ * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
  */
 class Failure extends AbstractOutput
 {

@@ -13,58 +13,23 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI;
+namespace JBZoo\ToolboxCI\Formats\Text\Formats\Xml;
 
 /**
- * Class Helper
+ * Class Xml
  * @package JBZoo\ToolboxCI
  */
-class Helper
+class Xml
 {
-    /**
-     * @param array $data
-     * @return string
-     */
-    public static function descAsList(array $data): string
-    {
-        $result = [];
-
-        foreach ($data as $key => $value) {
-            if ($value) {
-                $result[] = ucfirst($key) . ': ' . $value;
-            }
-        }
-
-        return implode(PHP_EOL, $result);
-    }
-
-    /**
-     * @param string $source
-     * @return \DOMDocument
-     */
-    public static function createDomDocument(?string $source = null): \DOMDocument
-    {
-        $document = new \DOMDocument();
-        $document->preserveWhiteSpace = false;
-
-        if ($source) {
-            $document->loadXML($source);
-        }
-
-        $document->formatOutput = true;
-        $document->encoding = 'UTF-8';
-        $document->version = '1.0';
-
-        return $document;
-    }
-
     /**
      * @param \DOMNode|\DOMElement|\DOMDocument $element
      * @return array
      */
     public static function dom2Array(\DOMNode $element): array
     {
-        $result = [];
+        $result = [
+            '#attributes' => []
+        ];
 
         if ($element->hasAttributes()) {
             $attrs = $element->attributes;
@@ -105,6 +70,26 @@ class Helper
         }
 
         return $result;
+    }
+
+    /**
+     * @param string $source
+     * @return \DOMDocument
+     */
+    public static function createDomDocument(?string $source = null): \DOMDocument
+    {
+        $document = new \DOMDocument();
+        $document->preserveWhiteSpace = false;
+
+        if ($source) {
+            $document->loadXML($source);
+        }
+
+        $document->formatOutput = true;
+        $document->encoding = 'UTF-8';
+        $document->version = '1.0';
+
+        return $document;
     }
 
     /**

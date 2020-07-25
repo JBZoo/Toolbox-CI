@@ -15,8 +15,9 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\Helper;
-use JBZoo\ToolboxCI\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\Text\Formats\Xml\Xml;
+use ReflectionClass;
 
 /**
  * Class HelperTest
@@ -27,13 +28,13 @@ class HelperTest extends PHPUnit
 {
     public function testDom2Array()
     {
-        isSame(['#attributes' => []], Helper::dom2Array(new \DOMDocument()));
+        isSame(['#attributes' => []], Xml::dom2Array(new \DOMDocument()));
         isSame([
             '#attributes' => [],
             'testsuites'  => [
                 '#attributes' => []
             ]
-        ], Helper::dom2Array((new JUnit())->getDom()));
+        ], Xml::dom2Array((new JUnit())->getDom()));
 
         isSame([
             '#attributes' => [],
@@ -111,13 +112,13 @@ class HelperTest extends PHPUnit
                     ]
                 ]
             ]
-        ], Helper::dom2Array($this->getXmlFixture()->getDom()));
+        ], Xml::dom2Array($this->getXmlFixture()->getDom()));
     }
 
     public function testArray2Dom()
     {
         isSame($this->getXmlFixture()->__toString(),
-            Helper::array2Dom([
+            Xml::array2Dom([
                     'testsuites' => [
                         'testsuite' => [
                             [
@@ -195,7 +196,7 @@ class HelperTest extends PHPUnit
 
     public function testArrayToXmlComplex()
     {
-        $xmlExamples = glob(__DIR__ . '/fixtures/**/*.xml');
+        $xmlExamples = glob(Fixtures::ROOT . '/**/*.xml');
 
         foreach ($xmlExamples as $xmlFile) {
             $originalXml = new \DOMDocument();
@@ -205,7 +206,7 @@ class HelperTest extends PHPUnit
             $originalXml->encoding = 'UTF-8';
             $originalXml->version = '1.0';
 
-            $actualXml = Helper::array2Dom(Helper::dom2Array($originalXml));
+            $actualXml = Xml::array2Dom(Xml::dom2Array($originalXml));
 
             isSame($originalXml->saveXML(), $actualXml->saveXML(), "File: {$xmlFile}");
         }
@@ -226,5 +227,19 @@ class HelperTest extends PHPUnit
         $junit->addTestSuite('Package #3 Empty');
 
         return $junit;
+    }
+
+
+    public function testFixturesExists()
+    {
+        $oClass = new ReflectionClass(Fixtures::class);
+        foreach ($oClass->getConstants() as $name => $path) {
+            if (in_array($name, ['ROOT', 'ROOT_ORIG'], true)) {
+                continue;
+            }
+
+            isTrue(realpath($path), "{$name} => {$path}");
+            isFile($path, $name);
+        }
     }
 }

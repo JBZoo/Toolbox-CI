@@ -13,7 +13,7 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Converters;
+namespace JBZoo\ToolboxCI\Formats\Text\Converters;
 
 /**
  * Class AbstractConverter

@@ -13,7 +13,7 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Teamcity\Writer;
+namespace JBZoo\ToolboxCI\Formats\Text\Teamcity\Writer;
 
 use Symfony\Component\Console\Output\OutputInterface;
 

@@ -13,24 +13,28 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Teamcity\Writer;
-
-use JBZoo\Utils\Cli;
+namespace JBZoo\ToolboxCI\Formats\Text;
 
 /**
- * Class Stdout
- * @package JBZoo\ToolboxCI\Teamcity\Writer
+ * Class Helper
+ * @package JBZoo\ToolboxCI
  */
-class Stdout implements AbstractWriter
+class Text
 {
     /**
-     * Writes a message to standard output.
-     *
-     * @param string $message The message.
-     * @return void
+     * @param array $data
+     * @return string
      */
-    public function write(string $message)
+    public static function descAsList(array $data): string
     {
-        Cli::out($message);
+        $result = [];
+
+        foreach ($data as $key => $value) {
+            if ($value) {
+                $result[] = ucfirst($key) . ': ' . $value;
+            }
+        }
+
+        return implode(PHP_EOL, $result);
     }
 }

@@ -13,13 +13,13 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\JUnit;
+namespace JBZoo\ToolboxCI\Formats\Text\Formats\JUnit;
 
-use JBZoo\ToolboxCI\Helper;
+use JBZoo\ToolboxCI\Formats\Text\Formats\Xml\Xml;
 
 /**
  * Class JUnit
- * @package JBZoo\ToolboxCI\JUnit
+ * @package JBZoo\ToolboxCI\Formats\JUnit
  */
 class JUnit
 {
@@ -45,7 +45,7 @@ class JUnit
      */
     public function getDom(): \DOMDocument
     {
-        $document = Helper::createDomDocument();
+        $document = Xml::createDomDocument();
 
         $testSuites = $document->createElement('testsuites');
         $document->appendChild($testSuites);

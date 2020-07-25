@@ -13,16 +13,13 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\JUnit\TestCaseOutput;
+namespace JBZoo\ToolboxCI\Collection;
 
 /**
- * Class Error
- * @package JBZoo\ToolboxCI\JUnit\TestCaseOutput
+ * Class Exception
+ * @package JBZoo\ToolboxCI\Collection
  */
-class Error extends AbstractOutput
+class Exception extends \JBZoo\ToolboxCI\Exception
 {
-    /**
-     * @var string
-     */
-    protected $elementName = 'error';
+
 }

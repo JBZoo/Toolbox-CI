@@ -13,11 +13,11 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\JUnit;
+namespace JBZoo\ToolboxCI\Formats\Text\Formats\JUnit;
 
 /**
  * Class TestSuite
- * @package JBZoo\ToolboxCI\JUnit
+ * @package JBZoo\ToolboxCI\Formats\JUnit
  */
 class TestSuite
 {

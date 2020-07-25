@@ -13,7 +13,7 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Teamcity;
+namespace JBZoo\ToolboxCI\Formats\Text\Teamcity;
 
 /**
  * Class Helper

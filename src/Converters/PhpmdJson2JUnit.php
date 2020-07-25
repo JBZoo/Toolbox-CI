@@ -13,10 +13,10 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Converters;
+namespace JBZoo\ToolboxCI\Formats\Text\Converters;
 
-use JBZoo\ToolboxCI\Helper;
-use JBZoo\ToolboxCI\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\Text\Text;
 
 use function JBZoo\Data\json;
 
@@ -71,7 +71,7 @@ class PhpmdJson2JUnit extends AbstractConverter
             $functionName = "{$data['class']}->{$data['method']}()";
         }
 
-        return Helper::descAsList([
+        return Text::descAsList([
                 'Rule' => implode(' / ', [$data['ruleSet'], $data['rule'], "Priority:{$data['priority']}"]),
                 'Docs' => $data['externalInfoUrl'],
                 'Mute' => "@SuppressWarnings(PHPMD.{$data['rule']})",

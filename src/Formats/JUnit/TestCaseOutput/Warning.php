@@ -13,16 +13,16 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\JUnit\TestCaseOutput;
+namespace JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput;
 
 /**
- * Class SystemOut
- * @package JBZoo\ToolboxCI\JUnit\TestCaseOutput
+ * Class Warning
+ * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
  */
-class SystemOut extends AbstractOutput
+class Warning extends AbstractOutput
 {
     /**
      * @var string
      */
-    protected $elementName = 'system-out';
+    protected $elementName = 'warning';
 }
