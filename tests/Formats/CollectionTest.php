@@ -28,16 +28,16 @@ class CollectionTest extends PHPUnit
     public function testCollection()
     {
         $suite = new TestSuite('Suite');
-        isFalse($suite->isTestSuites());
+        isFalse($suite->hasSubSuites());
         $suite->addTestCase('Case #1')->time = 11;
         $suite->addTestCase('Case #2')->time = '2.2';
         $suite->addTestCase('Case #3')->failure = 'Failed';
-        isFalse($suite->isTestSuites());
+        isFalse($suite->hasSubSuites());
         $suite->file = __FILE__;
 
         $subSuite = $suite->addSubSuite('Sub Suite');
         $subSuite->addTestCase('Case #3')->time = 0;
-        isTrue($suite->isTestSuites());
+        isTrue($suite->hasSubSuites());
 
         isSame([
             "data"   => [

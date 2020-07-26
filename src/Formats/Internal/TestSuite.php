@@ -34,21 +34,37 @@ class TestSuite extends AbstractItem
     ];
 
     /**
-     * @var TestSuite[]
-     */
-    private $suites = [];
-
-    /**
      * @var TestCase[]
      */
     private $cases = [];
 
     /**
+     * @var TestSuite[]
+     */
+    private $suites = [];
+
+    /**
      * @return bool
      */
-    public function isTestSuites(): bool
+    public function hasSubSuites(): bool
     {
         return count($this->suites) > 0;
+    }
+
+    /**
+     * @return TestSuite[]
+     */
+    public function getSuites()
+    {
+        return $this->suites;
+    }
+
+    /**
+     * @return TestCase[]
+     */
+    public function getCases()
+    {
+        return $this->cases;
     }
 
     /**
@@ -59,7 +75,6 @@ class TestSuite extends AbstractItem
     {
         $testSuite = new self($testSuiteName);
         $this->suites[] = $testSuite;
-
         return $testSuite;
     }
 
@@ -71,7 +86,6 @@ class TestSuite extends AbstractItem
     {
         $testCase = new TestCase($testCaseName);
         $this->cases[] = $testCase;
-
         return $testCase;
     }
 
@@ -80,7 +94,7 @@ class TestSuite extends AbstractItem
      */
     public function toArray(): array
     {
-        $data = array_merge(parent::toArray(), [
+        $data = array_filter(array_merge(parent::toArray(), [
             'time'       => $this->getTime(),
             'tests'      => $this->getCasesCount(),
             'assertions' => $this->getAssertionsCount(),
@@ -88,14 +102,14 @@ class TestSuite extends AbstractItem
             'warnings'   => $this->getWarningCount(),
             'failure'    => $this->getFailureCount(),
             'skipped'    => $this->getSkippedCount(),
-        ]);
+        ]), function ($value) {
+            return $value !== null;
+        });
 
         $result = [
-            'data'   => array_filter($data, function ($value) {
-                return $value !== null;
-            }),
-            'suites' => [],
+            'data'   => $data,
             'cases'  => [],
+            'suites' => [],
         ];
 
         foreach ($this->suites as $suite) {
@@ -165,7 +179,7 @@ class TestSuite extends AbstractItem
     /**
      * @return int
      */
-    private function getErrorsCount(): ?int
+    public function getErrorsCount(): ?int
     {
         $result = 0;
 
@@ -183,7 +197,7 @@ class TestSuite extends AbstractItem
     /**
      * @return int
      */
-    private function getWarningCount(): ?int
+    public function getWarningCount(): ?int
     {
         $result = 0;
 
@@ -201,7 +215,7 @@ class TestSuite extends AbstractItem
     /**
      * @return int
      */
-    private function getFailureCount(): ?int
+    public function getFailureCount(): ?int
     {
         $result = 0;
 
@@ -219,7 +233,7 @@ class TestSuite extends AbstractItem
     /**
      * @return int
      */
-    private function getSkippedCount(): ?int
+    public function getSkippedCount(): ?int
     {
         $result = 0;
 

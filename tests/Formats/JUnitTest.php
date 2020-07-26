@@ -57,6 +57,32 @@ class JUnitTest extends PHPUnit
         isSame($actual, $expected);
     }
 
+    public function testConvertToInternalReal()
+    {
+        $suiteAll = new TestSuite('All');
+        $suite1 = $suiteAll->addSubSuite('Suite #1');
+        $suite1->addTestCase('Test #1.1')->time = 1;
+        $suite1->addTestCase('Test #1.2')->time = 2;
+        $suite2 = $suiteAll->addSubSuite('Suite #2');
+        $suite2->addTestCase('Test #2.1')->time = 3;
+        $suite2->addTestCase('Test #2.2')->time = 4;
+        $suite2->addTestCase('Test #2.3')->time = 5;
+
+        $junitActual = (new JUnitConverter())->fromInternal($suiteAll);
+
+        $junitExpected = new JUnit();
+        $suiteAll = $junitExpected->addSuite('All');
+        $suite1 = $suiteAll->addSubSuite('Suite #1');
+        $suite1->addCase('Test #1.1')->setTime(1);
+        $suite1->addCase('Test #1.2')->setTime(2);
+        $suite2 = $suiteAll->addSubSuite('Suite #2');
+        $suite2->addCase('Test #2.1')->setTime(3);
+        $suite2->addCase('Test #2.2')->setTime(4);
+        $suite2->addCase('Test #2.3')->setTime(5);
+
+        isSame((string)$junitExpected, (string)$junitActual);
+    }
+
     public function testJunitBuilder()
     {
         // Fixtures
@@ -148,12 +174,12 @@ class JUnitTest extends PHPUnit
 
 
         // validate
-        $this->validateXml($junit->__toString());
+        $this->validateXml((string)$junit);
 
         $expectedXml = new \DOMDocument();
         $expectedXml->loadXML(file_get_contents(Fixtures::PHPUNIT_JUNIT_EXPECTED));
 
-        isSame($expectedXml->saveXML(), $junit->__toString());
+        isSame($expectedXml->saveXML(), (string)$junit);
     }
 
     public function testJUnitPhpUnitExpectedXsd()
