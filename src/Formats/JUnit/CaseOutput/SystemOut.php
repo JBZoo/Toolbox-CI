@@ -13,13 +13,16 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Collection;
+namespace JBZoo\ToolboxCI\Formats\JUnit\CaseOutput;
 
 /**
- * Class Exception
- * @package JBZoo\ToolboxCI\Collection
+ * Class SystemOut
+ * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
  */
-class Exception extends \JBZoo\ToolboxCI\Exception
+class SystemOut extends AbstractOutput
 {
-
+    /**
+     * @var string
+     */
+    protected $elementName = 'system-out';
 }

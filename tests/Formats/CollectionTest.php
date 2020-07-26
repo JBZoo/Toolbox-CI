@@ -15,8 +15,8 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\Collection\TestCase;
-use JBZoo\ToolboxCI\Collection\TestSuite;
+use JBZoo\ToolboxCI\Formats\Internal\TestCase;
+use JBZoo\ToolboxCI\Formats\Internal\TestSuite;
 
 /**
  * Class CollectionTest
@@ -41,28 +41,15 @@ class CollectionTest extends PHPUnit
 
         isSame([
             "data"   => [
-                "name"       => "Suite",
-                'file'       => __FILE__,
-                'time'       => 13.2,
-                'tests'      => 4,
-                'assertions' => 0,
-                'errors'     => 0,
-                'warnings'   => 0,
-                'failure'    => 1,
-                'skipped'    => 0,
+                "name"    => "Suite",
+                'file'    => __FILE__,
+                'time'    => 13.2,
+                'tests'   => 4,
+                'failure' => 1,
             ],
             "suites" => [
                 [
-                    "data"   => [
-                        "name"       => "Sub Suite",
-                        'time'       => 0.0,
-                        'tests'      => 1,
-                        'assertions' => 0,
-                        'errors'     => 0,
-                        'warnings'   => 0,
-                        'failure'    => 0,
-                        'skipped'    => 0,
-                    ],
+                    "data"   => ["name" => "Sub Suite", 'tests' => 1],
                     "suites" => [],
                     "cases"  => [["name" => "Case #3", 'time' => 0.0]]
                 ]
@@ -79,7 +66,7 @@ class CollectionTest extends PHPUnit
     {
         $suite = new TestSuite('Suite');
         $suite->addTestCase('Case #1');
-        isSame(0.0, $suite->getTime());
+        isSame(null, $suite->getTime());
 
 
         $suite = new TestSuite('Suite');
@@ -104,16 +91,7 @@ class CollectionTest extends PHPUnit
         isSame(null, $suite->file);
         isSame(null, $suite->class);
         isSame([
-            'data'   => [
-                'name'       => 'Suite',
-                'time'       => 0.0,
-                'tests'      => 0,
-                'assertions' => 0,
-                'errors'     => 0,
-                'warnings'   => 0,
-                'failure'    => 0,
-                'skipped'    => 0,
-            ],
+            'data'   => ['name' => 'Suite'],
             'suites' => [],
             'cases'  => []
         ], $suite->toArray());
@@ -124,16 +102,9 @@ class CollectionTest extends PHPUnit
 
         isSame([
             'data'   => [
-                'name'       => 'Suite',
-                'file'       => '/some/file/name.php',
-                'class'      => __CLASS__,
-                'time'       => 0.0,
-                'tests'      => 0,
-                'assertions' => 0,
-                'errors'     => 0,
-                'warnings'   => 0,
-                'failure'    => 0,
-                'skipped'    => 0,
+                'name'  => 'Suite',
+                'file'  => '/some/file/name.php',
+                'class' => __CLASS__,
             ],
             'suites' => [],
             'cases'  => []
@@ -186,7 +157,7 @@ class CollectionTest extends PHPUnit
 
     public function testSettingInvalidProperty()
     {
-        $this->expectException(\JBZoo\ToolboxCI\Collection\Exception::class);
+        $this->expectException(\JBZoo\ToolboxCI\Formats\Internal\Exception::class);
         $this->expectExceptionMessage('Undefined property "invalid_prop"');
 
         $suite = new TestCase('Case');
@@ -195,7 +166,7 @@ class CollectionTest extends PHPUnit
 
     public function testRequiredPropCannotBeEmpty()
     {
-        $this->expectException(\JBZoo\ToolboxCI\Collection\Exception::class);
+        $this->expectException(\JBZoo\ToolboxCI\Formats\Internal\Exception::class);
         $this->expectExceptionMessage("Property \"name\" can't be null");
 
         $suite = new TestCase('case');

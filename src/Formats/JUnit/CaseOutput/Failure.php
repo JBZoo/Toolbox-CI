@@ -13,16 +13,16 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput;
+namespace JBZoo\ToolboxCI\Formats\JUnit\CaseOutput;
 
 /**
- * Class Skipped
+ * Class Failure
  * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
  */
-class Skipped extends AbstractOutput
+class Failure extends AbstractOutput
 {
     /**
      * @var string
      */
-    protected $elementName = 'skipped';
+    protected $elementName = 'failure';
 }

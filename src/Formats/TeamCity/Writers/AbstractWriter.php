@@ -13,7 +13,7 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Text\Teamcity\Writer;
+namespace JBZoo\ToolboxCI\Formats\TeamCity\Writers;
 
 /**
  * Interface AbstractWriter

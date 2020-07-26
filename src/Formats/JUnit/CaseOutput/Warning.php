@@ -13,13 +13,16 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Converters;
+namespace JBZoo\ToolboxCI\Formats\JUnit\CaseOutput;
 
 /**
- * Class AbtractConverter
- * @package JBZoo\ToolboxCI\Converters
+ * Class Warning
+ * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
  */
-class AbstractConverter
+class Warning extends AbstractOutput
 {
-
+    /**
+     * @var string
+     */
+    protected $elementName = 'warning';
 }

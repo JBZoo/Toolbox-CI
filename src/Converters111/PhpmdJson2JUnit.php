@@ -13,10 +13,10 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Text\Converters;
+namespace JBZoo\ToolboxCI\Converters111;
 
 use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\JUnit;
-use JBZoo\ToolboxCI\Formats\Text\Text;
+use JBZoo\ToolboxCI\Helper;
 
 use function JBZoo\Data\json;
 
@@ -36,12 +36,12 @@ class PhpmdJson2JUnit extends AbstractConverter
 
         $junit = new JUnit();
 
-        $testSuite = $junit->addTestSuite("PHPmd");
+        $testSuite = $junit->addSuite("PHPmd");
         foreach ($files as $file) {
             $filepath = $this->cleanFilepath($file['file']);
 
             foreach ($file['violations'] as $violation) {
-                $case = $testSuite->addTestCase("{$filepath}:{$violation['beginLine']}");
+                $case = $testSuite->addCase("{$filepath}:{$violation['beginLine']}");
 
                 $case
                     ->setFile($filepath)
@@ -71,7 +71,7 @@ class PhpmdJson2JUnit extends AbstractConverter
             $functionName = "{$data['class']}->{$data['method']}()";
         }
 
-        return Text::descAsList([
+        return Helper::descAsList([
                 'Rule' => implode(' / ', [$data['ruleSet'], $data['rule'], "Priority:{$data['priority']}"]),
                 'Docs' => $data['externalInfoUrl'],
                 'Mute' => "@SuppressWarnings(PHPMD.{$data['rule']})",

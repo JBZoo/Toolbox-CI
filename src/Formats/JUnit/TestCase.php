@@ -13,14 +13,14 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Text\Formats\JUnit;
+namespace JBZoo\ToolboxCI\Formats\JUnit;
 
-use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput\AbstractOutput;
-use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput\Error;
-use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput\Failure;
-use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput\Skipped;
-use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput\SystemOut;
-use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput\Warning;
+use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\AbstractOutput;
+use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\Error;
+use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\Failure;
+use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\Skipped;
+use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\SystemOut;
+use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\Warning;
 
 /**
  * Class TestCase

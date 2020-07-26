@@ -13,13 +13,14 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Collection;
+namespace JBZoo\ToolboxCI\Formats\Internal;
 
 /**
  * Class TestCase
  * @package JBZoo\ToolboxCI
  *
  * @property string|null $class
+ * @property string|null $classname
  * @property string|null $file
  * @property int|null    $line
  *
@@ -42,10 +43,11 @@ class TestCase extends AbstractItem
      * @var array
      */
     protected $meta = [
-        'name'       => ['string', '*'],
+        'name'       => ['string'],
 
         // Location
         'class'      => ['string'],
+        'classname'  => ['string'],
         'file'       => ['string'],
         'line'       => ['int'],
 

@@ -13,7 +13,7 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Collection;
+namespace JBZoo\ToolboxCI\Formats\Internal;
 
 /**
  * Class TestSuite
@@ -28,7 +28,7 @@ class TestSuite extends AbstractItem
      * @var array
      */
     protected $meta = [
-        'name'  => ['string', '*'],
+        'name'  => ['string'],
         'file'  => ['string'],
         'class' => ['string'],
     ];
@@ -55,7 +55,7 @@ class TestSuite extends AbstractItem
      * @param string $testSuiteName
      * @return TestSuite
      */
-    public function addSubSuite(string $testSuiteName): self
+    public function addSubSuite(?string $testSuiteName = null): self
     {
         $testSuite = new self($testSuiteName);
         $this->suites[] = $testSuite;
@@ -80,16 +80,20 @@ class TestSuite extends AbstractItem
      */
     public function toArray(): array
     {
+        $data = array_merge(parent::toArray(), [
+            'time'       => $this->getTime(),
+            'tests'      => $this->getCasesCount(),
+            'assertions' => $this->getAssertionsCount(),
+            'errors'     => $this->getErrorsCount(),
+            'warnings'   => $this->getWarningCount(),
+            'failure'    => $this->getFailureCount(),
+            'skipped'    => $this->getSkippedCount(),
+        ]);
+
         $result = [
-            'data'   => array_merge(parent::toArray(), [
-                'time'       => $this->getTime(),
-                'tests'      => $this->getCasesCount(),
-                'assertions' => $this->getAssertionsCount(),
-                'errors'     => $this->getErrorsCount(),
-                'warnings'   => $this->getWarningCount(),
-                'failure'    => $this->getFailureCount(),
-                'skipped'    => $this->getSkippedCount(),
-            ]),
+            'data'   => array_filter($data, function ($value) {
+                return $value !== null;
+            }),
             'suites' => [],
             'cases'  => [],
         ];
@@ -109,7 +113,7 @@ class TestSuite extends AbstractItem
      * @param int $round
      * @return float
      */
-    public function getTime(int $round = 6): float
+    public function getTime(int $round = 6): ?float
     {
         $result = 0.0;
 
@@ -121,7 +125,7 @@ class TestSuite extends AbstractItem
             $result += $case->getTime();
         }
 
-        return round($result, $round);
+        return $result === 0.0 ? null : round($result, $round);
     }
 
     /**
@@ -135,13 +139,15 @@ class TestSuite extends AbstractItem
             $subResult += $suite->getCasesCount();
         }
 
-        return count($this->cases) + $subResult;
+        $result = count($this->cases) + $subResult;
+
+        return $result === 0 ? null : $result;
     }
 
     /**
      * @return int
      */
-    public function getAssertionsCount(): int
+    public function getAssertionsCount(): ?int
     {
         $result = 0;
 
@@ -153,13 +159,13 @@ class TestSuite extends AbstractItem
             $result += $case->assertions;
         }
 
-        return $result;
+        return $result === 0 ? null : $result;
     }
 
     /**
      * @return int
      */
-    private function getErrorsCount(): int
+    private function getErrorsCount(): ?int
     {
         $result = 0;
 
@@ -171,13 +177,13 @@ class TestSuite extends AbstractItem
             $result += $case->isError() ? 1 : 0;
         }
 
-        return $result;
+        return $result === 0 ? null : $result;
     }
 
     /**
      * @return int
      */
-    private function getWarningCount(): int
+    private function getWarningCount(): ?int
     {
         $result = 0;
 
@@ -189,13 +195,13 @@ class TestSuite extends AbstractItem
             $result += $case->isWarning() ? 1 : 0;
         }
 
-        return $result;
+        return $result === 0 ? null : $result;
     }
 
     /**
      * @return int
      */
-    private function getFailureCount(): int
+    private function getFailureCount(): ?int
     {
         $result = 0;
 
@@ -207,13 +213,13 @@ class TestSuite extends AbstractItem
             $result += $case->isFailure() ? 1 : 0;
         }
 
-        return $result;
+        return $result === 0 ? null : $result;
     }
 
     /**
      * @return int
      */
-    private function getSkippedCount(): int
+    private function getSkippedCount(): ?int
     {
         $result = 0;
 
@@ -225,6 +231,6 @@ class TestSuite extends AbstractItem
             $result += $case->isSkipped() ? 1 : 0;
         }
 
-        return $result;
+        return $result === 0 ? null : $result;
     }
 }

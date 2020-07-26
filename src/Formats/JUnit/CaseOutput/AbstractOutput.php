@@ -13,7 +13,7 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput;
+namespace JBZoo\ToolboxCI\Formats\JUnit\CaseOutput;
 
 /**
  * Class AbstractOutput

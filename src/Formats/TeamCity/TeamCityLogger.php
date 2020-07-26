@@ -13,9 +13,9 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Text\Teamcity;
+namespace JBZoo\ToolboxCI\Formats\TeamCity;
 
-use JBZoo\ToolboxCI\Formats\Text\Teamcity\Writer\AbstractWriter;
+use JBZoo\ToolboxCI\Formats\TeamCity\Writers\AbstractWriter;
 
 /**
  * Instance is able to write TeamCity messages through one of the writers.

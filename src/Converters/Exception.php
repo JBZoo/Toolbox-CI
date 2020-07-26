@@ -16,10 +16,10 @@
 namespace JBZoo\ToolboxCI\Converters;
 
 /**
- * Class AbtractConverter
+ * Class Exception
  * @package JBZoo\ToolboxCI\Converters
  */
-class AbstractConverter
+class Exception extends \JBZoo\ToolboxCI\Exception
 {
 
 }

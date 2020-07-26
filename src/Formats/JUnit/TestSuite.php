@@ -13,7 +13,7 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Text\Formats\JUnit;
+namespace JBZoo\ToolboxCI\Formats\JUnit;
 
 /**
  * Class TestSuite
@@ -37,6 +37,11 @@ class TestSuite
     private $testCases = [];
 
     /**
+     * @var TestSuite[]
+     */
+    private $testSuites = [];
+
+    /**
      * TestSuite constructor.
      * @param string $name
      */
@@ -46,17 +51,9 @@ class TestSuite
     }
 
     /**
-     * @param string $name
-     * @return TestCase
+     * @param \DOMDocument $document
+     * @return \DOMNode
      */
-    public function addTestCase(string $name): TestCase
-    {
-        $testCase = new TestCase($name);
-
-        $this->testCases[] = $testCase;
-        return $testCase;
-    }
-
     public function toXML(\DOMDocument $document): \DOMNode
     {
         $node = $document->createElement('testsuite');
@@ -66,19 +63,65 @@ class TestSuite
             $node->setAttribute('file', $this->file);
         }
 
-        $node->setAttribute('tests', count($this->testCases));
-        $node->setAttribute('assertions', $this->getAssertionsCount());
-        $node->setAttribute('errors', $this->getErrorsCount());
-        $node->setAttribute('warnings', $this->getWarningsCount());
-        $node->setAttribute('failures', $this->getFailuresCount());
-        $node->setAttribute('skipped', $this->getSkippedCount());
-        $node->setAttribute('time', sprintf('%F', round($this->getTime(), 6)));
+        if ($value = $this->getTestsCount()) {
+            $node->setAttribute('tests', $value);
+        }
+
+        if ($value = $this->getAssertionsCount()) {
+            $node->setAttribute('assertions', $value);
+        }
+
+        if ($value = $this->getErrorsCount()) {
+            $node->setAttribute('errors', $value);
+        }
+
+        if ($value = $this->getWarningsCount()) {
+            $node->setAttribute('warnings', $value);
+        }
+
+        if ($value = $this->getFailuresCount()) {
+            $node->setAttribute('failures', $value);
+        }
+
+        if ($value = $this->getSkippedCount()) {
+            $node->setAttribute('skipped', $value);
+        }
+
+        if ($value = $this->getTime()) {
+            $node->setAttribute('time', sprintf('%F', round($value, 6)));
+        }
+
+        foreach ($this->testSuites as $testSuite) {
+            $node->appendChild($testSuite->toXML($document));
+        }
 
         foreach ($this->testCases as $testCase) {
             $node->appendChild($testCase->toXML($document));
         }
 
         return $node;
+    }
+
+    /**
+     * @param string $name
+     * @return TestSuite
+     */
+    public function addSubSuite(string $name): TestSuite
+    {
+        $testSuite = new TestSuite($name);
+        $this->testSuites[] = $testSuite;
+        return $testSuite;
+    }
+
+    /**
+     * @param string $name
+     * @return TestCase
+     */
+    public function addCase(string $name): TestCase
+    {
+        $testCase = new TestCase($name);
+        $this->testCases[] = $testCase;
+        return $testCase;
     }
 
     /**
@@ -96,9 +139,15 @@ class TestSuite
      */
     private function getAssertionsCount(): int
     {
-        return (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
-            return $acc + $testCase->getAssertions();
-        }, 0);
+        $result = 0;
+
+        foreach ($this->testSuites as $testSuite) {
+            $result += $testSuite->getAssertionsCount();
+        }
+
+        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+                return $acc + $testCase->getAssertions();
+            }, 0);
     }
 
     /**
@@ -106,9 +155,15 @@ class TestSuite
      */
     private function getErrorsCount(): int
     {
-        return (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
-            return $acc + (int)$testCase->getErrorsCount();
-        }, 0);
+        $result = 0;
+
+        foreach ($this->testSuites as $testSuite) {
+            $result += $testSuite->getErrorsCount();
+        }
+
+        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+                return $acc + $testCase->getErrorsCount();
+            }, 0);
     }
 
     /**
@@ -116,9 +171,15 @@ class TestSuite
      */
     private function getWarningsCount(): int
     {
-        return (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
-            return $acc + (int)$testCase->getWarningCount();
-        }, 0);
+        $result = 0;
+
+        foreach ($this->testSuites as $testSuite) {
+            $result += $testSuite->getWarningsCount();
+        }
+
+        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+                return $acc + $testCase->getWarningCount();
+            }, 0);
     }
 
     /**
@@ -126,9 +187,15 @@ class TestSuite
      */
     private function getFailuresCount(): int
     {
-        return (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
-            return $acc + (int)$testCase->getFailureCount();
-        }, 0);
+        $result = 0;
+
+        foreach ($this->testSuites as $testSuite) {
+            $result += $testSuite->getFailuresCount();
+        }
+
+        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+                return $acc + $testCase->getFailureCount();
+            }, 0);
     }
 
     /**
@@ -136,9 +203,15 @@ class TestSuite
      */
     private function getSkippedCount(): int
     {
-        return (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
-            return $acc + (int)$testCase->getSkippedCount();
-        }, 0);
+        $result = 0;
+
+        foreach ($this->testSuites as $testSuite) {
+            $result += $testSuite->getSkippedCount();
+        }
+
+        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+                return $acc + $testCase->getSkippedCount();
+            }, 0);
     }
 
     /**
@@ -146,8 +219,28 @@ class TestSuite
      */
     private function getTime(): float
     {
-        return (float)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
-            return $acc + $testCase->getTime();
-        }, 0);
+        $result = 0.0;
+
+        foreach ($this->testSuites as $testSuite) {
+            $result += $testSuite->getTime();
+        }
+
+        return $result + (float)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+                return $acc + $testCase->getTime();
+            }, 0.0);
+    }
+
+    /**
+     * @return int
+     */
+    private function getTestsCount(): int
+    {
+        $result = 0;
+
+        foreach ($this->testSuites as $testSuite) {
+            $result += $testSuite->getTime();
+        }
+
+        return $result + count($this->testCases);
     }
 }

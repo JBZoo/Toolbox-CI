@@ -15,7 +15,9 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\JUnit;
+use JBZoo\ToolboxCI\Converters\JUnitConverter;
+use JBZoo\ToolboxCI\Formats\Internal\TestSuite;
+use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Error\Notice;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -29,21 +31,47 @@ use PHPUnit\Framework\Warning;
  */
 class JUnitTest extends PHPUnit
 {
+    public function testConvertToInternal()
+    {
+        $junit = new JUnit();
+        $suiteAll = $junit->addSuite('All');
+        $suite1 = $suiteAll->addSubSuite('Suite #1');
+        $suite1->addCase('Test #1.1')->setTime(1);
+        $suite1->addCase('Test #1.2')->setTime(2);
+        $suite2 = $suiteAll->addSubSuite('Suite #2');
+        $suite2->addCase('Test #2.1')->setTime(3);
+        $suite2->addCase('Test #2.2')->setTime(4);
+        $suite2->addCase('Test #2.3')->setTime(5);
+        $actual = (new JUnitConverter())->toInternal($junit)->toArray();
+
+        $suiteAll = new TestSuite('All');
+        $suite1 = $suiteAll->addSubSuite('Suite #1');
+        $suite1->addTestCase('Test #1.1')->time = 1;
+        $suite1->addTestCase('Test #1.2')->time = 2;
+        $suite2 = $suiteAll->addSubSuite('Suite #2');
+        $suite2->addTestCase('Test #2.1')->time = 3;
+        $suite2->addTestCase('Test #2.2')->time = 4;
+        $suite2->addTestCase('Test #2.3')->time = 5;
+        $expected = $suiteAll->toArray();
+
+        isSame($actual, $expected);
+    }
+
     public function testJunitBuilder()
     {
         // Fixtures
         $class = ExampleTest::class;
         $className = str_replace('\\', '.', $class);
-        $filename = __DIR__ . '/ExampleTest.php';
+        $filename = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php';
 
         // Build XML
         $junit = new JUnit();
-        $suite = $junit->addTestSuite($class)->setFile($filename);
+        $suite = $junit->addSuite($class)->setFile($filename);
 
-        $suite->addTestCase('testValid')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testValid')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(28)->setAssertions(1)->setTime(0.002791);
 
-        $suite->addTestCase('testInValid')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testInValid')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(33)->setAssertions(1)->setTime(0.001824)
             ->addFailure(ExpectationFailedException::class, null, implode("\n", [
                 'JBZoo\PHPUnit\ExampleTest::testInValid',
@@ -54,13 +82,13 @@ class JUnitTest extends PHPUnit
                 '',
             ]));
 
-        $suite->addTestCase('testSkipped')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testSkipped')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(38)->setAssertions(0)->setTime(0.001036)->markAsSkipped();
 
-        $suite->addTestCase('testIncomplete')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testIncomplete')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(43)->setAssertions(0)->setTime(0.001092)->markAsSkipped();
 
-        $suite->addTestCase('testFail')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testFail')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(48)->setAssertions(1)->setTime(0.000142)
             ->addFailure(AssertionFailedError::class, null, implode("\n", [
                 'JBZoo\PHPUnit\ExampleTest::testFail',
@@ -71,21 +99,21 @@ class JUnitTest extends PHPUnit
                 '',
             ]));
 
-        $suite->addTestCase('testEcho')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testEcho')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(53)->setAssertions(1)->setTime(0.000098)
             ->addSystemOut('Some echo output');
 
-        $suite->addTestCase('testStdOutput')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testStdOutput')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(59)->setAssertions(1)->setTime(0.001125);
 
-        $suite->addTestCase('testErrOutput')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testErrOutput')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(65)->setAssertions(1)->setTime(0.000198);
 
-        $suite->addTestCase('testNoAssert')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testNoAssert')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(71)->setAssertions(0)->setTime(0.000107)
             ->addError(RiskyTestError::class, null, "Risky Test\n");
 
-        $suite->addTestCase('testNotice')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testNotice')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(75)->setAssertions(0)->setTime(0.000370)
             ->addError(Notice::class, null, implode("\n", [
                 'JBZoo\PHPUnit\ExampleTest::testNotice',
@@ -95,7 +123,7 @@ class JUnitTest extends PHPUnit
                 '',
             ]));
 
-        $suite->addTestCase('testWarning')->setFile($filename)->setClass($class)->setClassname($className)
+        $suite->addCase('testWarning')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(80)->setAssertions(0)->setTime(0.000317)
             ->addWarning(Warning::class, null, implode("\n", [
                 'JBZoo\PHPUnit\ExampleTest::testWarning',
@@ -106,8 +134,8 @@ class JUnitTest extends PHPUnit
             ]));
 
 
-        $anotherSuite = $junit->addTestSuite($class)->setFile($filename);
-        $anotherSuite->addTestCase('testException')->setFile($filename)->setClass($class)->setClassname($className)
+        $anotherSuite = $junit->addSuite($class)->setFile($filename);
+        $anotherSuite->addCase('testException')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(85)->setAssertions(0)->setTime(0.000593)
             ->addError(Exception::class, null, implode("\n", [
                 'JBZoo\PHPUnit\ExampleTest::testException',

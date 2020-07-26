@@ -48,7 +48,7 @@ Some warning
 </warning>
     </testcase>
   </testsuite>
-  <testsuite name="JBZoo\PHPUnit\ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" tests="1" assertions="0" errors="1" warnings="0" failures="0" skipped="0" time="0.000593">
+  <testsuite name="JBZoo\PHPUnit\ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" tests="1" errors="1" time="0.000593">
     <testcase name="testException" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="85" assertions="0" time="0.000593">
       <error type="JBZoo\PHPUnit\Exception">JBZoo\PHPUnit\ExampleTest::testException
 JBZoo\PHPUnit\Exception: Exception message

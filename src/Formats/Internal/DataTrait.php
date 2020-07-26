@@ -13,7 +13,7 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Collection;
+namespace JBZoo\ToolboxCI\Formats\Internal;
 
 use JBZoo\Data\Data;
 
@@ -23,7 +23,7 @@ use function JBZoo\Utils\int;
 
 /**
  * Class TestCase
- * @package JBZoo\ToolboxCI
+ * @package JBZoo\ToolboxCI\Formats\Internal
  *
  * @property Data  $data
  * @property array $meta
@@ -37,7 +37,8 @@ trait DataTrait
     {
         $values = $this->data->getArrayCopy();
 
-        $result = [];
+        $result = ['nodeName' => $this->nodeName];
+
         foreach (array_keys($this->meta) as $propName) {
             if (array_key_exists($propName, $values) && $values[$propName] !== null) {
                 $result[$propName] = $values[$propName];
@@ -48,8 +49,8 @@ trait DataTrait
     }
 
     /**
-     * @param string                $name
-     * @param string|float|int|null $value
+     * @param string                      $name
+     * @param array|string|float|int|null $value
      */
     public function __set(string $name, $value)
     {
@@ -62,17 +63,19 @@ trait DataTrait
             throw new Exception("Property \"{$name}\" can't be null");
         }
 
-        $varType = $this->meta[$name][0] ?? 'string';
-        if ($varType === 'string') {
-            $value = trim($value);
-        } elseif ($varType === 'float') {
-            $value = float($value);
-        } elseif ($varType === 'int') {
-            $value = int($value);
-        } elseif ($varType === 'bool') {
-            $value = bool($value);
-        } elseif ($varType === 'array') {
-            $value = (array)$value;
+        if ($value !== null) {
+            $varType = $this->meta[$name][0] ?? 'string';
+            if ($varType === 'string') {
+                $value = trim($value);
+            } elseif ($varType === 'float') {
+                $value = float($value);
+            } elseif ($varType === 'int') {
+                $value = int($value);
+            } elseif ($varType === 'bool') {
+                $value = bool($value);
+            } elseif ($varType === 'array') {
+                $value = (array)$value;
+            }
         }
 
         $this->data->set($name, $value);

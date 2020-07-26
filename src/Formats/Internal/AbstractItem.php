@@ -13,9 +13,10 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Collection;
+namespace JBZoo\ToolboxCI\Formats\Internal;
 
 use JBZoo\Data\Data;
+use JBZoo\Utils\Str;
 
 /**
  * Class AbstractItem
@@ -26,6 +27,11 @@ use JBZoo\Data\Data;
 class AbstractItem
 {
     use DataTrait;
+
+    /**
+     * @var string
+     */
+    protected $nodeName;
 
     /**
      * @var Data
@@ -41,11 +47,13 @@ class AbstractItem
 
     /**
      * AbstractItem constructor.
-     * @param string $name
+     * @param string|null $name
      */
-    public function __construct(string $name)
+    public function __construct(?string $name = null)
     {
         $this->data = new Data();
+
         $this->name = $name;
+        $this->nodeName = Str::getClassName(static::class);
     }
 }

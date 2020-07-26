@@ -13,16 +13,16 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\TestCaseOutput;
+namespace JBZoo\ToolboxCI\Formats\JUnit\CaseOutput;
 
 /**
- * Class Warning
+ * Class Error
  * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
  */
-class Warning extends AbstractOutput
+class Error extends AbstractOutput
 {
     /**
      * @var string
      */
-    protected $elementName = 'warning';
+    protected $elementName = 'error';
 }
