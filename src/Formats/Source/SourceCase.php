@@ -18,7 +18,7 @@ namespace JBZoo\ToolboxCI\Formats\Source;
 use JBZoo\ToolboxCI\Formats\AbstractNode;
 
 /**
- * Class TestCase
+ * Class SourceCase
  * @package JBZoo\ToolboxCI\Formats\Source
  *
  * @property string|null           $class
@@ -38,6 +38,24 @@ use JBZoo\ToolboxCI\Formats\AbstractNode;
  * @property SourceCaseOutput|null $error
  * @property SourceCaseOutput|null $warning
  * @property SourceCaseOutput|null $skipped
+ *
+ * @method self setClass(?string $class)
+ * @method self setClassname(?string $classname)
+ * @method self setFile(?string $file)
+ * @method self setLine(?string $line)
+ *
+ * @method self setStdOut(?string $stdOut)
+ * @method self setErrOut(?string $errOut)
+ *
+ * @method self setAssertions(?string $assertions)
+ * @method self setTime(?string $time)
+ * @method self setActual(?string $actual)
+ * @method self setExpected(?string $expected)
+ *
+ * @method self setFailure(?SourceCaseOutput $failure)
+ * @method self setError(?SourceCaseOutput $error)
+ * @method self setWarning(?SourceCaseOutput $warning)
+ * @method self setSkipped(?SourceCaseOutput $skipped)
  */
 class SourceCase extends AbstractNode
 {

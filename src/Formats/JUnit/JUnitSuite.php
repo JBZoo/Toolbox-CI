@@ -15,21 +15,25 @@
 
 namespace JBZoo\ToolboxCI\Formats\JUnit;
 
+use JBZoo\ToolboxCI\Formats\AbstractNode;
+
 /**
  * Class JUnitSuite
  * @package JBZoo\ToolboxCI\Formats\JUnit
+ *
+ * @property string|null $file
+ *
+ * @method self setFile(?string $file)
  */
-class JUnitSuite
+class JUnitSuite extends AbstractNode
 {
     /**
-     * @var string
+     * @var array
      */
-    private $name;
-
-    /**
-     * @var string|null
-     */
-    private $file;
+    protected $meta = [
+        'name' => ['string'],
+        'file' => ['string'],
+    ];
 
     /**
      * @var JUnitCase[]
@@ -40,15 +44,6 @@ class JUnitSuite
      * @var JUnitSuite[]
      */
     private $testSuites = [];
-
-    /**
-     * TestSuite constructor.
-     * @param string|null $name
-     */
-    public function __construct(?string $name = null)
-    {
-        $this->name = $name;
-    }
 
     /**
      * @param \DOMDocument $document
@@ -109,9 +104,9 @@ class JUnitSuite
      * @param string $name
      * @return JUnitSuite
      */
-    public function addSuite(string $name): JUnitSuite
+    public function addSuite(string $name): self
     {
-        $testSuite = new JUnitSuite($name);
+        $testSuite = new self($name);
         $this->testSuites[] = $testSuite;
         return $testSuite;
     }
@@ -125,16 +120,6 @@ class JUnitSuite
         $testCase = new JUnitCase($name);
         $this->testCases[] = $testCase;
         return $testCase;
-    }
-
-    /**
-     * @param string $file
-     * @return $this
-     */
-    public function setFile(?string $file): self
-    {
-        $this->file = $file;
-        return $this;
     }
 
     /**

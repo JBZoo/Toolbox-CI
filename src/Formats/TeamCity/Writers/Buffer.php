@@ -27,9 +27,9 @@ class Buffer implements AbstractWriter
     private $buffer = [];
 
     /**
-     * @param string $message
+     * @inheritDoc
      */
-    public function write(string $message)
+    public function write(?string $message): void
     {
         $this->buffer[] = $message;
     }

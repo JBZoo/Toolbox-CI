@@ -22,15 +22,8 @@ namespace JBZoo\ToolboxCI\Formats\TeamCity\Writers;
 interface AbstractWriter
 {
     /**
-     * Writes a message.
-     *
-     * Method _SHOULD NOT_ perform any message post-processing
-     * and _SHOULD_ accept any contents as a message.
-     *
-     * The message _SHOULD_ end with `PHP_EOL`.
-     *
-     * @param string $message The message.
+     * @param string|null $message
      * @return void
      */
-    public function write(string $message);
+    public function write(?string $message): void;
 }

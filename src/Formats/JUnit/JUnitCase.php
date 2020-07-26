@@ -34,12 +34,12 @@ use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\Warning;
  * @property float|null  $time
  * @property int|null    $assertions
  *
- * @method setClass(?string $class): self
- * @method setClassname(?string $classname): self
- * @method setFile(?string $file): self
- * @method setLine(?string $line): self
- * @method setTime(?string $time): self
- * @method setAssertions(?string $assertions): self
+ * @method self setClass(?string $class)
+ * @method self setClassname(?string $classname)
+ * @method self setFile(?string $file)
+ * @method self setLine(?string $line)
+ * @method self setTime(?string $time)
+ * @method self setAssertions(?string $assertions)
  */
 class JUnitCase extends AbstractNode
 {

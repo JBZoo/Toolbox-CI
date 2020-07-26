@@ -18,11 +18,14 @@ namespace JBZoo\ToolboxCI\Formats\Source;
 use JBZoo\ToolboxCI\Formats\AbstractNode;
 
 /**
- * Class TestSuite
+ * Class SourceSuite
  * @package JBZoo\ToolboxCI\Formats\Source
  *
  * @property string|null $file
  * @property string|null $class
+ *
+ * @method self setFile(?string $file)
+ * @method self setClass(?string $class)
  */
 class SourceSuite extends AbstractNode
 {

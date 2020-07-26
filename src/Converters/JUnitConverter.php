@@ -87,6 +87,9 @@ class JUnitConverter extends AbstractConverter
         $junit = new JUnit();
 
         foreach ($sourceCollection->getSuites() as $sourceSuite) {
+
+            $sourceSuite->setFile('1')->
+
             $this->createJUnitNodes($sourceSuite, $junit);
         }
 

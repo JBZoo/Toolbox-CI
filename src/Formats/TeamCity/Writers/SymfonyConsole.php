@@ -29,9 +29,9 @@ class SymfonyConsole implements AbstractWriter
     private $output;
 
     /**
-     * @param string $message
+     * @inheritDoc
      */
-    public function write(string $message)
+    public function write(?string $message): void
     {
         $this->output->writeln($message);
     }

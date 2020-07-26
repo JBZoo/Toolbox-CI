@@ -27,12 +27,9 @@ class Callback implements AbstractWriter
     private $callback;
 
     /**
-     * Passes message to the callback.
-     *
-     * @param string $message The message.
-     * @return void
+     * @inheritDoc
      */
-    public function write(string $message)
+    public function write(?string $message): void
     {
         call_user_func($this->callback, $message);
     }

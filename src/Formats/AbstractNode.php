@@ -30,7 +30,7 @@ use function JBZoo\Utils\int;
  *
  * @property string $name
  *
- * @method setName(?string $name): self
+ * @method self setName(?string $name)
  */
 class AbstractNode
 {

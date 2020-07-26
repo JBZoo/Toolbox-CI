@@ -24,12 +24,9 @@ use JBZoo\Utils\Cli;
 class Stdout implements AbstractWriter
 {
     /**
-     * Writes a message to standard output.
-     *
-     * @param string $message The message.
-     * @return void
+     * @inheritDoc
      */
-    public function write(string $message)
+    public function write(?string $message): void
     {
         Cli::out($message);
     }

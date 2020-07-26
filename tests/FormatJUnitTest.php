@@ -17,8 +17,8 @@ namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
-use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;
 use JBZoo\ToolboxCI\Formats\Source\Source;
+use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Error\Notice;
 use PHPUnit\Framework\ExpectationFailedException;
