@@ -15,6 +15,8 @@
 
 namespace JBZoo\ToolboxCI\Formats\Source;
 
+use JBZoo\ToolboxCI\Formats\AbstractNode;
+
 /**
  * Class TestSuite
  * @package JBZoo\ToolboxCI\Formats\Source
@@ -22,7 +24,7 @@ namespace JBZoo\ToolboxCI\Formats\Source;
  * @property string|null $file
  * @property string|null $class
  */
-class SourceSuite extends AbstractItemSource
+class SourceSuite extends AbstractNode
 {
     /**
      * @var array
@@ -71,7 +73,7 @@ class SourceSuite extends AbstractItemSource
      * @param string $testSuiteName
      * @return SourceSuite
      */
-    public function addSubSuite(?string $testSuiteName = null): self
+    public function addSuite(?string $testSuiteName = null): self
     {
         $testSuite = new self($testSuiteName);
         $this->suites[] = $testSuite;

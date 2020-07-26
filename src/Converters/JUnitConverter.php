@@ -17,9 +17,9 @@ namespace JBZoo\ToolboxCI\Converters;
 
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnitSuite;
-use JBZoo\ToolboxCI\Formats\Source\SourceCollection;
+use JBZoo\ToolboxCI\Formats\Source\Source;
 use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
-use JBZoo\ToolboxCI\Helper;
+use JBZoo\ToolboxCI\Formats\Xml;
 
 use function JBZoo\Data\data;
 
@@ -33,27 +33,61 @@ class JUnitConverter extends AbstractConverter
      * @param string $source
      * @return SourceSuite
      */
-    public function toInternal(string $source): SourceSuite
+    public function toInternal(string $source)
     {
-        $xmlDocument = Helper::createDomDocument($source);
-        $xmlAsArray = Helper::dom2Array($xmlDocument);
+        $xmlDocument = Xml::createDomDocument($source);
+        $xmlAsArray = Xml::dom2Array($xmlDocument);
 
         $testSuite = new SourceSuite();
-        $this->createNodes($xmlAsArray['_children'][0], $testSuite);
+        $this->createSourceNodes($xmlAsArray['_children'][0], $testSuite);
 
         return $testSuite->getSuites()[0];
     }
 
     /**
-     * @param SourceCollection $sourceCollection
+     * @param array              $xmlAsArray
+     * @param SourceSuite|Source $currentSuite
+     * @return SourceSuite|Source
+     */
+    private function createSourceNodes(array $xmlAsArray, $currentSuite)
+    {
+        $attrs = data($xmlAsArray['_attrs'] ?? []);
+
+        if ($xmlAsArray['_node'] === 'testcase') {
+            $case = $currentSuite->addTestCase($attrs->get('name'));
+            $case->time = $attrs->get('time');
+            $case->file = $attrs->get('file');
+            $case->line = $attrs->get('line');
+            $case->class = $attrs->get('class');
+            $case->classname = $attrs->get('classname');
+            $case->assertions = $attrs->get('assertions');
+        } else {
+            foreach ($xmlAsArray['_children'] as $childNode) {
+                $attrs = data($childNode['_attrs'] ?? []);
+
+                if ($childNode['_node'] === 'testcase') {
+                    $this->createSourceNodes($childNode, $currentSuite);
+                } else {
+                    $subSuite = $currentSuite->addSuite($attrs->get('name'));
+                    $subSuite->file = $attrs->get('file');
+                    $this->createSourceNodes($childNode, $subSuite);
+                }
+            }
+        }
+
+        return $currentSuite;
+    }
+
+    /**
+     * @param Source $sourceCollection
      * @return JUnit
      */
-    public function fromInternal(SourceCollection $sourceCollection): JUnit
+    public function fromInternal($sourceCollection): JUnit
     {
         $junit = new JUnit();
 
         foreach ($sourceCollection->getSuites() as $sourceSuite) {
-            $this->createJUnitSuite($sourceSuite, $junit);
+            $this->createJUnitNodes($sourceSuite, $junit);
         }
 
         return $junit;
@@ -64,18 +98,13 @@ class JUnitConverter extends AbstractConverter
      * @param JUnitSuite|JUnit $junitSuite
      * @return JUnitSuite
      */
-    public function createJUnitSuite(SourceSuite $sourceSuite, $junitSuite): JUnitSuite
+    public function createJUnitNodes(SourceSuite $sourceSuite, $junitSuite): JUnitSuite
     {
-        if ($junitSuite instanceof JUnitSuite) {
-            $junitSuite = $junitSuite->addSubSuite($sourceSuite->name);
-        } else {
-            $junitSuite = $junitSuite->addSuite($sourceSuite->name);
-        }
-
+        $junitSuite = $junitSuite->addSuite($sourceSuite->name);
         $junitSuite->setFile($sourceSuite->file);
 
         foreach ($sourceSuite->getSuites() as $sourceSubSuite) {
-            $this->createJUnitSuite($sourceSubSuite, $junitSuite);
+            $this->createJUnitNodes($sourceSubSuite, $junitSuite);
         }
 
         foreach ($sourceSuite->getCases() as $sourceCase) {
@@ -113,39 +142,5 @@ class JUnitConverter extends AbstractConverter
         }
 
         return $junitSuite;
-    }
-
-    /**
-     * @param array       $xmlAsArray
-     * @param SourceSuite $currentSuite
-     * @return SourceSuite
-     */
-    private function createNodes(array $xmlAsArray, SourceSuite $currentSuite): SourceSuite
-    {
-        $attrs = data($xmlAsArray['_attrs'] ?? []);
-
-        if ($xmlAsArray['_node'] === 'testcase') {
-            $case = $currentSuite->addTestCase($attrs->get('name'));
-            $case->time = $attrs->get('time');
-            $case->file = $attrs->get('file');
-            $case->line = $attrs->get('line');
-            $case->class = $attrs->get('class');
-            $case->classname = $attrs->get('classname');
-            $case->assertions = $attrs->get('assertions');
-        } else {
-            foreach ($xmlAsArray['_children'] as $childNode) {
-                $attrs = data($childNode['_attrs'] ?? []);
-
-                if ($childNode['_node'] === 'testcase') {
-                    $this->createNodes($childNode, $currentSuite);
-                } else {
-                    $subSuite = $currentSuite->addSubSuite($attrs->get('name'));
-                    $subSuite->file = $attrs->get('file');
-                    $this->createNodes($childNode, $subSuite);
-                }
-            }
-        }
-
-        return $currentSuite;
     }
 }

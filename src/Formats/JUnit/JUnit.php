@@ -15,7 +15,7 @@
 
 namespace JBZoo\ToolboxCI\Formats\JUnit;
 
-use JBZoo\ToolboxCI\Helper;
+use JBZoo\ToolboxCI\Formats\Xml;
 
 /**
  * Class JUnit
@@ -44,7 +44,7 @@ class JUnit
      */
     public function getDom(): \DOMDocument
     {
-        $document = Helper::createDomDocument();
+        $document = Xml::createDomDocument();
 
         $testSuites = $document->createElement('testsuites');
         $document->appendChild($testSuites);

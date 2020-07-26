@@ -15,13 +15,15 @@
 
 namespace JBZoo\ToolboxCI\Formats\Source;
 
+use JBZoo\ToolboxCI\Formats\AbstractNode;
+
 /**
  * Class TestCase
  * @package JBZoo\ToolboxCI\Formats\Source
  *
- * @property string|null     $class
- * @property string|null     $classname
- * @property string|null     $file
+ * @property string|null           $class
+ * @property string|null           $classname
+ * @property string|null           $file
  * @property int|null              $line
  *
  * @property string|null           $stdOut
@@ -37,7 +39,7 @@ namespace JBZoo\ToolboxCI\Formats\Source;
  * @property SourceCaseOutput|null $warning
  * @property SourceCaseOutput|null $skipped
  */
-class SourceCase extends AbstractItemSource
+class SourceCase extends AbstractNode
 {
     /**
      * @var array

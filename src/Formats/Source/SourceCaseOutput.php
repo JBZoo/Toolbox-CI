@@ -16,7 +16,7 @@
 namespace JBZoo\ToolboxCI\Formats\Source;
 
 /**
- * Class TestOutput
+ * Class SourceCaseOutput
  * @package JBZoo\ToolboxCI\Formats\Source
  */
 class SourceCaseOutput

@@ -24,7 +24,7 @@ use JBZoo\ToolboxCI\Formats\TeamCity\Writers\Buffer;
  *
  * @package JBZoo\PHPUnit
  */
-class JUnit2TeamCityTest extends PHPUnit
+class ConverterTeamcityTest extends PHPUnit
 {
     public function testPHPUnitTeamCity()
     {

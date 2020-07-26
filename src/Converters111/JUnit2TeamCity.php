@@ -18,7 +18,7 @@ namespace JBZoo\ToolboxCI\Converters111;
 use JBZoo\Data\Data;
 use JBZoo\ToolboxCI\Formats\TeamCity\TeamCity;
 use JBZoo\ToolboxCI\Formats\TeamCity\Writers\AbstractWriter;
-use JBZoo\ToolboxCI\Helper;
+use JBZoo\ToolboxCI\Formats\Xml;
 
 use function JBZoo\Data\data;
 use function JBZoo\Utils\float;
@@ -50,7 +50,7 @@ class JUnit2TeamCity extends AbstractConverter
      */
     public function convert(string $sourceData): AbstractWriter
     {
-        $xmlAsArray = Helper::dom2Array(Helper::createDomDocument($sourceData));
+        $xmlAsArray = Xml::dom2Array(Xml::createDomDocument($sourceData));
 
         foreach ($xmlAsArray as $nodeName => $testRootSuites) {
             if ($nodeName === 'testsuites') {

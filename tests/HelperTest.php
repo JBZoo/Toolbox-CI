@@ -16,7 +16,7 @@
 namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
-use JBZoo\ToolboxCI\Helper;
+use JBZoo\ToolboxCI\Formats\Xml;
 use ReflectionClass;
 
 /**
@@ -34,7 +34,7 @@ class HelperTest extends PHPUnit
             '_cdata'    => null,
             '_attrs'    => [],
             '_children' => []
-        ], Helper::dom2Array(new \DOMDocument()));
+        ], Xml::dom2Array(new \DOMDocument()));
 
         isSame([
             '_node'     => '#document',
@@ -50,7 +50,7 @@ class HelperTest extends PHPUnit
                     '_children' => []
                 ]
             ]
-        ], Helper::dom2Array((new JUnit())->getDom()));
+        ], Xml::dom2Array((new JUnit())->getDom()));
 
         isSame([
             '_node'     => '#document',
@@ -114,11 +114,7 @@ class HelperTest extends PHPUnit
                             '_node'     => 'testsuite',
                             '_text'     => null,
                             '_cdata'    => null,
-                            '_attrs'    => [
-                                'name'   => 'Package #2',
-                                'tests'  => '2',
-                                'errors' => '1',
-                            ],
+                            '_attrs'    => ['name' => 'Package #2', 'tests' => '2', 'errors' => '1'],
                             '_children' => [
                                 [
                                     '_node'     => 'testcase',
@@ -165,13 +161,13 @@ class HelperTest extends PHPUnit
                     ],
                 ],
             ],
-        ], Helper::dom2Array($this->getXmlFixture()->getDom()));
+        ], Xml::dom2Array($this->getXmlFixture()->getDom()));
     }
 
     public function testArray2Dom()
     {
         isSame((string)$this->getXmlFixture(),
-            Helper::array2Dom([
+            Xml::array2Dom([
                 '_node'     => '#document',
                 '_text'     => null,
                 '_cdata'    => null,
@@ -293,7 +289,7 @@ class HelperTest extends PHPUnit
             $originalXml->encoding = 'UTF-8';
             $originalXml->version = '1.0';
 
-            $actualXml = Helper::array2Dom(Helper::dom2Array($originalXml));
+            $actualXml = Xml::array2Dom(Xml::dom2Array($originalXml));
 
             isSame($originalXml->saveXML(), $actualXml->saveXML(), "File: {$xmlFile}");
         }
@@ -316,10 +312,10 @@ class HelperTest extends PHPUnit
         return $junit;
     }
 
-
     public function testFixturesExists()
     {
         $oClass = new ReflectionClass(Fixtures::class);
+
         foreach ($oClass->getConstants() as $name => $path) {
             if (in_array($name, ['ROOT', 'ROOT_ORIG'], true)) {
                 continue;

@@ -109,7 +109,7 @@ class JUnitSuite
      * @param string $name
      * @return JUnitSuite
      */
-    public function addSubSuite(string $name): JUnitSuite
+    public function addSuite(string $name): JUnitSuite
     {
         $testSuite = new JUnitSuite($name);
         $this->testSuites[] = $testSuite;

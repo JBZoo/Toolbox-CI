@@ -15,6 +15,7 @@
 
 namespace JBZoo\ToolboxCI\Formats\JUnit;
 
+use JBZoo\ToolboxCI\Formats\AbstractNode;
 use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\AbstractOutput;
 use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\Error;
 use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\Failure;
@@ -25,57 +26,40 @@ use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\Warning;
 /**
  * Class JUnitCase
  * @package JBZoo\ToolboxCI\Formats\JUnit
+ *
+ * @property string|null $class
+ * @property string|null $classname
+ * @property string|null $file
+ * @property int|null    $line
+ * @property float|null  $time
+ * @property int|null    $assertions
+ *
+ * @method setClass(?string $class): self
+ * @method setClassname(?string $classname): self
+ * @method setFile(?string $file): self
+ * @method setLine(?string $line): self
+ * @method setTime(?string $time): self
+ * @method setAssertions(?string $assertions): self
  */
-class JUnitCase
+class JUnitCase extends AbstractNode
 {
     /**
-     * @var string
+     * @var array
      */
-    private $name;
-
-    /**
-     * @var string|null
-     */
-    private $file;
-
-    /**
-     * @var string|null
-     */
-    private $class;
-
-    /**
-     * @var string|null
-     */
-    private $className;
-
-    /**
-     * @var int|null
-     */
-    private $line;
-
-    /**
-     * @var int|null
-     */
-    private $assertions;
-
-    /**
-     * @var float|null
-     */
-    private $time;
+    protected $meta = [
+        'name'       => ['string'],
+        'class'      => ['string'],
+        'classname'  => ['string'],
+        'file'       => ['string'],
+        'line'       => ['int'],
+        'time'       => ['float'],
+        'assertions' => ['int'],
+    ];
 
     /**
      * @var AbstractOutput[]
      */
     private $outputs = [];
-
-    /**
-     * TestCase constructor.
-     * @param string $name
-     */
-    public function __construct(string $name)
-    {
-        $this->name = $name;
-    }
 
     /**
      * @param string      $type
@@ -141,8 +125,8 @@ class JUnitCase
             $node->setAttribute('class', $this->class);
         }
 
-        if (null !== $this->className) {
-            $node->setAttribute('classname', $this->className);
+        if (null !== $this->classname) {
+            $node->setAttribute('classname', $this->classname);
         }
 
         if (null !== $this->file) {
@@ -166,78 +150,6 @@ class JUnitCase
         }
 
         return $node;
-    }
-
-    /**
-     * @param string $filename
-     * @return $this
-     */
-    public function setFile(?string $filename): self
-    {
-        if (null !== $filename) {
-            $this->file = $filename;
-        }
-        return $this;
-    }
-
-    /**
-     * @param string|null $class
-     * @return $this
-     */
-    public function setClass(?string $class): self
-    {
-        if (null !== $class) {
-            $this->class = $class;
-        }
-        return $this;
-    }
-
-    /**
-     * @param string $className
-     * @return $this
-     */
-    public function setClassname(?string $className): self
-    {
-        if (null !== $className) {
-            $this->className = $className;
-        }
-        return $this;
-    }
-
-    /**
-     * @param string|int $line
-     * @return $this
-     */
-    public function setLine($line): self
-    {
-        if (null !== $line) {
-            $this->line = (int)$line;
-        }
-        return $this;
-    }
-
-    /**
-     * @param string|int $assertions
-     * @return $this
-     */
-    public function setAssertions($assertions): self
-    {
-        if (null !== $assertions) {
-            $this->assertions = (int)$assertions;
-        }
-        return $this;
-    }
-
-    /**
-     * @param string|float|int $time
-     * @return $this
-     */
-    public function setTime($time): self
-    {
-        if (null !== $time) {
-            $this->time = (float)$time;
-        }
-        return $this;
     }
 
     /**

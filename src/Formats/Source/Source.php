@@ -16,10 +16,10 @@
 namespace JBZoo\ToolboxCI\Formats\Source;
 
 /**
- * Class Collection
+ * Class Source
  * @package JBZoo\ToolboxCI\Formats\Source
  */
-class SourceCollection
+class Source
 {
     /**
      * @var SourceSuite[]

@@ -22,7 +22,7 @@ use JBZoo\ToolboxCI\Converters111\PhpmdJson2JUnit;
  *
  * @package JBZoo\PHPUnit
  */
-class PhpmdJson2JUnitTest extends PHPUnit
+class ConverterPhpmdJsonTest extends PHPUnit
 {
     public function testPhpmdJson2JUnit()
     {

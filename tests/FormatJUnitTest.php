@@ -18,8 +18,7 @@ namespace JBZoo\PHPUnit;
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;
-use JBZoo\ToolboxCI\Formats\Source\SourceCollection;
-use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
+use JBZoo\ToolboxCI\Formats\Source\Source;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Error\Notice;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -31,54 +30,56 @@ use PHPUnit\Framework\Warning;
  *
  * @package JBZoo\PHPUnit
  */
-class JUnitTest extends PHPUnit
+class FormatJUnitTest extends PHPUnit
 {
     public function testConvertToInternal()
     {
         $junit = new JUnit();
         $suiteAll = $junit->addSuite('All');
-        $suite1 = $suiteAll->addSubSuite('Suite #1');
+        $suite1 = $suiteAll->addSuite('Suite #1');
         $suite1->addCase('Test #1.1')->setTime(1);
         $suite1->addCase('Test #1.2')->setTime(2);
-        $suite2 = $suiteAll->addSubSuite('Suite #2');
+        $suite2 = $suiteAll->addSuite('Suite #2');
         $suite2->addCase('Test #2.1')->setTime(3);
         $suite2->addCase('Test #2.2')->setTime(4);
         $suite2->addCase('Test #2.3')->setTime(5);
         $actual = (new JUnitConverter())->toInternal($junit)->toArray();
 
-        $suiteAll = new SourceSuite('All');
-        $suite1 = $suiteAll->addSubSuite('Suite #1');
+
+        $collection = new Source();
+        $suiteAll = $collection->addSuite('All');
+        $suite1 = $suiteAll->addSuite('Suite #1');
         $suite1->addTestCase('Test #1.1')->time = 1;
         $suite1->addTestCase('Test #1.2')->time = 2;
-        $suite2 = $suiteAll->addSubSuite('Suite #2');
+        $suite2 = $suiteAll->addSuite('Suite #2');
         $suite2->addTestCase('Test #2.1')->time = 3;
         $suite2->addTestCase('Test #2.2')->time = 4;
         $suite2->addTestCase('Test #2.3')->time = 5;
         $expected = $suiteAll->toArray();
 
-        isSame($actual, $expected);
+        isSame($expected, $actual);
     }
 
     public function testConvertToInternalReal()
     {
-        $collection = new SourceCollection();
+        $collection = new Source();
         $suiteAll = $collection->addSuite('All');
-        $suite1 = $suiteAll->addSubSuite('Suite #1');
+        $suite1 = $suiteAll->addSuite('Suite #1');
         $suite1->addTestCase('Test #1.1')->time = 1;
         $suite1->addTestCase('Test #1.2')->time = 2;
-        $suite2 = $suiteAll->addSubSuite('Suite #2');
+        $suite2 = $suiteAll->addSuite('Suite #2');
         $suite2->addTestCase('Test #2.1')->time = 3;
         $suite2->addTestCase('Test #2.2')->time = 4;
         $suite2->addTestCase('Test #2.3')->time = 5;
-
         $junitActual = (new JUnitConverter())->fromInternal($collection);
+
 
         $junitExpected = new JUnit();
         $suiteAll = $junitExpected->addSuite('All');
-        $suite1 = $suiteAll->addSubSuite('Suite #1');
+        $suite1 = $suiteAll->addSuite('Suite #1');
         $suite1->addCase('Test #1.1')->setTime(1);
         $suite1->addCase('Test #1.2')->setTime(2);
-        $suite2 = $suiteAll->addSubSuite('Suite #2');
+        $suite2 = $suiteAll->addSuite('Suite #2');
         $suite2->addCase('Test #2.1')->setTime(3);
         $suite2->addCase('Test #2.2')->setTime(4);
         $suite2->addCase('Test #2.3')->setTime(5);
@@ -94,7 +95,7 @@ class JUnitTest extends PHPUnit
         $filename = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php';
         $line = 28;
 
-        $collection = new SourceCollection();
+        $collection = new Source();
         $case = $collection->addSuite('Suite')->addTestCase('Test Name');
         $case->time = 0.001824;
         $case->file = $filename;
@@ -176,6 +177,17 @@ class JUnitTest extends PHPUnit
             '</testsuites>',
             '',
         ]), (string)(new JUnitConverter())->fromInternal($collection));
+    }
+
+    public function testComplex()
+    {
+        $expectedXmlCode = file_get_contents(Fixtures::PHPUNIT_JUNIT_EXPECTED);
+
+        $converter = new JUnitConverter();
+        $source = $converter->toInternal($expectedXmlCode);
+        $junit = $converter->fromInternal($source);
+
+        $this->isSameXml($expectedXmlCode, (string)$junit);
     }
 
     public function testJunitBuilder()
@@ -300,5 +312,20 @@ class JUnitTest extends PHPUnit
         } catch (\Exception $exception) {
             fail($exception->getMessage() . "\n\n" . $xmlString);
         }
+    }
+
+    /**
+     * @param string $expectedCode
+     * @param string $actualCode
+     */
+    protected function isSameXml(string $expectedCode, string $actualCode)
+    {
+        $xmlExpected = new \DOMDocument();
+        $xmlExpected->loadXML($expectedCode);
+
+        $xmlActual = new \DOMDocument();
+        $xmlActual->loadXML($actualCode);
+
+        isSame($xmlExpected->saveXML(), $xmlActual->saveXML());
     }
 }
