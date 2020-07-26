@@ -16,8 +16,8 @@
 namespace JBZoo\ToolboxCI\Converters111;
 
 use JBZoo\Data\Data;
-use JBZoo\ToolboxCI\Formats\Text\Teamcity\TeamCityLogger;
-use JBZoo\ToolboxCI\Formats\Text\Teamcity\Writer\AbstractWriter;
+use JBZoo\ToolboxCI\Formats\TeamCity\TeamCityLogger;
+use JBZoo\ToolboxCI\Formats\TeamCity\Writers\AbstractWriter;
 use JBZoo\ToolboxCI\Helper;
 
 use function JBZoo\Data\data;

@@ -47,6 +47,11 @@ class CollectionTest extends PHPUnit
                 'tests'   => 4,
                 'failure' => 1,
             ],
+            "cases"  => [
+                ["name" => "Case #1", 'time' => 11.0],
+                ["name" => "Case #2", 'time' => 2.2],
+                ["name" => "Case #3", 'failure' => 'Failed']
+            ],
             "suites" => [
                 [
                     "data"   => ["name" => "Sub Suite", 'tests' => 1],
@@ -54,11 +59,6 @@ class CollectionTest extends PHPUnit
                     "cases"  => [["name" => "Case #3", 'time' => 0.0]]
                 ]
             ],
-            "cases"  => [
-                ["name" => "Case #1", 'time' => 11.0],
-                ["name" => "Case #2", 'time' => 2.2],
-                ["name" => "Case #3", 'failure' => 'Failed']
-            ]
         ], $suite->toArray());
     }
 
@@ -92,8 +92,8 @@ class CollectionTest extends PHPUnit
         isSame(null, $suite->class);
         isSame([
             'data'   => ['name' => 'Suite'],
+            'cases'  => [],
             'suites' => [],
-            'cases'  => []
         ], $suite->toArray());
 
 
@@ -106,8 +106,8 @@ class CollectionTest extends PHPUnit
                 'file'  => '/some/file/name.php',
                 'class' => __CLASS__,
             ],
+            'cases'  => [],
             'suites' => [],
-            'cases'  => []
         ], $suite->toArray());
     }
 

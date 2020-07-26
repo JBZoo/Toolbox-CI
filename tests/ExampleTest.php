@@ -27,7 +27,7 @@ class ExampleTest extends PHPUnit
 {
     protected function setUp(): void
     {
-        //skip("It's only for local development");
+        skip("It's only for local development");
     }
 
     public function testValid()

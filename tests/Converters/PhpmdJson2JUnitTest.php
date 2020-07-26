@@ -15,7 +15,7 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\Formats\Text\Converters\PhpmdJson2JUnit;
+use JBZoo\ToolboxCI\Converters111\PhpmdJson2JUnit;
 
 /**
  * Class PhpmdJson2JUnitTest
@@ -29,7 +29,7 @@ class PhpmdJson2JUnitTest extends PHPUnit
         $expected = implode("\n", [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<testsuites>',
-            '  <testsuite name="PHPmd" tests="10" assertions="0" errors="0" warnings="0" failures="10" skipped="0" time="0.000000">',
+            '  <testsuite name="PHPmd" tests="10" failures="10">',
             '    <testcase name="vendor/povils/phpmnd/src/Console/Application.php:26" file="vendor/povils/phpmnd/src/Console/Application.php" line="26">',
             '      <failure type="UnusedFormalParameter" message="Avoid unused parameters such as \'$input\'."/>',
             '      <system-out>Rule: Unused Code Rules / UnusedFormalParameter / Priority:3',

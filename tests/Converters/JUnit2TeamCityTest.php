@@ -15,9 +15,9 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\Formats\Text\Converters\JUnit2TeamCity;
-use JBZoo\ToolboxCI\Formats\Text\Teamcity\TeamCityLogger;
-use JBZoo\ToolboxCI\Formats\Text\Teamcity\Writer\Buffer;
+use JBZoo\ToolboxCI\Converters111\JUnit2TeamCity;
+use JBZoo\ToolboxCI\Formats\TeamCity\TeamCityLogger;
+use JBZoo\ToolboxCI\Formats\TeamCity\Writers\Buffer;
 
 /**
  * Class JUnit2TeamCityTest
@@ -95,7 +95,7 @@ class JUnit2TeamCityTest extends PHPUnit
         /** @var Buffer $actual */
         $actual = (new JUnit2TeamCity('/Users/smetdenis/Work/projects/jbzoo-toolbox-ci'))
             ->setTeamCityLogger($tcLogger)
-            ->convert(file_get_contents(__DIR__ . '/../fixtures/phpcs/junit.xml'));
+            ->convert(Fixtures::PHPCS_JUNIT);
 
         $filepath = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php';
 

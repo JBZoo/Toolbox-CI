@@ -37,7 +37,7 @@ trait DataTrait
     {
         $values = $this->data->getArrayCopy();
 
-        $result = ['nodeName' => $this->nodeName];
+        $result = [];
 
         foreach (array_keys($this->meta) as $propName) {
             if (array_key_exists($propName, $values) && $values[$propName] !== null) {

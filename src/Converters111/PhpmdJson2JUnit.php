@@ -15,7 +15,7 @@
 
 namespace JBZoo\ToolboxCI\Converters111;
 
-use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Helper;
 
 use function JBZoo\Data\json;

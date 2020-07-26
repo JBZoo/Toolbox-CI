@@ -15,7 +15,7 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\Formats\Text\Formats\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Helper;
 use ReflectionClass;
 
@@ -69,14 +69,9 @@ class HelperTest extends PHPUnit
                             '_text'     => null,
                             '_cdata'    => null,
                             '_attrs'    => [
-                                'name'       => 'Package #1',
-                                'tests'      => '2',
-                                'assertions' => '0',
-                                'errors'     => '0',
-                                'warnings'   => '0',
-                                'failures'   => '1',
-                                'skipped'    => '0',
-                                'time'       => '0.000000',
+                                'name'     => 'Package #1',
+                                'tests'    => '2',
+                                'failures' => '1',
                             ],
                             '_children' => [
                                 [
@@ -119,17 +114,11 @@ class HelperTest extends PHPUnit
                             '_node'     => 'testsuite',
                             '_text'     => null,
                             '_cdata'    => null,
-                            '_attrs'    =>
-                                [
-                                    'name'       => 'Package #2',
-                                    'tests'      => '2',
-                                    'assertions' => '0',
-                                    'errors'     => '1',
-                                    'warnings'   => '0',
-                                    'failures'   => '0',
-                                    'skipped'    => '0',
-                                    'time'       => '0.000000',
-                                ],
+                            '_attrs'    => [
+                                'name'   => 'Package #2',
+                                'tests'  => '2',
+                                'errors' => '1',
+                            ],
                             '_children' => [
                                 [
                                     '_node'     => 'testcase',
@@ -170,16 +159,7 @@ class HelperTest extends PHPUnit
                             '_node'     => 'testsuite',
                             '_text'     => null,
                             '_cdata'    => null,
-                            '_attrs'    => [
-                                'name'       => 'Package #3 Empty',
-                                'tests'      => '0',
-                                'assertions' => '0',
-                                'errors'     => '0',
-                                'warnings'   => '0',
-                                'failures'   => '0',
-                                'skipped'    => '0',
-                                'time'       => '0.000000',
-                            ],
+                            '_attrs'    => ['name' => 'Package #3 Empty'],
                             '_children' => [],
                         ],
                     ],
@@ -208,14 +188,9 @@ class HelperTest extends PHPUnit
                                 '_text'     => null,
                                 '_cdata'    => null,
                                 '_attrs'    => [
-                                    'name'       => 'Package #1',
-                                    'tests'      => '2',
-                                    'assertions' => '0',
-                                    'errors'     => '0',
-                                    'warnings'   => '0',
-                                    'failures'   => '1',
-                                    'skipped'    => '0',
-                                    'time'       => '0.000000',
+                                    'name'     => 'Package #1',
+                                    'tests'    => '2',
+                                    'failures' => '1',
                                 ],
                                 '_children' => [
                                     [
@@ -255,14 +230,9 @@ class HelperTest extends PHPUnit
                                 '_text'     => null,
                                 '_cdata'    => null,
                                 '_attrs'    => [
-                                    'name'       => 'Package #2',
-                                    'tests'      => '2',
-                                    'assertions' => '0',
-                                    'errors'     => '1',
-                                    'warnings'   => '0',
-                                    'failures'   => '0',
-                                    'skipped'    => '0',
-                                    'time'       => '0.000000',
+                                    'name'   => 'Package #2',
+                                    'tests'  => '2',
+                                    'errors' => '1',
                                 ],
                                 '_children' => [
                                     [
@@ -301,16 +271,7 @@ class HelperTest extends PHPUnit
                                 '_node'     => 'testsuite',
                                 '_text'     => null,
                                 '_cdata'    => null,
-                                '_attrs'    => [
-                                    'name'       => 'Package #3 Empty',
-                                    'tests'      => '0',
-                                    'assertions' => '0',
-                                    'errors'     => '0',
-                                    'warnings'   => '0',
-                                    'failures'   => '0',
-                                    'skipped'    => '0',
-                                    'time'       => '0.000000',
-                                ],
+                                '_attrs'    => ['name' => 'Package #3 Empty'],
                                 '_children' => [],
                             ],
                         ],
