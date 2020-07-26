@@ -18,9 +18,10 @@ namespace JBZoo\ToolboxCI\Formats\TeamCity;
 use JBZoo\ToolboxCI\Formats\TeamCity\Writers\AbstractWriter;
 
 /**
- * Instance is able to write TeamCity messages through one of the writers.
+ * Class TeamCityLogger
+ * @package JBZoo\ToolboxCI\Formats\TeamCity
  */
-class TeamCityLogger
+class TeamCity
 {
     /**
      * @var int|null

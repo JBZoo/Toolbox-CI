@@ -13,31 +13,31 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Internal;
+namespace JBZoo\ToolboxCI\Formats\Source;
 
 /**
  * Class TestCase
- * @package JBZoo\ToolboxCI
+ * @package JBZoo\ToolboxCI\Formats\Source
  *
- * @property string|null $class
- * @property string|null $classname
- * @property string|null $file
- * @property int|null    $line
+ * @property string|null     $class
+ * @property string|null     $classname
+ * @property string|null     $file
+ * @property int|null              $line
  *
- * @property string|null $stdOut
- * @property string|null $errOut
+ * @property string|null           $stdOut
+ * @property string|null           $errOut
  *
- * @property string|null $failure
- * @property string|null $error
- * @property string|null $skipped
- * @property string|null $warning
+ * @property float|null            $time
+ * @property int|null              $assertions
+ * @property string|null           $actual
+ * @property string|null           $expected
  *
- * @property float|null  $time
- * @property int|null    $assertions
- * @property string|null $actual
- * @property string|null $expected
+ * @property SourceCaseOutput|null $failure
+ * @property SourceCaseOutput|null $error
+ * @property SourceCaseOutput|null $warning
+ * @property SourceCaseOutput|null $skipped
  */
-class TestCase extends AbstractItem
+class SourceCase extends AbstractItemSource
 {
     /**
      * @var array
@@ -55,17 +55,17 @@ class TestCase extends AbstractItem
         'stdOut'     => ['string'],
         'errOut'     => ['string'],
 
-        // Type of negative result
-        'failure'    => ['string'],
-        'error'      => ['string'],
-        'warning'    => ['string'],
-        'skipped'    => ['string'],
-
         // Test meta data
         'time'       => ['float'],
         'assertions' => ['int'],
         'actual'     => ['string'],
         'expected'   => ['string'],
+
+        // Type of negative result
+        'failure'    => [SourceCaseOutput::class],
+        'error'      => [SourceCaseOutput::class],
+        'warning'    => [SourceCaseOutput::class],
+        'skipped'    => [SourceCaseOutput::class],
     ];
 
     /**

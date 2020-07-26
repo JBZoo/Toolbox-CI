@@ -13,11 +13,11 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Internal;
+namespace JBZoo\ToolboxCI\Formats\Source;
 
 /**
  * Class Exception
- * @package JBZoo\ToolboxCI\Formats\Internal
+ * @package JBZoo\ToolboxCI\Formats\Source
  */
 class Exception extends \JBZoo\ToolboxCI\Formats\Exception
 {

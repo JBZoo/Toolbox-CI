@@ -13,18 +13,18 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Internal;
+namespace JBZoo\ToolboxCI\Formats\Source;
 
 use JBZoo\Data\Data;
 use JBZoo\Utils\Str;
 
 /**
  * Class AbstractItem
- * @package JBZoo\ToolboxCI\Collection
+ * @package JBZoo\ToolboxCI\Formats\Source
  *
  * @property string $name
  */
-class AbstractItem
+class AbstractItemSource
 {
     use DataTrait;
 

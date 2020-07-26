@@ -16,10 +16,10 @@
 namespace JBZoo\ToolboxCI\Formats\JUnit;
 
 /**
- * Class TestSuite
+ * Class JUnitSuite
  * @package JBZoo\ToolboxCI\Formats\JUnit
  */
-class TestSuite
+class JUnitSuite
 {
     /**
      * @var string
@@ -32,20 +32,20 @@ class TestSuite
     private $file;
 
     /**
-     * @var TestCase[]
+     * @var JUnitCase[]
      */
     private $testCases = [];
 
     /**
-     * @var TestSuite[]
+     * @var JUnitSuite[]
      */
     private $testSuites = [];
 
     /**
      * TestSuite constructor.
-     * @param string $name
+     * @param string|null $name
      */
-    public function __construct(string $name)
+    public function __construct(?string $name = null)
     {
         $this->name = $name;
     }
@@ -57,7 +57,10 @@ class TestSuite
     public function toXML(\DOMDocument $document): \DOMNode
     {
         $node = $document->createElement('testsuite');
-        $node->setAttribute('name', $this->name);
+
+        if (null !== $this->name) {
+            $node->setAttribute('name', $this->name);
+        }
 
         if (null !== $this->file) {
             $node->setAttribute('file', $this->file);
@@ -104,22 +107,22 @@ class TestSuite
 
     /**
      * @param string $name
-     * @return TestSuite
+     * @return JUnitSuite
      */
-    public function addSubSuite(string $name): TestSuite
+    public function addSubSuite(string $name): JUnitSuite
     {
-        $testSuite = new TestSuite($name);
+        $testSuite = new JUnitSuite($name);
         $this->testSuites[] = $testSuite;
         return $testSuite;
     }
 
     /**
      * @param string $name
-     * @return TestCase
+     * @return JUnitCase
      */
-    public function addCase(string $name): TestCase
+    public function addCase(string $name): JUnitCase
     {
-        $testCase = new TestCase($name);
+        $testCase = new JUnitCase($name);
         $this->testCases[] = $testCase;
         return $testCase;
     }
@@ -128,7 +131,7 @@ class TestSuite
      * @param string $file
      * @return $this
      */
-    public function setFile(string $file): self
+    public function setFile(?string $file): self
     {
         $this->file = $file;
         return $this;
@@ -145,7 +148,7 @@ class TestSuite
             $result += $testSuite->getAssertionsCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
                 return $acc + $testCase->getAssertions();
             }, 0);
     }
@@ -161,7 +164,7 @@ class TestSuite
             $result += $testSuite->getErrorsCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
                 return $acc + $testCase->getErrorsCount();
             }, 0);
     }
@@ -177,7 +180,7 @@ class TestSuite
             $result += $testSuite->getWarningsCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
                 return $acc + $testCase->getWarningCount();
             }, 0);
     }
@@ -193,7 +196,7 @@ class TestSuite
             $result += $testSuite->getFailuresCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
                 return $acc + $testCase->getFailureCount();
             }, 0);
     }
@@ -209,7 +212,7 @@ class TestSuite
             $result += $testSuite->getSkippedCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
                 return $acc + $testCase->getSkippedCount();
             }, 0);
     }
@@ -225,7 +228,7 @@ class TestSuite
             $result += $testSuite->getTime();
         }
 
-        return $result + (float)array_reduce($this->testCases, function ($acc, TestCase $testCase) {
+        return $result + (float)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
                 return $acc + $testCase->getTime();
             }, 0.0);
     }

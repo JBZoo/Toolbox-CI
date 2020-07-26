@@ -24,19 +24,18 @@ use JBZoo\ToolboxCI\Helper;
 class JUnit
 {
     /**
-     * @var TestSuite[]
+     * @var JUnitSuite[]
      */
     private $testSuites = [];
 
     /**
-     * @param string $name
-     * @return TestSuite
+     * @param string|null $name
+     * @return JUnitSuite
      */
-    public function addSuite(string $name): TestSuite
+    public function addSuite(?string $name = null): JUnitSuite
     {
-        $testSuite = new TestSuite($name);
+        $testSuite = new JUnitSuite($name);
         $this->testSuites[] = $testSuite;
-
         return $testSuite;
     }
 

@@ -15,8 +15,10 @@
 
 namespace JBZoo\ToolboxCI\Converters;
 
-use JBZoo\ToolboxCI\Formats\Internal\TestSuite;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\JUnit\JUnitSuite;
+use JBZoo\ToolboxCI\Formats\Source\SourceCollection;
+use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 use JBZoo\ToolboxCI\Helper;
 
 use function JBZoo\Data\data;
@@ -29,55 +31,106 @@ class JUnitConverter extends AbstractConverter
 {
     /**
      * @param string $source
-     * @return TestSuite
+     * @return SourceSuite
      */
-    public function toInternal(string $source): TestSuite
+    public function toInternal(string $source): SourceSuite
     {
         $xmlDocument = Helper::createDomDocument($source);
         $xmlAsArray = Helper::dom2Array($xmlDocument);
 
-        $testSuite = new TestSuite();
+        $testSuite = new SourceSuite();
         $this->createNodes($xmlAsArray['_children'][0], $testSuite);
 
         return $testSuite->getSuites()[0];
     }
 
     /**
-     * @param TestSuite $source
+     * @param SourceCollection $sourceCollection
      * @return JUnit
      */
-    public function fromInternal(TestSuite $source): JUnit
+    public function fromInternal(SourceCollection $sourceCollection): JUnit
     {
         $junit = new JUnit();
-        $junitSuite = $junit->addSuite($source->name);
 
-        foreach ($source->getSuites() as $suite) {
-            $subSuite = $junitSuite->addSubSuite($suite->name);
-
-            foreach ($suite->getCases() as $case) {
-                $subSuite->addCase($case->name)->setTime($case->time);
-            }
+        foreach ($sourceCollection->getSuites() as $sourceSuite) {
+            $this->createJUnitSuite($sourceSuite, $junit);
         }
 
         return $junit;
     }
 
     /**
-     * @param array     $xmlAsArray
-     * @param TestSuite $currentSuite
-     * @return TestSuite
+     * @param SourceSuite      $sourceSuite
+     * @param JUnitSuite|JUnit $junitSuite
+     * @return JUnitSuite
      */
-    private function createNodes(array $xmlAsArray, TestSuite $currentSuite): TestSuite
+    public function createJUnitSuite(SourceSuite $sourceSuite, $junitSuite): JUnitSuite
+    {
+        if ($junitSuite instanceof JUnitSuite) {
+            $junitSuite = $junitSuite->addSubSuite($sourceSuite->name);
+        } else {
+            $junitSuite = $junitSuite->addSuite($sourceSuite->name);
+        }
+
+        $junitSuite->setFile($sourceSuite->file);
+
+        foreach ($sourceSuite->getSuites() as $sourceSubSuite) {
+            $this->createJUnitSuite($sourceSubSuite, $junitSuite);
+        }
+
+        foreach ($sourceSuite->getCases() as $sourceCase) {
+            $junitCase = $junitSuite->addCase($sourceCase->name)
+                ->setTime($sourceCase->time)
+                ->setClass($sourceCase->class)
+                ->setClassname($sourceCase->classname)
+                ->setFile($sourceCase->file)
+                ->setLine($sourceCase->line)
+                ->setAssertions($sourceCase->assertions);
+
+            if ($failure = $sourceCase->failure) {
+                $junitCase->addFailure($failure->type, $failure->message, $failure->description);
+            }
+
+            if ($warning = $sourceCase->warning) {
+                $junitCase->addWarning($warning->type, $warning->message, $warning->description);
+            }
+
+            if ($error = $sourceCase->error) {
+                $junitCase->addError($error->type, $error->message, $error->description);
+            }
+
+            if ($sourceCase->stdOut && $sourceCase->errOut) {
+                $junitCase->addSystemOut($sourceCase->stdOut . "\n" . $sourceCase->errOut);
+            } elseif ($sourceCase->stdOut && !$sourceCase->errOut) {
+                $junitCase->addSystemOut($sourceCase->stdOut);
+            } elseif (!$sourceCase->stdOut && $sourceCase->errOut) {
+                $junitCase->addSystemOut($sourceCase->errOut);
+            }
+
+            if ($sourceCase->skipped) {
+                $junitCase->markAsSkipped();
+            }
+        }
+
+        return $junitSuite;
+    }
+
+    /**
+     * @param array       $xmlAsArray
+     * @param SourceSuite $currentSuite
+     * @return SourceSuite
+     */
+    private function createNodes(array $xmlAsArray, SourceSuite $currentSuite): SourceSuite
     {
         $attrs = data($xmlAsArray['_attrs'] ?? []);
 
         if ($xmlAsArray['_node'] === 'testcase') {
             $case = $currentSuite->addTestCase($attrs->get('name'));
             $case->time = $attrs->get('time');
-            $case->class = $attrs->get('class');
-            $case->classname = $attrs->get('classname');
             $case->file = $attrs->get('file');
             $case->line = $attrs->get('line');
+            $case->class = $attrs->get('class');
+            $case->classname = $attrs->get('classname');
             $case->assertions = $attrs->get('assertions');
         } else {
             foreach ($xmlAsArray['_children'] as $childNode) {

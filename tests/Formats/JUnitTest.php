@@ -16,8 +16,10 @@
 namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
-use JBZoo\ToolboxCI\Formats\Internal\TestSuite;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;
+use JBZoo\ToolboxCI\Formats\Source\SourceCollection;
+use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Error\Notice;
 use PHPUnit\Framework\ExpectationFailedException;
@@ -44,7 +46,7 @@ class JUnitTest extends PHPUnit
         $suite2->addCase('Test #2.3')->setTime(5);
         $actual = (new JUnitConverter())->toInternal($junit)->toArray();
 
-        $suiteAll = new TestSuite('All');
+        $suiteAll = new SourceSuite('All');
         $suite1 = $suiteAll->addSubSuite('Suite #1');
         $suite1->addTestCase('Test #1.1')->time = 1;
         $suite1->addTestCase('Test #1.2')->time = 2;
@@ -59,7 +61,8 @@ class JUnitTest extends PHPUnit
 
     public function testConvertToInternalReal()
     {
-        $suiteAll = new TestSuite('All');
+        $collection = new SourceCollection();
+        $suiteAll = $collection->addSuite('All');
         $suite1 = $suiteAll->addSubSuite('Suite #1');
         $suite1->addTestCase('Test #1.1')->time = 1;
         $suite1->addTestCase('Test #1.2')->time = 2;
@@ -68,7 +71,7 @@ class JUnitTest extends PHPUnit
         $suite2->addTestCase('Test #2.2')->time = 4;
         $suite2->addTestCase('Test #2.3')->time = 5;
 
-        $junitActual = (new JUnitConverter())->fromInternal($suiteAll);
+        $junitActual = (new JUnitConverter())->fromInternal($collection);
 
         $junitExpected = new JUnit();
         $suiteAll = $junitExpected->addSuite('All');
@@ -81,6 +84,98 @@ class JUnitTest extends PHPUnit
         $suite2->addCase('Test #2.3')->setTime(5);
 
         isSame((string)$junitExpected, (string)$junitActual);
+    }
+
+    public function testConvertToInternalRealFull()
+    {
+        // Fixtures
+        $class = ExampleTest::class;
+        $className = str_replace('\\', '.', $class);
+        $filename = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php';
+        $line = 28;
+
+        $collection = new SourceCollection();
+        $case = $collection->addSuite('Suite')->addTestCase('Test Name');
+        $case->time = 0.001824;
+        $case->file = $filename;
+        $case->line = $line;
+        $case->class = $class;
+        $case->classname = $className;
+        $case->assertions = 5;
+        $case->stdOut = 'Some std output';
+        $case->errOut = 'Some err output';
+        $case->failure = new SourceCaseOutput(ExpectationFailedException::class, 'Failure Message', 'Failure Details');
+        $case->warning = new SourceCaseOutput(ExpectationFailedException::class, 'Warning Message', 'Warning Details');
+        $case->error = new SourceCaseOutput(ExpectationFailedException::class, 'Error Message', 'Error Details');
+        $case->skipped = new SourceCaseOutput(ExpectationFailedException::class, 'Skipped Message', 'Skipped Details');
+
+        isSame([
+            [
+                'data'   => [
+                    '_node'      => 'SourceSuite',
+                    'name'       => 'Suite',
+                    'time'       => 0.001824,
+                    'tests'      => 1,
+                    'assertions' => 5,
+                    'errors'     => 1,
+                    'warnings'   => 1,
+                    'failure'    => 1,
+                    'skipped'    => 1,
+                ],
+                'cases'  => [
+                    [
+                        '_node'      => 'SourceCase',
+                        'name'       => 'Test Name',
+                        'class'      => ExampleTest::class,
+                        'classname'  => 'JBZoo.PHPUnit.ExampleTest',
+                        'file'       => '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php',
+                        'line'       => 28,
+                        'stdOut'     => 'Some std output',
+                        'errOut'     => 'Some err output',
+                        'time'       => 0.001824,
+                        'assertions' => 5,
+                        'failure'    => [
+                            'type'        => ExpectationFailedException::class,
+                            'message'     => 'Failure Message',
+                            'description' => 'Failure Details',
+                        ],
+                        'error'      => [
+                            'type'        => ExpectationFailedException::class,
+                            'message'     => 'Error Message',
+                            'description' => 'Error Details',
+                        ],
+                        'warning'    => [
+                            'type'        => ExpectationFailedException::class,
+                            'message'     => 'Warning Message',
+                            'description' => 'Warning Details',
+                        ],
+                        'skipped'    => [
+                            'type'        => ExpectationFailedException::class,
+                            'message'     => 'Skipped Message',
+                            'description' => 'Skipped Details',
+                        ]
+                    ]
+                ],
+                'suites' => [],
+            ]
+        ], $collection->toArray());
+
+        isSame(implode("\n", [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<testsuites>',
+            '  <testsuite name="Suite" tests="1" assertions="5" errors="1" warnings="1" failures="1" skipped="1" time="0.001824">',
+            '    <testcase name="Test Name" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="28" assertions="5" time="0.001824">',
+            '      <failure type="PHPUnit\Framework\ExpectationFailedException" message="Failure Message">Failure Details</failure>',
+            '      <warning type="PHPUnit\Framework\ExpectationFailedException" message="Warning Message">Warning Details</warning>',
+            '      <error type="PHPUnit\Framework\ExpectationFailedException" message="Error Message">Error Details</error>',
+            '      <system-out>Some std output',
+            'Some err output</system-out>',
+            '      <skipped/>',
+            '    </testcase>',
+            '  </testsuite>',
+            '</testsuites>',
+            '',
+        ]), (string)(new JUnitConverter())->fromInternal($collection));
     }
 
     public function testJunitBuilder()
@@ -198,8 +293,12 @@ class JUnitTest extends PHPUnit
     {
         isNotEmpty($xmlString);
 
-        $xml = new \DOMDocument();
-        $xml->loadXML($xmlString);
-        isTrue($xml->schemaValidate(PROJECT_ROOT . '/tests/fixtures/junit.xsd'));
+        try {
+            $xml = new \DOMDocument();
+            $xml->loadXML($xmlString);
+            isTrue($xml->schemaValidate(PROJECT_ROOT . '/tests/fixtures/junit.xsd'));
+        } catch (\Exception $exception) {
+            fail($exception->getMessage() . "\n\n" . $xmlString);
+        }
     }
 }

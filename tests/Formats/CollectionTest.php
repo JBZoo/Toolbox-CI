@@ -15,8 +15,8 @@
 
 namespace JBZoo\PHPUnit;
 
-use JBZoo\ToolboxCI\Formats\Internal\TestCase;
-use JBZoo\ToolboxCI\Formats\Internal\TestSuite;
+use JBZoo\ToolboxCI\Formats\Source\SourceCase;
+use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 
 /**
  * Class CollectionTest
@@ -27,7 +27,7 @@ class CollectionTest extends PHPUnit
 {
     public function testCollection()
     {
-        $suite = new TestSuite('Suite');
+        $suite = new SourceSuite('Suite');
         isFalse($suite->hasSubSuites());
         $suite->addTestCase('Case #1')->time = 11;
         $suite->addTestCase('Case #2')->time = '2.2';
@@ -64,19 +64,19 @@ class CollectionTest extends PHPUnit
 
     public function testSuiteAggregationUtilities()
     {
-        $suite = new TestSuite('Suite');
+        $suite = new SourceSuite('Suite');
         $suite->addTestCase('Case #1');
         isSame(null, $suite->getTime());
 
 
-        $suite = new TestSuite('Suite');
+        $suite = new SourceSuite('Suite');
         $suite->addTestCase('Case #1')->time = 11;
         $suite->addTestCase('Case #2');
         $suite->addTestCase('Case #3')->time = '2.2';
         isSame(13.2, $suite->getTime());
 
 
-        $suite = new TestSuite('Suite');
+        $suite = new SourceSuite('Suite');
         $subSuite = $suite->addSubSuite('Suite 2');
         $suite->addTestCase('Case #1')->time = 1;
         $suite->addTestCase('Case #2')->time = 2;
@@ -86,7 +86,7 @@ class CollectionTest extends PHPUnit
 
     public function testSuiteObject()
     {
-        $suite = new TestSuite(' Suite ');
+        $suite = new SourceSuite(' Suite ');
         isSame('Suite', $suite->name);
         isSame(null, $suite->file);
         isSame(null, $suite->class);
@@ -113,7 +113,7 @@ class CollectionTest extends PHPUnit
 
     public function testCaseObject()
     {
-        $case = new TestCase(' Case ');
+        $case = new SourceCase(' Case ');
         isSame(['name' => 'Case'], $case->toArray());
 
         $case->class = self::class;
@@ -143,7 +143,7 @@ class CollectionTest extends PHPUnit
 
     public function testUsingProperties()
     {
-        $suite = new TestCase('Case');
+        $suite = new SourceCase('Case');
         isSame(null, $suite->invalid_prop);
         isFalse(isset($suite->invalid_prop));
 
@@ -157,19 +157,19 @@ class CollectionTest extends PHPUnit
 
     public function testSettingInvalidProperty()
     {
-        $this->expectException(\JBZoo\ToolboxCI\Formats\Internal\Exception::class);
+        $this->expectException(\JBZoo\ToolboxCI\Formats\Source\Exception::class);
         $this->expectExceptionMessage('Undefined property "invalid_prop"');
 
-        $suite = new TestCase('Case');
+        $suite = new SourceCase('Case');
         $suite->invalid_prop = 100;
     }
 
     public function testRequiredPropCannotBeEmpty()
     {
-        $this->expectException(\JBZoo\ToolboxCI\Formats\Internal\Exception::class);
+        $this->expectException(\JBZoo\ToolboxCI\Formats\Source\Exception::class);
         $this->expectExceptionMessage("Property \"name\" can't be null");
 
-        $suite = new TestCase('case');
+        $suite = new SourceCase('case');
         $suite->name = null;
     }
 }

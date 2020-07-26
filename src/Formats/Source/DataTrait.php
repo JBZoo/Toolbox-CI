@@ -13,7 +13,7 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Internal;
+namespace JBZoo\ToolboxCI\Formats\Source;
 
 use JBZoo\Data\Data;
 
@@ -22,8 +22,8 @@ use function JBZoo\Utils\float;
 use function JBZoo\Utils\int;
 
 /**
- * Class TestCase
- * @package JBZoo\ToolboxCI\Formats\Internal
+ * Trait DataTrait
+ * @package JBZoo\ToolboxCI\Formats\Source
  *
  * @property Data  $data
  * @property array $meta
@@ -37,11 +37,15 @@ trait DataTrait
     {
         $values = $this->data->getArrayCopy();
 
-        $result = [];
+        $result = ['_node' => $this->nodeName];
 
         foreach (array_keys($this->meta) as $propName) {
             if (array_key_exists($propName, $values) && $values[$propName] !== null) {
-                $result[$propName] = $values[$propName];
+                if ($values[$propName] instanceof SourceCaseOutput) {
+                    $result[$propName] = $values[$propName]->toArray();
+                } else {
+                    $result[$propName] = $values[$propName];
+                }
             }
         }
 

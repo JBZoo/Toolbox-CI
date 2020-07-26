@@ -16,7 +16,7 @@
 namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Converters111\JUnit2TeamCity;
-use JBZoo\ToolboxCI\Formats\TeamCity\TeamCityLogger;
+use JBZoo\ToolboxCI\Formats\TeamCity\TeamCity;
 use JBZoo\ToolboxCI\Formats\TeamCity\Writers\Buffer;
 
 /**
@@ -30,7 +30,7 @@ class JUnit2TeamCityTest extends PHPUnit
     {
         $flowId = random_int(0, 10000);
 
-        $tcLogger = new TeamCityLogger(new Buffer(), $flowId, ['show-datetime' => false]);
+        $tcLogger = new TeamCity(new Buffer(), $flowId, ['show-datetime' => false]);
 
         /** @var Buffer $actual */
         $actual = (new JUnit2TeamCity('/Users/smetdenis/Work/projects/jbzoo-toolbox-ci'))
@@ -90,12 +90,12 @@ class JUnit2TeamCityTest extends PHPUnit
     {
         $flowId = random_int(0, 10000);
 
-        $tcLogger = new TeamCityLogger(new Buffer(), $flowId, ['show-datetime' => false]);
+        $tcLogger = new TeamCity(new Buffer(), $flowId, ['show-datetime' => false]);
 
         /** @var Buffer $actual */
         $actual = (new JUnit2TeamCity('/Users/smetdenis/Work/projects/jbzoo-toolbox-ci'))
             ->setTeamCityLogger($tcLogger)
-            ->convert(Fixtures::PHPCS_JUNIT);
+            ->convert(file_get_contents(Fixtures::PHPCS_JUNIT));
 
         $filepath = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php';
 

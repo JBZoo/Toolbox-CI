@@ -23,10 +23,10 @@ use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\SystemOut;
 use JBZoo\ToolboxCI\Formats\JUnit\CaseOutput\Warning;
 
 /**
- * Class TestCase
+ * Class JUnitCase
  * @package JBZoo\ToolboxCI\Formats\JUnit
  */
-class TestCase
+class JUnitCase
 {
     /**
      * @var string
@@ -81,9 +81,9 @@ class TestCase
      * @param string      $type
      * @param string|null $message
      * @param string|null $description
-     * @return TestCase
+     * @return JUnitCase
      */
-    public function addFailure(string $type, ?string $message = null, ?string $description = null): TestCase
+    public function addFailure(string $type, ?string $message = null, ?string $description = null): JUnitCase
     {
         $this->outputs[] = new Failure($type, $message, $description);
         return $this;
@@ -93,9 +93,9 @@ class TestCase
      * @param string      $type
      * @param string|null $message
      * @param string|null $description
-     * @return TestCase
+     * @return JUnitCase
      */
-    public function addError(string $type, ?string $message = null, ?string $description = null): TestCase
+    public function addError(string $type, ?string $message = null, ?string $description = null): JUnitCase
     {
         $this->outputs[] = new Error($type, $message, $description);
         return $this;
@@ -105,9 +105,9 @@ class TestCase
      * @param string      $type
      * @param string|null $message
      * @param string|null $description
-     * @return TestCase
+     * @return JUnitCase
      */
-    public function addWarning(string $type, ?string $message = null, ?string $description = null): TestCase
+    public function addWarning(string $type, ?string $message = null, ?string $description = null): JUnitCase
     {
         $this->outputs[] = new Warning($type, $message, $description);
         return $this;
@@ -126,7 +126,7 @@ class TestCase
     /**
      * @return $this
      */
-    public function markAsSkipped(): TestCase
+    public function markAsSkipped(): JUnitCase
     {
         $this->outputs[] = new Skipped();
         return $this;
@@ -172,19 +172,23 @@ class TestCase
      * @param string $filename
      * @return $this
      */
-    public function setFile(string $filename): self
+    public function setFile(?string $filename): self
     {
-        $this->file = $filename;
+        if (null !== $filename) {
+            $this->file = $filename;
+        }
         return $this;
     }
 
     /**
-     * @param string $class
+     * @param string|null $class
      * @return $this
      */
-    public function setClass(string $class): self
+    public function setClass(?string $class): self
     {
-        $this->class = $class;
+        if (null !== $class) {
+            $this->class = $class;
+        }
         return $this;
     }
 
@@ -192,9 +196,11 @@ class TestCase
      * @param string $className
      * @return $this
      */
-    public function setClassname(string $className): self
+    public function setClassname(?string $className): self
     {
-        $this->className = $className;
+        if (null !== $className) {
+            $this->className = $className;
+        }
         return $this;
     }
 
@@ -204,7 +210,9 @@ class TestCase
      */
     public function setLine($line): self
     {
-        $this->line = (int)$line;
+        if (null !== $line) {
+            $this->line = (int)$line;
+        }
         return $this;
     }
 
@@ -214,7 +222,9 @@ class TestCase
      */
     public function setAssertions($assertions): self
     {
-        $this->assertions = (int)$assertions;
+        if (null !== $assertions) {
+            $this->assertions = (int)$assertions;
+        }
         return $this;
     }
 
@@ -224,7 +234,9 @@ class TestCase
      */
     public function setTime($time): self
     {
-        $this->time = (float)$time;
+        if (null !== $time) {
+            $this->time = (float)$time;
+        }
         return $this;
     }
 

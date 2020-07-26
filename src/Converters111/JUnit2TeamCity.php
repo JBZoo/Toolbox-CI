@@ -16,7 +16,7 @@
 namespace JBZoo\ToolboxCI\Converters111;
 
 use JBZoo\Data\Data;
-use JBZoo\ToolboxCI\Formats\TeamCity\TeamCityLogger;
+use JBZoo\ToolboxCI\Formats\TeamCity\TeamCity;
 use JBZoo\ToolboxCI\Formats\TeamCity\Writers\AbstractWriter;
 use JBZoo\ToolboxCI\Helper;
 
@@ -30,15 +30,15 @@ use function JBZoo\Utils\float;
 class JUnit2TeamCity extends AbstractConverter
 {
     /**
-     * @var TeamCityLogger
+     * @var TeamCity
      */
     private $tcLogger;
 
     /**
-     * @param TeamCityLogger $logger
+     * @param TeamCity $logger
      * @return $this
      */
-    public function setTeamCityLogger(TeamCityLogger $logger): self
+    public function setTeamCityLogger(TeamCity $logger): self
     {
         $this->tcLogger = $logger;
         return $this;

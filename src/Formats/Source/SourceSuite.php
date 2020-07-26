@@ -13,16 +13,16 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Formats\Internal;
+namespace JBZoo\ToolboxCI\Formats\Source;
 
 /**
  * Class TestSuite
- * @package JBZoo\ToolboxCI
+ * @package JBZoo\ToolboxCI\Formats\Source
  *
  * @property string|null $file
  * @property string|null $class
  */
-class TestSuite extends AbstractItem
+class SourceSuite extends AbstractItemSource
 {
     /**
      * @var array
@@ -34,12 +34,12 @@ class TestSuite extends AbstractItem
     ];
 
     /**
-     * @var TestCase[]
+     * @var SourceCase[]
      */
     private $cases = [];
 
     /**
-     * @var TestSuite[]
+     * @var SourceSuite[]
      */
     private $suites = [];
 
@@ -52,7 +52,7 @@ class TestSuite extends AbstractItem
     }
 
     /**
-     * @return TestSuite[]
+     * @return SourceSuite[]
      */
     public function getSuites()
     {
@@ -60,7 +60,7 @@ class TestSuite extends AbstractItem
     }
 
     /**
-     * @return TestCase[]
+     * @return SourceCase[]
      */
     public function getCases()
     {
@@ -69,7 +69,7 @@ class TestSuite extends AbstractItem
 
     /**
      * @param string $testSuiteName
-     * @return TestSuite
+     * @return SourceSuite
      */
     public function addSubSuite(?string $testSuiteName = null): self
     {
@@ -80,11 +80,11 @@ class TestSuite extends AbstractItem
 
     /**
      * @param string $testCaseName
-     * @return TestCase
+     * @return SourceCase
      */
-    public function addTestCase(string $testCaseName): TestCase
+    public function addTestCase(string $testCaseName): SourceCase
     {
-        $testCase = new TestCase($testCaseName);
+        $testCase = new SourceCase($testCaseName);
         $this->cases[] = $testCase;
         return $testCase;
     }
