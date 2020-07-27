@@ -80,7 +80,7 @@ class JUnit2TeamCity extends AbstractConverter
         $this->tcLogger->testStarted($testName, ['locationHint' => "php_qn://{$fileName}::\\{$class}::{$testName}"]);
 
         if (count($testCase) > 0) {
-            foreach ($testCase as $failType => $failureInfo) {
+            foreach ($testCase as $failType => $failureInfo) {Î
                 $text = $failureInfo['#text'] ?? null;
                 $messageData = $this->parseTextMessage($text);
 

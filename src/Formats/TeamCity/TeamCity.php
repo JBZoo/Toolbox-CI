@@ -120,7 +120,7 @@ class TeamCity
      * @param string $name     The test name.
      * @param float  $duration The test duration in seconds.
      */
-    public function testFinished($name, $duration = null)
+    public function testFinished($name, ?float $duration = null)
     {
         $this->write('testFinished', [
             'name'     => $name,
@@ -129,46 +129,27 @@ class TeamCity
     }
 
     /**
-     * @param string      $name
-     * @param string      $message
-     * @param string|null $details
-     * @param float|null  $duration
+     * @param string $name
+     * @param array  $params
      */
-    public function testFailed(string $name, string $message, ?string $details = null, ?float $duration = null): void
+    public function testFailed(string $name, array $params = []): void
     {
-        $this->write('testFailed', [
+        $writeParams = [
             'name'     => $name,
-            'message'  => $message,
-            'details'  => $details,
-            'duration' => $duration > 0 ? round($duration * 1000) : null,
-        ]);
-    }
+            'message'  => $params['message'] ?? null,
+            'details'  => $params['details'] ?? null,
+            'duration' => $params['duration'] > 0 ? round($params['duration'] * 1000) : null,
+            'type'     => null,
+            'actual'   => $params['actual'] ?? null,
+            'expected' => $params['expected'] ?? null,
 
-    /**
-     * @param string      $name
-     * @param string      $message
-     * @param string|null $details
-     * @param string|null $actual
-     * @param string|null $expected
-     * @param float|null  $duration
-     */
-    public function testFailedWithComparison(
-        string $name,
-        string $message,
-        ?string $details = null,
-        ?string $actual = null,
-        ?string $expected = null,
-        ?float $duration = null
-    ) {
-        $this->write('testFailed', [
-            'name'     => $name,
-            'message'  => $message,
-            'details'  => $details,
-            'duration' => $duration > 0 ? round($duration * 1000) : null,
-            'type'     => 'comparisonFailure',
-            'actual'   => $actual,
-            'expected' => $expected,
-        ]);
+        ];
+
+        if (null !== $writeParams['actual'] && null !== $writeParams['expected']) {
+            $writeParams['type'] = 'comparisonFailure';
+        }
+
+        $this->write('testFailed', $writeParams);
     }
 
     /**

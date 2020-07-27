@@ -15,11 +15,26 @@
 
 namespace JBZoo\ToolboxCI\Converters;
 
+use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
+
 /**
- * Class AbtractConverter
+ * Class AbstractConverter
  * @package JBZoo\ToolboxCI\Converters
  */
-class AbstractConverter
+abstract class AbstractConverter
 {
+    public const TYPE = 'abstract';
+    public const NAME = 'Abstract';
 
+    /**
+     * @param string $source
+     * @return SourceSuite
+     */
+    abstract public function toInternal(string $source): SourceSuite;
+
+    /**
+     * @param SourceSuite $sourceSuite
+     * @return string
+     */
+    abstract public function fromInternal(SourceSuite $sourceSuite): string;
 }

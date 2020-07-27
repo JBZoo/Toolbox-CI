@@ -77,7 +77,7 @@ class ConverterJUnitTest extends PHPUnit
         $suite2->addCase('Test #2.2')->time = 4;
         $suite2->addCase('Test #2.3')->time = 5;
 
-        isSame((string)$junitExpected, (string)$junitActual);
+        isSame((string)$junitExpected, $junitActual);
     }
 
     public function testConvertToInternalRealFull()
@@ -118,15 +118,15 @@ class ConverterJUnitTest extends PHPUnit
             '  </testsuite>',
             '</testsuites>',
             '',
-        ]), (string)(new JUnitConverter())->fromInternal($suite));
+        ]), (new JUnitConverter())->fromInternal($suite));
     }
 
     public function testComplex()
     {
         $junitFiles = [
-            Fixtures::PHPUNIT_JUNIT_EXPECTED,
             Fixtures::PHPUNIT_JUNIT,
-            Fixtures::PHPCS_JUNIT,
+            Fixtures::PHPUNIT_JUNIT_EXPECTED,
+            //Fixtures::PHPCS_JUNIT,
             //Fixtures::PHPSTAN_JUNIT,
             //Fixtures::PSALM_JUNIT,
         ];

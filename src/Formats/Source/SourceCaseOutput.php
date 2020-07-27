@@ -15,6 +15,10 @@
 
 namespace JBZoo\ToolboxCI\Formats\Source;
 
+use JBZoo\Data\Data;
+
+use function JBZoo\Data\data;
+
 /**
  * Class SourceCaseOutput
  * @package JBZoo\ToolboxCI\Formats\Source
@@ -34,7 +38,7 @@ class SourceCaseOutput
     /**
      * @var string|null
      */
-    public $description;
+    public $details;
 
     /**
      * AbstractError constructor.
@@ -46,7 +50,67 @@ class SourceCaseOutput
     {
         $this->type = $type;
         $this->message = $message;
-        $this->description = $description;
+        $this->details = $description;
+    }
+
+    /**
+     * @param string|null $text
+     * @return Data
+     */
+    public function parseDescription(): Data
+    {
+        $result = [];
+
+        $text = $this->details;
+        $result['description'] = $text;
+
+        $lines = explode("\n", $text);
+        if (array_key_exists(1, $lines)) {
+            $result['message'] = $lines[1];
+            unset($lines[0], $lines[1]);
+            $result['description'] = ' ' . ltrim(implode("\n ", $lines));
+        } else {
+            $result['message'] = $lines[0];
+            $result['description'] = null;
+        }
+
+        if (strpos($text, '@@ @@') > 0) {
+            $diff = trim(explode('@@ @@', $text)[1]);
+            $diffLines = explode("\n", $diff);
+
+            $actual = [];
+            $expected = [];
+            $description = [];
+            $isDiffPart = true;
+
+            foreach ($diffLines as $diffLine) {
+                $diffLine = trim($diffLine);
+
+                if (!$diffLine) {
+                    $isDiffPart = false;
+                    continue;
+                }
+
+                if ($isDiffPart) {
+                    $message = preg_replace('#^[\-\+]#', '', $diffLine);
+                    if ($diffLine[0] === '-') {
+                        $expected[] = $message;
+                    }
+
+                    if ($diffLine[0] === '+') {
+                        $actual[] = $message;
+                    }
+                } else {
+                    $description[] = $diffLine;
+                }
+            }
+
+            $result['actual'] = implode("\n", $actual);
+            $result['expected'] = implode("\n", $expected);
+            $result['description'] = ' ' . ltrim(implode("\n ", $description)) . "\n ";
+        }
+
+        return data($result);
     }
 
     /**
@@ -57,7 +121,7 @@ class SourceCaseOutput
         return [
             'type'        => $this->type,
             'message'     => $this->message,
-            'description' => $this->description
+            'description' => $this->details
         ];
     }
 }
