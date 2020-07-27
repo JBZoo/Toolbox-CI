@@ -15,8 +15,6 @@
 
 namespace JBZoo\ToolboxCI\Formats\TeamCity;
 
-use DateTime;
-use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
 use LogicException;
@@ -92,11 +90,7 @@ class Util
      */
     public static function formatTimestamp($date = null)
     {
-        if (!$date) {
-            $date = self::nowMicro();
-        }
-
-        $formatted = $date->format(self::TIMESTAMP_FORMAT);
+        $formatted = (new \DateTime())->format(self::TIMESTAMP_FORMAT);
         // We need to pass only 3 microsecond digits.
         // 2000-01-01T12:34:56.123450+0100 <- before
         // 2000-01-01T12:34:56.123+0100 <- after
@@ -122,11 +116,7 @@ class Util
             ']'  => '|]',
         ];
 
-        return preg_replace_callback(/**
-         * @param $matches
-         * @return mixed|string
-         */
-            '/([\'\n\r|[\]])|\\\\u(\d{4})/', function ($matches) use ($escapeCharacterMap) {
+        return preg_replace_callback('/([\'\n\r|[\]])|\\\\u(\d{4})/', function ($matches) use ($escapeCharacterMap) {
             if ($matches[1]) {
                 return $escapeCharacterMap[$matches[1]];
             }
@@ -138,26 +128,4 @@ class Util
             throw new LogicException('Unexpected match combination.');
         }, $value);
     }
-
-    /**
-     * Get current time with microseconds included.
-     *
-     * @return DateTimeInterface
-     */
-    public static function nowMicro()
-    {
-        // This is kinda hacky way, because you can't simply ask for DateTime with microseconds in PHP
-
-        [$microseconds, $timestamp] = explode(' ', microtime());
-
-        // extract first six microsecond digits from string "0.12345678" as DateTime won't accept more
-        $microseconds = substr($microseconds, 2, 6);
-
-        // order of format matters; timestamp sets timezone and set microseconds to zero;
-        // that's why microseconds must be set after parsing the timestamp
-        return PHP_VERSION_ID >= 50500
-            ? DateTimeImmutable::createFromFormat('U u', "$timestamp $microseconds")
-            : DateTime::createFromFormat('U u', "$timestamp $microseconds");
-    }
-
 }

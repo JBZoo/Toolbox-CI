@@ -124,8 +124,8 @@ class ConverterJUnitTest extends PHPUnit
     public function testComplex()
     {
         $junitFiles = [
-            Fixtures::PHPUNIT_JUNIT,
-            Fixtures::PHPUNIT_JUNIT_EXPECTED,
+            Fixtures::PHPUNIT_JUNIT_NESTED,
+            Fixtures::PHPUNIT_JUNIT_SIMPLE,
             //Fixtures::PHPCS_JUNIT,
             //Fixtures::PHPSTAN_JUNIT,
             //Fixtures::PSALM_JUNIT,

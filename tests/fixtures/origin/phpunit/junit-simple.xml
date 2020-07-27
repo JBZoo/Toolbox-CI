@@ -48,8 +48,8 @@ Some warning
 </warning>
     </testcase>
   </testsuite>
-  <testsuite name="JBZoo\PHPUnit\ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" tests="1" errors="1" time="0.000593">
-    <testcase name="testException" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="85" assertions="0" time="0.000593">
+  <testsuite name="JBZoo\PHPUnit\ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" tests="1" errors="1" time="5.000593">
+    <testcase name="testException" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="85" assertions="0" time="5.000593">
       <error type="JBZoo\PHPUnit\Exception">JBZoo\PHPUnit\ExampleTest::testException
 JBZoo\PHPUnit\Exception: Exception message
 

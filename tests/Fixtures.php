@@ -25,7 +25,9 @@ class Fixtures
     public const ROOT      = __DIR__ . '/../tests/fixtures';
     public const ROOT_ORIG = self::ROOT . '/origin';
 
-    public const JUNIT_XSD = self::ROOT . '/junit.xsd';
+    public const JUNIT_XSD        = self::ROOT . '/junit.xsd';
+    public const JUNIT_CHECKSTYLE = self::ROOT . '/checkstyle.xsd';
+    public const JUNIT_PMD        = self::ROOT . '/pmd.xsd';
 
     public const PHAN_CHECKSTYLE  = self::ROOT_ORIG . '/phan/checkstyle.xml';
     public const PHAN_CODECLIMATE = self::ROOT_ORIG . '/phan/codeclimate.json';
@@ -57,9 +59,9 @@ class Fixtures
     public const PHPSTAN_JSON   = self::ROOT_ORIG . '/phpstan/json.json';
     public const PHPSTAN_JUNIT  = self::ROOT_ORIG . '/phpstan/junit.xml';
 
-    public const PHPUNIT_JUNIT          = self::ROOT_ORIG . '/phpunit/junit.xml';
-    public const PHPUNIT_JUNIT_EXPECTED = self::ROOT_ORIG . '/phpunit/junit-expected.xml';
-    public const PHPUNIT_TEAMCITY       = self::ROOT_ORIG . '/phpunit/teamcity.txt';
+    public const PHPUNIT_JUNIT_NESTED = self::ROOT_ORIG . '/phpunit/junit-nested.xml';
+    public const PHPUNIT_JUNIT_SIMPLE = self::ROOT_ORIG . '/phpunit/junit-simple.xml';
+    public const PHPUNIT_TEAMCITY     = self::ROOT_ORIG . '/phpunit/teamcity.txt';
 
     public const PSALM_CHECKSTYLE = self::ROOT_ORIG . '/psalm/checkstyle.xml';
     public const PSALM_EMACS      = self::ROOT_ORIG . '/psalm/emacs.txt';

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="JBZoo\PHPUnit\ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" tests="14" assertions="8" errors="3" warnings="1" failures="4" skipped="2" time="0.011812">
+  <testsuite name="JBZoo\PHPUnit\ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" tests="14" assertions="8" errors="3" warnings="1" failures="4" skipped="2" time="10.511720">
     <testcase name="testValid" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="33" assertions="1" time="0.006633"/>
     <testcase name="testInValid" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="38" assertions="1" time="0.001102">
       <failure type="PHPUnit\Framework\ExpectationFailedException">JBZoo\PHPUnit\ExampleTest::testInValid
@@ -70,7 +70,7 @@ Failed asserting that two arrays are identical.
 /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:98
 </failure>
     </testcase>
-    <testcase name="testCompareString" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="101" assertions="1" time="0.000092">
+    <testcase name="testCompareString" class="JBZoo\PHPUnit\ExampleTest" classname="JBZoo.PHPUnit.ExampleTest" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php" line="101" assertions="1" time="10.500000">
       <failure type="PHPUnit\Framework\ExpectationFailedException">JBZoo\PHPUnit\ExampleTest::testCompareString
 Failed asserting that two strings are identical.
 --- Expected

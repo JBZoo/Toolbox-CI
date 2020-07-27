@@ -108,7 +108,7 @@ class FormatJUnitTest extends PHPUnit
 
         $anotherSuite = $junit->addSuite($class)->setFile($filename);
         $anotherSuite->addCase('testException')->setFile($filename)->setClass($class)->setClassname($className)
-            ->setLine(85)->setAssertions(0)->setTime(0.000593)
+            ->setLine(85)->setAssertions(0)->setTime(5.000593)
             ->addError(Exception::class, null, implode("\n", [
                 'JBZoo\PHPUnit\ExampleTest::testException',
                 'JBZoo\PHPUnit\Exception: Exception message',
@@ -123,7 +123,7 @@ class FormatJUnitTest extends PHPUnit
         Aliases::isValidXml((string)$junit);
 
         $expectedXml = new \DOMDocument();
-        $expectedXml->loadXML(file_get_contents(Fixtures::PHPUNIT_JUNIT_EXPECTED));
+        $expectedXml->loadXML(file_get_contents(Fixtures::PHPUNIT_JUNIT_SIMPLE));
 
         isSame($expectedXml->saveXML(), (string)$junit);
     }

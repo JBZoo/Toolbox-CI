@@ -73,9 +73,12 @@ class TeamCityTestsConverter extends AbstractConverter
     private function renderSuite(SourceSuite $sourceSuite)
     {
         foreach ($sourceSuite->getSuites() as $suite) {
-            $this->tcLogger->testSuiteStarted($suite->name, [
-                'locationHint' => "php_qn://{$suite->file}::\\{$suite->name}"
-            ]);
+            $params = [];
+            if ($suite->file) {
+                $params = ['locationHint' => "php_qn://{$suite->file}::\\{$suite->name}"];
+            }
+
+            $this->tcLogger->testSuiteStarted($suite->name, $params);
 
             foreach ($suite->getCases() as $case) {
                 $this->renderTestCase($case);
@@ -92,9 +95,12 @@ class TeamCityTestsConverter extends AbstractConverter
     {
         $logger = $this->tcLogger;
 
-        $logger->testStarted($case->name, [
-            'locationHint' => "php_qn://{$case->file}::\\{$case->class}::{$case->name}"
-        ]);
+        $params = [];
+        if ($case->file && $case->class) {
+            $params = ['locationHint' => "php_qn://{$case->file}::\\{$case->class}::{$case->name}"];
+        }
+
+        $logger->testStarted($case->name, $params);
 
         if ($case->skipped) {
             $logger->testSkipped($case->name, $case->skipped->message, $case->skipped->details, $case->time);
