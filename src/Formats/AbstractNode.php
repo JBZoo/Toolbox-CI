@@ -124,20 +124,24 @@ class AbstractNode
             $name = strtolower(preg_replace("#^set#", '', $name));
             $newValue = $arguments[0] ?? null;
 
-            if (null !== $newValue) {
-                $this->{$name} = $newValue;
+            if (array_key_exists($name, $this->meta)) {
+                if (null !== $newValue) {
+                    $this->{$name} = $newValue;
+                }
+
+                return $this;
             }
-
-            return $this;
-
         }
 
         if (strpos($name, 'get') === 0) {
             $name = preg_replace("#^get#", '', $name);
-            return $this->{$name};
+            if (array_key_exists($name, $this->meta)) {
+                return $this->{$name};
+            }
         }
 
-        throw new Exception("Undefined method \"{$name}\"");
+        $methodName = static::class . "->{$name}()";
+        throw new Exception("Undefined method \"{$methodName}\"");
     }
 
     /**

@@ -68,7 +68,7 @@ class PhpmdJsonConverter extends AbstractConverter
      */
     public function fromInternal(SourceSuite $sourceSuite): string
     {
-
+        throw new Exception('Method is not available');
     }
 
     /**
