@@ -27,7 +27,7 @@ class Aliases
      * @param string $xmlString
      * @param string $xsdFile
      */
-    public static function isValidXml($xmlString, string $xsdFile = Fixtures::JUNIT_XSD)
+    public static function isValidXml($xmlString, string $xsdFile = Fixtures::XSD_JUNIT)
     {
         isNotEmpty($xmlString);
 

@@ -15,6 +15,7 @@
 
 namespace JBZoo\ToolboxCI;
 
+use JBZoo\ToolboxCI\Converters\CheckStyleConverter;
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
 use JBZoo\ToolboxCI\Converters\PhpmdJsonConverter;
 use JBZoo\ToolboxCI\Converters\TeamCityTestsConverter;
@@ -26,25 +27,9 @@ use JBZoo\ToolboxCI\Converters\TeamCityTestsConverter;
 class Map
 {
     public const MAP = [
-        JUnitConverter::class => [
-            'type' => JUnitConverter::TYPE,
-            'name' => JUnitConverter::NAME,
-            'to'   => true,
-            'from' => true
-        ],
-
-        TeamCityTestsConverter::class => [
-            'type' => TeamCityTestsConverter::TYPE,
-            'name' => TeamCityTestsConverter::NAME,
-            'to'   => false,
-            'from' => true
-        ],
-
-        PhpmdJsonConverter::class => [
-            'type' => PhpmdJsonConverter::TYPE,
-            'name' => PhpmdJsonConverter::NAME,
-            'to'   => true,
-            'from' => true
-        ]
+        JUnitConverter::class         => ['to' => true, 'from' => true],
+        TeamCityTestsConverter::class => ['to' => false, 'from' => true],
+        PhpmdJsonConverter::class     => ['to' => true, 'from' => false],
+        CheckStyleConverter::class    => ['to' => true, 'from' => false]
     ];
 }

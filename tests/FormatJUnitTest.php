@@ -127,13 +127,4 @@ class FormatJUnitTest extends PHPUnit
 
         isSame($expectedXml->saveXML(), (string)$junit);
     }
-
-    public function testJUnitPhpUnitExpectedXsd()
-    {
-        $xmlExamples = glob(realpath(Fixtures::ROOT) . '/**/**/junit.xml');
-
-        foreach ($xmlExamples as $junitXmlFile) {
-            Aliases::isValidXml(file_get_contents($junitXmlFile));
-        }
-    }
 }

@@ -22,12 +22,12 @@ namespace JBZoo\PHPUnit;
  */
 class Fixtures
 {
-    public const ROOT      = __DIR__ . '/../tests/fixtures';
+    public const ROOT      = __DIR__ . '/../../tests/fixtures';
     public const ROOT_ORIG = self::ROOT . '/origin';
 
-    public const JUNIT_XSD        = self::ROOT . '/junit.xsd';
-    public const JUNIT_CHECKSTYLE = self::ROOT . '/checkstyle.xsd';
-    public const JUNIT_PMD        = self::ROOT . '/pmd.xsd';
+    public const XSD_JUNIT      = self::ROOT . '/junit.xsd';
+    public const XSD_CHECKSTYLE = self::ROOT . '/checkstyle.xsd';
+    public const XSD_PMD        = self::ROOT . '/pmd.xsd';
 
     public const PHAN_CHECKSTYLE  = self::ROOT_ORIG . '/phan/checkstyle.xml';
     public const PHAN_CODECLIMATE = self::ROOT_ORIG . '/phan/codeclimate.json';

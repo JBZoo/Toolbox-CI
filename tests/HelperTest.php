@@ -17,7 +17,6 @@ namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\Xml;
-use ReflectionClass;
 
 /**
  * Class HelperTest
@@ -277,24 +276,6 @@ class HelperTest extends PHPUnit
         );
     }
 
-    public function testArrayToXmlComplex()
-    {
-        $xmlExamples = glob(realpath(Fixtures::ROOT) . '/**/**/*.xml');
-
-        foreach ($xmlExamples as $xmlFile) {
-            $originalXml = new \DOMDocument();
-            $originalXml->preserveWhiteSpace = false;
-            $originalXml->loadXML(file_get_contents($xmlFile));
-            $originalXml->formatOutput = true;
-            $originalXml->encoding = 'UTF-8';
-            $originalXml->version = '1.0';
-
-            $actualXml = Xml::array2Dom(Xml::dom2Array($originalXml));
-
-            isSame($originalXml->saveXML(), $actualXml->saveXML(), "File: {$xmlFile}");
-        }
-    }
-
     /**
      * @return JUnit
      */
@@ -312,17 +293,21 @@ class HelperTest extends PHPUnit
         return $junit;
     }
 
-    public function testFixturesExists()
+    public function testArrayToXmlComplex()
     {
-        $oClass = new ReflectionClass(Fixtures::class);
+        $xmlExamples = glob(realpath(Fixtures::ROOT) . '/**/**/*.xml');
 
-        foreach ($oClass->getConstants() as $name => $path) {
-            if (in_array($name, ['ROOT', 'ROOT_ORIG'], true)) {
-                continue;
-            }
+        foreach ($xmlExamples as $xmlFile) {
+            $originalXml = new \DOMDocument();
+            $originalXml->preserveWhiteSpace = false;
+            $originalXml->loadXML(file_get_contents($xmlFile));
+            $originalXml->formatOutput = true;
+            $originalXml->encoding = 'UTF-8';
+            $originalXml->version = '1.0';
 
-            isTrue(realpath($path), "{$name} => {$path}");
-            isFile($path, $name);
+            $actualXml = Xml::array2Dom(Xml::dom2Array($originalXml));
+
+            isSame($originalXml->saveXML(), $actualXml->saveXML(), "File: {$xmlFile}");
         }
     }
 }
