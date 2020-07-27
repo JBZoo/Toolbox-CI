@@ -53,11 +53,11 @@ class Fixtures
 
     public const PHPMND_XML = self::ROOT_ORIG . '/phpmnd/phpmnd.xml';
 
-    public const PHPSTAN_XML    = self::ROOT_ORIG . '/phpstan/checkstyle.xml';
-    public const PHPSTAN_GITHUB = self::ROOT_ORIG . '/phpstan/github.txt';
-    public const PHPSTAN_GITLAB = self::ROOT_ORIG . '/phpstan/gitlab.json';
-    public const PHPSTAN_JSON   = self::ROOT_ORIG . '/phpstan/json.json';
-    public const PHPSTAN_JUNIT  = self::ROOT_ORIG . '/phpstan/junit.xml';
+    public const PHPSTAN_CHECKSTYLE = self::ROOT_ORIG . '/phpstan/checkstyle.xml';
+    public const PHPSTAN_GITHUB     = self::ROOT_ORIG . '/phpstan/github.txt';
+    public const PHPSTAN_GITLAB     = self::ROOT_ORIG . '/phpstan/gitlab.json';
+    public const PHPSTAN_JSON       = self::ROOT_ORIG . '/phpstan/json.json';
+    public const PHPSTAN_JUNIT      = self::ROOT_ORIG . '/phpstan/junit.xml';
 
     public const PHPUNIT_JUNIT_NESTED = self::ROOT_ORIG . '/phpunit/junit-nested.xml';
     public const PHPUNIT_JUNIT_SIMPLE = self::ROOT_ORIG . '/phpunit/junit-simple.xml';

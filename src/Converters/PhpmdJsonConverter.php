@@ -83,10 +83,10 @@ class PhpmdJsonConverter extends AbstractConverter
         }
 
         return Helper::descAsList([
-                'Rule' => implode(' / ', [$data['ruleSet'], $data['rule'], "Priority:{$data['priority']}"]),
-                'Docs' => $data['externalInfoUrl'],
-                'Mute' => "@SuppressWarnings(PHPMD.{$data['rule']})",
-                'Func' => $functionName ?? $data['function'],
-            ]) . "\n";
+            'Rule' => implode(' / ', [$data['ruleSet'], $data['rule'], "Priority:{$data['priority']}"]),
+            'Docs' => $data['externalInfoUrl'],
+            'Mute' => "@SuppressWarnings(PHPMD.{$data['rule']})",
+            'Func' => $functionName ?? $data['function'],
+        ]);
     }
 }

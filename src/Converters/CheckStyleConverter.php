@@ -15,10 +15,13 @@
 
 namespace JBZoo\ToolboxCI\Converters;
 
-use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
-use JBZoo\ToolboxCI\Formats\JUnit\JUnitSuite;
+use JBZoo\Data\Data;
+use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;
 use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 use JBZoo\ToolboxCI\Formats\Xml;
+use JBZoo\ToolboxCI\Helper;
+
+use function JBZoo\Data\data;
 
 /**
  * Class CheckStyleConverter
@@ -37,25 +40,50 @@ class CheckStyleConverter extends AbstractConverter
         $xmlDocument = Xml::createDomDocument($source);
         $xmlAsArray = Xml::dom2Array($xmlDocument);
 
-        dump($xmlAsArray);
+        $sourceSuite = new SourceSuite('CheckStyle');
 
-        return $testSuite->getSuites()[0];
+        foreach ($xmlAsArray['_children'] as $files) {
+            foreach ($files['_children'] as $file) {
+                $fileName = $this->cleanFilepath($file['_attrs']['name']);
+
+                foreach ($file['_children'] as $errorNode) {
+                    $error = data($errorNode['_attrs']);
+
+                    $line = $error->get('line');
+                    $source = $error->get('source') ?? 'ERROR';
+
+                    $caseName = $line > 0 ? "{$fileName}:{$line}" : $fileName;
+
+                    $case = $sourceSuite->addTestCase($caseName);
+                    $case->file = $fileName;
+                    $case->line = $line;
+                    $case->class = $source;
+                    $case->classname = $source;
+                    $case->failure = new SourceCaseOutput($source, $error->get('message'), $this->getDetails($error));
+                }
+            }
+        }
+
+        return $sourceSuite;
+    }
+
+    /**
+     * @param Data $data
+     * @return string
+     */
+    private function getDetails(Data $data): string
+    {
+        return Helper::descAsList([
+            'Severity' => $data->get('severity'),
+            'Message ' => $data->get('message'),
+            'Rule    ' => $data->get('source'),
+        ]);
     }
 
     /**
      * @inheritDoc
      */
     public function fromInternal(SourceSuite $sourceSuite): string
-    {
-
-    }
-
-    /**
-     * @param SourceSuite      $source
-     * @param JUnitSuite|JUnit $junitSuite
-     * @return JUnitSuite|JUnit
-     */
-    public function createJUnitNodes(SourceSuite $source, $junitSuite)
     {
 
     }

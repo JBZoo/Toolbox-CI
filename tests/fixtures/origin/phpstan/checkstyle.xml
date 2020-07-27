@@ -9,49 +9,5 @@
                message="Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setTime() has no return typehint specified."/>
         <error line="54" column="1" severity="error"
                message="Parameter #2 $value of method DOMElement::setAttribute() expects string, float given."/>
-        <error line="65" column="1" severity="error" message="Cannot call method createElement() on DOMDocument|null."/>
-        <error line="88" column="1" severity="error" message="Cannot call method createElement() on DOMDocument|null."/>
-        <error line="106" column="1" severity="error"
-               message="Method JBZoo\ToolboxCI\JUnit\TestCaseElement::incrementFailureCount() has no return typehint specified."/>
-        <error line="109" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
-        <error line="111" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
-        <error line="118" column="1" severity="error"
-               message="Method JBZoo\ToolboxCI\JUnit\TestCaseElement::incrementErrorCount() has no return typehint specified."/>
-        <error line="121" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
-        <error line="123" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
-    </file>
-    <file name="src/JUnit/TestSuiteElement.php">
-        <error line="35" column="1" severity="error"
-               message="Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::setName() has no return typehint specified."/>
-        <error line="45" column="1" severity="error"
-               message="Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::setTimestamp() has no return typehint specified."/>
-        <error line="55" column="1" severity="error"
-               message="Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::setTime() has no return typehint specified."/>
-        <error line="57" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, float given."/>
-        <error line="65" column="1" severity="error"
-               message="Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::setHostname() has no return typehint specified."/>
-        <error line="86" column="1" severity="error"
-               message="Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::incrementTestCount() has no return typehint specified."/>
-        <error line="89" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
-        <error line="91" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
-        <error line="98" column="1" severity="error"
-               message="Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::incrementFailureCount() has no return typehint specified."/>
-        <error line="101" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
-        <error line="103" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
-        <error line="110" column="1" severity="error"
-               message="Method JBZoo\ToolboxCI\JUnit\TestSuiteElement::incrementErrorCount() has no return typehint specified."/>
-        <error line="113" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
-        <error line="115" column="1" severity="error"
-               message="Parameter #2 $value of method DOMElement::setAttribute() expects string, int given."/>
     </file>
 </checkstyle>

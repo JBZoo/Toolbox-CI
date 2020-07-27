@@ -15,8 +15,6 @@
 
 namespace JBZoo\ToolboxCI\Formats\JUnit\CaseOutput;
 
-use JBZoo\Utils\Str;
-
 /**
  * Class AbstractOutput
  * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
@@ -83,7 +81,7 @@ abstract class AbstractOutput
     public function toXML(\DOMDocument $document): \DOMNode
     {
         if (null !== $this->description) {
-            $node = $document->createElement($this->elementName, Str::escXml((string)$this->description));
+            $node = $document->createElement($this->elementName, str_replace(' &0 ', ' &amp;0 ', $this->description));
         } else {
             $node = $document->createElement($this->elementName);
         }

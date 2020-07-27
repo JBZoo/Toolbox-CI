@@ -30,11 +30,12 @@ class Helper
         $result = [];
 
         foreach ($data as $key => $value) {
-            if ($value) {
+            $value = trim($value);
+            if ('' !== $value) {
                 $result[] = ucfirst($key) . ': ' . $value;
             }
         }
 
-        return implode(PHP_EOL, $result);
+        return implode(PHP_EOL, $result) . "\n";
     }
 }

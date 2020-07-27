@@ -74,12 +74,12 @@ class JUnitCase extends AbstractNode
     }
 
     /**
-     * @param string      $type
+     * @param string|null $type
      * @param string|null $message
      * @param string|null $description
      * @return JUnitCase
      */
-    public function addError(string $type, ?string $message = null, ?string $description = null): JUnitCase
+    public function addError(?string $type, ?string $message = null, ?string $description = null): JUnitCase
     {
         $this->outputs[] = new Error($type, $message, $description);
         return $this;

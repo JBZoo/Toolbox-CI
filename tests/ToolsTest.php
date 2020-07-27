@@ -19,12 +19,52 @@ use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\Xml;
 
 /**
- * Class HelperTest
- *
+ * Class ToolsTest
  * @package JBZoo\PHPUnit
  */
-class HelperTest extends PHPUnit
+class ToolsTest extends PHPUnit
 {
+    public function testCheckstyleSchema()
+    {
+        $xmlFiles = glob(realpath(Fixtures::ROOT) . '/**/**/checkstyle.xml');
+
+        foreach ($xmlFiles as $junitXmlFile) {
+            Aliases::isValidXml(file_get_contents($junitXmlFile), Fixtures::XSD_CHECKSTYLE);
+        }
+    }
+
+    public function testPmdSchema()
+    {
+        $xmlFiles = glob(realpath(Fixtures::ROOT) . '/**/**/pmd.xml');
+
+        foreach ($xmlFiles as $xmlFile) {
+            Aliases::isValidXml(file_get_contents($xmlFile), Fixtures::XSD_PMD);
+        }
+    }
+
+    public function testJUnitSchema()
+    {
+        $xmlFiles = glob(realpath(Fixtures::ROOT) . '/**/**/junit.xml');
+
+        foreach ($xmlFiles as $xmlFile) {
+            Aliases::isValidXml(file_get_contents($xmlFile));
+        }
+    }
+
+    public function testFixturesExists()
+    {
+        $oClass = new \ReflectionClass(Fixtures::class);
+
+        foreach ($oClass->getConstants() as $name => $path) {
+            if (in_array($name, ['ROOT', 'ROOT_ORIG'], true)) {
+                continue;
+            }
+
+            isTrue(realpath($path), "{$name} => {$path}");
+            isFile($path, $name);
+        }
+    }
+
     public function testDom2Array()
     {
         isSame([
