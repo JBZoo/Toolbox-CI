@@ -59,7 +59,7 @@ class JUnitCase extends AbstractNode
     /**
      * @var AbstractOutput[]
      */
-    private $outputs = [];
+    public $outputs = [];
 
     /**
      * @param string      $type
@@ -145,8 +145,8 @@ class JUnitCase extends AbstractNode
             $node->setAttribute('time', sprintf('%F', round($this->time, 6)));
         }
 
-        foreach ($this->outputs as $failure) {
-            $node->appendChild($failure->toXML($document));
+        foreach ($this->outputs as $caseOutput) {
+            $node->appendChild($caseOutput->toXML($document));
         }
 
         return $node;

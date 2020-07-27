@@ -120,7 +120,7 @@ class FormatJUnitTest extends PHPUnit
 
 
         // validate
-        Aliases::validateXml((string)$junit);
+        Aliases::isValidXml((string)$junit);
 
         $expectedXml = new \DOMDocument();
         $expectedXml->loadXML(file_get_contents(Fixtures::PHPUNIT_JUNIT_EXPECTED));
@@ -133,7 +133,7 @@ class FormatJUnitTest extends PHPUnit
         $xmlExamples = glob(realpath(Fixtures::ROOT) . '/**/**/junit.xml');
 
         foreach ($xmlExamples as $junitXmlFile) {
-            Aliases::validateXml(file_get_contents($junitXmlFile));
+            Aliases::isValidXml(file_get_contents($junitXmlFile));
         }
     }
 }

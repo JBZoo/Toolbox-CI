@@ -31,7 +31,7 @@ class JUnitSuite extends AbstractNode
      * @var array
      */
     protected $meta = [
-        'name' => ['string'],
+        'name' => ['string', 'required'],
         'file' => ['string'],
     ];
 

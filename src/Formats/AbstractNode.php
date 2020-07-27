@@ -116,9 +116,9 @@ class AbstractNode
     /**
      * @param string $name
      * @param array  $arguments
-     * @return $this
+     * @return $this|string
      */
-    public function __call(string $name, array $arguments): self
+    public function __call(string $name, array $arguments)
     {
         if (strpos($name, 'set') === 0) {
             $name = strtolower(preg_replace("#^set#", '', $name));

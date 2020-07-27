@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Converters;
 
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnitSuite;
-use JBZoo\ToolboxCI\Formats\Source\SourceCase;
+use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;
 use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 use JBZoo\ToolboxCI\Formats\Xml;
 
@@ -39,7 +39,7 @@ class JUnitConverter extends AbstractConverter
         $xmlAsArray = Xml::dom2Array($xmlDocument);
 
         $testSuite = new SourceSuite();
-        $this->createSourceNodes($xmlAsArray['_children'][0], $testSuite);
+        $this->createSourceNodes($xmlAsArray, $testSuite);
 
         return $testSuite->getSuites()[0];
     }
@@ -61,6 +61,26 @@ class JUnitConverter extends AbstractConverter
             $case->class = $attrs->get('class');
             $case->classname = $attrs->get('classname');
             $case->assertions = $attrs->get('assertions');
+            foreach ($xmlAsArray['_children'] as $output) {
+                $typeOfOutput = $output['_node'];
+                $type = $output['_attrs']['type'] ?? null;
+                $message = $output['_attrs']['message'] ?? null;
+                $details = ($output['_cdata'] ?? null) ?? $output['_text'] ?? null;
+
+                $caseOutput = new SourceCaseOutput($type, $message, $details);
+
+                if ($typeOfOutput === 'failure') {
+                    $case->failure = $caseOutput;
+                } elseif ($typeOfOutput === 'error') {
+                    $case->error = $caseOutput;
+                } elseif ($typeOfOutput === 'warning') {
+                    $case->warning = $caseOutput;
+                } elseif ($typeOfOutput === 'skipped') {
+                    $case->skipped = $caseOutput;
+                } elseif ($typeOfOutput === 'system-out') {
+                    $case->stdOut = $details;
+                }
+            }
         } else {
             foreach ($xmlAsArray['_children'] as $childNode) {
                 $attrs = data($childNode['_attrs'] ?? []);
@@ -82,70 +102,60 @@ class JUnitConverter extends AbstractConverter
      * @param SourceSuite $sourceSuite
      * @return JUnit
      */
-    public function fromInternal($sourceSuite): JUnit
+    public function fromInternal(SourceSuite $sourceSuite): JUnit
     {
         $junit = new JUnit();
-
-        foreach ($sourceSuite->getSuites() as $sourceSubSuite) {
-            $this->createJUnitNodes($sourceSubSuite, $junit);
-        }
-
-        foreach ($sourceSuite->getCases() as $sourceSubSuite) {
-            $this->createJUnitNodes($sourceSubSuite, $junit);
-        }
-
+        $this->createJUnitNodes($sourceSuite, $junit);
         return $junit;
     }
 
     /**
-     * @param SourceSuite|SourceCase $source
-     * @param JUnitSuite|JUnit       $junitSuite
-     * @return JUnitSuite
+     * @param SourceSuite      $source
+     * @param JUnitSuite|JUnit $junitSuite
+     * @return JUnitSuite|JUnit
      */
-    public function createJUnitNodes($source, $junitSuite): JUnitSuite
+    public function createJUnitNodes(SourceSuite $source, $junitSuite)
     {
-        $junitSuite = $junitSuite->addSuite($source->name);
-        $junitSuite->file = $source->file;
-
-        if (method_exists($source, 'getSuites')) {
-            foreach ($source->getSuites() as $sourceSuite) {
-                $this->createJUnitNodes($sourceSuite, $junitSuite);
-            }
+        if ($source->name) {
+            $junitSuite = $junitSuite->addSuite($source->name);
+            $junitSuite->file = $source->file;
         }
 
-        if (method_exists($source, 'getCases')) {
-            foreach ($source->getCases() as $sourceCase) {
-                $junitCase = $junitSuite->addCase($sourceCase->name);
-                $junitCase->time = $sourceCase->time;
-                $junitCase->class = $sourceCase->class;
-                $junitCase->classname = $sourceCase->classname;
-                $junitCase->file = $sourceCase->file;
-                $junitCase->line = $sourceCase->line;
-                $junitCase->assertions = $sourceCase->assertions;
+        foreach ($source->getSuites() as $sourceSuite) {
+            $this->createJUnitNodes($sourceSuite, $junitSuite);
+        }
 
-                if ($failure = $sourceCase->failure) {
-                    $junitCase->addFailure($failure->type, $failure->message, $failure->description);
-                }
+        foreach ($source->getCases() as $sourceCase) {
+            $junitCase = $junitSuite->addCase($sourceCase->name);
+            $junitCase->time = $sourceCase->time;
+            $junitCase->class = $sourceCase->class;
+            $junitCase->classname = $sourceCase->classname;
+            $junitCase->file = $sourceCase->file;
+            $junitCase->line = $sourceCase->line;
+            $junitCase->assertions = $sourceCase->assertions;
 
-                if ($warning = $sourceCase->warning) {
-                    $junitCase->addWarning($warning->type, $warning->message, $warning->description);
-                }
+            if ($failure = $sourceCase->failure) {
+                $junitCase->addFailure($failure->type, $failure->message, $failure->description);
+            }
 
-                if ($error = $sourceCase->error) {
-                    $junitCase->addError($error->type, $error->message, $error->description);
-                }
+            if ($warning = $sourceCase->warning) {
+                $junitCase->addWarning($warning->type, $warning->message, $warning->description);
+            }
 
-                if ($sourceCase->stdOut && $sourceCase->errOut) {
-                    $junitCase->addSystemOut($sourceCase->stdOut . "\n" . $sourceCase->errOut);
-                } elseif ($sourceCase->stdOut && !$sourceCase->errOut) {
-                    $junitCase->addSystemOut($sourceCase->stdOut);
-                } elseif (!$sourceCase->stdOut && $sourceCase->errOut) {
-                    $junitCase->addSystemOut($sourceCase->errOut);
-                }
+            if ($error = $sourceCase->error) {
+                $junitCase->addError($error->type, $error->message, $error->description);
+            }
 
-                if ($sourceCase->skipped) {
-                    $junitCase->markAsSkipped();
-                }
+            if ($sourceCase->stdOut && $sourceCase->errOut) {
+                $junitCase->addSystemOut($sourceCase->stdOut . "\n" . $sourceCase->errOut);
+            } elseif ($sourceCase->stdOut && !$sourceCase->errOut) {
+                $junitCase->addSystemOut($sourceCase->stdOut);
+            } elseif (!$sourceCase->stdOut && $sourceCase->errOut) {
+                $junitCase->addSystemOut($sourceCase->errOut);
+            }
+
+            if ($sourceCase->skipped) {
+                $junitCase->markAsSkipped();
             }
         }
 

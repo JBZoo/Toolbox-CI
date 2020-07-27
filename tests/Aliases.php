@@ -15,6 +15,8 @@
 
 namespace JBZoo\PHPUnit;
 
+use JBZoo\ToolboxCI\Formats\Xml;
+
 /**
  * Class Aliases
  * @package JBZoo\PHPUnit
@@ -24,7 +26,7 @@ class Aliases
     /**
      * @param string $xmlString
      */
-    public static function validateXml($xmlString)
+    public static function isValidXml($xmlString)
     {
         isNotEmpty($xmlString);
 
@@ -43,11 +45,8 @@ class Aliases
      */
     public static function isSameXml(string $expectedCode, string $actualCode)
     {
-        $xmlExpected = new \DOMDocument();
-        $xmlExpected->loadXML($expectedCode);
-
-        $xmlActual = new \DOMDocument();
-        $xmlActual->loadXML($actualCode);
+        $xmlExpected = Xml::createDomDocument($expectedCode);
+        $xmlActual = Xml::createDomDocument($actualCode);
 
         isSame($xmlExpected->saveXML(), $xmlActual->saveXML());
     }

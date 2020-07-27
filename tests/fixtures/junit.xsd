@@ -48,11 +48,11 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="skipped" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="error" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="failure" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="warning" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="system-out" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="system-err" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="error" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="failure" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="warning" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="system-out" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="system-err" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="name" type="xs:string" use="required"/>
             <xs:attribute name="assertions" type="xs:string" use="optional"/>
@@ -75,7 +75,7 @@
                 <xs:element ref="system-err" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="name" type="xs:string" use="required"/>
-            <xs:attribute name="tests" type="xs:string" use="required"/>
+            <xs:attribute name="tests" type="xs:string" use="optional"/>
             <xs:attribute name="file" type="xs:string" use="optional"/>
             <xs:attribute name="failures" type="xs:string" use="optional"/>
             <xs:attribute name="errors" type="xs:string" use="optional"/>
