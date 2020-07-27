@@ -27,6 +27,11 @@ abstract class AbstractConverter
     public const NAME = 'Abstract';
 
     /**
+     * @var string|null
+     */
+    protected $rootPath;
+
+    /**
      * @param string $source
      * @return SourceSuite
      */
@@ -37,4 +42,27 @@ abstract class AbstractConverter
      * @return string
      */
     abstract public function fromInternal(SourceSuite $sourceSuite): string;
+
+    /**
+     * @param string $rootPath
+     * @return $this
+     */
+    public function setRootPath(string $rootPath): self
+    {
+        $this->rootPath = $rootPath;
+        return $this;
+    }
+
+    /**
+     * @param $origPath
+     * @return string
+     */
+    protected function cleanFilepath($origPath): string
+    {
+        if ($this->rootPath) {
+            return str_replace(rtrim($this->rootPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR, '', $origPath);
+        }
+
+        return $origPath;
+    }
 }

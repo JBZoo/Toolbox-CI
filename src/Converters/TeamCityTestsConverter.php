@@ -98,6 +98,8 @@ class TeamCityTestsConverter extends AbstractConverter
         $params = [];
         if ($case->file && $case->class) {
             $params = ['locationHint' => "php_qn://{$case->file}::\\{$case->class}::{$case->name}"];
+        } elseif ($case->file) {
+            $params = ['locationHint' => "php_qn://{$case->file}"];
         }
 
         $logger->testStarted($case->name, $params);

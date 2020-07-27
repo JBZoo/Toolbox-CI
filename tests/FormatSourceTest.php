@@ -154,24 +154,24 @@ class FormatSourceTest extends PHPUnit
                     'time'       => 0.001824,
                     'assertions' => 5,
                     'failure'    => [
-                        'type'        => 'Failure',
-                        'message'     => 'Failure Message',
-                        'description' => 'Failure Details',
+                        'type'    => 'Failure',
+                        'message' => 'Failure Message',
+                        'details' => 'Failure Details',
                     ],
                     'error'      => [
-                        'type'        => 'Error',
-                        'message'     => 'Error Message',
-                        'description' => 'Error Details',
+                        'type'    => 'Error',
+                        'message' => 'Error Message',
+                        'details' => 'Error Details',
                     ],
                     'warning'    => [
-                        'type'        => 'Warning',
-                        'message'     => 'Warning Message',
-                        'description' => 'Warning Details',
+                        'type'    => 'Warning',
+                        'message' => 'Warning Message',
+                        'details' => 'Warning Details',
                     ],
                     'skipped'    => [
-                        'type'        => 'Skipped',
-                        'message'     => 'Skipped Message',
-                        'description' => 'Skipped Details',
+                        'type'    => 'Skipped',
+                        'message' => 'Skipped Message',
+                        'details' => 'Skipped Details',
                     ]
                 ]
             ],

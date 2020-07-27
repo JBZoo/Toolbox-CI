@@ -41,16 +41,16 @@ class SourceCaseOutput
     public $details;
 
     /**
-     * AbstractError constructor.
+     * SourceCaseOutput constructor.
      * @param string|null $type
      * @param string|null $message
-     * @param string|null $description
+     * @param string|null $details
      */
-    public function __construct(?string $type = null, ?string $message = null, ?string $description = null)
+    public function __construct(?string $type = null, ?string $message = null, ?string $details = null)
     {
         $this->type = $type;
         $this->message = $message;
-        $this->details = $description;
+        $this->details = $details;
     }
 
     /**
@@ -119,9 +119,9 @@ class SourceCaseOutput
     public function toArray(): array
     {
         return [
-            'type'        => $this->type,
-            'message'     => $this->message,
-            'description' => $this->details
+            'type'    => $this->type,
+            'message' => $this->message,
+            'details' => $this->details
         ];
     }
 }

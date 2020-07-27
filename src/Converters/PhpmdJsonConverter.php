@@ -13,58 +13,69 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\ToolboxCI\Converters111;
+namespace JBZoo\ToolboxCI\Converters;
 
-use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
+use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;
+use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 use JBZoo\ToolboxCI\Helper;
 
 use function JBZoo\Data\json;
 
 /**
- * Class PhpmdJson2JUnit
+ * Class PhpmdJsonConverter
  * @package JBZoo\ToolboxCI\Converters
  */
-class PhpmdJson2JUnit extends AbstractConverter
+class PhpmdJsonConverter extends AbstractConverter
 {
+    public const TYPE = 'phpmd-json';
+    public const NAME = 'PHPmd (json)';
+
     /**
-     * @param string $sourceData
-     * @return string
+     * @inheritDoc
      */
-    public function convert(string $sourceData): string
+    public function toInternal(string $source): SourceSuite
     {
-        $files = (array)json($sourceData)->get('files');
+        $sourceSuite = new SourceSuite('PHPmd');
 
-        $junit = new JUnit();
+        $files = (array)json($source)->get('files');
 
-        $testSuite = $junit->addSuite("PHPmd");
         foreach ($files as $file) {
             $filepath = $this->cleanFilepath($file['file']);
 
             foreach ($file['violations'] as $violation) {
-                $case = $testSuite->addCase("{$filepath}:{$violation['beginLine']}");
+                $case = $sourceSuite->addTestCase("{$filepath}:{$violation['beginLine']}");
 
-                $case
-                    ->setFile($filepath)
-                    ->setLine($violation['beginLine'])
-                    ->addFailure($violation['rule'], $violation['description'])
-                    ->addSystemOut($this->getDetails($violation));
+                $case->file = $filepath;
+                $case->line = $violation['beginLine'] ?? null;
+                $case->failure = new SourceCaseOutput(
+                    $violation['rule'] ?? null,
+                    $violation['description'] ?? null,
+                    $this->getDetails($violation)
+                );
 
-                if ($violation['package']) {
-                    $case
-                        ->setClass($violation['package'])
-                        ->setClassname(str_replace('\\', '.', $violation['package']));
+                if ($violation['package'] ?? null) {
+                    $case->class = $violation['package'];
+                    $case->classname = str_replace('\\', '.', $violation['package']);
                 }
             }
         }
 
-        return (string)$junit;
+        return $sourceSuite;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function fromInternal(SourceSuite $sourceSuite): string
+    {
+
     }
 
     /**
      * @param array $data
      * @return string
      */
-    private function getDetails(array $data)
+    private function getDetails(array $data): string
     {
         $functionName = $data['function'];
         if ($data['class'] && $data['method']) {

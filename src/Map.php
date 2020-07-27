@@ -16,6 +16,7 @@
 namespace JBZoo\ToolboxCI;
 
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
+use JBZoo\ToolboxCI\Converters\PhpmdJsonConverter;
 use JBZoo\ToolboxCI\Converters\TeamCityTestsConverter;
 
 /**
@@ -36,6 +37,13 @@ class Map
             'type' => TeamCityTestsConverter::TYPE,
             'name' => TeamCityTestsConverter::NAME,
             'to'   => false,
+            'from' => true
+        ],
+
+        PhpmdJsonConverter::class => [
+            'type' => PhpmdJsonConverter::TYPE,
+            'name' => PhpmdJsonConverter::NAME,
+            'to'   => true,
             'from' => true
         ]
     ];
