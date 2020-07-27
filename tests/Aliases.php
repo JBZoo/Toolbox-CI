@@ -25,15 +25,16 @@ class Aliases
 {
     /**
      * @param string $xmlString
+     * @param string $xsdFile
      */
-    public static function isValidXml($xmlString)
+    public static function isValidXml($xmlString, string $xsdFile = Fixtures::JUNIT_XSD)
     {
         isNotEmpty($xmlString);
 
         try {
             $xml = new \DOMDocument();
             $xml->loadXML($xmlString);
-            isTrue($xml->schemaValidate(PROJECT_ROOT . '/tests/fixtures/junit.xsd'));
+            isTrue($xml->schemaValidate($xsdFile));
         } catch (\Exception $exception) {
             fail($exception->getMessage() . "\n\n" . $xmlString);
         }
