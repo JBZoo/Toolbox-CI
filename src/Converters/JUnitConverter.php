@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Converters;
 
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnitSuite;
-use JBZoo\ToolboxCI\Formats\Source\Source;
+use JBZoo\ToolboxCI\Formats\Source\SourceCase;
 use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 use JBZoo\ToolboxCI\Formats\Xml;
 
@@ -45,11 +45,11 @@ class JUnitConverter extends AbstractConverter
     }
 
     /**
-     * @param array              $xmlAsArray
-     * @param SourceSuite|Source $currentSuite
-     * @return SourceSuite|Source
+     * @param array       $xmlAsArray
+     * @param SourceSuite $currentSuite
+     * @return SourceSuite
      */
-    private function createSourceNodes(array $xmlAsArray, $currentSuite)
+    private function createSourceNodes(array $xmlAsArray, SourceSuite $currentSuite)
     {
         $attrs = data($xmlAsArray['_attrs'] ?? []);
 
@@ -79,65 +79,73 @@ class JUnitConverter extends AbstractConverter
     }
 
     /**
-     * @param Source $sourceCollection
+     * @param SourceSuite $sourceSuite
      * @return JUnit
      */
-    public function fromInternal($sourceCollection): JUnit
+    public function fromInternal($sourceSuite): JUnit
     {
         $junit = new JUnit();
 
-        foreach ($sourceCollection->getSuites() as $sourceSuite) {
-            $this->createJUnitNodes($sourceSuite, $junit);
+        foreach ($sourceSuite->getSuites() as $sourceSubSuite) {
+            $this->createJUnitNodes($sourceSubSuite, $junit);
+        }
+
+        foreach ($sourceSuite->getCases() as $sourceSubSuite) {
+            $this->createJUnitNodes($sourceSubSuite, $junit);
         }
 
         return $junit;
     }
 
     /**
-     * @param SourceSuite      $sourceSuite
-     * @param JUnitSuite|JUnit $junitSuite
+     * @param SourceSuite|SourceCase $source
+     * @param JUnitSuite|JUnit       $junitSuite
      * @return JUnitSuite
      */
-    public function createJUnitNodes(SourceSuite $sourceSuite, $junitSuite): JUnitSuite
+    public function createJUnitNodes($source, $junitSuite): JUnitSuite
     {
-        $junitSuite = $junitSuite->addSuite($sourceSuite->name);
-        $junitSuite->setFile($sourceSuite->file);
+        $junitSuite = $junitSuite->addSuite($source->name);
+        $junitSuite->file = $source->file;
 
-        foreach ($sourceSuite->getSuites() as $sourceSubSuite) {
-            $this->createJUnitNodes($sourceSubSuite, $junitSuite);
+        if (method_exists($source, 'getSuites')) {
+            foreach ($source->getSuites() as $sourceSuite) {
+                $this->createJUnitNodes($sourceSuite, $junitSuite);
+            }
         }
 
-        foreach ($sourceSuite->getCases() as $sourceCase) {
-            $junitCase = $junitSuite->addCase($sourceCase->name)
-                ->setTime($sourceCase->time)
-                ->setClass($sourceCase->class)
-                ->setClassname($sourceCase->classname)
-                ->setFile($sourceCase->file)
-                ->setLine($sourceCase->line)
-                ->setAssertions($sourceCase->assertions);
+        if (method_exists($source, 'getCases')) {
+            foreach ($source->getCases() as $sourceCase) {
+                $junitCase = $junitSuite->addCase($sourceCase->name);
+                $junitCase->time = $sourceCase->time;
+                $junitCase->class = $sourceCase->class;
+                $junitCase->classname = $sourceCase->classname;
+                $junitCase->file = $sourceCase->file;
+                $junitCase->line = $sourceCase->line;
+                $junitCase->assertions = $sourceCase->assertions;
 
-            if ($failure = $sourceCase->failure) {
-                $junitCase->addFailure($failure->type, $failure->message, $failure->description);
-            }
+                if ($failure = $sourceCase->failure) {
+                    $junitCase->addFailure($failure->type, $failure->message, $failure->description);
+                }
 
-            if ($warning = $sourceCase->warning) {
-                $junitCase->addWarning($warning->type, $warning->message, $warning->description);
-            }
+                if ($warning = $sourceCase->warning) {
+                    $junitCase->addWarning($warning->type, $warning->message, $warning->description);
+                }
 
-            if ($error = $sourceCase->error) {
-                $junitCase->addError($error->type, $error->message, $error->description);
-            }
+                if ($error = $sourceCase->error) {
+                    $junitCase->addError($error->type, $error->message, $error->description);
+                }
 
-            if ($sourceCase->stdOut && $sourceCase->errOut) {
-                $junitCase->addSystemOut($sourceCase->stdOut . "\n" . $sourceCase->errOut);
-            } elseif ($sourceCase->stdOut && !$sourceCase->errOut) {
-                $junitCase->addSystemOut($sourceCase->stdOut);
-            } elseif (!$sourceCase->stdOut && $sourceCase->errOut) {
-                $junitCase->addSystemOut($sourceCase->errOut);
-            }
+                if ($sourceCase->stdOut && $sourceCase->errOut) {
+                    $junitCase->addSystemOut($sourceCase->stdOut . "\n" . $sourceCase->errOut);
+                } elseif ($sourceCase->stdOut && !$sourceCase->errOut) {
+                    $junitCase->addSystemOut($sourceCase->stdOut);
+                } elseif (!$sourceCase->stdOut && $sourceCase->errOut) {
+                    $junitCase->addSystemOut($sourceCase->errOut);
+                }
 
-            if ($sourceCase->skipped) {
-                $junitCase->markAsSkipped();
+                if ($sourceCase->skipped) {
+                    $junitCase->markAsSkipped();
+                }
             }
         }
 

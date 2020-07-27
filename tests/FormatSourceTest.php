@@ -17,15 +17,13 @@ namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Formats\Source\SourceCase;
 use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;
-use JBZoo\ToolboxCI\Formats\Source\Source;
 use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 
 /**
- * Class CollectionTest
- *
+ * Class FormatSourceTest
  * @package JBZoo\PHPUnit
  */
-class FormatCollectionTest extends PHPUnit
+class FormatSourceTest extends PHPUnit
 {
     public function testCollection()
     {
@@ -116,19 +114,13 @@ class FormatCollectionTest extends PHPUnit
 
     public function testAllProperties()
     {
-        // Fixtures
-        $class = ExampleTest::class;
-        $className = str_replace('\\', '.', $class);
-        $filename = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php';
-        $line = 28;
-
-        $collection = new Source();
-        $case = $collection->addSuite('Suite')->addTestCase('Test Name');
+        $suite = new SourceSuite('Suite');
+        $case = $suite->addTestCase('Test Name');
         $case->time = 0.001824;
-        $case->file = $filename;
-        $case->line = $line;
-        $case->class = $class;
-        $case->classname = $className;
+        $case->file = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php';
+        $case->line = 28;
+        $case->class = ExampleTest::class;
+        $case->classname = str_replace('\\', '.', ExampleTest::class);
         $case->assertions = 5;
         $case->stdOut = 'Some std output';
         $case->errOut = 'Some err output';
@@ -138,55 +130,53 @@ class FormatCollectionTest extends PHPUnit
         $case->skipped = new SourceCaseOutput('Skipped', 'Skipped Message', 'Skipped Details');
 
         isSame([
-            [
-                'data'   => [
-                    '_node'      => 'SourceSuite',
-                    'name'       => 'Suite',
+            'data'   => [
+                '_node'      => 'SourceSuite',
+                'name'       => 'Suite',
+                'time'       => 0.001824,
+                'tests'      => 1,
+                'assertions' => 5,
+                'errors'     => 1,
+                'warnings'   => 1,
+                'failure'    => 1,
+                'skipped'    => 1,
+            ],
+            'cases'  => [
+                [
+                    '_node'      => 'SourceCase',
+                    'name'       => 'Test Name',
+                    'class'      => ExampleTest::class,
+                    'classname'  => 'JBZoo.PHPUnit.ExampleTest',
+                    'file'       => '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php',
+                    'line'       => 28,
+                    'stdOut'     => 'Some std output',
+                    'errOut'     => 'Some err output',
                     'time'       => 0.001824,
-                    'tests'      => 1,
                     'assertions' => 5,
-                    'errors'     => 1,
-                    'warnings'   => 1,
-                    'failure'    => 1,
-                    'skipped'    => 1,
-                ],
-                'cases'  => [
-                    [
-                        '_node'      => 'SourceCase',
-                        'name'       => 'Test Name',
-                        'class'      => ExampleTest::class,
-                        'classname'  => 'JBZoo.PHPUnit.ExampleTest',
-                        'file'       => '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php',
-                        'line'       => 28,
-                        'stdOut'     => 'Some std output',
-                        'errOut'     => 'Some err output',
-                        'time'       => 0.001824,
-                        'assertions' => 5,
-                        'failure'    => [
-                            'type'        => 'Failure',
-                            'message'     => 'Failure Message',
-                            'description' => 'Failure Details',
-                        ],
-                        'error'      => [
-                            'type'        => 'Error',
-                            'message'     => 'Error Message',
-                            'description' => 'Error Details',
-                        ],
-                        'warning'    => [
-                            'type'        => 'Warning',
-                            'message'     => 'Warning Message',
-                            'description' => 'Warning Details',
-                        ],
-                        'skipped'    => [
-                            'type'        => 'Skipped',
-                            'message'     => 'Skipped Message',
-                            'description' => 'Skipped Details',
-                        ]
+                    'failure'    => [
+                        'type'        => 'Failure',
+                        'message'     => 'Failure Message',
+                        'description' => 'Failure Details',
+                    ],
+                    'error'      => [
+                        'type'        => 'Error',
+                        'message'     => 'Error Message',
+                        'description' => 'Error Details',
+                    ],
+                    'warning'    => [
+                        'type'        => 'Warning',
+                        'message'     => 'Warning Message',
+                        'description' => 'Warning Details',
+                    ],
+                    'skipped'    => [
+                        'type'        => 'Skipped',
+                        'message'     => 'Skipped Message',
+                        'description' => 'Skipped Details',
                     ]
-                ],
-                'suites' => [],
-            ]
-        ], $collection->toArray());
+                ]
+            ],
+            'suites' => [],
+        ], $suite->toArray());
     }
 
     public function testCaseObject()
