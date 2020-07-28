@@ -28,7 +28,7 @@ use function JBZoo\Data\json;
 class PhpmdJsonConverter extends AbstractConverter
 {
     public const TYPE = 'phpmd-json';
-    public const NAME = 'PHPmd (json)';
+    public const NAME = 'PHPmd.json';
 
     /**
      * @inheritDoc

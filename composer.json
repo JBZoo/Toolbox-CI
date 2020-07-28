@@ -33,6 +33,7 @@
         "classmap" : ["tests"]
     },
 
+    "bin"               : ["toolbox-ci"],
     "minimum-stability" : "dev",
     "prefer-stable"     : true,
     "config"            : {

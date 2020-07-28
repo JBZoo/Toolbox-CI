@@ -17,7 +17,6 @@ namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\Xml;
-use JBZoo\ToolboxCI\Map;
 
 /**
  * Class ToolsTest
@@ -25,21 +24,6 @@ use JBZoo\ToolboxCI\Map;
  */
 class ToolsTest extends PHPUnit
 {
-    public function testMapTable()
-    {
-        dump(Map::getMarkdownTable());
-
-        isSame(implode("\n", [
-            "|                  | JUnit | TeamCity - Tests | PHPmd (json) | CheckStyle.xml |",
-            "|:-----------------|:-----:|:----------------:|:------------:|:--------------:|",
-            "| JUnit            |   Y   |        Y         |              |                |",
-            "| TeamCity - Tests |       |                  |              |                |",
-            "| PHPmd (json)     |   Y   |        Y         |              |                |",
-            "| CheckStyle.xml   |   Y   |        Y         |              |                |",
-            "",
-        ]), Map::getMarkdownTable());
-    }
-
     public function testCheckstyleSchema()
     {
         $xmlFiles = glob(realpath(Fixtures::ROOT) . '/**/**/checkstyle.xml');

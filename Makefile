@@ -32,3 +32,10 @@ test-example:
 	@cp ./build/coverage_junit/main.xml ./tests/fixtures/phpunit/junit.xml
 	@-php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit.xml.dist ./tests/ExampleTest.php \
         --order-by=default --teamcity > ./tests/fixtures/phpunit/teamcity-real.txt
+
+test-manual:
+	@php `pwd`/toolbox-ci convert -h
+	@cat `pwd`/tests/fixtures/origin/phan/checkstyle.xml |   \
+        php `pwd`/toolbox-ci convert                         \
+            --input-format="checkstyle"                      \
+            --output-format="tc-tests"

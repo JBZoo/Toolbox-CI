@@ -44,10 +44,10 @@ abstract class AbstractConverter
     abstract public function fromInternal(SourceSuite $sourceSuite): string;
 
     /**
-     * @param string $rootPath
+     * @param string|null $rootPath
      * @return $this
      */
-    public function setRootPath(string $rootPath): self
+    public function setRootPath(?string $rootPath): self
     {
         $this->rootPath = $rootPath;
         return $this;

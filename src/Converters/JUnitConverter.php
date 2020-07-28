@@ -30,7 +30,7 @@ use function JBZoo\Data\data;
 class JUnitConverter extends AbstractConverter
 {
     public const TYPE = 'junit';
-    public const NAME = 'JUnit';
+    public const NAME = 'JUnit.xml';
 
     /**
      * @inheritDoc

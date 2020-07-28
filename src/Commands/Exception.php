@@ -13,24 +13,13 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
-namespace JBZoo\PHPUnit;
-
-use JBZoo\ToolboxCI\Converters\Map;
+namespace JBZoo\ToolboxCI\Commands;
 
 /**
- * Class ToolboxCIReadmeTest
- *
- * @package JBZoo\PHPUnit
+ * Class Exception
+ * @package JBZoo\ToolboxCI\Commands
  */
-class ToolboxCIReadmeTest extends AbstractReadmeTest
+class Exception extends \JBZoo\ToolboxCI\Exception
 {
-    /**
-     * @var string
-     */
-    protected $packageName = 'Toolbox-CI';
 
-    public function testMapTable()
-    {
-        isContain(Map::getMarkdownTable(), self::getReadme());
-    }
 }
