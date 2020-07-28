@@ -79,7 +79,7 @@ class ConverterTeamCityTest extends PHPUnit
         ]), $converter->fromInternal($sourceCode));
     }
 
-    public function testShowDatetime()
+    public function testSimpleSources()
     {
         $source = new SourceSuite('All');
         $suite = $source->addSuite('Tests');
@@ -88,12 +88,30 @@ class ConverterTeamCityTest extends PHPUnit
         $converter = (new TeamCityTestsConverter(['show-datetime' => false], 1));
         isSame(implode('', [
             "\n##teamcity[testCount count='1' flowId='1']\n",
+            "\n##teamcity[testSuiteStarted name='All' flowId='1']\n",
             "\n##teamcity[testSuiteStarted name='Tests' flowId='1']\n",
             "\n##teamcity[testStarted name='Test Case' flowId='1']\n",
             "\n##teamcity[testFinished name='Test Case' flowId='1']\n",
             "\n##teamcity[testSuiteFinished name='Tests' flowId='1']\n",
+            "\n##teamcity[testSuiteFinished name='All' flowId='1']\n",
         ]), $converter->fromInternal($source));
 
+        $source = new SourceSuite('All');
+        $source->addTestCase('Test Case');
+
+        $converter = (new TeamCityTestsConverter(['show-datetime' => false], 1));
+        isSame(implode('', [
+            "\n##teamcity[testCount count='1' flowId='1']\n",
+            "\n##teamcity[testSuiteStarted name='All' flowId='1']\n",
+            "\n##teamcity[testStarted name='Test Case' flowId='1']\n",
+            "\n##teamcity[testFinished name='Test Case' flowId='1']\n",
+            "\n##teamcity[testSuiteFinished name='All' flowId='1']\n",
+        ]), $converter->fromInternal($source));
+    }
+
+    public function testShowDatetime()
+    {
+        $source = new SourceSuite('All');
         $converter = (new TeamCityTestsConverter(['show-datetime' => true], 1));
         isContain("timestamp='202", $converter->fromInternal($source));
     }
@@ -139,12 +157,12 @@ class ConverterTeamCityTest extends PHPUnit
             "\n##teamcity[testFailed name='testWarning' message='Some warning' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:82|n ' duration='0' flowId='{$flowId}']\n",
             "\n##teamcity[testFinished name='testWarning' duration='0' flowId='{$flowId}']\n",
             "\n##teamcity[testSuiteFinished name='JBZoo\PHPUnit\ExampleTest' flowId='{$flowId}']\n",
-            "\n##teamcity[testSuiteStarted name='JBZoo\PHPUnit\ExampleTest' locationHint='php_qn://{$filepath}::\JBZoo\PHPUnit\ExampleTest' flowId='{$flowId}']\n",
+            "\n##teamcity[testSuiteStarted name='JBZoo\PHPUnit\ExampleTest-2' locationHint='php_qn://{$filepath}::\JBZoo\PHPUnit\ExampleTest-2' flowId='{$flowId}']\n",
             "\n##teamcity[testStarted name='testException' locationHint='php_qn://{$filepath}::\JBZoo\PHPUnit\ExampleTest::testException' flowId='{$flowId}']\n",
             "\n##teamcity[testFailed name='testException' message='JBZoo\PHPUnit\Exception: Exception message' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php:88|n ' duration='5001' flowId='{$flowId}']\n",
             "Some echo output",
             "\n##teamcity[testFinished name='testException' duration='5001' flowId='{$flowId}']\n",
-            "\n##teamcity[testSuiteFinished name='JBZoo\PHPUnit\ExampleTest' flowId='{$flowId}']\n",
+            "\n##teamcity[testSuiteFinished name='JBZoo\PHPUnit\ExampleTest-2' flowId='{$flowId}']\n",
         ]), $converter->fromInternal($junitConverter));
     }
 }

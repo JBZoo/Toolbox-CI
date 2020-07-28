@@ -77,7 +77,7 @@ class SourceSuite extends AbstractNode
      */
     public function isEmpty(): bool
     {
-        return $this->getCasesCount() > 0;
+        return $this->getCasesCount() === 0;
     }
 
     /**

@@ -62,7 +62,6 @@ class TeamCityTestsConverter extends AbstractConverter
         $this->tcLogger->write('testCount', ['count' => $sourceSuite->getCasesCount()]);
 
         $this->renderSuite($sourceSuite);
-        $this->renderSuites($sourceSuite);
 
         /** @var Buffer $buffer */
         $buffer = $this->tcLogger->getWriter();
@@ -72,34 +71,28 @@ class TeamCityTestsConverter extends AbstractConverter
     /**
      * @param SourceSuite $sourceSuite
      */
-    private function renderSuites(SourceSuite $sourceSuite)
-    {
-        foreach ($sourceSuite->getSuites() as $suite) {
-            $this->renderSuite($suite);
-        }
-    }
-
-    /**
-     * @param SourceSuite $sourceSuite
-     */
     private function renderSuite(SourceSuite $sourceSuite)
     {
-        if ($sourceSuite->isEmpty()) {
-            return;
-        }
-
         $params = [];
         if ($sourceSuite->file) {
             $params = ['locationHint' => "php_qn://{$sourceSuite->file}::\\{$sourceSuite->name}"];
         }
 
-        $this->tcLogger->testSuiteStarted($sourceSuite->name, $params);
+        if ($sourceSuite->name) {
+            $this->tcLogger->testSuiteStarted($sourceSuite->name, $params);
+        }
 
         foreach ($sourceSuite->getCases() as $case) {
             $this->renderTestCase($case);
         }
 
-        $this->tcLogger->testSuiteFinished($sourceSuite->name);
+        foreach ($sourceSuite->getSuites() as $suite) {
+            $this->renderSuite($suite);
+        }
+
+        if ($sourceSuite->name) {
+            $this->tcLogger->testSuiteFinished($sourceSuite->name);
+        }
     }
 
     /**
