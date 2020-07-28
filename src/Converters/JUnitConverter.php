@@ -40,7 +40,7 @@ class JUnitConverter extends AbstractConverter
         $xmlDocument = Xml::createDomDocument($source);
         $xmlAsArray = Xml::dom2Array($xmlDocument);
 
-        $testSuite = new SourceSuite();
+        $testSuite = new SourceSuite($this->rootSuiteName);
         $this->createSourceNodes($xmlAsArray, $testSuite);
 
         return $testSuite;

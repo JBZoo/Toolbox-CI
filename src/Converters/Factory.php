@@ -40,10 +40,12 @@ class Factory
 
         $sourceCode = Map::getConverter($sourceFormat, Map::INPUT)
             ->setRootPath($params->get('root_path'))
+            ->setRootSuiteName($params->get('suite_name'))
             ->toInternal($sourceCode);
 
         return Map::getConverter($targetFormat, Map::OUTPUT)
             ->setRootPath($params->get('root_path'))
+            ->setRootSuiteName($params->get('suite_name'))
             ->fromInternal($sourceCode);
     }
 }

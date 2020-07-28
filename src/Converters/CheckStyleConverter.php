@@ -48,7 +48,7 @@ class CheckStyleConverter extends AbstractConverter
         $xmlDocument = Xml::createDomDocument($source);
         $xmlAsArray = Xml::dom2Array($xmlDocument);
 
-        $sourceSuite = new SourceSuite('CheckStyle');
+        $sourceSuite = new SourceSuite($this->rootSuiteName ?: 'CheckStyle');
 
         foreach ($xmlAsArray['_children'] as $files) {
             foreach ($files['_children'] as $file) {

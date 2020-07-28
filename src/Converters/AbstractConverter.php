@@ -32,6 +32,11 @@ abstract class AbstractConverter
     protected $rootPath;
 
     /**
+     * @var string|null
+     */
+    protected $rootSuiteName;
+
+    /**
      * @param string $source
      * @return SourceSuite
      */
@@ -50,6 +55,16 @@ abstract class AbstractConverter
     public function setRootPath(?string $rootPath): self
     {
         $this->rootPath = $rootPath;
+        return $this;
+    }
+
+    /**
+     * @param string|null $rootSuiteName
+     * @return $this
+     */
+    public function setRootSuiteName(?string $rootSuiteName): self
+    {
+        $this->rootSuiteName = $rootSuiteName;
         return $this;
     }
 

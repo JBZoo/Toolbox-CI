@@ -42,11 +42,11 @@ test-example:
 
 
 codestyle-teamcity: ##@Tests Check codestyle in TeamCity Mode
-	@if [[ -z "${TEAMCITY_VERSION}" ]]; then \
-        echo "1";                      \
-    else                               \
-        echo "2";                      \
-    fi
+	@make test-phpcs-tc
+	@make test-phpmd-tc
+	@make test-phpstan-tc
+	@make test-psalm-tc
+	@make test-phan-tc
 
 
 test-phpcs-tc:
@@ -61,6 +61,7 @@ test-phpcs-tc:
 	@php `pwd`/toolbox-ci convert                               \
         --input-format="checkstyle"                             \
         --output-format="tc-tests"                              \
+        --suite-name="PHPcs"                                    \
         --root-path="`pwd`"                                     \
         --input-file="$(PATH_BUILD)/phpcs-checkstyle.xml"
 
@@ -73,6 +74,7 @@ test-phpmd-tc:
 	@php `pwd`/toolbox-ci convert                               \
         --input-format="phpmd-json"                             \
         --output-format="tc-tests"                              \
+        --suite-name="PHPmd"                                    \
         --root-path="`pwd`"                                     \
         --input-file="$(PATH_BUILD)/phpmd-json.json"
 
@@ -86,6 +88,7 @@ test-phpstan-tc:
 	@php `pwd`/toolbox-ci convert                               \
         --input-format="checkstyle"                             \
         --output-format="tc-tests"                              \
+        --suite-name="PHPstan"                                  \
         --root-path="`pwd`"                                     \
         --input-file="$(PATH_BUILD)/phpstan-checkstyle.xml"
 
@@ -102,6 +105,7 @@ test-psalm-tc:
 	@php `pwd`/toolbox-ci convert                               \
         --input-format="checkstyle"                             \
         --output-format="tc-tests"                              \
+        --suite-name="Psalm"                                    \
         --root-path="`pwd`"                                     \
         --input-file="$(PATH_BUILD)/psalm-checkstyle.xml"
 
@@ -122,5 +126,6 @@ test-phan-tc:
 	@php `pwd`/toolbox-ci convert                               \
         --input-format="checkstyle"                             \
         --output-format="tc-tests"                              \
+        --suite-name="Phan"                                     \
         --root-path="`pwd`"                                     \
         --input-file="$(PATH_BUILD)/phan-checkstyle.xml"

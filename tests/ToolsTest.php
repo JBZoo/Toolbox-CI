@@ -27,8 +27,7 @@ class ToolsTest extends PHPUnit
 {
     public function test()
     {
-        skip('remove me');
-        echo Cli::exec('make test-psalm-tc', [], PROJECT_ROOT);
+        echo Cli::exec('make codestyle-teamcity', [], PROJECT_ROOT);
         isTrue(true);
     }
 

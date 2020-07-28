@@ -54,6 +54,7 @@ class Convert extends Command
             ->addOption('input-format', 'S', InputOption::VALUE_REQUIRED, "Source format. {$formats}")
             ->addOption('output-format', 'T', InputOption::VALUE_REQUIRED, "Target format. {$formats}")
             // Optional
+            ->addOption('suite-name', 'N', InputOption::VALUE_REQUIRED, 'Set name of root suite')
             ->addOption('root-path', 'R', InputOption::VALUE_OPTIONAL, 'If option is set ' .
                 'all absolute file paths will be converted to relative')
             ->addOption('input-file', 'I', InputOption::VALUE_OPTIONAL, "Use CLI input (STDIN, pipeline) " .
@@ -75,7 +76,8 @@ class Convert extends Command
         $targetFormat = $this->getFormat('output-format');
 
         $result = Factory::convert($sourceFormat, $targetFormat, $sourceCode, [
-            'root_path' => $this->input->getOption('root-path')
+            'root_path'  => $this->input->getOption('root-path'),
+            'suite_name' => $this->input->getOption('suite-name'),
         ]);
 
         $this->saveResult($result);

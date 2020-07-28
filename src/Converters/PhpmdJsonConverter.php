@@ -45,7 +45,7 @@ class PhpmdJsonConverter extends AbstractConverter
      */
     public function toInternal(string $source): SourceSuite
     {
-        $sourceSuite = new SourceSuite('PHPmd');
+        $sourceSuite = new SourceSuite($this->rootSuiteName ?: 'PHPmd');
 
         $files = (array)json($source)->get('files');
 
