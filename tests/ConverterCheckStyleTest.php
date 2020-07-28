@@ -32,6 +32,9 @@ class ConverterCheckStyleTest extends PHPUnit
             ->setRootPath($pathPrefix)
             ->toInternal(file_get_contents(Fixtures::PHAN_CHECKSTYLE));
 
+        $actual = (new JUnitConverter())->fromInternal($source);
+        Aliases::isValidXml($actual);
+
         isSame([
             '_node'     => 'SourceCase',
             'name'      => 'src/JUnit/JUnitXml.php:37',
@@ -54,9 +57,66 @@ class ConverterCheckStyleTest extends PHPUnit
         isSame([
             "_node"   => "SourceSuite",
             "name"    => "CheckStyle",
-            "tests"   => 38,
-            "failure" => 38
+            "tests"   => 7,
+            "failure" => 7
         ], $source->toArray()['data']);
+
+        isSame(implode("\n", [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<testsuites>',
+            '  <testsuite name="CheckStyle" failures="7">',
+            '    <testsuite name="src/JUnit/JUnitXml.php" tests="2" failures="2">',
+            '      <testcase name="src/JUnit/JUnitXml.php:37" class="PhanPossiblyFalseTypeMismatchProperty" classname="PhanPossiblyFalseTypeMismatchProperty" file="src/JUnit/JUnitXml.php" line="37">',
+            '        <failure type="PhanPossiblyFalseTypeMismatchProperty" message="Assigning $this-&amp;gt;rootElement of type \DOMElement|false to property but \JBZoo\ToolboxCI\JUnit\JUnitXml-&amp;gt;rootElement is \DOMElement (false is incompatible)">Severity: warning',
+            'Message : Assigning $this-&gt;rootElement of type \DOMElement|false to property but \JBZoo\ToolboxCI\JUnit\JUnitXml-&gt;rootElement is \DOMElement (false is incompatible)',
+            'Rule    : PhanPossiblyFalseTypeMismatchProperty',
+            '</failure>',
+            '      </testcase>',
+            '      <testcase name="src/JUnit/JUnitXml.php:44" class="PhanPluginCanUseReturnType" classname="PhanPluginCanUseReturnType" file="src/JUnit/JUnitXml.php" line="44">',
+            '        <failure type="PhanPluginCanUseReturnType" message="Can use \JBZoo\ToolboxCI\JUnit\TestSuiteElement as a return type of addTestSuite">Severity: warning',
+            'Message : Can use \JBZoo\ToolboxCI\JUnit\TestSuiteElement as a return type of addTestSuite',
+            'Rule    : PhanPluginCanUseReturnType',
+            '</failure>',
+            '      </testcase>',
+            '    </testsuite>',
+            '    <testsuite name="src/JUnit/TestCaseElement.php" tests="3" failures="3">',
+            '      <testcase name="src/JUnit/TestCaseElement.php:34" class="PhanPluginCanUseParamType" classname="PhanPluginCanUseParamType" file="src/JUnit/TestCaseElement.php" line="34">',
+            '        <failure type="PhanPluginCanUseParamType" message="Can use string as the type of parameter $name of setName">Severity: warning',
+            'Message : Can use string as the type of parameter $name of setName',
+            'Rule    : PhanPluginCanUseParamType',
+            '</failure>',
+            '      </testcase>',
+            '      <testcase name="src/JUnit/TestCaseElement.php:36" class="PhanPluginSuspiciousParamPositionInternal" classname="PhanPluginSuspiciousParamPositionInternal" file="src/JUnit/TestCaseElement.php" line="36">',
+            '        <failure type="PhanPluginSuspiciousParamPositionInternal" message="Suspicious order for argument name - This is getting passed to parameter #1 (string $name) of \JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute(string $name, string $value)">Severity: warning',
+            'Message : Suspicious order for argument name - This is getting passed to parameter #1 (string $name) of \JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute(string $name, string $value)',
+            'Rule    : PhanPluginSuspiciousParamPositionInternal',
+            '</failure>',
+            '      </testcase>',
+            '      <testcase name="src/JUnit/TestCaseElement.php:42" class="PhanPluginCanUseParamType" classname="PhanPluginCanUseParamType" file="src/JUnit/TestCaseElement.php" line="42">',
+            '        <failure type="PhanPluginCanUseParamType" message="Can use string as the type of parameter $classname of setClassname">Severity: warning',
+            'Message : Can use string as the type of parameter $classname of setClassname',
+            'Rule    : PhanPluginCanUseParamType',
+            '</failure>',
+            '      </testcase>',
+            '    </testsuite>',
+            '    <testsuite name="src/JUnit/TestSuiteElement.php" tests="2" failures="2">',
+            '      <testcase name="src/JUnit/TestSuiteElement.php:35" class="PhanPluginCanUseParamType" classname="PhanPluginCanUseParamType" file="src/JUnit/TestSuiteElement.php" line="35">',
+            '        <failure type="PhanPluginCanUseParamType" message="Can use string as the type of parameter $name of setName">Severity: warning',
+            'Message : Can use string as the type of parameter $name of setName',
+            'Rule    : PhanPluginCanUseParamType',
+            '</failure>',
+            '      </testcase>',
+            '      <testcase name="src/JUnit/TestSuiteElement.php:37" class="PhanPluginSuspiciousParamPositionInternal" classname="PhanPluginSuspiciousParamPositionInternal" file="src/JUnit/TestSuiteElement.php" line="37">',
+            '        <failure type="PhanPluginSuspiciousParamPositionInternal" message="Suspicious order for argument name - This is getting passed to parameter #1 (string $name) of \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute(string $name, string $value)">Severity: warning',
+            'Message : Suspicious order for argument name - This is getting passed to parameter #1 (string $name) of \JBZoo\ToolboxCI\JUnit\TestSuiteElement::setAttribute(string $name, string $value)',
+            'Rule    : PhanPluginSuspiciousParamPositionInternal',
+            '</failure>',
+            '      </testcase>',
+            '    </testsuite>',
+            '  </testsuite>',
+            '</testsuites>',
+            ''
+        ]), $actual);
     }
 
     public function testToInternalPHPcs()
@@ -67,6 +127,7 @@ class ConverterCheckStyleTest extends PHPUnit
             ->toInternal(file_get_contents(Fixtures::PHPCS_CODESTYLE));
 
         $actual = (new JUnitConverter())->fromInternal($source);
+        Aliases::isValidXml($actual);
 
         isSame(implode("\n", [
             '<?xml version="1.0" encoding="UTF-8"?>',
