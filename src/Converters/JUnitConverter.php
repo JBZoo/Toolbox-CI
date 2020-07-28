@@ -15,7 +15,6 @@
 
 namespace JBZoo\ToolboxCI\Converters;
 
-use JBZoo\Data\Data;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnitSuite;
 use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;

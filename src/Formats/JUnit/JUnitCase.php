@@ -62,14 +62,14 @@ class JUnitCase extends AbstractNode
     public $outputs = [];
 
     /**
-     * @param string      $type
+     * @param string|null $type
      * @param string|null $message
      * @param string|null $description
      * @return JUnitCase
      */
-    public function addFailure(string $type, ?string $message = null, ?string $description = null): JUnitCase
+    public function addFailure(?string $type = null, ?string $message = null, ?string $description = null): JUnitCase
     {
-        $this->outputs[] = new Failure($type, $message, $description);
+        $this->outputs[] = new Failure($type ?: 'Failure', $message, $description);
         return $this;
     }
 
@@ -79,21 +79,21 @@ class JUnitCase extends AbstractNode
      * @param string|null $description
      * @return JUnitCase
      */
-    public function addError(?string $type, ?string $message = null, ?string $description = null): JUnitCase
+    public function addError(?string $type = null, ?string $message = null, ?string $description = null): JUnitCase
     {
-        $this->outputs[] = new Error($type, $message, $description);
+        $this->outputs[] = new Error($type ?: 'Error', $message, $description);
         return $this;
     }
 
     /**
-     * @param string      $type
+     * @param string|null $type
      * @param string|null $message
      * @param string|null $description
      * @return JUnitCase
      */
-    public function addWarning(string $type, ?string $message = null, ?string $description = null): JUnitCase
+    public function addWarning(?string $type = null, ?string $message = null, ?string $description = null): JUnitCase
     {
-        $this->outputs[] = new Warning($type, $message, $description);
+        $this->outputs[] = new Warning($type ?: 'Warning', $message, $description);
         return $this;
     }
 

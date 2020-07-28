@@ -45,6 +45,7 @@ class CheckStyleConverter extends AbstractConverter
         foreach ($xmlAsArray['_children'] as $files) {
             foreach ($files['_children'] as $file) {
                 $fileName = $this->cleanFilepath($file['_attrs']['name']);
+                $subSuite = $sourceSuite->addSuite($fileName);
 
                 foreach ($file['_children'] as $errorNode) {
                     $error = data($errorNode['_attrs']);
@@ -54,7 +55,7 @@ class CheckStyleConverter extends AbstractConverter
 
                     $caseName = $line > 0 ? "{$fileName}:{$line}" : $fileName;
 
-                    $case = $sourceSuite->addTestCase($caseName);
+                    $case = $subSuite->addTestCase($caseName);
                     $case->file = $fileName;
                     $case->line = $line;
                     $case->class = $source;
