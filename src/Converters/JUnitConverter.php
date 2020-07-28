@@ -43,7 +43,7 @@ class JUnitConverter extends AbstractConverter
         $testSuite = new SourceSuite();
         $this->createSourceNodes($xmlAsArray, $testSuite);
 
-        return $testSuite->getSuites()[0];
+        return $testSuite;
     }
 
     /**

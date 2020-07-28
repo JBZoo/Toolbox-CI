@@ -51,7 +51,7 @@ class ConverterJUnitTest extends PHPUnit
         $suite2->addTestCase('Test #2.3')->time = 5;
         $expected = $suiteAll->toArray();
 
-        isSame($expected, $actual['suites'][0]);
+        isSame($expected, $actual['suites'][0]['suites'][0]);
     }
 
     public function testConvertToInternalReal()

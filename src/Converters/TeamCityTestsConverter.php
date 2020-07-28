@@ -60,6 +60,7 @@ class TeamCityTestsConverter extends AbstractConverter
     public function fromInternal(SourceSuite $sourceSuite): string
     {
         $this->tcLogger->write('testCount', ['count' => $sourceSuite->getCasesCount()]);
+
         $this->renderSuite($sourceSuite);
         $this->renderSuites($sourceSuite);
 
@@ -83,6 +84,10 @@ class TeamCityTestsConverter extends AbstractConverter
      */
     private function renderSuite(SourceSuite $sourceSuite)
     {
+        if ($sourceSuite->isEmpty()) {
+            return;
+        }
+
         $params = [];
         if ($sourceSuite->file) {
             $params = ['locationHint' => "php_qn://{$sourceSuite->file}::\\{$sourceSuite->name}"];

@@ -29,7 +29,7 @@ class ConverterTeamCityTest extends PHPUnit
     {
         $flowId = 159753;
         $filepath = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php';
-        $junitConverter = (new JUnitConverter())->toInternal(file_get_contents(Fixtures::PHPUNIT_JUNIT_NESTED));
+        $sourceCode = (new JUnitConverter())->toInternal(file_get_contents(Fixtures::PHPUNIT_JUNIT_NESTED));
         $converter = (new TeamCityTestsConverter(['show-datetime' => false], $flowId));
 
         isSame(implode('', [
@@ -76,7 +76,7 @@ class ConverterTeamCityTest extends PHPUnit
             "\n##teamcity[testFailed name='testCompareString' message='Failed asserting that two strings are identical.' details=' /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/jbzoo/phpunit/src/functions/aliases.php:197|n {$filepath}:103|n ' duration='10500' type='comparisonFailure' actual='|'123|'' expected='|'132|'' flowId='{$flowId}']\n",
             "\n##teamcity[testFinished name='testCompareString' duration='10500' flowId='{$flowId}']\n",
             "\n##teamcity[testSuiteFinished name='JBZoo\PHPUnit\ExampleTest' flowId='{$flowId}']\n",
-        ]), $converter->fromInternal($junitConverter));
+        ]), $converter->fromInternal($sourceCode));
     }
 
     public function testShowDatetime()

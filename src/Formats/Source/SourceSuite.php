@@ -73,6 +73,14 @@ class SourceSuite extends AbstractNode
     }
 
     /**
+     * @return bool
+     */
+    public function isEmpty(): bool
+    {
+        return $this->getCasesCount() > 0;
+    }
+
+    /**
      * @param string $testSuiteName
      * @return SourceSuite
      */

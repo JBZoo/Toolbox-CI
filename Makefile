@@ -42,7 +42,11 @@ test-example:
 
 
 codestyle-teamcity: ##@Tests Check codestyle in TeamCity Mode
-	@make test-psalm-tc
+	@if [[ -z "${TEAMCITY_VERSION}" ]]; then \
+        echo "1";                      \
+    else                               \
+        echo "2";                      \
+    fi
 
 
 test-phpcs-tc:
@@ -94,7 +98,6 @@ test-psalm-tc:
         --report-show-info=true                                 \
         --show-snippet=true                                     \
         --no-progress                                           \
-        --no-cache                                              \
         --monochrome > "$(PATH_BUILD)/psalm-checkstyle.xml"
 	@php `pwd`/toolbox-ci convert                               \
         --input-format="checkstyle"                             \

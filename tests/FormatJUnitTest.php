@@ -106,7 +106,7 @@ class FormatJUnitTest extends PHPUnit
             ]));
 
 
-        $anotherSuite = $junit->addSuite($class)->setFile($filename);
+        $anotherSuite = $junit->addSuite($class . '-2')->setFile($filename);
         $anotherSuite->addCase('testException')->setFile($filename)->setClass($class)->setClassname($className)
             ->setLine(85)->setAssertions(0)->setTime(5.000593)
             ->addError(Exception::class, null, implode("\n", [

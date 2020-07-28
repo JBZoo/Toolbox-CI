@@ -85,7 +85,7 @@ class PhpmdJsonConverter extends AbstractConverter
      */
     private function getDetails(Data $data): string
     {
-        $functionName = "{$data['function']}()";
+        $functionName = $data['function'] ? "{$data['function']}()" : null;
         if ($data['method']) {
             $functionName = "{$data['method']}()";
         }
