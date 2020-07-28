@@ -105,13 +105,17 @@ abstract class AbstractConverter
     }
 
     /**
-     * @param string          $filename
+     * @param string|null     $filename
      * @param string|int|null $line
      * @param string|int|null $column
-     * @return string
+     * @return string|null
      */
-    protected function getFilePoint(string $filename, $line = 0, $column = 0): string
+    protected function getFilePoint(?string $filename = null, $line = 0, $column = 0): ?string
     {
+        if (!$filename) {
+            return null;
+        }
+
         $line = (int)$line > 0 ? ":{$line}" : '';
         $column = (int)$column > 0 ? ":{$column}" : '';
 
