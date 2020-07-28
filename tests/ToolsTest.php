@@ -17,6 +17,7 @@ namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\Xml;
+use JBZoo\Utils\Cli;
 
 /**
  * Class ToolsTest
@@ -24,6 +25,12 @@ use JBZoo\ToolboxCI\Formats\Xml;
  */
 class ToolsTest extends PHPUnit
 {
+    public function test()
+    {
+        echo Cli::exec('make test-phan-tc', [], PROJECT_ROOT);
+        isTrue(true);
+    }
+
     public function testCheckstyleSchema()
     {
         $xmlFiles = glob(realpath(Fixtures::ROOT) . '/**/**/checkstyle.xml');

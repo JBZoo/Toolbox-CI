@@ -60,9 +60,46 @@ abstract class AbstractConverter
     protected function cleanFilepath($origPath): string
     {
         if ($this->rootPath) {
-            return str_replace(rtrim($this->rootPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR, '', $origPath);
+            return str_replace(rtrim($this->rootPath, '/') . '/', '', $origPath);
         }
 
         return $origPath;
+    }
+
+    /**
+     * @param string $relFilename
+     * @return string
+     */
+    protected function getFullPath(string $relFilename): string
+    {
+        if ($absFilename = realpath($relFilename)) {
+            return $absFilename;
+        }
+
+        if ($this->rootPath) {
+            $rootPath = rtrim($this->rootPath, '/');
+            $relFilename = ltrim($relFilename, '.');
+            $relFilename = ltrim($relFilename, '/');
+
+            if ($absFilename = realpath($rootPath . '/' . $relFilename)) {
+                return $absFilename;
+            }
+        }
+
+        return $relFilename;
+    }
+
+    /**
+     * @param string          $filename
+     * @param string|int|null $line
+     * @param string|int|null $column
+     * @return string
+     */
+    protected function getFilePoint(string $filename, $line, $column): string
+    {
+        $line = (int)$line > 0 ? ":{$line}" : '';
+        $column = (int)$column > 0 ? ":{$column}" : '';
+
+        return $filename . $line . $column;
     }
 }

@@ -25,7 +25,7 @@ use LogicException;
  */
 class Util
 {
-    const TIMESTAMP_FORMAT = 'Y-m-d\TH:i:s.uO';
+    private const TIMESTAMP_FORMAT = 'Y-m-d\TH:i:s.uO';
 
     /**
      * Return arbitrary message formatted according the TeamCity message protocol.
@@ -57,7 +57,6 @@ class Util
                 self::ensureValidJavaId($propertyName);
                 $result .= " $propertyName='$escapedValue'";
             }
-
         }
         $result .= ']' . PHP_EOL;
 

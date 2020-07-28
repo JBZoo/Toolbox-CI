@@ -78,9 +78,12 @@ class SourceSuite extends AbstractNode
      */
     public function addSuite(?string $testSuiteName = null): self
     {
-        $testSuite = new self($testSuiteName);
-        $this->suites[] = $testSuite;
-        return $testSuite;
+        if (!array_key_exists($testSuiteName, $this->suites)) {
+            $testSuite = new self($testSuiteName);
+            $this->suites[$testSuiteName] = $testSuite;
+        }
+
+        return $this->suites[$testSuiteName];
     }
 
     /**

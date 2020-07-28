@@ -21,7 +21,7 @@ use function JBZoo\Data\data;
  * Class ConverterFactory
  * @package JBZoo\ToolboxCI\Converters
  */
-class ConverterFactory
+class Factory
 {
     /**
      * @param string $sourceFormat

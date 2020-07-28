@@ -25,17 +25,17 @@ class Helper
      * @param array $data
      * @return string
      */
-    public static function descAsList(array $data): string
+    public static function descAsList(array $data)
     {
         $result = [];
 
         foreach ($data as $key => $value) {
             $value = trim($value);
             if ('' !== $value) {
-                $result[] = ucfirst($key) . ': ' . $value;
+                $result[] = $key ? (ucfirst($key) . ': ' . $value) : $value;
             }
         }
 
-        return implode(PHP_EOL, $result) . "\n";
+        return "\n" . implode("\n", $result) . "\n";
     }
 }

@@ -133,9 +133,11 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getAssertionsCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
-                return $acc + $testCase->getAssertions();
-            }, 0);
+        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+            return $acc + $testCase->getAssertions();
+        }, 0);
+
+        return $result;
     }
 
     /**
@@ -149,9 +151,11 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getErrorsCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
-                return $acc + $testCase->getErrorsCount();
-            }, 0);
+        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+            return $acc + $testCase->getErrorsCount();
+        }, 0);
+
+        return $result;
     }
 
     /**
@@ -165,9 +169,11 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getWarningsCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
-                return $acc + $testCase->getWarningCount();
-            }, 0);
+        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+            return $acc + $testCase->getWarningCount();
+        }, 0);
+
+        return $result;
     }
 
     /**
@@ -181,9 +187,11 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getFailuresCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
-                return $acc + $testCase->getFailureCount();
-            }, 0);
+        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+            return $acc + $testCase->getFailureCount();
+        }, 0);
+
+        return $result;
     }
 
     /**
@@ -197,9 +205,11 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getSkippedCount();
         }
 
-        return $result + (int)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
-                return $acc + $testCase->getSkippedCount();
-            }, 0);
+        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+            return $acc + $testCase->getSkippedCount();
+        }, 0);
+
+        return $result;
     }
 
     /**
@@ -213,9 +223,11 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getTime();
         }
 
-        return $result + (float)array_reduce($this->testCases, function ($acc, JUnitCase $testCase) {
-                return $acc + $testCase->getTime();
-            }, 0.0);
+        $result += (float)array_reduce($this->testCases, function (float $acc, JUnitCase $testCase) {
+            return $acc + $testCase->getTime();
+        }, 0.0);
+
+        return $result;
     }
 
     /**

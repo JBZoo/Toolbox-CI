@@ -49,10 +49,19 @@ class TeamCityTestsConverter extends AbstractConverter
     /**
      * @inheritDoc
      */
+    public function toInternal(string $source): SourceSuite
+    {
+        throw new Exception('Method is not available');
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function fromInternal(SourceSuite $sourceSuite): string
     {
         $this->tcLogger->write('testCount', ['count' => $sourceSuite->getCasesCount()]);
         $this->renderSuite($sourceSuite);
+        $this->renderSuites($sourceSuite);
 
         /** @var Buffer $buffer */
         $buffer = $this->tcLogger->getWriter();
@@ -60,11 +69,13 @@ class TeamCityTestsConverter extends AbstractConverter
     }
 
     /**
-     * @inheritDoc
+     * @param SourceSuite $sourceSuite
      */
-    public function toInternal(string $source): SourceSuite
+    private function renderSuites(SourceSuite $sourceSuite)
     {
-        throw new Exception('Method is not available');
+        foreach ($sourceSuite->getSuites() as $suite) {
+            $this->renderSuite($suite);
+        }
     }
 
     /**
@@ -72,20 +83,18 @@ class TeamCityTestsConverter extends AbstractConverter
      */
     private function renderSuite(SourceSuite $sourceSuite)
     {
-        foreach ($sourceSuite->getSuites() as $suite) {
-            $params = [];
-            if ($suite->file) {
-                $params = ['locationHint' => "php_qn://{$suite->file}::\\{$suite->name}"];
-            }
-
-            $this->tcLogger->testSuiteStarted($suite->name, $params);
-
-            foreach ($suite->getCases() as $case) {
-                $this->renderTestCase($case);
-            }
-
-            $this->tcLogger->testSuiteFinished($suite->name);
+        $params = [];
+        if ($sourceSuite->file) {
+            $params = ['locationHint' => "php_qn://{$sourceSuite->file}::\\{$sourceSuite->name}"];
         }
+
+        $this->tcLogger->testSuiteStarted($sourceSuite->name, $params);
+
+        foreach ($sourceSuite->getCases() as $case) {
+            $this->renderTestCase($case);
+        }
+
+        $this->tcLogger->testSuiteFinished($sourceSuite->name);
     }
 
     /**

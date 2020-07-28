@@ -15,10 +15,12 @@
 
 namespace JBZoo\ToolboxCI\Converters;
 
+use JBZoo\Data\Data;
 use JBZoo\ToolboxCI\Formats\Source\SourceCaseOutput;
 use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 use JBZoo\ToolboxCI\Helper;
 
+use function JBZoo\Data\data;
 use function JBZoo\Data\json;
 
 /**
@@ -33,6 +35,14 @@ class PhpmdJsonConverter extends AbstractConverter
     /**
      * @inheritDoc
      */
+    public function fromInternal(SourceSuite $sourceSuite): string
+    {
+        throw new Exception('Method is not available');
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function toInternal(string $source): SourceSuite
     {
         $sourceSuite = new SourceSuite('PHPmd');
@@ -40,12 +50,18 @@ class PhpmdJsonConverter extends AbstractConverter
         $files = (array)json($source)->get('files');
 
         foreach ($files as $file) {
-            $filepath = $this->cleanFilepath($file['file']);
+            $relFilename = $this->cleanFilepath($file['file']);
+            $absFilename = $this->getFullPath($relFilename);
+            $suite = $sourceSuite->addSuite($relFilename);
+            $suite->file = $absFilename;
 
             foreach ($file['violations'] as $violation) {
-                $case = $sourceSuite->addTestCase("{$filepath}:{$violation['beginLine']}");
+                $violation = data($violation);
+                $violation->set('full_path', $absFilename);
 
-                $case->file = $filepath;
+                $case = $suite->addTestCase("{$relFilename} line {$violation['beginLine']}");
+
+                $case->file = $absFilename;
                 $case->line = $violation['beginLine'] ?? null;
                 $case->failure = new SourceCaseOutput(
                     $violation['rule'] ?? null,
@@ -64,29 +80,33 @@ class PhpmdJsonConverter extends AbstractConverter
     }
 
     /**
-     * @inheritDoc
-     */
-    public function fromInternal(SourceSuite $sourceSuite): string
-    {
-        throw new Exception('Method is not available');
-    }
-
-    /**
-     * @param array $data
+     * @param Data $data
      * @return string
      */
-    private function getDetails(array $data): string
+    private function getDetails(Data $data): string
     {
-        $functionName = $data['function'];
+        $functionName = "{$data['function']}()";
+        if ($data['method']) {
+            $functionName = "{$data['method']}()";
+        }
+
         if ($data['class'] && $data['method']) {
             $functionName = "{$data['class']}->{$data['method']}()";
         }
 
+        if ($data['class'] && $data['method'] && $data['package']) {
+            $functionName = "{$data['package']}\\{$data['class']}->{$data['method']}()";
+        }
+
+        $line = (int)$data->get('beginLine');
+        $line = $line > 0 ? ":{$line}" : '';
+
         return Helper::descAsList([
-            'Rule' => implode(' / ', [$data['ruleSet'], $data['rule'], "Priority:{$data['priority']}"]),
-            'Docs' => $data['externalInfoUrl'],
-            'Mute' => "@SuppressWarnings(PHPMD.{$data['rule']})",
+            ''     => $data->get('description'),
+            'Rule' => "{$data->get('ruleSet')} / {$data->get('rule')} / Priority: {$data->get('priority')}",
             'Func' => $functionName ?? $data['function'],
+            'Path' => $data->get('full_path') . $line,
+            'Docs' => $data->get('externalInfoUrl'),
         ]);
     }
 }

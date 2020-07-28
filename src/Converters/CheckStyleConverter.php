@@ -35,6 +35,14 @@ class CheckStyleConverter extends AbstractConverter
     /**
      * @inheritDoc
      */
+    public function fromInternal(SourceSuite $sourceSuite): string
+    {
+        throw new Exception('Method is not available');
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function toInternal(string $source): SourceSuite
     {
         $xmlDocument = Xml::createDomDocument($source);
@@ -44,20 +52,27 @@ class CheckStyleConverter extends AbstractConverter
 
         foreach ($xmlAsArray['_children'] as $files) {
             foreach ($files['_children'] as $file) {
-                $fileName = $this->cleanFilepath($file['_attrs']['name']);
-                $subSuite = $sourceSuite->addSuite($fileName);
+                $relFilename = $this->cleanFilepath($file['_attrs']['name']);
+                $absFilename = $this->getFullPath($relFilename);
+
+                $suite = $sourceSuite->addSuite($relFilename);
+                $suite->file = $absFilename;
 
                 foreach ($file['_children'] as $errorNode) {
                     $error = data($errorNode['_attrs']);
+                    $error->set('full_path', $absFilename);
 
                     $line = $error->get('line');
+                    $column = $error->get('column');
                     $source = $error->get('source') ?? 'ERROR';
 
-                    $caseName = $line > 0 ? "{$fileName}:{$line}" : $fileName;
+                    $caseName = $line > 0 ? "{$relFilename} line {$line}" : $relFilename;
+                    $caseName = $column > 0 ? "{$caseName}, column {$column}" : $caseName;
 
-                    $case = $subSuite->addTestCase($caseName);
-                    $case->file = $fileName;
-                    $case->line = $line;
+                    $case = $suite->addTestCase($caseName);
+                    $case->file = $absFilename;
+                    $case->line = $line ?: null;
+                    $case->column = $column ?: null;
                     $case->class = $source;
                     $case->classname = $source;
                     $case->failure = new SourceCaseOutput($source, $error->get('message'), $this->getDetails($error));
@@ -75,17 +90,10 @@ class CheckStyleConverter extends AbstractConverter
     private function getDetails(Data $data): string
     {
         return Helper::descAsList([
+            ''         => $data->get('message'),
+            'Rule'     => $data->get('source'),
+            'Path'     => $this->getFilePoint($data->get('full_path'), $data->get('line'), $data->get('column')),
             'Severity' => $data->get('severity'),
-            'Message ' => $data->get('message'),
-            'Rule    ' => $data->get('source'),
         ]);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function fromInternal(SourceSuite $sourceSuite): string
-    {
-
     }
 }

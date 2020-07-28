@@ -25,6 +25,7 @@ use JBZoo\ToolboxCI\Formats\AbstractNode;
  * @property string|null           $classname
  * @property string|null           $file
  * @property int|null              $line
+ * @property int|null              $column
  *
  * @property string|null           $stdOut
  * @property string|null           $errOut
@@ -70,6 +71,7 @@ class SourceCase extends AbstractNode
         'classname'  => ['string'],
         'file'       => ['string'],
         'line'       => ['int'],
+        'column'     => ['int'],
 
         // Output
         'stdOut'     => ['string'],

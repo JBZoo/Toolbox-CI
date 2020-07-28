@@ -15,7 +15,7 @@
 
 namespace JBZoo\ToolboxCI\Commands;
 
-use JBZoo\ToolboxCI\Converters\ConverterFactory;
+use JBZoo\ToolboxCI\Converters\Factory;
 use JBZoo\ToolboxCI\Converters\Map;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -54,15 +54,12 @@ class Convert extends Command
             ->addOption('input-format', 'S', InputOption::VALUE_REQUIRED, "Source format. {$formats}")
             ->addOption('output-format', 'T', InputOption::VALUE_REQUIRED, "Target format. {$formats}")
             // Optional
-            ->addOption('root-path', 'R', InputOption::VALUE_OPTIONAL,
-                'If option is set all absolute file paths will be converted to relative'
-            )
-            ->addOption('input-file', 'I', InputOption::VALUE_OPTIONAL,
-                "Use CLI input (STDIN, pipeline) OR use the option to define filename of source report"
-            )
-            ->addOption('output-file', 'O', InputOption::VALUE_OPTIONAL,
-                "Use CLI output (STDOUT, pipeline) OR use the option to define filename with reults"
-            );
+            ->addOption('root-path', 'R', InputOption::VALUE_OPTIONAL, 'If option is set ' .
+                'all absolute file paths will be converted to relative')
+            ->addOption('input-file', 'I', InputOption::VALUE_OPTIONAL, "Use CLI input (STDIN, pipeline) " .
+                "OR use the option to define filename of source report")
+            ->addOption('output-file', 'O', InputOption::VALUE_OPTIONAL, "Use CLI output (STDOUT, pipeline) " .
+                "OR use the option to define filename with result");
     }
 
     /**
@@ -77,9 +74,10 @@ class Convert extends Command
         $sourceFormat = $this->getFormat('input-format');
         $targetFormat = $this->getFormat('output-format');
 
-        $result = ConverterFactory::convert($sourceFormat, $targetFormat, $sourceCode, [
+        $result = Factory::convert($sourceFormat, $targetFormat, $sourceCode, [
             'root_path' => $this->input->getOption('root-path')
         ]);
+
         $this->saveResult($result);
 
         return 0;
