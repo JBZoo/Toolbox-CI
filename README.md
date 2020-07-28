@@ -23,7 +23,8 @@ composer require jbzoo/toolbox-ci
 | TeamCity - Tests |       -        |     -     |     -      |     -      |        -         |
 
 
-## Unit tests and check code style
+### Unit tests and check code style
+
 ```sh
 make update
 make test-all
