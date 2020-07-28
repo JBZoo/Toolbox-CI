@@ -97,13 +97,13 @@ test-psalm-tc:
 	@rm -f "$(PATH_BUILD)/psalm-checkstyle.xml"
 	@-php `pwd`/vendor/bin/psalm                                \
         --config="$(JBZOO_CONFIG_PSALM)"                        \
-        --output-format=checkstyle                              \
+        --output-format=json                                    \
         --report-show-info=true                                 \
         --show-snippet=true                                     \
         --no-progress                                           \
         --monochrome > "$(PATH_BUILD)/psalm-checkstyle.xml"
 	@php `pwd`/toolbox-ci convert                               \
-        --input-format="checkstyle"                             \
+        --input-format="psalm-json"                             \
         --output-format="tc-tests"                              \
         --suite-name="Psalm"                                    \
         --root-path="`pwd`"                                     \

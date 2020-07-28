@@ -14,12 +14,13 @@ composer require jbzoo/toolbox-ci
 
 ### Available directions
 
-|                  | CheckStyle.xml | JUnit.xml | PHPmd.json | TeamCity - Tests |
-|:-----------------|:--------------:|:---------:|:----------:|:----------------:|
-| CheckStyle.xml   |       -        |    Yes    |     -      |       Yes        |
-| JUnit.xml        |       -        |    Yes    |     -      |       Yes        |
-| PHPmd.json       |       -        |    Yes    |     -      |       Yes        |
-| TeamCity - Tests |       -        |     -     |     -      |        -         |
+|                  | CheckStyle.xml | JUnit.xml | PHPmd.json | Psalm.json | TeamCity - Tests |
+|:-----------------|:--------------:|:---------:|:----------:|:----------:|:----------------:|
+| CheckStyle.xml   |       -        |    Yes    |     -      |     -      |       Yes        |
+| JUnit.xml        |       -        |    Yes    |     -      |     -      |       Yes        |
+| PHPmd.json       |       -        |    Yes    |     -      |     -      |       Yes        |
+| Psalm.json       |       -        |    Yes    |     -      |     -      |       Yes        |
+| TeamCity - Tests |       -        |     -     |     -      |     -      |        -         |
 
 
 ## Unit tests and check code style

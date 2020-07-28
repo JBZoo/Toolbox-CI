@@ -30,7 +30,8 @@ class Map
         JUnitConverter::class         => [self::INPUT => true, self::OUTPUT => true],
         TeamCityTestsConverter::class => [self::INPUT => false, self::OUTPUT => true],
         PhpmdJsonConverter::class     => [self::INPUT => true, self::OUTPUT => false],
-        CheckStyleConverter::class    => [self::INPUT => true, self::OUTPUT => false]
+        CheckStyleConverter::class    => [self::INPUT => true, self::OUTPUT => false],
+        PsalmJsonConverter::class     => [self::INPUT => true, self::OUTPUT => false],
     ];
 
 

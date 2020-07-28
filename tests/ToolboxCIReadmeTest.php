@@ -31,6 +31,6 @@ class ToolboxCIReadmeTest extends AbstractReadmeTest
 
     public function testMapTable()
     {
-        isContain(Map::getMarkdownTable(), self::getReadme());
+        isContain("### Available directions\n\n" . Map::getMarkdownTable(), self::getReadme());
     }
 }
