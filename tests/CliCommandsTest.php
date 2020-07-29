@@ -15,10 +15,15 @@
 
 namespace JBZoo\PHPUnit;
 
+use JBZoo\ToolboxCI\Commands\Convert;
+use JBZoo\ToolboxCI\Commands\ConvertMap;
 use JBZoo\ToolboxCI\Converters\CheckStyleConverter;
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
 use JBZoo\Utils\Cli;
 use JBZoo\Utils\Sys;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 /**
  * Class CliCommandsTest
@@ -28,7 +33,7 @@ class CliCommandsTest extends PHPUnit
 {
     public function testConvertCommandReadMe()
     {
-        $helpMessage = $this->task('convert', ['help' => null]);
+        $helpMessage = $this->taskReal('convert', ['help' => null]);
         $helpMessage = implode("\n", [
             '',
             '### Usage',
@@ -121,15 +126,35 @@ class CliCommandsTest extends PHPUnit
      * @param string $action
      * @param array  $params
      * @return string
+     * @throws \Exception
      */
     public function task(string $action, array $params = []): string
+    {
+        $application = new Application();
+        $application->add(new Convert());
+        $application->add(new ConvertMap());
+        $command = $application->find($action);
+
+        $buffer = new BufferedOutput();
+        $args = new StringInput(Cli::build('', $params));
+        $command->run($args, $buffer);
+
+        return $buffer->fetch();
+    }
+
+    /**
+     * @param string $action
+     * @param array  $params
+     * @return string
+     */
+    public function taskReal(string $action, array $params = []): string
     {
         $rootDir = PROJECT_ROOT;
 
         return Cli::exec(
             implode(' ', [
                 Sys::getBinary(),
-                "{$rootDir}/tests/Tools/cli-wrapper.php",
+                "{$rootDir}/toolbox-ci.php",
                 $action,
             ]),
             $params,
