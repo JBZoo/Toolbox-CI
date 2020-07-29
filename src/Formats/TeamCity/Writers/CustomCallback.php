@@ -16,10 +16,10 @@
 namespace JBZoo\ToolboxCI\Formats\TeamCity\Writers;
 
 /**
- * Class Callback
+ * Class CustomCallback
  * @package JBZoo\ToolboxCI\Teamcity\Writer
  */
-class Callback implements AbstractWriter
+class CustomCallback implements AbstractWriter
 {
     /**
      * @var callable|null

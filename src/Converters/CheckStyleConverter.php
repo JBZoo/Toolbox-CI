@@ -35,14 +35,6 @@ class CheckStyleConverter extends AbstractConverter
     /**
      * @inheritDoc
      */
-    public function fromInternal(SourceSuite $sourceSuite): string
-    {
-        throw new Exception('Method is not available');
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function toInternal(string $source): SourceSuite
     {
         $xmlDocument = Xml::createDomDocument($source);
@@ -69,13 +61,13 @@ class CheckStyleConverter extends AbstractConverter
                     $caseName = $line > 0 ? "{$relFilename} line {$line}" : $relFilename;
                     $caseName = $column > 0 ? "{$caseName}, column {$column}" : $caseName;
 
-                    $case = $suite->addTestCase((string)$caseName);
+                    $case = $suite->addTestCase($caseName);
                     $case->file = $absFilename;
                     $case->line = $line ?: null;
                     $case->column = $column ?: null;
                     $case->class = $source;
                     $case->classname = $source;
-                    $case->failure = new SourceCaseOutput($source, $error->get('message'), $this->getDetails($error));
+                    $case->failure = new SourceCaseOutput($source, $error->get('message'), self::getDetails($error));
                 }
             }
         }
@@ -87,12 +79,13 @@ class CheckStyleConverter extends AbstractConverter
      * @param Data $data
      * @return string|null
      */
-    private function getDetails(Data $data): ?string
+    private static function getDetails(Data $data): ?string
     {
         return Helper::descAsList([
-            ''          => $data->get('message'),
+            ''          => htmlspecialchars_decode($data->get('message')),
             'Rule'      => $data->get('source'),
-            'File Path' => $this->getFilePoint($data->get('full_path'), $data->get('line'), $data->get('column')),
+            'File Path' => self::getFilePoint($data->get('full_path'), $data->get('line'),
+                $data->get('column')),
             'Severity'  => $data->get('severity'),
         ]);
     }

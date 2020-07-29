@@ -35,14 +35,6 @@ class PsalmJsonConverter extends AbstractConverter
     /**
      * @inheritDoc
      */
-    public function fromInternal(SourceSuite $sourceSuite): string
-    {
-        throw new Exception('Method is not available');
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function toInternal(string $source): SourceSuite
     {
         $sourceSuite = new SourceSuite($this->rootSuiteName ?: 'Psalm');
@@ -66,7 +58,7 @@ class PsalmJsonConverter extends AbstractConverter
             $case->failure = new SourceCaseOutput(
                 $sourceCase['type'],
                 $sourceCase['message'],
-                $this->getDetails($sourceCase)
+                self::getDetails($sourceCase)
             );
         }
 
@@ -77,14 +69,14 @@ class PsalmJsonConverter extends AbstractConverter
      * @param Data $data
      * @return string|null
      */
-    private function getDetails(Data $data): ?string
+    private static function getDetails(Data $data): ?string
     {
         $snippet = trim($data->get('snippet'));
 
         return Helper::descAsList([
-            ''            => $data->get('message'),
+            ''            => htmlspecialchars_decode($data->get('message')),
             'Rule'        => $data->get('type'),
-            'File Path'   => $this->getFilePoint($data->get('file_path'), $data->get('line_from')),
+            'File Path'   => self::getFilePoint($data->get('file_path'), $data->get('line_from')),
             'Snippet'     => $snippet ? "`{$snippet}`" : null,
             'Taint Trace' => $data->get('taint_trace'),
             'Docs'        => $data->get('link'),

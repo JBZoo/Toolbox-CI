@@ -35,14 +35,6 @@ class PhpmdJsonConverter extends AbstractConverter
     /**
      * @inheritDoc
      */
-    public function fromInternal(SourceSuite $sourceSuite): string
-    {
-        throw new Exception('Method is not available');
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function toInternal(string $source): SourceSuite
     {
         $sourceSuite = new SourceSuite($this->rootSuiteName ?: 'PHPmd');
@@ -66,7 +58,7 @@ class PhpmdJsonConverter extends AbstractConverter
                 $case->failure = new SourceCaseOutput(
                     $violation['rule'] ?? null,
                     $violation['description'] ?? null,
-                    $this->getDetails($violation)
+                    self::getDetails($violation)
                 );
 
                 $package = $violation['package'] ?? null;
@@ -84,7 +76,7 @@ class PhpmdJsonConverter extends AbstractConverter
      * @param Data $data
      * @return string|null
      */
-    private function getDetails(Data $data): ?string
+    private static function getDetails(Data $data): ?string
     {
         $functionName = $data['function'] ? "{$data['function']}()" : null;
         if ($data['method']) {
@@ -103,7 +95,7 @@ class PhpmdJsonConverter extends AbstractConverter
         $line = $line > 0 ? ":{$line}" : '';
 
         return Helper::descAsList([
-            ''          => $data->get('description'),
+            ''          => htmlspecialchars_decode($data->get('description')),
             'Rule'      => "{$data->get('ruleSet')} / {$data->get('rule')} / Priority: {$data->get('priority')}",
             'PHP Mute'  => "@SuppressWarnings(PHPMD.{$data->get('rule')})",
             'Func'      => $functionName ?? $data['function'],

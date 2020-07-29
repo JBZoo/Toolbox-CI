@@ -49,23 +49,18 @@ class TeamCityTestsConverter extends AbstractConverter
     /**
      * @inheritDoc
      */
-    public function toInternal(string $source): SourceSuite
-    {
-        throw new Exception('Method is not available');
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function fromInternal(SourceSuite $sourceSuite): string
     {
         $this->tcLogger->write('testCount', ['count' => $sourceSuite->getCasesCount()]);
 
         $this->renderSuite($sourceSuite);
 
-        /** @var Buffer $buffer */
         $buffer = $this->tcLogger->getWriter();
-        return implode('', $buffer->getBuffer());
+        if ($buffer instanceof Buffer) {
+            return implode('', $buffer->getBuffer());
+        }
+
+        return '';
     }
 
     /**
@@ -111,8 +106,8 @@ class TeamCityTestsConverter extends AbstractConverter
 
         $logger->testStarted($case->name, $params);
 
-        if ($case->skipped) {
-            $logger->testSkipped($case->name, $case->skipped->message, $case->skipped->details, $case->time);
+        if ($skippedOutput = $case->skipped) {
+            $logger->testSkipped($case->name, $skippedOutput->message, $skippedOutput->details, $case->time);
         } else {
             $failureObject = $case->failure ?? $case->error ?? $case->warning;
             if ($failureObject) {

@@ -98,12 +98,17 @@ class JUnitCase extends AbstractNode
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      * @return $this
      */
-    public function addSystemOut(string $description): self
+    public function addSystemOut(?string $description): self
     {
-        $this->outputs[] = (new SystemOut())->setDescription($description);
+        if (null !== $description) {
+            $this->outputs[] = (new SystemOut())->setDescription($description);
+        } else {
+            $this->outputs[] = (new SystemOut());
+        }
+
         return $this;
     }
 

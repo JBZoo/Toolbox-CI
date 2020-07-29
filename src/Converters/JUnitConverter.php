@@ -74,38 +74,39 @@ class JUnitConverter extends AbstractConverter
             $this->createJUnitNodes($sourceSuite, $junitSuite);
         }
 
-        /** @var JUnitSuite $junitSuite */
-        foreach ($source->getCases() as $sourceCase) {
-            $junitCase = $junitSuite->addCase($sourceCase->name);
-            $junitCase->time = $sourceCase->time;
-            $junitCase->class = $sourceCase->class;
-            $junitCase->classname = $sourceCase->classname;
-            $junitCase->file = $sourceCase->file;
-            $junitCase->line = $sourceCase->line;
-            $junitCase->assertions = $sourceCase->assertions;
+        if ($junitSuite instanceof JUnitSuite) {
+            foreach ($source->getCases() as $sourceCase) {
+                $junitCase = $junitSuite->addCase($sourceCase->name);
+                $junitCase->time = $sourceCase->time;
+                $junitCase->class = $sourceCase->class;
+                $junitCase->classname = $sourceCase->classname;
+                $junitCase->file = $sourceCase->file;
+                $junitCase->line = $sourceCase->line;
+                $junitCase->assertions = $sourceCase->assertions;
 
-            if ($failure = $sourceCase->failure) {
-                $junitCase->addFailure($failure->type, $failure->message, $failure->details);
-            }
+                if ($failure = $sourceCase->failure) {
+                    $junitCase->addFailure($failure->type, $failure->message, $failure->details);
+                }
 
-            if ($warning = $sourceCase->warning) {
-                $junitCase->addWarning($warning->type, $warning->message, $warning->details);
-            }
+                if ($warning = $sourceCase->warning) {
+                    $junitCase->addWarning($warning->type, $warning->message, $warning->details);
+                }
 
-            if ($error = $sourceCase->error) {
-                $junitCase->addError($error->type, $error->message, $error->details);
-            }
+                if ($error = $sourceCase->error) {
+                    $junitCase->addError($error->type, $error->message, $error->details);
+                }
 
-            if ($sourceCase->stdOut && $sourceCase->errOut) {
-                $junitCase->addSystemOut($sourceCase->stdOut . "\n" . $sourceCase->errOut);
-            } elseif ($sourceCase->stdOut && !$sourceCase->errOut) {
-                $junitCase->addSystemOut($sourceCase->stdOut);
-            } elseif (!$sourceCase->stdOut && $sourceCase->errOut) {
-                $junitCase->addSystemOut($sourceCase->errOut);
-            }
+                if ($sourceCase->stdOut && $sourceCase->errOut) {
+                    $junitCase->addSystemOut("{$sourceCase->stdOut}\n{$sourceCase->errOut}");
+                } elseif ($sourceCase->stdOut && !$sourceCase->errOut) {
+                    $junitCase->addSystemOut($sourceCase->stdOut);
+                } elseif (!$sourceCase->stdOut && $sourceCase->errOut) {
+                    $junitCase->addSystemOut($sourceCase->errOut);
+                }
 
-            if ($sourceCase->skipped) {
-                $junitCase->markAsSkipped();
+                if ($sourceCase->skipped) {
+                    $junitCase->markAsSkipped();
+                }
             }
         }
 
@@ -118,7 +119,7 @@ class JUnitConverter extends AbstractConverter
      * @return SourceSuite
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    private function createSourceNodes(array $xmlAsArray, SourceSuite $currentSuite)
+    private function createSourceNodes(array $xmlAsArray, SourceSuite $currentSuite): SourceSuite
     {
         $attrs = data($xmlAsArray['_attrs'] ?? []);
 

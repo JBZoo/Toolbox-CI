@@ -38,7 +38,7 @@ class Map
     /**
      * @return array
      */
-    public static function getTable()
+    public static function getTable(): array
     {
         $result = [];
 
@@ -64,7 +64,7 @@ class Map
         $drivers = array_keys(self::MAP);
         sort($drivers);
 
-        return array_map(function (string $converterClass): string {
+        return array_map(static function (string $converterClass): string {
             return $converterClass::TYPE;
         }, $drivers);
     }
@@ -93,7 +93,7 @@ class Map
 
         $rows = [];
         foreach ($tableData as $key => $info) {
-            $rows[$key] = array_values(array_map(function (bool $value) {
+            $rows[$key] = array_values(array_map(static function (bool $value) {
                 return $value ? 'Yes' : '-';
             }, $info));
 

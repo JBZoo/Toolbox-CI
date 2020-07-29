@@ -47,7 +47,7 @@ class ConverterCheckStyleTest extends PHPUnit
                 'message' => 'Assigning $this-&gt;rootElement of type \\DOMElement|false to property but \\JBZoo\\ToolboxCI\\JUnit\\JUnitXml-&gt;rootElement is \\DOMElement (false is incompatible)',
                 'details' => implode("\n", [
                     '',
-                    'Assigning $this-&gt;rootElement of type \DOMElement|false to property but \JBZoo\ToolboxCI\JUnit\JUnitXml-&gt;rootElement is \DOMElement (false is incompatible)',
+                    'Assigning $this->rootElement of type \DOMElement|false to property but \JBZoo\ToolboxCI\JUnit\JUnitXml->rootElement is \DOMElement (false is incompatible)',
                     'Rule     : PhanPossiblyFalseTypeMismatchProperty',
                     'File Path: src/JUnit/JUnitXml.php:37',
                     'Severity : warning',

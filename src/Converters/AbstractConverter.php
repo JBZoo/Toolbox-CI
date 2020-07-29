@@ -39,14 +39,22 @@ abstract class AbstractConverter
     /**
      * @param string $source
      * @return SourceSuite
+     * @phan-suppress PhanUnusedPublicMethodParameter
      */
-    abstract public function toInternal(string $source): SourceSuite;
+    public function toInternal(string $source): SourceSuite
+    {
+        throw new Exception('Method \"' . __METHOD__ . '\" is not available');
+    }
 
     /**
      * @param SourceSuite $sourceSuite
      * @return string
+     * @phan-suppress PhanUnusedPublicMethodParameter
      */
-    abstract public function fromInternal(SourceSuite $sourceSuite): string;
+    public function fromInternal(SourceSuite $sourceSuite): string
+    {
+        throw new Exception('Method \"' . __METHOD__ . '\" is not available');
+    }
 
     /**
      * @param string|null $rootPath
@@ -114,7 +122,7 @@ abstract class AbstractConverter
      * @param string|int|null $column
      * @return string|null
      */
-    protected function getFilePoint(?string $filename = null, $line = 0, $column = 0): ?string
+    protected static function getFilePoint(?string $filename = null, $line = 0, $column = 0): ?string
     {
         if (!$filename) {
             return null;
