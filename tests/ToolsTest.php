@@ -18,7 +18,6 @@ namespace JBZoo\PHPUnit;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\Xml;
 use JBZoo\ToolboxCI\Helper;
-use JBZoo\Utils\Cli;
 
 /**
  * Class ToolsTest
@@ -28,7 +27,7 @@ class ToolsTest extends PHPUnit
 {
     public function test()
     {
-        echo Cli::exec('make codestyle-teamcity', [], PROJECT_ROOT);
+        //echo \JBZoo\Utils\Cli::exec('make codestyle-teamcity', [], PROJECT_ROOT);
         isTrue(true);
     }
 
