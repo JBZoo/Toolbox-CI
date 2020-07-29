@@ -84,6 +84,7 @@ test-phpstan-tc:
 	@-php `pwd`/vendor/bin/phpstan analyse                      \
         --configuration="$(JBZOO_CONFIG_PHPSTAN)"               \
         --error-format=checkstyle                               \
+        --no-progress                                           \
         "$(PATH_SRC)" > "$(PATH_BUILD)/phpstan-checkstyle.xml"
 	@php `pwd`/toolbox-ci convert                               \
         --input-format="checkstyle"                             \

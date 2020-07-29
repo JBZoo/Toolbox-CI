@@ -17,6 +17,7 @@ namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\Xml;
+use JBZoo\ToolboxCI\Helper;
 use JBZoo\Utils\Cli;
 
 /**
@@ -27,8 +28,28 @@ class ToolsTest extends PHPUnit
 {
     public function test()
     {
-        //echo Cli::exec('make test-phpmd-tc', [], PROJECT_ROOT);
+        //echo Cli::exec('make test-phpstan-tc', [], PROJECT_ROOT);
         isTrue(true);
+    }
+
+    public function testDescAsList()
+    {
+        $result = Helper::descAsList([
+            ''               => 'QWERTY',
+            'q'              => 123,
+            'qwerty'         => 123,
+            'qwe'            => 123,
+            'qweqwerty 1234' => '',
+        ]);
+
+        isSame(implode("\n", [
+            '',
+            'QWERTY',
+            'Q     : 123',
+            'Qwerty: 123',
+            'Qwe   : 123',
+            '',
+        ]), $result);
     }
 
     public function testCheckstyleSchema()

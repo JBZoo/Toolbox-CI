@@ -43,6 +43,23 @@ class CliCommandsTest extends PHPUnit
         isContain($helpMessage, file_get_contents(PROJECT_ROOT . '/README.md'));
     }
 
+    public function testConvertCommandMapReadMe()
+    {
+        $helpMessage = $this->task('convert-map');
+        $helpMessage = implode("\n", [
+            '',
+            '### Available directions',
+            '',
+            '```sh',
+            'php ./vendor/bin/toolbox-ci convert-map',
+            '```',
+            '',
+            $helpMessage,
+        ]);
+
+        isContain($helpMessage, file_get_contents(PROJECT_ROOT . '/README.md'));
+    }
+
     public function testConvertCommand()
     {
         $output = $this->task('convert', [
@@ -61,36 +78,36 @@ class CliCommandsTest extends PHPUnit
             '      <testcase name="JUnit/TestCaseElement.php line 34, column 21" class="ERROR" classname="ERROR" file="JUnit/TestCaseElement.php" line="34">',
             '        <failure type="ERROR" message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setName does not have a return type, expecting void">',
             'MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setName does not have a return type, expecting void',
-            'Path: JUnit/TestCaseElement.php:34:21',
-            'Severity: error',
+            'File Path: JUnit/TestCaseElement.php:34:21',
+            'Severity : error',
             '</failure>',
             '      </testcase>',
             '      <testcase name="JUnit/TestCaseElement.php line 42, column 21" class="ERROR" classname="ERROR" file="JUnit/TestCaseElement.php" line="42">',
             '        <failure type="ERROR" message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setClassname does not have a return type, expecting void">',
             'MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setClassname does not have a return type, expecting void',
-            'Path: JUnit/TestCaseElement.php:42:21',
-            'Severity: error',
+            'File Path: JUnit/TestCaseElement.php:42:21',
+            'Severity : error',
             '</failure>',
             '      </testcase>',
             '      <testcase name="JUnit/TestCaseElement.php line 52, column 21" class="ERROR" classname="ERROR" file="JUnit/TestCaseElement.php" line="52">',
             '        <failure type="ERROR" message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setTime does not have a return type, expecting void">',
             'MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setTime does not have a return type, expecting void',
-            'Path: JUnit/TestCaseElement.php:52:21',
-            'Severity: error',
+            'File Path: JUnit/TestCaseElement.php:52:21',
+            'Severity : error',
             '</failure>',
             '      </testcase>',
             '      <testcase name="JUnit/TestCaseElement.php line 54, column 37" class="ERROR" classname="ERROR" file="JUnit/TestCaseElement.php" line="54">',
             '        <failure type="ERROR" message="InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute expects string, float provided">',
             'InvalidScalarArgument: Argument 2 of JBZoo\ToolboxCI\JUnit\TestCaseElement::setAttribute expects string, float provided',
-            'Path: JUnit/TestCaseElement.php:54:37',
-            'Severity: error',
+            'File Path: JUnit/TestCaseElement.php:54:37',
+            'Severity : error',
             '</failure>',
             '      </testcase>',
             '      <testcase name="JUnit/TestCaseElement.php line 65, column 47" class="ERROR" classname="ERROR" file="JUnit/TestCaseElement.php" line="65">',
             '        <failure type="ERROR" message="PossiblyNullReference: Cannot call method createElement on possibly null value">',
             'PossiblyNullReference: Cannot call method createElement on possibly null value',
-            'Path: JUnit/TestCaseElement.php:65:47',
-            'Severity: error',
+            'File Path: JUnit/TestCaseElement.php:65:47',
+            'Severity : error',
             '</failure>',
             '      </testcase>',
             '    </testsuite>',

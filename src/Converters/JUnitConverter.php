@@ -60,6 +60,8 @@ class JUnitConverter extends AbstractConverter
      * @param SourceSuite      $source
      * @param JUnitSuite|JUnit $junitSuite
      * @return JUnitSuite|JUnit
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function createJUnitNodes(SourceSuite $source, $junitSuite)
     {
@@ -113,6 +115,7 @@ class JUnitConverter extends AbstractConverter
      * @param array       $xmlAsArray
      * @param SourceSuite $currentSuite
      * @return SourceSuite
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     private function createSourceNodes(array $xmlAsArray, SourceSuite $currentSuite)
     {

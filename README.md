@@ -41,6 +41,10 @@ Options:
 
 ### Available directions
 
+```sh
+php ./vendor/bin/toolbox-ci convert-map
+```
+
 |                  | CheckStyle.xml | JUnit.xml | PHPmd.json | Psalm.json | TeamCity - Tests |
 |:-----------------|:--------------:|:---------:|:----------:|:----------:|:----------------:|
 | CheckStyle.xml   |       -        |    Yes    |     -      |     -      |       Yes        |

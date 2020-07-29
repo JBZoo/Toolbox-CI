@@ -15,10 +15,6 @@
 
 namespace JBZoo\ToolboxCI\Formats\TeamCity;
 
-use DateTimeInterface;
-use InvalidArgumentException;
-use LogicException;
-
 /**
  * Class Util
  * @package JBZoo\ToolboxCI\Teamcity
@@ -49,11 +45,9 @@ class Util
 
             if (is_int($propertyName)) {
                 // Value without name; skip the key and dump just the value
-
                 $result .= " '$escapedValue'";
             } else {
                 // Classic name=value pair
-
                 self::ensureValidJavaId($propertyName);
                 $result .= " $propertyName='$escapedValue'";
             }
@@ -65,31 +59,25 @@ class Util
 
     /**
      * Checks if given value is valid Java ID.
-     *
      * Valid Java ID starts with alpha-character and continues with mix of alphanumeric characters and `-`.
-     *
      * @param string $value
-     * @return bool
-     * @see https://confluence.jetbrains.com/display/TCD9/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-servMsgsServiceMessages
-     *      TeamCity – Service Messages
      */
     public static function ensureValidJavaId($value)
     {
         if (!preg_match('/^[a-z][-a-z0-9]+$/i', $value)) {
-            throw new InvalidArgumentException("Value \"{$value}\" is not valid Java ID.");
+            throw new Exception("Value \"{$value}\" is not valid Java ID.");
         }
     }
 
     /**
-     * Return date in format acceptable as TeamCity "timestamp" parameter.
-     *
-     * @param DateTimeInterface $date Either date with timestamp or `NULL` for now.
+     * @param \DateTime $date Either date with timestamp or `NULL` for now.
      * @return string
-     * @see https://confluence.jetbrains.com/display/TCD9/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-MessageCreationTimestamp
      */
     public static function formatTimestamp($date = null)
     {
-        $formatted = (new \DateTime())->format(self::TIMESTAMP_FORMAT);
+        $date = $date ?? new \DateTime();
+        $formatted = $date->format(self::TIMESTAMP_FORMAT);
+
         // We need to pass only 3 microsecond digits.
         // 2000-01-01T12:34:56.123450+0100 <- before
         // 2000-01-01T12:34:56.123+0100 <- after
@@ -124,7 +112,7 @@ class Util
                 return '|0x' . $matches[2];
             }
 
-            throw new LogicException('Unexpected match combination.');
+            throw new Exception('Unexpected match combination.');
         }, $value);
     }
 }

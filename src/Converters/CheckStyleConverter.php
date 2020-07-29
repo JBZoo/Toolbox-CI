@@ -90,10 +90,10 @@ class CheckStyleConverter extends AbstractConverter
     private function getDetails(Data $data): string
     {
         return Helper::descAsList([
-            ''         => $data->get('message'),
-            'Rule'     => $data->get('source'),
-            'Path'     => $this->getFilePoint($data->get('full_path'), $data->get('line'), $data->get('column')),
-            'Severity' => $data->get('severity'),
+            ''          => $data->get('message'),
+            'Rule'      => $data->get('source'),
+            'File Path' => $this->getFilePoint($data->get('full_path'), $data->get('line'), $data->get('column')),
+            'Severity'  => $data->get('severity'),
         ]);
     }
 }

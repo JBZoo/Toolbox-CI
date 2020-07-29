@@ -65,6 +65,7 @@ class AbstractNode
     /**
      * @param string                      $name
      * @param array|string|float|int|null $value
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function __set(string $name, $value)
     {

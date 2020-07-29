@@ -14,6 +14,7 @@
  */
 
 use JBZoo\ToolboxCI\Commands\Convert;
+use JBZoo\ToolboxCI\Commands\ConvertMap;
 use Symfony\Component\Console\Application;
 
 define('PATH_ROOT', __DIR__);
@@ -35,4 +36,5 @@ require JBZOO_COMPOSER_GRAPH;
 
 $application = new Application();
 $application->add(new Convert());
+$application->add(new ConvertMap());
 $application->run();

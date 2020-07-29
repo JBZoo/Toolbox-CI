@@ -80,7 +80,7 @@ class PsalmJsonConverter extends AbstractConverter
         return Helper::descAsList([
             ''            => $data->get('message'),
             'Rule'        => $data->get('type'),
-            'Path'        => $this->getFilePoint($data->get('file_path'), $data->get('line_from')),
+            'File Path'   => $this->getFilePoint($data->get('file_path'), $data->get('line_from')),
             'Snippet'     => $snippet ? "`{$snippet}`" : null,
             'Taint Trace' => $data->get('taint_trace'),
             'Docs'        => $data->get('link'),

@@ -47,11 +47,11 @@ class ConverterPsalmJsonTest extends PHPUnit
                 'message' => 'Method JBZoo\\ToolboxCI\\JUnit\\TestCaseElement::setName does not have a return type, expecting void',
                 'details' => '
 Method JBZoo\\ToolboxCI\\JUnit\\TestCaseElement::setName does not have a return type, expecting void
-Rule: MissingReturnType
-Path: /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php:34
-Snippet: `public function setName($name)`
-Docs: https://psalm.dev/050
-Severity: error
+Rule       : MissingReturnType
+File Path  : /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php:34
+Snippet    : `public function setName($name)`
+Docs       : https://psalm.dev/050
+Severity   : error
 Error Level: 2
 ',
             ],

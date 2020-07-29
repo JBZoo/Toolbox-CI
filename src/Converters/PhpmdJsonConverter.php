@@ -102,11 +102,12 @@ class PhpmdJsonConverter extends AbstractConverter
         $line = $line > 0 ? ":{$line}" : '';
 
         return Helper::descAsList([
-            ''     => $data->get('description'),
-            'Rule' => "{$data->get('ruleSet')} / {$data->get('rule')} / Priority: {$data->get('priority')}",
-            'Func' => $functionName ?? $data['function'],
-            'Path' => $data->get('full_path') . $line,
-            'Docs' => $data->get('externalInfoUrl'),
+            ''          => $data->get('description'),
+            'Rule'      => "{$data->get('ruleSet')} / {$data->get('rule')} / Priority: {$data->get('priority')}",
+            'PHP Mute'  => "@SuppressWarnings(PHPMD.{$data->get('rule')})",
+            'Func'      => $functionName ?? $data['function'],
+            'File Path' => $data->get('full_path') . $line,
+            'Docs'      => $data->get('externalInfoUrl'),
         ]);
     }
 }

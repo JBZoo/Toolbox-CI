@@ -48,6 +48,8 @@ class JUnitSuite extends AbstractNode
     /**
      * @param \DOMDocument $document
      * @return \DOMNode
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function toXML(\DOMDocument $document): \DOMNode
     {
