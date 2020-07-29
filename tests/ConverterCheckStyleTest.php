@@ -66,7 +66,7 @@ class ConverterCheckStyleTest extends PHPUnit
         isSame(implode("\n", [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<testsuites>',
-            '  <testsuite name="CheckStyle" failures="7">',
+            '  <testsuite name="CheckStyle" tests="7" failures="7">',
             '    <testsuite name="src/JUnit/JUnitXml.php" file="src/JUnit/JUnitXml.php" tests="2" failures="2">',
             '      <testcase name="src/JUnit/JUnitXml.php line 37" class="PhanPossiblyFalseTypeMismatchProperty" classname="PhanPossiblyFalseTypeMismatchProperty" file="src/JUnit/JUnitXml.php" line="37">',
             '        <failure type="PhanPossiblyFalseTypeMismatchProperty" message="Assigning $this-&amp;gt;rootElement of type \DOMElement|false to property but \JBZoo\ToolboxCI\JUnit\JUnitXml-&amp;gt;rootElement is \DOMElement (false is incompatible)">',
@@ -148,7 +148,7 @@ class ConverterCheckStyleTest extends PHPUnit
         isSame(implode("\n", [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<testsuites>',
-            '  <testsuite name="CheckStyle" failures="3">',
+            '  <testsuite name="CheckStyle" tests="3" failures="3">',
             '    <testsuite name="src/JUnit/JUnitXml.php" file="src/JUnit/JUnitXml.php" tests="3" failures="3">',
             '      <testcase name="src/JUnit/JUnitXml.php line 24, column 5" class="PSR12.Properties.ConstantVisibility.NotFound" classname="PSR12.Properties.ConstantVisibility.NotFound" file="src/JUnit/JUnitXml.php" line="24">',
             '        <failure type="PSR12.Properties.ConstantVisibility.NotFound" message="Visibility must be declared on all constants if your project supports PHP 7.1 or later">',
@@ -195,7 +195,7 @@ class ConverterCheckStyleTest extends PHPUnit
         isSame(implode("\n", [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<testsuites>',
-            '  <testsuite name="CheckStyle" failures="4">',
+            '  <testsuite name="CheckStyle" tests="4" failures="4">',
             '    <testsuite name="src/JUnit/TestCaseElement.php" file="src/JUnit/TestCaseElement.php" tests="4" failures="4">',
             '      <testcase name="src/JUnit/TestCaseElement.php line 34, column 1" class="ERROR" classname="ERROR" file="src/JUnit/TestCaseElement.php" line="34">',
             '        <failure type="ERROR" message="Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setName() has no return typehint specified.">',
@@ -246,7 +246,7 @@ class ConverterCheckStyleTest extends PHPUnit
         isSame(implode("\n", [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<testsuites>',
-            '  <testsuite name="CheckStyle" failures="5">',
+            '  <testsuite name="CheckStyle" tests="5" failures="5">',
             '    <testsuite name="src/JUnit/TestCaseElement.php" file="src/JUnit/TestCaseElement.php" tests="5" failures="5">',
             '      <testcase name="src/JUnit/TestCaseElement.php line 34, column 21" class="ERROR" classname="ERROR" file="src/JUnit/TestCaseElement.php" line="34">',
             '        <failure type="ERROR" message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setName does not have a return type, expecting void">',

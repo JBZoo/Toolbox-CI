@@ -75,6 +75,7 @@ class JUnitConverter extends AbstractConverter
         }
 
         foreach ($source->getCases() as $sourceCase) {
+            // @phpstan-ignore-next-line
             $junitCase = $junitSuite->addCase($sourceCase->name);
             $junitCase->time = $sourceCase->time;
             $junitCase->class = $sourceCase->class;

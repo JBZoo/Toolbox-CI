@@ -42,5 +42,6 @@ class ConvertMap extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln(Map::getMarkdownTable());
+        return 0;
     }
 }

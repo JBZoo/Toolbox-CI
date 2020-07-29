@@ -24,28 +24,32 @@ use function JBZoo\Data\data;
 class Factory
 {
     /**
-     * @param string $sourceFormat
-     * @param string $targetFormat
-     * @param string $sourceCode
-     * @param array  $params
+     * @param string|false|null $sourceCode
+     * @param string            $sourceFormat
+     * @param string            $targetFormat
+     * @param array             $params
      * @return string
      */
     public static function convert(
+        $sourceCode,
         string $sourceFormat,
         string $targetFormat,
-        string $sourceCode,
         array $params = []
     ): string {
         $params = data($params);
 
-        $sourceCode = Map::getConverter($sourceFormat, Map::INPUT)
-            ->setRootPath($params->get('root_path'))
-            ->setRootSuiteName($params->get('suite_name'))
-            ->toInternal($sourceCode);
+        if ($sourceCode) {
+            $sourceCode = Map::getConverter($sourceFormat, Map::INPUT)
+                ->setRootPath($params->get('root_path'))
+                ->setRootSuiteName($params->get('suite_name'))
+                ->toInternal($sourceCode);
 
-        return Map::getConverter($targetFormat, Map::OUTPUT)
-            ->setRootPath($params->get('root_path'))
-            ->setRootSuiteName($params->get('suite_name'))
-            ->fromInternal($sourceCode);
+            return Map::getConverter($targetFormat, Map::OUTPUT)
+                ->setRootPath($params->get('root_path'))
+                ->setRootSuiteName($params->get('suite_name'))
+                ->fromInternal($sourceCode);
+        }
+
+        return '';
     }
 }

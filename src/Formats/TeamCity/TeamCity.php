@@ -88,7 +88,7 @@ class TeamCity
      * @param string $messageName
      * @param array  $parameters Parameters with value === `null` will be filtered out.
      */
-    public function write($messageName, array $parameters)
+    public function write($messageName, array $parameters): void
     {
         $parameters = array_merge($parameters, [
             'timestamp' => Util::formatTimestamp(),
@@ -120,7 +120,7 @@ class TeamCity
      * @param string $name     The test name.
      * @param float  $duration The test duration in seconds.
      */
-    public function testFinished($name, ?float $duration = null)
+    public function testFinished($name, ?float $duration = null): void
     {
         $this->write('testFinished', [
             'name'     => $name,

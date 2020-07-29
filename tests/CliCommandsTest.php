@@ -73,7 +73,7 @@ class CliCommandsTest extends PHPUnit
         isSame(implode("\n", [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<testsuites>',
-            '  <testsuite name="Test Suite" failures="5">',
+            '  <testsuite name="Test Suite" tests="5" failures="5">',
             '    <testsuite name="JUnit/TestCaseElement.php" file="JUnit/TestCaseElement.php" tests="5" failures="5">',
             '      <testcase name="JUnit/TestCaseElement.php line 34, column 21" class="ERROR" classname="ERROR" file="JUnit/TestCaseElement.php" line="34">',
             '        <failure type="ERROR" message="MissingReturnType: Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setName does not have a return type, expecting void">',

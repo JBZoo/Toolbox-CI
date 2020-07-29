@@ -64,27 +64,27 @@ class JUnitSuite extends AbstractNode
         }
 
         if ($value = $this->getTestsCount()) {
-            $node->setAttribute('tests', $value);
+            $node->setAttribute('tests', (string)$value);
         }
 
         if ($value = $this->getAssertionsCount()) {
-            $node->setAttribute('assertions', $value);
+            $node->setAttribute('assertions', (string)$value);
         }
 
         if ($value = $this->getErrorsCount()) {
-            $node->setAttribute('errors', $value);
+            $node->setAttribute('errors', (string)$value);
         }
 
         if ($value = $this->getWarningsCount()) {
-            $node->setAttribute('warnings', $value);
+            $node->setAttribute('warnings', (string)$value);
         }
 
         if ($value = $this->getFailuresCount()) {
-            $node->setAttribute('failures', $value);
+            $node->setAttribute('failures', (string)$value);
         }
 
         if ($value = $this->getSkippedCount()) {
-            $node->setAttribute('skipped', $value);
+            $node->setAttribute('skipped', (string)$value);
         }
 
         if ($value = $this->getTime()) {
@@ -136,7 +136,7 @@ class JUnitSuite extends AbstractNode
         }
 
         $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
-            return $acc + $testCase->getAssertions();
+            return $acc + $testCase->getAssertionsCount();
         }, 0);
 
         return $result;
@@ -172,7 +172,7 @@ class JUnitSuite extends AbstractNode
         }
 
         $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
-            return $acc + $testCase->getWarningCount();
+            return $acc + $testCase->getWarningsCount();
         }, 0);
 
         return $result;
@@ -190,7 +190,7 @@ class JUnitSuite extends AbstractNode
         }
 
         $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
-            return $acc + $testCase->getFailureCount();
+            return $acc + $testCase->getFailuresCount();
         }, 0);
 
         return $result;
@@ -240,7 +240,7 @@ class JUnitSuite extends AbstractNode
         $result = 0;
 
         foreach ($this->testSuites as $testSuite) {
-            $result += $testSuite->getTime();
+            $result += $testSuite->getTestsCount();
         }
 
         return $result + count($this->testCases);

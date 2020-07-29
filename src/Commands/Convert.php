@@ -75,7 +75,7 @@ class Convert extends Command
         $sourceFormat = $this->getFormat('input-format');
         $targetFormat = $this->getFormat('output-format');
 
-        $result = Factory::convert($sourceFormat, $targetFormat, $sourceCode, [
+        $result = Factory::convert($sourceCode, $sourceFormat, $targetFormat, [
             'root_path'  => $this->input->getOption('root-path'),
             'suite_name' => $this->input->getOption('suite-name'),
         ]);
@@ -91,7 +91,8 @@ class Convert extends Command
      */
     private function getFormat(string $optionName): string
     {
-        $format = strtolower(trim($this->input->getOption($optionName)));
+        // @phpstan-ignore-next-line
+        $format = strtolower(trim((string)$this->input->getOption($optionName)));
 
         $validFormats = Map::getAvailableFormats();
 
@@ -110,7 +111,8 @@ class Convert extends Command
      */
     private function getSourceCode()
     {
-        if ($filename = $this->input->getOption('input-file')) {
+        // @phpstan-ignore-next-line
+        if ($filename = (string)$this->input->getOption('input-file')) {
             if (!realpath($filename) && !file_exists($filename)) {
                 throw new Exception("File \"{$filename}\" not foun");
             }
@@ -134,9 +136,10 @@ class Convert extends Command
     /**
      * @param string $result
      */
-    private function saveResult(string $result)
+    private function saveResult(string $result): void
     {
-        if ($filename = $this->input->getOption('output-file')) {
+        // @phpstan-ignore-next-line
+        if ($filename = (string)$this->input->getOption('output-file')) {
             file_put_contents($filename, $result);
             $this->output->writeln("Result save: {$filename}");
         } else {

@@ -69,7 +69,7 @@ class CheckStyleConverter extends AbstractConverter
                     $caseName = $line > 0 ? "{$relFilename} line {$line}" : $relFilename;
                     $caseName = $column > 0 ? "{$caseName}, column {$column}" : $caseName;
 
-                    $case = $suite->addTestCase($caseName);
+                    $case = $suite->addTestCase((string)$caseName);
                     $case->file = $absFilename;
                     $case->line = $line ?: null;
                     $case->column = $column ?: null;

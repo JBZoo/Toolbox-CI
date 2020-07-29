@@ -39,7 +39,7 @@ class SymfonyConsole implements AbstractWriter
     /**
      * @param OutputInterface $output
      */
-    public function setCallback(OutputInterface $output)
+    public function setCallback(OutputInterface $output): void
     {
         $this->output = $output;
     }

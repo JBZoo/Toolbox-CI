@@ -134,11 +134,11 @@ class JUnitCase extends AbstractNode
         }
 
         if (null !== $this->line) {
-            $node->setAttribute('line', $this->line);
+            $node->setAttribute('line', (string)$this->line);
         }
 
         if (null !== $this->assertions) {
-            $node->setAttribute('assertions', $this->assertions);
+            $node->setAttribute('assertions', (string)$this->assertions);
         }
 
         if (null !== $this->time) {
@@ -163,7 +163,7 @@ class JUnitCase extends AbstractNode
     /**
      * @return int
      */
-    public function getAssertions(): int
+    public function getAssertionsCount(): int
     {
         return (int)$this->assertions;
     }
@@ -181,7 +181,7 @@ class JUnitCase extends AbstractNode
     /**
      * @return int
      */
-    public function getWarningCount(): int
+    public function getWarningsCount(): int
     {
         return count(array_filter($this->outputs, function (AbstractOutput $output) {
             return $output instanceof Warning;
@@ -191,7 +191,7 @@ class JUnitCase extends AbstractNode
     /**
      * @return int
      */
-    public function getFailureCount(): int
+    public function getFailuresCount(): int
     {
         return count(array_filter($this->outputs, function (AbstractOutput $output) {
             return $output instanceof Failure;

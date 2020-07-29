@@ -39,7 +39,7 @@ class ConverterPhpmdJsonTest extends PHPUnit
         isSame(implode("\n", [
             '<?xml version="1.0" encoding="UTF-8"?>',
             '<testsuites>',
-            '  <testsuite name="PHPmd" failures="10">',
+            '  <testsuite name="PHPmd" tests="10" failures="10">',
             '    <testsuite name="vendor/povils/phpmnd/src/Console/Application.php" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/povils/phpmnd/src/Console/Application.php" tests="2" failures="2">',
             '      <testcase name="vendor/povils/phpmnd/src/Console/Application.php line 26" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/povils/phpmnd/src/Console/Application.php" line="26">',
             '        <failure type="UnusedFormalParameter" message="Avoid unused parameters such as \'$input\'.">',

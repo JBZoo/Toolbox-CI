@@ -71,7 +71,7 @@ class TeamCityTestsConverter extends AbstractConverter
     /**
      * @param SourceSuite $sourceSuite
      */
-    private function renderSuite(SourceSuite $sourceSuite)
+    private function renderSuite(SourceSuite $sourceSuite): void
     {
         $params = [];
         if ($sourceSuite->file) {
@@ -98,7 +98,7 @@ class TeamCityTestsConverter extends AbstractConverter
     /**
      * @param SourceCase $case
      */
-    private function renderTestCase(SourceCase $case)
+    private function renderTestCase(SourceCase $case): void
     {
         $logger = $this->tcLogger;
 

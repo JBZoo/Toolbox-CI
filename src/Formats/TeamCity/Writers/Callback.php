@@ -37,7 +37,7 @@ class Callback implements AbstractWriter
     /**
      * @param callable $callback $callback
      */
-    public function setCallback(callable $callback)
+    public function setCallback(callable $callback): void
     {
         $this->callback = $callback;
     }

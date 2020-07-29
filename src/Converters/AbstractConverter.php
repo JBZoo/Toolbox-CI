@@ -69,12 +69,12 @@ abstract class AbstractConverter
     }
 
     /**
-     * @param $origPath
-     * @return string
+     * @param string|null $origPath
+     * @return string|null
      */
-    protected function cleanFilepath($origPath): string
+    protected function cleanFilepath(?string $origPath): ?string
     {
-        if ($this->rootPath) {
+        if ($this->rootPath && $origPath) {
             return str_replace(rtrim($this->rootPath, '/') . '/', '', $origPath);
         }
 
@@ -82,11 +82,15 @@ abstract class AbstractConverter
     }
 
     /**
-     * @param string $relFilename
-     * @return string
+     * @param string|null $relFilename
+     * @return string|null
      */
-    protected function getFullPath(string $relFilename): string
+    protected function getFullPath(?string $relFilename): ?string
     {
+        if (!$relFilename) {
+            return null;
+        }
+
         if ($absFilename = realpath($relFilename)) {
             return $absFilename;
         }

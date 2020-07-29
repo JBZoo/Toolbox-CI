@@ -58,16 +58,16 @@ class AbstractNode
     public function __construct(?string $name = null)
     {
         $this->data = new Data();
-        $this->name = $name;
+        $this->name = (string)$name;
         $this->nodeName = Str::getClassName(static::class);
     }
 
     /**
-     * @param string                      $name
-     * @param array|string|float|int|null $value
+     * @param string                $name
+     * @param string|float|int|null $value
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function __set(string $name, $value)
+    public function __set(string $name, $value): void
     {
         if (!array_key_exists($name, $this->meta)) {
             throw new Exception("Undefined property \"{$name}\"");
@@ -81,7 +81,7 @@ class AbstractNode
         if ($value !== null) {
             $varType = $this->meta[$name][0] ?? 'string';
             if ($varType === 'string') {
-                $value = trim($value);
+                $value = trim((string)$value);
             } elseif ($varType === 'float') {
                 $value = float($value);
             } elseif ($varType === 'int') {
@@ -122,7 +122,7 @@ class AbstractNode
     public function __call(string $name, array $arguments)
     {
         if (strpos($name, 'set') === 0) {
-            $name = strtolower(preg_replace("#^set#", '', $name));
+            $name = strtolower((string)preg_replace("#^set#", '', $name));
             $newValue = $arguments[0] ?? null;
 
             if (array_key_exists($name, $this->meta)) {
@@ -135,7 +135,7 @@ class AbstractNode
         }
 
         if (strpos($name, 'get') === 0) {
-            $name = preg_replace("#^get#", '', $name);
+            $name = (string)preg_replace("#^get#", '', $name);
             if (array_key_exists($name, $this->meta)) {
                 return $this->{$name};
             }
