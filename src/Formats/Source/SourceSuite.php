@@ -84,7 +84,7 @@ class SourceSuite extends AbstractNode
      * @param string $testSuiteName
      * @return SourceSuite
      */
-    public function addSuite(?string $testSuiteName = null): self
+    public function addSuite(string $testSuiteName): self
     {
         if (!array_key_exists($testSuiteName, $this->suites)) {
             $testSuite = new self($testSuiteName);
@@ -148,11 +148,11 @@ class SourceSuite extends AbstractNode
         $result = 0.0;
 
         foreach ($this->suites as $suite) {
-            $result += $suite->getTime();
+            $result += (float)$suite->getTime();
         }
 
         foreach ($this->cases as $case) {
-            $result += $case->getTime();
+            $result += (float)$case->getTime();
         }
 
         return $result === 0.0 ? null : round($result, $round);
@@ -166,7 +166,7 @@ class SourceSuite extends AbstractNode
         $subResult = 0;
 
         foreach ($this->suites as $suite) {
-            $subResult += $suite->getCasesCount();
+            $subResult += (int)$suite->getCasesCount();
         }
 
         $result = count($this->cases) + $subResult;
@@ -182,11 +182,11 @@ class SourceSuite extends AbstractNode
         $result = 0;
 
         foreach ($this->suites as $suite) {
-            $result += $suite->getAssertionsCount();
+            $result += (int)$suite->getAssertionsCount();
         }
 
         foreach ($this->cases as $case) {
-            $result += $case->assertions;
+            $result += (int)$case->assertions;
         }
 
         return $result === 0 ? null : $result;
@@ -200,7 +200,7 @@ class SourceSuite extends AbstractNode
         $result = 0;
 
         foreach ($this->suites as $suite) {
-            $result += $suite->getErrorsCount();
+            $result += (int)$suite->getErrorsCount();
         }
 
         foreach ($this->cases as $case) {
@@ -218,7 +218,7 @@ class SourceSuite extends AbstractNode
         $result = 0;
 
         foreach ($this->suites as $suite) {
-            $result += $suite->getWarningCount();
+            $result += (int)$suite->getWarningCount();
         }
 
         foreach ($this->cases as $case) {
@@ -236,7 +236,7 @@ class SourceSuite extends AbstractNode
         $result = 0;
 
         foreach ($this->suites as $suite) {
-            $result += $suite->getFailureCount();
+            $result += (int)$suite->getFailureCount();
         }
 
         foreach ($this->cases as $case) {
@@ -254,7 +254,7 @@ class SourceSuite extends AbstractNode
         $result = 0;
 
         foreach ($this->suites as $suite) {
-            $result += $suite->getSkippedCount();
+            $result += (int)$suite->getSkippedCount();
         }
 
         foreach ($this->cases as $case) {

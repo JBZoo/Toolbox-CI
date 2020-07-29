@@ -28,14 +28,15 @@ class ToolsTest extends PHPUnit
 {
     public function test()
     {
-        //echo Cli::exec('make test-phpstan-tc', [], PROJECT_ROOT);
+        echo Cli::exec('make test-psalm-tc', [], PROJECT_ROOT);
         isTrue(true);
     }
 
     public function testDescAsList()
     {
         $result = Helper::descAsList([
-            ''               => 'QWERTY',
+            '0'              => 'QWERTY',
+            ''               => 'QWERTY123',
             'q'              => 123,
             'qwerty'         => 123,
             'qwe'            => 123,
@@ -45,6 +46,7 @@ class ToolsTest extends PHPUnit
         isSame(implode("\n", [
             '',
             'QWERTY',
+            'QWERTY123',
             'Q     : 123',
             'Qwerty: 123',
             'Qwe   : 123',
@@ -250,11 +252,7 @@ class ToolsTest extends PHPUnit
                                 '_node'     => 'testsuite',
                                 '_text'     => null,
                                 '_cdata'    => null,
-                                '_attrs'    => [
-                                    'name'     => 'Package #1',
-                                    'tests'    => '2',
-                                    'failures' => '1',
-                                ],
+                                '_attrs'    => ['name' => 'Package #1', 'tests' => '2', 'failures' => '1'],
                                 '_children' => [
                                     [
                                         '_node'     => 'testcase',
@@ -292,11 +290,7 @@ class ToolsTest extends PHPUnit
                                 '_node'     => 'testsuite',
                                 '_text'     => null,
                                 '_cdata'    => null,
-                                '_attrs'    => [
-                                    'name'   => 'Package #2',
-                                    'tests'  => '2',
-                                    'errors' => '1',
-                                ],
+                                '_attrs'    => ['name' => 'Package #2', 'tests' => '2', 'errors' => '1'],
                                 '_children' => [
                                     [
                                         '_node'     => 'testcase',

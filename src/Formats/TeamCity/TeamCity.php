@@ -16,6 +16,7 @@
 namespace JBZoo\ToolboxCI\Formats\TeamCity;
 
 use JBZoo\ToolboxCI\Formats\TeamCity\Writers\AbstractWriter;
+use JBZoo\Utils\Sys;
 
 /**
  * Class TeamCityLogger
@@ -48,7 +49,7 @@ class TeamCity
     public function __construct(AbstractWriter $writer, ?int $flowId = null, array $params = [])
     {
         $this->flowId = $flowId ?: null;
-        if (!$this->flowId && \stripos(\ini_get('disable_functions'), 'getmypid') === false) {
+        if (!$this->flowId && Sys::isFunc('getmypid')) {
             $this->flowId = \getmypid();
         }
 
@@ -91,7 +92,7 @@ class TeamCity
     public function write($messageName, array $parameters): void
     {
         $parameters = array_merge($parameters, [
-            'timestamp' => Util::formatTimestamp(),
+            'timestamp' => Helper::formatTimestamp(),
             'flowId'    => $this->flowId,
         ]);
 

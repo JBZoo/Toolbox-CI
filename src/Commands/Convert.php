@@ -76,8 +76,8 @@ class Convert extends Command
         $targetFormat = $this->getFormat('output-format');
 
         $result = Factory::convert($sourceCode, $sourceFormat, $targetFormat, [
-            'root_path'  => $this->input->getOption('root-path'),
-            'suite_name' => $this->input->getOption('suite-name'),
+            'root_path'  => $this->getOption('root-path'),
+            'suite_name' => $this->getOption('suite-name'),
         ]);
 
         $this->saveResult($result);
@@ -91,8 +91,7 @@ class Convert extends Command
      */
     private function getFormat(string $optionName): string
     {
-        // @phpstan-ignore-next-line
-        $format = strtolower(trim((string)$this->input->getOption($optionName)));
+        $format = strtolower(trim((string)$this->getOption($optionName)));
 
         $validFormats = Map::getAvailableFormats();
 
@@ -112,7 +111,7 @@ class Convert extends Command
     private function getSourceCode()
     {
         // @phpstan-ignore-next-line
-        if ($filename = (string)$this->input->getOption('input-file')) {
+        if ($filename = (string)$this->getOption('input-file')) {
             if (!realpath($filename) && !file_exists($filename)) {
                 throw new Exception("File \"{$filename}\" not foun");
             }
@@ -139,11 +138,25 @@ class Convert extends Command
     private function saveResult(string $result): void
     {
         // @phpstan-ignore-next-line
-        if ($filename = (string)$this->input->getOption('output-file')) {
+        if ($filename = (string)$this->getOption('output-file')) {
             file_put_contents($filename, $result);
             $this->output->writeln("Result save: {$filename}");
         } else {
             $this->output->write($result);
         }
+    }
+
+    /**
+     * @param string $optionName
+     * @return bool|string|null
+     */
+    private function getOption(string $optionName)
+    {
+        $optionValue = $this->input->getOption($optionName);
+        if (is_array($optionValue)) {
+            return $optionValue[0];
+        }
+
+        return $optionValue;
     }
 }

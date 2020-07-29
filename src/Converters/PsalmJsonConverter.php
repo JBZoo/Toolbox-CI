@@ -51,10 +51,14 @@ class PsalmJsonConverter extends AbstractConverter
         foreach ($sourceCases as $sourceCase) {
             $sourceCase = data($sourceCase);
 
-            $suite = $sourceSuite->addSuite($sourceCase['file_name']);
+            /** @var string $fileName */
+            $fileName = $sourceCase['file_name'] ?? 'Undefined';
+            $fileLine = $sourceCase['line_from'] ?? null;
+
+            $suite = $sourceSuite->addSuite($fileName);
             $suite->file = $sourceCase['file_path'];
 
-            $case = $suite->addTestCase("{$sourceCase['file_name']} line {$sourceCase['line_from']}");
+            $case = $suite->addTestCase($fileLine > 0 ? "{$fileName} line {$sourceCase['line_from']}" : $fileName);
             $case->file = $sourceCase['file_path'];
             $case->line = $sourceCase['line_from'];
             $case->class = $sourceCase['type'];
@@ -71,9 +75,9 @@ class PsalmJsonConverter extends AbstractConverter
 
     /**
      * @param Data $data
-     * @return string
+     * @return string|null
      */
-    private function getDetails(Data $data): string
+    private function getDetails(Data $data): ?string
     {
         $snippet = trim($data->get('snippet'));
 

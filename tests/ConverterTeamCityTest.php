@@ -116,6 +116,16 @@ class ConverterTeamCityTest extends PHPUnit
         isContain("timestamp='202", $converter->fromInternal($source));
     }
 
+    public function testFlowId()
+    {
+        $source = new SourceSuite('All');
+        $converter = new TeamCityTestsConverter();
+
+        $flowId = getmypid();
+        isTrue($flowId > 0);
+        isContain("flowId='{$flowId}'", $converter->fromInternal($source));
+    }
+
     public function testJUnit2()
     {
         $flowId = 159753;

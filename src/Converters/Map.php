@@ -64,7 +64,7 @@ class Map
         $drivers = array_keys(self::MAP);
         sort($drivers);
 
-        return array_map(function ($converterClass) {
+        return array_map(function (string $converterClass): string {
             return $converterClass::TYPE;
         }, $drivers);
     }
@@ -93,7 +93,7 @@ class Map
 
         $rows = [];
         foreach ($tableData as $key => $info) {
-            $rows[$key] = array_values(array_map(function ($value) {
+            $rows[$key] = array_values(array_map(function (bool $value) {
                 return $value ? 'Yes' : '-';
             }, $info));
 

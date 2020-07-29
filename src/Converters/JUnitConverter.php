@@ -74,8 +74,8 @@ class JUnitConverter extends AbstractConverter
             $this->createJUnitNodes($sourceSuite, $junitSuite);
         }
 
+        /** @var JUnitSuite $junitSuite */
         foreach ($source->getCases() as $sourceCase) {
-            // @phpstan-ignore-next-line
             $junitCase = $junitSuite->addCase($sourceCase->name);
             $junitCase->time = $sourceCase->time;
             $junitCase->class = $sourceCase->class;
@@ -157,7 +157,7 @@ class JUnitConverter extends AbstractConverter
                 if ($childNode['_node'] === 'testcase') {
                     $this->createSourceNodes($childNode, $currentSuite);
                 } else {
-                    $subSuite = $currentSuite->addSuite($attrs->get('name'));
+                    $subSuite = $currentSuite->addSuite((string)$attrs->get('name'));
                     $subSuite->file = $attrs->get('file');
                     $this->createSourceNodes($childNode, $subSuite);
                 }

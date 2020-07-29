@@ -59,6 +59,7 @@ class Xml
             $document = self::createDomDocument();
         }
 
+        /** @var \DOMElement $domElement */
         $domElement = $domElement ?? $document;
 
         if ($xmlAsArray['_text'] !== null) {
@@ -85,6 +86,7 @@ class Xml
     /**
      * @param \DOMNode|\DOMElement|\DOMDocument $element
      * @return array
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public static function dom2Array(\DOMNode $element): array
     {
@@ -96,9 +98,8 @@ class Xml
             '_children' => [],
         ];
 
-        if ($element->hasAttributes()) {
-            $attrs = $element->attributes;
-            foreach ($attrs as $attr) {
+        if ($element->attributes && $element->hasAttributes()) {
+            foreach ($element->attributes as $attr) {
                 $result['_attrs'][$attr->name] = $attr->value;
             }
         }
@@ -106,9 +107,7 @@ class Xml
         if ($element->hasChildNodes()) {
             $children = $element->childNodes;
 
-            if ($children->length === 1) {
-                $child = $children->item(0);
-
+            if ($children->length === 1 && $child = $children->item(0)) {
                 if ($child->nodeType === XML_TEXT_NODE) {
                     $result['_text'] = $child->nodeValue;
                     return $result;

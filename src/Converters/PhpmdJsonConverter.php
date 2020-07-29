@@ -69,9 +69,10 @@ class PhpmdJsonConverter extends AbstractConverter
                     $this->getDetails($violation)
                 );
 
-                if ($violation['package'] ?? null) {
-                    $case->class = $violation['package'];
-                    $case->classname = str_replace('\\', '.', $violation['package']);
+                $package = $violation['package'] ?? null;
+                if (null !== $package) {
+                    $case->class = $package;
+                    $case->classname = str_replace('\\', '.', $package);
                 }
             }
         }
@@ -81,9 +82,9 @@ class PhpmdJsonConverter extends AbstractConverter
 
     /**
      * @param Data $data
-     * @return string
+     * @return string|null
      */
-    private function getDetails(Data $data): string
+    private function getDetails(Data $data): ?string
     {
         $functionName = $data['function'] ? "{$data['function']}()" : null;
         if ($data['method']) {

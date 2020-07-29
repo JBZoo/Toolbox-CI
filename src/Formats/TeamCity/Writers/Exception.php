@@ -15,21 +15,11 @@
 
 namespace JBZoo\ToolboxCI\Formats\TeamCity\Writers;
 
-use JBZoo\Utils\Cli;
-
 /**
- * Class Stdout
- * @package JBZoo\ToolboxCI\Teamcity\Writer
+ * Class Exception
+ * @package JBZoo\ToolboxCI\Formats\TeamCity\Writers
  */
-class Stdout implements AbstractWriter
+class Exception extends \JBZoo\ToolboxCI\Formats\TeamCity\Exception
 {
-    /**
-     * @inheritDoc
-     */
-    public function write(?string $message): void
-    {
-        if (null !== $message) {
-            Cli::out($message);
-        }
-    }
+
 }

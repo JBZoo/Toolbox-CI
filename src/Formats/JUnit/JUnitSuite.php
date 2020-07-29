@@ -55,9 +55,7 @@ class JUnitSuite extends AbstractNode
     {
         $node = $document->createElement('testsuite');
 
-        if (null !== $this->name) {
-            $node->setAttribute('name', $this->name);
-        }
+        $node->setAttribute('name', $this->name);
 
         if (null !== $this->file) {
             $node->setAttribute('file', $this->file);
@@ -226,7 +224,7 @@ class JUnitSuite extends AbstractNode
         }
 
         $result += (float)array_reduce($this->testCases, function (float $acc, JUnitCase $testCase) {
-            return $acc + $testCase->getTime();
+            return $acc + (float)$testCase->getTime();
         }, 0.0);
 
         return $result;

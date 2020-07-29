@@ -54,17 +54,16 @@ class SourceCaseOutput
     }
 
     /**
-     * @param string|null $text
      * @return Data
      */
     public function parseDescription(): Data
     {
         $result = [];
 
-        $text = $this->details;
+        $text = (string)$this->details;
         $result['description'] = $text;
 
-        $lines = explode("\n", $text);
+        $lines = (array)explode("\n", $text);
         if (array_key_exists(1, $lines)) {
             $result['message'] = $lines[1];
             unset($lines[0], $lines[1]);

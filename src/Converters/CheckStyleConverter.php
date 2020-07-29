@@ -85,9 +85,9 @@ class CheckStyleConverter extends AbstractConverter
 
     /**
      * @param Data $data
-     * @return string
+     * @return string|null
      */
-    private function getDetails(Data $data): string
+    private function getDetails(Data $data): ?string
     {
         return Helper::descAsList([
             ''          => $data->get('message'),

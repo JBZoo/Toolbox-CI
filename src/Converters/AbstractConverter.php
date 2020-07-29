@@ -69,10 +69,10 @@ abstract class AbstractConverter
     }
 
     /**
-     * @param string|null $origPath
-     * @return string|null
+     * @param string $origPath
+     * @return string
      */
-    protected function cleanFilepath(?string $origPath): ?string
+    protected function cleanFilepath(string $origPath): string
     {
         if ($this->rootPath && $origPath) {
             return str_replace(rtrim($this->rootPath, '/') . '/', '', $origPath);

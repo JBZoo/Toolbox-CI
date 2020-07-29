@@ -24,7 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class SymfonyConsole implements AbstractWriter
 {
     /**
-     * @var OutputInterface
+     * @var OutputInterface|null
      */
     private $output;
 
@@ -33,7 +33,13 @@ class SymfonyConsole implements AbstractWriter
      */
     public function write(?string $message): void
     {
-        $this->output->writeln($message);
+        if (null === $this->output) {
+            throw new Exception('Symfony OutputInterface endpoint is not set');
+        }
+
+        if (null !== $message) {
+            $this->output->writeln($message);
+        }
     }
 
     /**

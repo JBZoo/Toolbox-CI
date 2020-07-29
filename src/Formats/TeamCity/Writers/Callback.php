@@ -22,7 +22,7 @@ namespace JBZoo\ToolboxCI\Formats\TeamCity\Writers;
 class Callback implements AbstractWriter
 {
     /**
-     * @var callable
+     * @var callable|null
      */
     private $callback;
 
@@ -31,6 +31,9 @@ class Callback implements AbstractWriter
      */
     public function write(?string $message): void
     {
+        if (null === $this->callback) {
+            throw new Exception('Callback function is not set');
+        }
         call_user_func($this->callback, $message);
     }
 
