@@ -110,7 +110,6 @@ class Convert extends Command
      */
     private function getSourceCode()
     {
-        // @phpstan-ignore-next-line
         if ($filename = (string)$this->getOption('input-file')) {
             if (!realpath($filename) && !file_exists($filename)) {
                 throw new Exception("File \"{$filename}\" not foun");
@@ -137,7 +136,6 @@ class Convert extends Command
      */
     private function saveResult(string $result): void
     {
-        // @phpstan-ignore-next-line
         if ($filename = (string)$this->getOption('output-file')) {
             file_put_contents($filename, $result);
             $this->output->writeln("Result save: {$filename}");

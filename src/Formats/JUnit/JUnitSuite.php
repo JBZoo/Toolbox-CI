@@ -50,6 +50,9 @@ class JUnitSuite extends AbstractNode
      * @return \DOMNode
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @phan-suppress PhanPossiblyNonClassMethodCall
+     * @phan-suppress PhanPluginSuspiciousParamPositionInternal
+     * @phan-suppress PhanPossiblyFalseTypeReturn
      */
     public function toXML(\DOMDocument $document): \DOMNode
     {
@@ -133,7 +136,7 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getAssertionsCount();
         }
 
-        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+        $result += (int)array_reduce($this->testCases, static function (int $acc, JUnitCase $testCase) {
             return $acc + $testCase->getAssertionsCount();
         }, 0);
 
@@ -151,7 +154,7 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getErrorsCount();
         }
 
-        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+        $result += (int)array_reduce($this->testCases, static function (int $acc, JUnitCase $testCase) {
             return $acc + $testCase->getErrorsCount();
         }, 0);
 
@@ -169,7 +172,7 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getWarningsCount();
         }
 
-        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+        $result += (int)array_reduce($this->testCases, static function (int $acc, JUnitCase $testCase) {
             return $acc + $testCase->getWarningsCount();
         }, 0);
 
@@ -187,7 +190,7 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getFailuresCount();
         }
 
-        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+        $result += (int)array_reduce($this->testCases, static function (int $acc, JUnitCase $testCase) {
             return $acc + $testCase->getFailuresCount();
         }, 0);
 
@@ -205,7 +208,7 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getSkippedCount();
         }
 
-        $result += (int)array_reduce($this->testCases, function (int $acc, JUnitCase $testCase) {
+        $result += (int)array_reduce($this->testCases, static function (int $acc, JUnitCase $testCase) {
             return $acc + $testCase->getSkippedCount();
         }, 0);
 
@@ -223,7 +226,7 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getTime();
         }
 
-        $result += (float)array_reduce($this->testCases, function (float $acc, JUnitCase $testCase) {
+        $result += (float)array_reduce($this->testCases, static function (float $acc, JUnitCase $testCase) {
             return $acc + (float)$testCase->getTime();
         }, 0.0);
 

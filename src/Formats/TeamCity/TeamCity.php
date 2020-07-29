@@ -48,9 +48,11 @@ class TeamCity
      */
     public function __construct(AbstractWriter $writer, ?int $flowId = null, array $params = [])
     {
-        $this->flowId = $flowId ?: null;
-        if (!$this->flowId && Sys::isFunc('getmypid')) {
-            $this->flowId = \getmypid();
+        $flowId = (int)$flowId ?: null;
+        if (null === $flowId && Sys::isFunc('getmypid')) {
+            $this->flowId = (int)\getmypid() ?: null;
+        } else {
+            $this->flowId = $flowId;
         }
 
         $this->writer = $writer;
@@ -62,7 +64,7 @@ class TeamCity
      *
      * @return AbstractWriter The writer instance.
      */
-    public function getWriter()
+    public function getWriter(): AbstractWriter
     {
         return $this->writer;
     }
@@ -80,7 +82,7 @@ class TeamCity
      * @param string $name The test suite name.
      * @param array  $params
      */
-    public function testSuiteFinished($name, array $params = []): void
+    public function testSuiteFinished(string $name, array $params = []): void
     {
         $this->write('testSuiteFinished', array_merge(['name' => $name], $params));
     }
@@ -89,7 +91,7 @@ class TeamCity
      * @param string $messageName
      * @param array  $parameters Parameters with value === `null` will be filtered out.
      */
-    public function write($messageName, array $parameters): void
+    public function write(string $messageName, array $parameters): void
     {
         $parameters = array_merge($parameters, [
             'timestamp' => Helper::formatTimestamp(),
@@ -101,7 +103,7 @@ class TeamCity
         }
 
         // Filter out optional parameters.
-        $parameters = array_filter($parameters, function ($value) {
+        $parameters = array_filter($parameters, static function ($value) {
             return $value !== null && $value !== '' && $value !== ' ';
         });
 
@@ -118,10 +120,10 @@ class TeamCity
     }
 
     /**
-     * @param string $name     The test name.
-     * @param float  $duration The test duration in seconds.
+     * @param string     $name     The test name.
+     * @param float|null $duration The test duration in seconds.
      */
-    public function testFinished($name, ?float $duration = null): void
+    public function testFinished(string $name, ?float $duration = null): void
     {
         $this->write('testFinished', [
             'name'     => $name,

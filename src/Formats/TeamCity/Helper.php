@@ -61,13 +61,13 @@ class Helper
     }
 
     /**
-     * @param \DateTime $date Either date with timestamp or `NULL` for now.
+     * @param \DateTime|null $datetime Either date with timestamp or `NULL` for now.
      * @return string
      */
-    public static function formatTimestamp($date = null)
+    public static function formatTimestamp(?\DateTime $datetime = null): string
     {
-        $date = $date ?? new \DateTime();
-        $formatted = $date->format(self::TIMESTAMP_FORMAT);
+        $datetime = $datetime ?? new \DateTime();
+        $formatted = $datetime->format(self::TIMESTAMP_FORMAT);
 
         // We need to pass only 3 microsecond digits.
         // 2000-01-01T12:34:56.123450+0100 <- before
@@ -96,7 +96,7 @@ class Helper
 
         return preg_replace_callback(
             '/([\'\n\r|[\]])|\\\\u(\d{4})/',
-            function (array $matches) use ($escapeCharacterMap) {
+            static function (array $matches) use ($escapeCharacterMap) {
                 if ($matches[1]) {
                     return $escapeCharacterMap[$matches[1]];
                 }

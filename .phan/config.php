@@ -20,7 +20,7 @@ return array_merge($default, [
         'src',
 
         'vendor/jbzoo/data/src',
-        'vendor/jbzoo/data/utils/src',
+        'vendor/jbzoo/utils/src',
         'vendor/symfony/console',
     ]
 ]);

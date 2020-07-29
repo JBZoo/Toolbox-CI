@@ -121,9 +121,18 @@ class JUnitCase extends AbstractNode
         return $this;
     }
 
+    /**
+     * @param \DOMDocument $document
+     * @return \DOMNode
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @phan-suppress PhanPossiblyNonClassMethodCall
+     * @phan-suppress PhanPluginSuspiciousParamPositionInternal
+     * @phan-suppress PhanPossiblyFalseTypeReturn
+     */
     public function toXML(\DOMDocument $document): \DOMNode
     {
         $node = $document->createElement('testcase');
+
         $node->setAttribute('name', $this->name);
 
         if (null !== $this->class) {
@@ -178,7 +187,7 @@ class JUnitCase extends AbstractNode
      */
     public function getErrorsCount(): int
     {
-        return count(array_filter($this->outputs, function (AbstractOutput $output) {
+        return count(array_filter($this->outputs, static function (AbstractOutput $output) {
             return $output instanceof Error;
         }));
     }
@@ -188,7 +197,7 @@ class JUnitCase extends AbstractNode
      */
     public function getWarningsCount(): int
     {
-        return count(array_filter($this->outputs, function (AbstractOutput $output) {
+        return count(array_filter($this->outputs, static function (AbstractOutput $output) {
             return $output instanceof Warning;
         }));
     }
@@ -198,7 +207,7 @@ class JUnitCase extends AbstractNode
      */
     public function getFailuresCount(): int
     {
-        return count(array_filter($this->outputs, function (AbstractOutput $output) {
+        return count(array_filter($this->outputs, static function (AbstractOutput $output) {
             return $output instanceof Failure;
         }));
     }
@@ -208,7 +217,7 @@ class JUnitCase extends AbstractNode
      */
     public function getSkippedCount(): int
     {
-        return count(array_filter($this->outputs, function (AbstractOutput $output) {
+        return count(array_filter($this->outputs, static function (AbstractOutput $output) {
             return $output instanceof Skipped;
         }));
     }

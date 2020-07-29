@@ -28,7 +28,7 @@ class ToolsTest extends PHPUnit
 {
     public function test()
     {
-        echo Cli::exec('make test-phan-tc', [], PROJECT_ROOT);
+        echo Cli::exec('make codestyle-teamcity', [], PROJECT_ROOT);
         isTrue(true);
     }
 

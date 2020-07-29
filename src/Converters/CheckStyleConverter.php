@@ -84,8 +84,7 @@ class CheckStyleConverter extends AbstractConverter
         return Helper::descAsList([
             ''          => htmlspecialchars_decode($data->get('message')),
             'Rule'      => $data->get('source'),
-            'File Path' => self::getFilePoint($data->get('full_path'), $data->get('line'),
-                $data->get('column')),
+            'File Path' => self::getFilePoint($data->get('full_path'), $data->get('line'), $data->get('column')),
             'Severity'  => $data->get('severity'),
         ]);
     }

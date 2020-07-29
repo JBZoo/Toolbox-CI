@@ -59,7 +59,7 @@ class SourceSuite extends AbstractNode
     /**
      * @return SourceSuite[]
      */
-    public function getSuites()
+    public function getSuites(): array
     {
         return $this->suites;
     }
@@ -67,7 +67,7 @@ class SourceSuite extends AbstractNode
     /**
      * @return SourceCase[]
      */
-    public function getCases()
+    public function getCases(): array
     {
         return $this->cases;
     }
@@ -118,7 +118,7 @@ class SourceSuite extends AbstractNode
             'warnings'   => $this->getWarningCount(),
             'failure'    => $this->getFailureCount(),
             'skipped'    => $this->getSkippedCount(),
-        ]), function ($value) {
+        ]), static function ($value) {
             return $value !== null;
         });
 
@@ -141,7 +141,7 @@ class SourceSuite extends AbstractNode
 
     /**
      * @param int $round
-     * @return float
+     * @return float|null
      */
     public function getTime(int $round = 6): ?float
     {
@@ -159,7 +159,7 @@ class SourceSuite extends AbstractNode
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getCasesCount(): ?int
     {
@@ -175,7 +175,7 @@ class SourceSuite extends AbstractNode
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getAssertionsCount(): ?int
     {
@@ -193,7 +193,7 @@ class SourceSuite extends AbstractNode
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getErrorsCount(): ?int
     {
@@ -211,7 +211,7 @@ class SourceSuite extends AbstractNode
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getWarningCount(): ?int
     {
@@ -229,7 +229,7 @@ class SourceSuite extends AbstractNode
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFailureCount(): ?int
     {
@@ -247,7 +247,7 @@ class SourceSuite extends AbstractNode
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getSkippedCount(): ?int
     {

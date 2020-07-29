@@ -77,6 +77,8 @@ abstract class AbstractOutput
     /**
      * @param \DOMDocument $document
      * @return \DOMNode
+     * @phan-suppress PhanPossiblyNonClassMethodCall
+     * @phan-suppress PhanPossiblyFalseTypeReturn
      */
     public function toXML(\DOMDocument $document): \DOMNode
     {

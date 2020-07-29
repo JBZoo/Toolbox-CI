@@ -25,7 +25,7 @@ class Xml
     public const ENCODING = 'UTF-8';
 
     /**
-     * @param string $source
+     * @param string|null $source
      * @return \DOMDocument
      */
     public static function createDomDocument(?string $source = null): \DOMDocument
@@ -59,7 +59,6 @@ class Xml
             $document = self::createDomDocument();
         }
 
-        /** @var \DOMElement $domElement */
         $domElement = $domElement ?? $document;
 
         if ($xmlAsArray['_text'] !== null) {
@@ -70,13 +69,17 @@ class Xml
             $domElement->appendChild($document->createCDATASection($xmlAsArray['_cdata']));
         }
 
-        foreach ($xmlAsArray['_attrs'] as $name => $value) {
-            $domElement->setAttribute($name, $value);
+        if ($domElement instanceof \DOMElement) {
+            foreach ($xmlAsArray['_attrs'] as $name => $value) {
+                $domElement->setAttribute($name, $value);
+            }
         }
 
         foreach ($xmlAsArray['_children'] as $mixedElement) {
             $node = $document->createElement($mixedElement['_node']);
             $domElement->appendChild($node);
+
+            /** @phan-suppress-next-line PhanPossiblyFalseTypeArgument */
             self::array2Dom($mixedElement, $node, $document);
         }
 

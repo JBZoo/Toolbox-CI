@@ -41,6 +41,7 @@ class JUnit
 
     /**
      * @return \DOMDocument
+     * @phan-suppress PhanPossiblyNonClassMethodCall
      */
     public function getDom(): \DOMDocument
     {

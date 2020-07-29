@@ -120,10 +120,18 @@ class ConverterTeamCityTest extends PHPUnit
     {
         $source = new SourceSuite('All');
         $converter = new TeamCityTestsConverter();
-
         $flowId = getmypid();
         isTrue($flowId > 0);
         isContain("flowId='{$flowId}'", $converter->fromInternal($source));
+
+
+        $source = new SourceSuite('All');
+        $converter = new TeamCityTestsConverter(['show-datetime' => true], 1);
+        isContain("flowId='1'", $converter->fromInternal($source));
+
+        $source = new SourceSuite('All');
+        $converter = new TeamCityTestsConverter(['show-datetime' => true], 0);
+        isNotContain("flowId='0'", $converter->fromInternal($source));
     }
 
     public function testJUnit2()

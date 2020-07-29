@@ -27,7 +27,8 @@ class Helper
      */
     public static function descAsList(array $data): ?string
     {
-        $maxWidth = array_reduce(array_keys($data), function (int $acc, string $key) use ($data): int {
+        /** @psalm-suppress MissingClosureParamType */
+        $maxWidth = array_reduce(array_keys($data), static function ($acc, $key) use ($data): int {
             if ('' === trim($data[$key])) {
                 return $acc;
             }

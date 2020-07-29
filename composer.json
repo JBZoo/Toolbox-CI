@@ -15,7 +15,8 @@
     "require"           : {
         "php"             : "^7.2",
         "ext-dom"         : "*",
-
+        "jbzoo/data"      : "^4.0.1",
+        "jbzoo/utils"     : "^4.1.2",
         "symfony/console" : "^4.4||^5.0"
     },
 

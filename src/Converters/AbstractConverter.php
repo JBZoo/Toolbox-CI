@@ -40,6 +40,7 @@ abstract class AbstractConverter
      * @param string $source
      * @return SourceSuite
      * @phan-suppress PhanUnusedPublicMethodParameter
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function toInternal(string $source): SourceSuite
     {
@@ -50,6 +51,7 @@ abstract class AbstractConverter
      * @param SourceSuite $sourceSuite
      * @return string
      * @phan-suppress PhanUnusedPublicMethodParameter
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function fromInternal(SourceSuite $sourceSuite): string
     {
