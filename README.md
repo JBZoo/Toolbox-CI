@@ -11,6 +11,33 @@
 composer require jbzoo/toolbox-ci
 ```
 
+### Usage
+
+```
+$ php ./vendor/bin/toolbox-ci convert --help
+Description:
+  Convert one report format to another
+
+Usage:
+  convert [options]
+
+Options:
+  -S, --input-format=INPUT-FORMAT    Source format. Available options: checkstyle,junit,phpmd-json,psalm-json,tc-tests
+  -T, --output-format=OUTPUT-FORMAT  Target format. Available options: checkstyle,junit,phpmd-json,psalm-json,tc-tests
+  -N, --suite-name=SUITE-NAME        Set name of root suite
+  -R, --root-path[=ROOT-PATH]        If option is set all absolute file paths will be converted to relative
+  -I, --input-file[=INPUT-FILE]      Use CLI input (STDIN, pipeline) OR use the option to define filename of source report
+  -O, --output-file[=OUTPUT-FILE]    Use CLI output (STDOUT, pipeline) OR use the option to define filename with result
+  -h, --help                         Display this help message
+  -q, --quiet                        Do not output any message
+  -V, --version                      Display this application version
+      --ansi                         Force ANSI output
+      --no-ansi                      Disable ANSI output
+  -n, --no-interaction               Do not ask any interactive question
+  -v|vv|vvv, --verbose               Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+```
+
 
 ### Available directions
 
