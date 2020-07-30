@@ -29,8 +29,8 @@ class ToolsTest extends PHPUnit
 {
     public function testCodesStyle()
     {
-        if (!Env::bool('TEAMCITY_VERSION')) {
-            echo Cli::exec('make codestyle-teamcity', [], PROJECT_ROOT);
+        if (!Env::bool('TEAMCITY_VERSION') && Env::isExists('IDE_PHPUNIT_CUSTOM_LOADER')) {
+            echo Cli::exec('TEAMCITY_VERSION="2020.1.2 (build 78726)" make codestyle', [], PROJECT_ROOT);
             success();
         } else {
             skip("It's disabled in TeamCity");
