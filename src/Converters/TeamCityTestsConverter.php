@@ -78,7 +78,7 @@ class TeamCityTestsConverter extends AbstractConverter
         }
 
         foreach ($sourceSuite->getCases() as $case) {
-            $this->renderTestCase($case);
+            $this->renderTestCase($case, $sourceSuite->name);
         }
 
         foreach ($sourceSuite->getSuites() as $suite) {
@@ -92,8 +92,9 @@ class TeamCityTestsConverter extends AbstractConverter
 
     /**
      * @param SourceCase $case
+     * @param string     $suiteName
      */
-    private function renderTestCase(SourceCase $case): void
+    private function renderTestCase(SourceCase $case, string $suiteName): void
     {
         $logger = $this->tcLogger;
 
@@ -111,16 +112,22 @@ class TeamCityTestsConverter extends AbstractConverter
         } elseif ($warningOutput = $case->warning) {
             $logger->write('inspectionType', [
                 'id'          => 'FoundCustomWarnings',
-                'name'        => 'Name',
-                'category'    => 'Warning',
-                'description' => 'Description',
+                'name'        => $suiteName,
+                'category'    => 'Coding Standards',
+                'description' => 'Errors found while checking coding standards',
             ]);
             $logger->write('inspection', [
                 'typeId'   => 'FoundCustomWarnings',
-                'message'  => $case->name . "\n" . $warningOutput->message . "\n" . $warningOutput->details,
-                'file'     => $case->file,
+                'file'     => $this->cleanFilepath($case->file),
                 'line'     => $case->line,
+                'message'  => implode("\n", array_unique(array_filter([
+                    $case->name,
+                    $warningOutput->message,
+                    $warningOutput->details
+                ]))),
+                // Custom props
                 'SEVERITY' => 'WARNING',
+                'TOOL'     => 'JBZoo/Toolbox-CI',
             ]);
         } else {
             $failureObject = $case->failure ?? $case->error;
