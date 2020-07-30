@@ -24,6 +24,16 @@ use JBZoo\Utils\Sys;
  */
 class TeamCity
 {
+    public const SEVERITY_INFO         = 'INFO';
+    public const SEVERITY_ERROR        = 'ERROR';
+    public const SEVERITY_WARNING      = 'WARNING';
+    public const SEVERITY_WARNING_WEAK = 'WEAK WARNING';
+
+    public const DEFAULT_INSPECTION_ID       = 'CodingStandardIssues';
+    public const DEFAULT_INSPECTION_NAME     = 'Coding Standard Issues';
+    public const DEFAULT_INSPECTION_CATEGORY = 'Coding Standard';
+    public const DEFAULT_INSPECTION_DESC     = 'Issues found while checking coding standards';
+
     /**
      * @var int|null
      */
@@ -40,6 +50,11 @@ class TeamCity
     private $params = [
         'show-datetime' => true
     ];
+
+    /**
+     * @var array
+     */
+    private $inspectionTypes = [];
 
     /**
      * @param AbstractWriter $writer The writer used to write messages.
@@ -172,6 +187,64 @@ class TeamCity
             'message'  => $message,
             'details'  => $details,
             'duration' => $duration > 0 ? round($duration * 1000) : null,
+        ]);
+    }
+
+    /**
+     * @param string      $inspectionId
+     * @param string|null $name
+     * @param string|null $category
+     * @param string|null $description
+     */
+    public function addInspectionType(
+        string $inspectionId,
+        ?string $name = null,
+        ?string $category = null,
+        ?string $description = null
+    ): void {
+        $cleanInspectionId = trim($inspectionId);
+        if (!$cleanInspectionId) {
+            throw new Exception("Inspection Id can't be empty");
+        }
+
+        if (!in_array($inspectionId, $this->inspectionTypes, true)) {
+            $this->write('inspectionType', [
+                'id'          => $cleanInspectionId,
+                'name'        => $name ?: self::DEFAULT_INSPECTION_NAME,
+                'category'    => $category ?: self::DEFAULT_INSPECTION_CATEGORY,
+                'description' => $description ?: self::DEFAULT_INSPECTION_DESC,
+            ]);
+
+            $this->inspectionTypes[] = $inspectionId;
+        }
+    }
+
+    public function addDefaultInspectionType(): void
+    {
+        $this->addInspectionType(self::DEFAULT_INSPECTION_ID);
+    }
+
+    /**
+     * @param string      $typeId
+     * @param string|null $filename
+     * @param int|null    $line
+     * @param string      $message
+     * @param string      $severity
+     */
+    public function addInspectionIssue(
+        string $typeId,
+        ?string $filename,
+        ?int $line,
+        string $message,
+        string $severity = self::SEVERITY_WARNING
+    ): void {
+        $this->write('inspection', [
+            'typeId'   => $typeId,
+            'file'     => $filename ?: 'Undefined file',
+            'line'     => $line ?: 0,
+            'message'  => $message,
+            // Custom props
+            'SEVERITY' => $severity,
         ]);
     }
 }

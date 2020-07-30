@@ -29,8 +29,6 @@ class ToolsTest extends PHPUnit
 {
     public function testCodesStyle()
     {
-        skip("It's example");
-
         if (!Env::bool('TEAMCITY_VERSION')) {
             echo Cli::exec('make codestyle-teamcity', [], PROJECT_ROOT);
             success();

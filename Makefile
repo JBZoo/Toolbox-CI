@@ -24,6 +24,7 @@ update: ##@Project Install/Update all 3rd party dependencies
 
 
 test-all: ##@Project Run all project tests at once
+	@ln -sf `pwd`/toolbox-ci `pwd`/vendor/bin/toolbox-ci
 	@make test
 	@make codestyle
 
