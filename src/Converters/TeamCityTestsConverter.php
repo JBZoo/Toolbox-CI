@@ -110,21 +110,23 @@ class TeamCityTestsConverter extends AbstractConverter
         if ($skippedOutput = $case->skipped) {
             $logger->testSkipped($case->name, $skippedOutput->message, $skippedOutput->details, $case->time);
         } elseif ($warningOutput = $case->warning) {
+            $messageData = $warningOutput->parseDescription();
             $logger->write('inspectionType', [
-                'id'          => 'FoundCustomWarnings',
-                'name'        => $suiteName,
-                'category'    => 'Coding Standards',
-                'description' => 'Errors found while checking coding standards',
+                'id'          => 'CodingStandardIssues',
+                'name'        => 'Coding Standard Issues',
+                'category'    => 'Coding Standard',
+                'description' => 'Issues found while checking coding standards',
             ]);
             $logger->write('inspection', [
-                'typeId'   => 'FoundCustomWarnings',
+                'typeId'   => 'CodingStandardIssues',
                 'file'     => $this->cleanFilepath($case->file),
                 'line'     => $case->line,
-                'message'  => implode("\n", array_unique(array_filter([
-                    $case->name,
-                    $warningOutput->message,
-                    $warningOutput->details
-                ]))),
+                'message'  => trim(implode("\n", array_unique(array_filter([
+                    str_repeat('-', 80),
+                    "{$suiteName} / {$case->name}",
+                    $messageData->get('message') ?? $params['message'] ?: null,
+                    '<pre>' . ($messageData->get('description') ?? $params['details']) . '</pre>'
+                ])))),
                 // Custom props
                 'SEVERITY' => 'WARNING',
                 'TOOL'     => 'JBZoo/Toolbox-CI',
