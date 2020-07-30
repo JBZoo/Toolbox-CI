@@ -110,10 +110,11 @@ class TeamCityTestsConverter extends AbstractConverter
             $logger->testSkipped($case->name, $skippedOutput->message, $skippedOutput->details, $case->time);
         } elseif ($warningOutput = $case->warning) {
             $messageData = $warningOutput->parseDescription();
-            $logger->write('message', [
-                'text'         => $messageData->get('message') ?? $params['message'],
-                'errorDetails' => $messageData->get('description') ?? $params['details'],
-                'status'       => 'WARNING',
+            $logger->write('inspectionType', [
+                'id'          => $case->name,
+                'name'        => $messageData->get('message') ?: $params['message'] ?? 'name',
+                'category'    => 'Warning',
+                'description' => $messageData->get('description') ?: $params['details'] ?? 'description',
             ]);
         } else {
             $failureObject = $case->failure ?? $case->error;
