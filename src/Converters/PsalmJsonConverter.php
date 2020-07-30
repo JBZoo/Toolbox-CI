@@ -55,11 +55,18 @@ class PsalmJsonConverter extends AbstractConverter
             $case->line = $sourceCase['line_from'];
             $case->class = $sourceCase['type'];
             $case->classname = $sourceCase['type'];
-            $case->failure = new SourceCaseOutput(
+
+            $caseOutput = new SourceCaseOutput(
                 $sourceCase['type'],
                 $sourceCase['message'],
                 self::getDetails($sourceCase)
             );
+
+            if ($sourceCase['error_level'] <= 0) {
+                $case->warning = $caseOutput;
+            } else {
+                $case->failure = $caseOutput;
+            }
         }
 
         return $sourceSuite;

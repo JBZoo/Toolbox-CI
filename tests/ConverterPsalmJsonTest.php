@@ -15,7 +15,9 @@
 
 namespace JBZoo\PHPUnit;
 
+use JBZoo\ToolboxCI\Converters\JUnitConverter;
 use JBZoo\ToolboxCI\Converters\PsalmJsonConverter;
+use JBZoo\ToolboxCI\Converters\TeamCityTestsConverter;
 
 /**
  * Class ConverterPsalmJsonTest
@@ -29,10 +31,11 @@ class ConverterPsalmJsonTest extends PHPUnit
             ->toInternal(file_get_contents(Fixtures::PSALM_JSON));
 
         isSame([
-            "_node"   => "SourceSuite",
-            "name"    => "Psalm",
-            "tests"   => 26,
-            "failure" => 26
+            "_node"    => "SourceSuite",
+            "name"     => "Psalm",
+            'tests'    => 3,
+            'warnings' => 2,
+            'failure'  => 1
         ], $actual->toArray()['data']);
 
         isSame([
@@ -56,5 +59,87 @@ Error Level: 2
 ',
             ],
         ], $actual->toArray()['suites'][0]['cases'][0]);
+    }
+
+    public function testConvertToJUnit()
+    {
+        $actual = (new PsalmJsonConverter())
+            ->toInternal(file_get_contents(Fixtures::PSALM_JSON));
+
+        $junit = (new JUnitConverter())->fromInternal($actual);
+
+        isSame(implode("\n", [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<testsuites>',
+            '  <testsuite name="Psalm" tests="3" warnings="2" failures="1">',
+            '    <testsuite name="src/JUnit/TestCaseElement.php" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php" tests="2" warnings="1" failures="1">',
+            '      <testcase name="src/JUnit/TestCaseElement.php line 34" class="MissingReturnType" classname="MissingReturnType" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php" line="34">',
+            '        <failure type="MissingReturnType" message="Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setName does not have a return type, expecting void">',
+            'Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setName does not have a return type, expecting void',
+            'Rule       : MissingReturnType',
+            'File Path  : /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php:34',
+            'Snippet    : `public function setName($name)`',
+            'Docs       : https://psalm.dev/050',
+            'Severity   : error',
+            'Error Level: 2',
+            '</failure>',
+            '      </testcase>',
+            '      <testcase name="src/JUnit/TestCaseElement.php line 42" class="MissingReturnType" classname="MissingReturnType" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php" line="42">',
+            '        <warning type="MissingReturnType" message="Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setClassname does not have a return type, expecting void">',
+            'Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setClassname does not have a return type, expecting void',
+            'Rule       : MissingReturnType',
+            'File Path  : /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php:42',
+            'Snippet    : `public function setClassname($classname)`',
+            'Docs       : https://psalm.dev/050',
+            'Severity   : info',
+            'Error Level: -1',
+            '</warning>',
+            '      </testcase>',
+            '    </testsuite>',
+            '    <testsuite name="src/JUnit/TestCaseElementSuppress.php" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElementSuppress.php" tests="1" warnings="1">',
+            '      <testcase name="src/JUnit/TestCaseElementSuppress.php line 42" class="MissingReturnType" classname="MissingReturnType" file="/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElementSuppress.php" line="42">',
+            '        <warning type="MissingReturnType" message="Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setClassname does not have a return type, expecting void">',
+            'Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setClassname does not have a return type, expecting void',
+            'Rule       : MissingReturnType',
+            'File Path  : /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElementSuppress.php:42',
+            'Snippet    : `public function setClassname($classname)`',
+            'Docs       : https://psalm.dev/050',
+            'Severity   : suppress',
+            'Error Level: -2',
+            '</warning>',
+            '      </testcase>',
+            '    </testsuite>',
+            '  </testsuite>',
+            '</testsuites>',
+            '',
+        ]), $junit);
+    }
+
+    public function testConvertToTeamCity()
+    {
+        $actual = (new PsalmJsonConverter())
+            ->toInternal(file_get_contents(Fixtures::PSALM_JSON));
+
+        $junit = (new TeamCityTestsConverter(['show-datetime' => false], 76978))->fromInternal($actual);
+
+        isSame(implode("", [
+            "\n##teamcity[testCount count='3' flowId='76978']\n",
+            "\n##teamcity[testSuiteStarted name='Psalm' flowId='76978']\n",
+            "\n##teamcity[testSuiteStarted name='src/JUnit/TestCaseElement.php' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php::\src/JUnit/TestCaseElement.php' flowId='76978']\n",
+            "\n##teamcity[testStarted name='src/JUnit/TestCaseElement.php line 34' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php::\MissingReturnType::src/JUnit/TestCaseElement.php line 34' flowId='76978']\n",
+            "\n##teamcity[testFailed name='src/JUnit/TestCaseElement.php line 34' message='Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setName does not have a return type, expecting void' details=' Rule       : MissingReturnType|n File Path  : /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php:34|n Snippet    : `public function setName(\$name)`|n Docs       : https://psalm.dev/050|n Severity   : error|n Error Level: 2|n ' flowId='76978']\n",
+            "\n##teamcity[testFinished name='src/JUnit/TestCaseElement.php line 34' flowId='76978']\n",
+            "\n##teamcity[testStarted name='src/JUnit/TestCaseElement.php line 42' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php::\MissingReturnType::src/JUnit/TestCaseElement.php line 42' flowId='76978']\n",
+            "\n##teamcity[message text='Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setClassname does not have a return type, expecting void' errorDetails=' Rule       : MissingReturnType|n File Path  : /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElement.php:42|n Snippet    : `public function setClassname(\$classname)`|n Docs       : https://psalm.dev/050|n Severity   : info|n Error Level: -1|n ' status='WARNING' flowId='76978']\n",
+            "\n##teamcity[testFinished name='src/JUnit/TestCaseElement.php line 42' flowId='76978']\n",
+            "\n##teamcity[testSuiteFinished name='src/JUnit/TestCaseElement.php' flowId='76978']\n",
+            "\n##teamcity[testSuiteStarted name='src/JUnit/TestCaseElementSuppress.php' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElementSuppress.php::\src/JUnit/TestCaseElementSuppress.php' flowId='76978']\n",
+            "\n##teamcity[testStarted name='src/JUnit/TestCaseElementSuppress.php line 42' locationHint='php_qn:///Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElementSuppress.php::\MissingReturnType::src/JUnit/TestCaseElementSuppress.php line 42' flowId='76978']\n",
+            "\n##teamcity[message text='Method JBZoo\ToolboxCI\JUnit\TestCaseElement::setClassname does not have a return type, expecting void' errorDetails=' Rule       : MissingReturnType|n File Path  : /Users/smetdenis/Work/projects/jbzoo-toolbox-ci/src/JUnit/TestCaseElementSuppress.php:42|n Snippet    : `public function setClassname(\$classname)`|n Docs       : https://psalm.dev/050|n Severity   : suppress|n Error Level: -2|n ' status='WARNING' flowId='76978']\n",
+            "\n##teamcity[testFinished name='src/JUnit/TestCaseElementSuppress.php line 42' flowId='76978']\n",
+            "\n##teamcity[testSuiteFinished name='src/JUnit/TestCaseElementSuppress.php' flowId='76978']\n",
+            "\n##teamcity[testSuiteFinished name='Psalm' flowId='76978']\n",
+            '',
+        ]), $junit);
     }
 }
