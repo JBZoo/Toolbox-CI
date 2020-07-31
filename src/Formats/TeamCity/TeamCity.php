@@ -25,9 +25,9 @@ use JBZoo\Utils\Sys;
 class TeamCity
 {
     public const SEVERITY_INFO         = 'INFO';
-    public const SEVERITY_ERROR        = 'ERROR';
-    public const SEVERITY_WARNING      = 'WARNING';
     public const SEVERITY_WARNING_WEAK = 'WEAK WARNING';
+    public const SEVERITY_WARNING      = 'WARNING';
+    public const SEVERITY_ERROR        = 'ERROR';
 
     public const DEFAULT_INSPECTION_ID       = 'CodingStandardIssues';
     public const DEFAULT_INSPECTION_NAME     = 'Coding Standard Issues';
