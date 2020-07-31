@@ -13,15 +13,16 @@
     ],
 
     "require"           : {
-        "php"             : "^7.2",
+        "php"             : ">=7.2",
         "ext-dom"         : "*",
-        "jbzoo/data"      : "^4.0.1",
-        "jbzoo/utils"     : "^4.1.2",
+
+        "jbzoo/data"      : "^4.0.2",
+        "jbzoo/utils"     : "^4.2.1",
         "symfony/console" : "^4.4||^5.0"
     },
 
     "require-dev"       : {
-        "jbzoo/toolbox-dev" : "^2.3.2"
+        "jbzoo/toolbox-dev" : "^2.4.1"
     },
 
     "autoload"          : {
