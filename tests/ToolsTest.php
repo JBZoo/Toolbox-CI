@@ -18,8 +18,6 @@ namespace JBZoo\PHPUnit;
 use JBZoo\ToolboxCI\Formats\JUnit\JUnit;
 use JBZoo\ToolboxCI\Formats\Xml;
 use JBZoo\ToolboxCI\Helper;
-use JBZoo\Utils\Cli;
-use JBZoo\Utils\Env;
 
 /**
  * Class ToolsTest
@@ -27,16 +25,6 @@ use JBZoo\Utils\Env;
  */
 class ToolsTest extends PHPUnit
 {
-    public function testCodesStyle()
-    {
-        if (!Env::bool('TEAMCITY_VERSION') && Env::isExists('IDE_PHPUNIT_CUSTOM_LOADER')) {
-            echo Cli::exec('TEAMCITY_VERSION="2020.1.2 (build 78726)" make codestyle', [], PROJECT_ROOT);
-            success();
-        } else {
-            skip("It's disabled in TeamCity");
-        }
-    }
-
     public function testDescAsList()
     {
         $result = Helper::descAsList([
