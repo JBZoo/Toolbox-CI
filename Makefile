@@ -21,6 +21,7 @@ update: ##@Project Install/Update all 3rd party dependencies
 	$(call title,"Install/Update all 3rd party dependencies")
 	@echo "Composer flags: $(JBZOO_COMPOSER_UPDATE_FLAGS)"
 	@composer update $(JBZOO_COMPOSER_UPDATE_FLAGS)
+	@ln -sf `pwd`/toolbox-ci `pwd`/vendor/bin/toolbox-ci
 
 
 test-all: ##@Project Run all project tests at once
