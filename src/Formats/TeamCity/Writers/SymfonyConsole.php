@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class SymfonyConsole
- * @package JBZoo\ToolboxCI\Teamcity\Writer
+ * @package JBZoo\ToolboxCI\Formats\TeamCity\Writers
  */
 class SymfonyConsole implements AbstractWriter
 {

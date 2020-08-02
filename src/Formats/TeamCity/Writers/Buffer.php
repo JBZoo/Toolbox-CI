@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Formats\TeamCity\Writers;
 
 /**
  * Class Buffer
- * @package JBZoo\ToolboxCI\Teamcity\Writer
+ * @package JBZoo\ToolboxCI\Formats\TeamCity\Writers
  */
 class Buffer implements AbstractWriter
 {

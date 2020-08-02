@@ -19,7 +19,7 @@ use JBZoo\Utils\Cli;
 
 /**
  * Class Stdout
- * @package JBZoo\ToolboxCI\Teamcity\Writer
+ * @package JBZoo\ToolboxCI\Formats\TeamCity\Writers
  */
 class Stdout implements AbstractWriter
 {

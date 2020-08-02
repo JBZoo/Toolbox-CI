@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Formats\TeamCity;
 
 /**
  * Class Exception
- * @package JBZoo\ToolboxCI\Formats\Source
+ * @package JBZoo\ToolboxCI\Formats\TeamCity
  */
 class Exception extends \JBZoo\ToolboxCI\Formats\Exception
 {

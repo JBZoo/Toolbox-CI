@@ -19,7 +19,7 @@ use JBZoo\ToolboxCI\Formats\TeamCity\Writers\AbstractWriter;
 use JBZoo\Utils\Sys;
 
 /**
- * Class TeamCityLogger
+ * Class TeamCity
  * @package JBZoo\ToolboxCI\Formats\TeamCity
  */
 class TeamCity

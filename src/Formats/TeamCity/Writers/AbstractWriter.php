@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Formats\TeamCity\Writers;
 
 /**
  * Interface AbstractWriter
- * @package JBZoo\ToolboxCI\Teamcity\Writer
+ * @package JBZoo\ToolboxCI\Formats\TeamCity\Writers
  */
 interface AbstractWriter
 {

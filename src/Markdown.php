@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI;
 
 /**
  * Class Markdown
- * @package JBZoo\ComposerDiff\Renders
+ * @package JBZoo\ToolboxCI
  */
 class Markdown
 {

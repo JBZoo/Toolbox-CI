@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Formats\JUnit\CaseOutput;
 
 /**
  * Class Error
- * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
+ * @package JBZoo\ToolboxCI\Formats\JUnit\CaseOutput
  */
 class Error extends AbstractOutput
 {

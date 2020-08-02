@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Formats\JUnit\CaseOutput;
 
 /**
  * Class Skipped
- * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
+ * @package JBZoo\ToolboxCI\Formats\JUnit\CaseOutput
  */
 class Skipped extends AbstractOutput
 {

@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Formats\TeamCity\Writers;
 
 /**
  * Class CustomCallback
- * @package JBZoo\ToolboxCI\Teamcity\Writer
+ * @package JBZoo\ToolboxCI\Formats\TeamCity\Writers
  */
 class CustomCallback implements AbstractWriter
 {

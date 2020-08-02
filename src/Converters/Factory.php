@@ -18,7 +18,7 @@ namespace JBZoo\ToolboxCI\Converters;
 use function JBZoo\Data\data;
 
 /**
- * Class ConverterFactory
+ * Class Factory
  * @package JBZoo\ToolboxCI\Converters
  */
 class Factory

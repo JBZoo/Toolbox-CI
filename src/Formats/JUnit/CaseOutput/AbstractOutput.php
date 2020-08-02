@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Formats\JUnit\CaseOutput;
 
 /**
  * Class AbstractOutput
- * @package JBZoo\ToolboxCI\Formats\JUnit\TestCaseOutput
+ * @package JBZoo\ToolboxCI\Formats\JUnit\CaseOutput
  */
 abstract class AbstractOutput
 {

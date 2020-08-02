@@ -17,7 +17,7 @@ namespace JBZoo\ToolboxCI\Formats\TeamCity;
 
 /**
  * Class Helper
- * @package JBZoo\ToolboxCI\Teamcity
+ * @package JBZoo\ToolboxCI\Formats\TeamCity
  */
 class Helper
 {
