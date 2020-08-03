@@ -17,7 +17,7 @@
         "ext-dom"         : "*",
         "ext-simplexml"   : "*",
 
-        "jbzoo/data"      : "^4.0.2",
+        "jbzoo/data"      : "^4.1.0",
         "jbzoo/utils"     : "^4.2.1",
         "symfony/console" : "^4.4||^5.0"
     },
