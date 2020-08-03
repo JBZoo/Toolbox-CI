@@ -60,6 +60,11 @@ class Factory
      */
     public static function convertMetric(string $sourceCode, string $sourceFormat): string
     {
+        $sourceCode = trim($sourceCode);
+        if ('' === $sourceCode) {
+            return '';
+        }
+
         $tcStatsConverter = Map::getMetric($sourceFormat);
 
         return $tcStatsConverter->fromInternalMetric($tcStatsConverter->toInternalMetric($sourceCode));
