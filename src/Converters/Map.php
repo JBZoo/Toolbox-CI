@@ -26,14 +26,20 @@ class Map
     public const INPUT  = 'input';
     public const OUTPUT = 'output';
 
-    private const MAP = [
+    private const MAP_TESTS = [
         JUnitConverter::class         => [self::INPUT => true, self::OUTPUT => true],
         TeamCityTestsConverter::class => [self::INPUT => false, self::OUTPUT => true],
-        PhpmdJsonConverter::class     => [self::INPUT => true, self::OUTPUT => false],
+        PhpMdJsonConverter::class     => [self::INPUT => true, self::OUTPUT => false],
         CheckStyleConverter::class    => [self::INPUT => true, self::OUTPUT => false],
         PsalmJsonConverter::class     => [self::INPUT => true, self::OUTPUT => false],
     ];
 
+    private const MAP_METRICS = [
+        PhpLocStatsTcConverter::class,
+        PhpDependStatsTcConverter::class,
+        PhpMetricsStatsTcConverter::class,
+        PhpUnitCloverStatsTcConverter::class,
+    ];
 
     /**
      * @return array
@@ -42,7 +48,7 @@ class Map
     {
         $result = [];
 
-        $drivers = array_keys(self::MAP);
+        $drivers = array_keys(self::MAP_TESTS);
         sort($drivers);
 
         foreach ($drivers as $source) {
@@ -61,12 +67,27 @@ class Map
      */
     public static function getAvailableFormats(): array
     {
-        $drivers = array_keys(self::MAP);
+        $drivers = array_keys(self::MAP_TESTS);
         sort($drivers);
 
         return array_map(static function (string $converterClass): string {
             return $converterClass::TYPE;
         }, $drivers);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getAvailableMetrics(): array
+    {
+        $result = [];
+        foreach (self::MAP_METRICS as $driver) {
+            $result[] = $driver::TYPE;
+        }
+
+        sort($result);
+
+        return $result;
     }
 
     /**
@@ -76,7 +97,7 @@ class Map
      */
     public static function isAvailable(string $source, string $target): bool
     {
-        return self::MAP[$source][self::INPUT] && self::MAP[$target][self::OUTPUT];
+        return self::MAP_TESTS[$source][self::INPUT] && self::MAP_TESTS[$target][self::OUTPUT];
     }
 
     /**
@@ -114,7 +135,7 @@ class Map
     {
         /** @var AbstractConverter $class */
         /** @var array $options */
-        foreach (self::MAP as $class => $options) {
+        foreach (self::MAP_TESTS as $class => $options) {
             if ($class::TYPE === $format && $options[$direction]) {
                 return new $class();
             }
@@ -122,7 +143,22 @@ class Map
 
         throw new Exception(
             "The format \"{$format}\" is not available as \"{$direction}\" direction. " .
-            "See `toolbox-ci report-map`"
+            "See `toolbox-ci convert:map`"
         );
+    }
+
+    /**
+     * @param string $sourceFormat
+     * @return AbstractStatsTcConverter
+     */
+    public static function getMetric(string $sourceFormat): AbstractStatsTcConverter
+    {
+        foreach (self::MAP_METRICS as $class) {
+            if ($class::TYPE === $sourceFormat) {
+                return new $class();
+            }
+        }
+
+        throw new Exception("The format \"{$sourceFormat}\" is not available. See `toolbox-ci convert:map`");
     }
 }

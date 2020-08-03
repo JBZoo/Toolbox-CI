@@ -16,7 +16,7 @@
 namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
-use JBZoo\ToolboxCI\Converters\PhpmdJsonConverter;
+use JBZoo\ToolboxCI\Converters\PhpMdJsonConverter;
 
 /**
  * Class PhpmdJson2JUnitTest
@@ -27,7 +27,7 @@ class ConverterPhpmdJsonTest extends PHPUnit
 {
     public function testPhpmdJson2JUnit()
     {
-        $actual = (new PhpmdJsonConverter())
+        $actual = (new PhpMdJsonConverter())
             ->toInternal(file_get_contents(Fixtures::PHPMD_JSON));
 
         $actual = (new JUnitConverter())->fromInternal($actual);

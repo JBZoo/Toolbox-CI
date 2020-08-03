@@ -24,10 +24,10 @@ use function JBZoo\Data\data;
 use function JBZoo\Data\json;
 
 /**
- * Class PhpmdJsonConverter
+ * Class PhpMdJsonConverter
  * @package JBZoo\ToolboxCI\Converters
  */
-class PhpmdJsonConverter extends AbstractConverter
+class PhpMdJsonConverter extends AbstractConverter
 {
     public const TYPE = 'phpmd-json';
     public const NAME = 'PHPmd.json';

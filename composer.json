@@ -15,6 +15,7 @@
     "require"           : {
         "php"             : ">=7.2",
         "ext-dom"         : "*",
+        "ext-simplexml"   : "*",
 
         "jbzoo/data"      : "^4.0.2",
         "jbzoo/utils"     : "^4.2.1",

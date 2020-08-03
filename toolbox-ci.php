@@ -15,6 +15,7 @@
 
 use JBZoo\ToolboxCI\Commands\Convert;
 use JBZoo\ToolboxCI\Commands\ConvertMap;
+use JBZoo\ToolboxCI\Commands\TeamCityStats;
 use Symfony\Component\Console\Application;
 
 define('PATH_ROOT', __DIR__);
@@ -37,4 +38,5 @@ require JBZOO_COMPOSER_GRAPH;
 $application = new Application();
 $application->add(new Convert());
 $application->add(new ConvertMap());
+$application->add(new TeamCityStats());
 $application->run();

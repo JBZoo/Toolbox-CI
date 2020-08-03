@@ -17,35 +17,20 @@ namespace JBZoo\ToolboxCI\Commands;
 
 use JBZoo\ToolboxCI\Converters\Factory;
 use JBZoo\ToolboxCI\Converters\Map;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class Convert
  * @package JBZoo\ToolboxCI\Commands
  */
-class Convert extends Command
+class Convert extends AbstractCommand
 {
-    /**
-     * @var InputInterface
-     * @psalm-suppress PropertyNotSetInConstructor
-     */
-    private $input;
-
-    /**
-     * @var OutputInterface
-     * @psalm-suppress PropertyNotSetInConstructor
-     */
-    private $output;
-
     /**
      * @inheritDoc
      */
     protected function configure(): void
     {
-        $formats = 'Available options: <comment>' . implode(',', Map::getAvailableFormats()) . '</comment>';
+        $formats = 'Available options: <comment>' . implode(', ', Map::getAvailableFormats()) . '</comment>';
 
         $this
             ->setName('convert')
@@ -54,23 +39,16 @@ class Convert extends Command
             ->addOption('input-format', 'S', InputOption::VALUE_REQUIRED, "Source format. {$formats}")
             ->addOption('output-format', 'T', InputOption::VALUE_REQUIRED, "Target format. {$formats}")
             // Optional
-            ->addOption('suite-name', 'N', InputOption::VALUE_REQUIRED, 'Set name of root suite')
-            ->addOption('root-path', 'R', InputOption::VALUE_OPTIONAL, 'If option is set ' .
-                'all absolute file paths will be converted to relative')
-            ->addOption('input-file', 'I', InputOption::VALUE_OPTIONAL, "Use CLI input (STDIN, pipeline) " .
-                "OR use the option to define filename of source report")
-            ->addOption('output-file', 'O', InputOption::VALUE_OPTIONAL, "Use CLI output (STDOUT, pipeline) " .
-                "OR use the option to define filename with result");
+            ->addOption('suite-name', 'N', InputOption::VALUE_REQUIRED, 'Set name of root suite');
+
+        parent::configure();
     }
 
     /**
      * @inheritDoc
      */
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function executeAction(): int
     {
-        $this->input = $input;
-        $this->output = $output;
-
         $sourceCode = $this->getSourceCode();
         $sourceFormat = $this->getFormat('input-format');
         $targetFormat = $this->getFormat('output-format');
@@ -103,58 +81,5 @@ class Convert extends Command
         }
 
         return $format;
-    }
-
-    /**
-     * @return string|false
-     */
-    private function getSourceCode()
-    {
-        if ($filename = (string)$this->getOption('input-file')) {
-            if (!realpath($filename) && !file_exists($filename)) {
-                throw new Exception("File \"{$filename}\" not foun");
-            }
-
-            return file_get_contents($filename);
-        }
-
-        if (0 === ftell(STDIN)) {
-            $contents = '';
-
-            while (!feof(STDIN)) {
-                $contents .= fread(STDIN, 1024);
-            }
-
-            return $contents;
-        }
-
-        throw new Exception("Please provide a filename or pipe template content to STDIN.");
-    }
-
-    /**
-     * @param string $result
-     */
-    private function saveResult(string $result): void
-    {
-        if ($filename = (string)$this->getOption('output-file')) {
-            file_put_contents($filename, $result);
-            $this->output->writeln("Result save: {$filename}");
-        } else {
-            $this->output->write($result);
-        }
-    }
-
-    /**
-     * @param string $optionName
-     * @return bool|string|null
-     */
-    private function getOption(string $optionName)
-    {
-        $optionValue = $this->input->getOption($optionName);
-        if (is_array($optionValue)) {
-            return $optionValue[0];
-        }
-
-        return $optionValue;
     }
 }

@@ -16,15 +16,12 @@
 namespace JBZoo\ToolboxCI\Commands;
 
 use JBZoo\ToolboxCI\Converters\Map;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class ConvertMap
  * @package JBZoo\ToolboxCI\Commands
  */
-class ConvertMap extends Command
+class ConvertMap extends AbstractCommand
 {
     /**
      * @inheritDoc
@@ -32,17 +29,16 @@ class ConvertMap extends Command
     protected function configure(): void
     {
         $this
-            ->setName('convert-map')
+            ->setName('convert:map')
             ->setDescription('Show current map of report converting');
     }
 
     /**
      * @inheritDoc
-     * @phan-suppress PhanUnusedProtectedMethodParameter
      */
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    protected function executeAction(): int
     {
-        $output->writeln(Map::getMarkdownTable());
+        $this->output->writeln(Map::getMarkdownTable());
         return 0;
     }
 }

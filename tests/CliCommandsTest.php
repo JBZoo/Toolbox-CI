@@ -17,6 +17,7 @@ namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Commands\Convert;
 use JBZoo\ToolboxCI\Commands\ConvertMap;
+use JBZoo\ToolboxCI\Commands\TeamCityStats;
 use JBZoo\ToolboxCI\Converters\CheckStyleConverter;
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
 use JBZoo\Utils\Cli;
@@ -45,24 +46,47 @@ class CliCommandsTest extends PHPUnit
             '',
         ]);
 
-        isContain($helpMessage, file_get_contents(PROJECT_ROOT . '/README.md'));
+        isFileContains($helpMessage, PROJECT_ROOT . '/README.md');
     }
 
     public function testConvertCommandMapReadMe()
     {
-        $helpMessage = $this->task('convert-map');
+        $helpMessage = $this->task('convert:map');
         $helpMessage = implode("\n", [
             '',
             '### Available directions',
             '',
             '```sh',
-            'php ./vendor/bin/toolbox-ci convert-map',
+            'php ./vendor/bin/toolbox-ci convert:map',
             '```',
             '',
             $helpMessage,
         ]);
 
-        isContain($helpMessage, file_get_contents(PROJECT_ROOT . '/README.md'));
+        isFileContains($helpMessage, PROJECT_ROOT . '/README.md');
+    }
+
+    public function testConvertStatsUndefinedFile()
+    {
+        $output = $this->task('teamcity:stats', [
+            'input-file'   => '/undefined/file.xml',
+            'input-format' => 'pdepend-xml'
+        ]);
+
+        isSame("Warning: File \"/undefined/file.xml\" not found\n", $output);
+    }
+
+    public function testConvertUndefinedFile()
+    {
+        $output = $this->task('convert', [
+            'input-format'  => CheckStyleConverter::TYPE,
+            'output-format' => JUnitConverter::TYPE,
+            'input-file'    => '/undefined/file.xml',
+            'suite-name'    => "Test Suite",
+            'root-path'     => "src",
+        ]);
+
+        isSame("Warning: File \"/undefined/file.xml\" not found\n", $output);
     }
 
     public function testConvertCommand()
@@ -133,6 +157,7 @@ class CliCommandsTest extends PHPUnit
         $application = new Application();
         $application->add(new Convert());
         $application->add(new ConvertMap());
+        $application->add(new TeamCityStats());
         $command = $application->find($action);
 
         $buffer = new BufferedOutput();

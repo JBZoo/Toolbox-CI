@@ -23,6 +23,45 @@ class Helper
 {
     private const TIMESTAMP_FORMAT = 'Y-m-d\TH:i:s.uO';
 
+    public const PREDEFINED_METRICS = [
+        'ArtifactsSize',
+        'VisibleArtifactsSize',
+        'buildStageDuration:artifactsPublishing',
+        'buildStageDuration:buildStepRunner_<N>',
+        'buildStageDuration:sourcesUpdate',
+        'buildStageDuration:dependenciesResolving',
+        'BuildDuration',
+        'BuildDurationNetTime',
+        'CodeCoverageB',
+        'CodeCoverageC',
+        'CodeCoverageL',
+        'CodeCoverageM',
+        'CodeCoverageR',
+        'CodeCoverageS',
+        'CodeCoverageAbsBCovered',
+        'CodeCoverageAbsBTotal',
+        'CodeCoverageAbsCCovered',
+        'CodeCoverageAbsCTotal',
+        'CodeCoverageAbsLCovered',
+        'CodeCoverageAbsLTotal',
+        'CodeCoverageAbsMCovered',
+        'CodeCoverageAbsMTotal',
+        'CodeCoverageAbsRCovered',
+        'CodeCoverageAbsRTotal',
+        'CodeCoverageAbsSCovered',
+        'CodeCoverageAbsSTotal',
+        'DuplicatorStats',
+        'TotalTestCount',
+        'PassedTestCount',
+        'FailedTestCount',
+        'IgnoredTestCount',
+        'InspectionStatsE',
+        'InspectionStatsW',
+        'SuccessRate',
+        'TimeSpentInQueue',
+    ];
+
+
     /**
      * @param string $eventName
      * @param array  $params

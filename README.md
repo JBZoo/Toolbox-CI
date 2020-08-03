@@ -11,6 +11,7 @@
 composer require jbzoo/toolbox-ci
 ```
 
+
 ### Usage
 
 ```
@@ -22,12 +23,12 @@ Usage:
   convert [options]
 
 Options:
-  -S, --input-format=INPUT-FORMAT    Source format. Available options: checkstyle,junit,phpmd-json,psalm-json,tc-tests
-  -T, --output-format=OUTPUT-FORMAT  Target format. Available options: checkstyle,junit,phpmd-json,psalm-json,tc-tests
+  -S, --input-format=INPUT-FORMAT    Source format. Available options: checkstyle, junit, phpmd-json, psalm-json, tc-tests
+  -T, --output-format=OUTPUT-FORMAT  Target format. Available options: checkstyle, junit, phpmd-json, psalm-json, tc-tests
   -N, --suite-name=SUITE-NAME        Set name of root suite
-  -R, --root-path[=ROOT-PATH]        If option is set all absolute file paths will be converted to relative
   -I, --input-file[=INPUT-FILE]      Use CLI input (STDIN, pipeline) OR use the option to define filename of source report
   -O, --output-file[=OUTPUT-FILE]    Use CLI output (STDOUT, pipeline) OR use the option to define filename with result
+  -R, --root-path[=ROOT-PATH]        If option is set all absolute file paths will be converted to relative
   -h, --help                         Display this help message
   -q, --quiet                        Do not output any message
   -V, --version                      Display this application version
@@ -39,10 +40,11 @@ Options:
 ```
 
 
+
 ### Available directions
 
 ```sh
-php ./vendor/bin/toolbox-ci convert-map
+php ./vendor/bin/toolbox-ci convert:map
 ```
 
 |                  | CheckStyle.xml | JUnit.xml | PHPmd.json | Psalm.json | TeamCity - Tests |
@@ -52,6 +54,7 @@ php ./vendor/bin/toolbox-ci convert-map
 | PHPmd.json       |       -        |    Yes    |     -      |     -      |       Yes        |
 | Psalm.json       |       -        |    Yes    |     -      |     -      |       Yes        |
 | TeamCity - Tests |       -        |     -     |     -      |     -      |        -         |
+
 
 
 ### Unit tests and check code style

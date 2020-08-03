@@ -62,6 +62,7 @@ class Fixtures
     public const PHPUNIT_JUNIT_NESTED = self::ROOT_ORIG . '/phpunit/junit-nested.xml';
     public const PHPUNIT_JUNIT_SIMPLE = self::ROOT_ORIG . '/phpunit/junit-simple.xml';
     public const PHPUNIT_TEAMCITY     = self::ROOT_ORIG . '/phpunit/teamcity.txt';
+    public const PHPUNIT_CLOVER       = self::ROOT_ORIG . '/phpunit/clover.xml';
 
     public const PSALM_CHECKSTYLE = self::ROOT_ORIG . '/psalm/checkstyle.xml';
     public const PSALM_EMACS      = self::ROOT_ORIG . '/psalm/emacs.txt';
@@ -71,4 +72,8 @@ class Fixtures
     public const PSALM_PYLINT     = self::ROOT_ORIG . '/psalm/pylint.txt';
     public const PSALM_SONARQUBE  = self::ROOT_ORIG . '/psalm/sonarqube.json';
     public const PSALM_XML        = self::ROOT_ORIG . '/psalm/xml.xml';
+
+    public const PHP_DEPEND_XML = self::ROOT_ORIG . '/phpdepend/pdepend.xml';
+
+    public const PHP_METRICS_XML = self::ROOT_ORIG . '/phpmetrics/phpmetrics.xml';
 }

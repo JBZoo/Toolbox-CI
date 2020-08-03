@@ -52,5 +52,9 @@
     "methodLlocAvg"               : 2.4210526315789473,
     "methodLlocMax"               : 7,
     "namespaces"                  : 2,
-    "ncloc"                       : 185
+    "ncloc"                       : 185,
+
+    "undefined"                   : "42",
+    "null"                        : null,
+    "empty-string"                : ""
 }

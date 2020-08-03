@@ -52,4 +52,16 @@ class Factory
 
         return '';
     }
+
+    /**
+     * @param string $sourceCode
+     * @param string $sourceFormat
+     * @return string
+     */
+    public static function convertMetric(string $sourceCode, string $sourceFormat): string
+    {
+        $tcStatsConverter = Map::getMetric($sourceFormat);
+
+        return $tcStatsConverter->fromInternalMetric($tcStatsConverter->toInternalMetric($sourceCode));
+    }
 }
