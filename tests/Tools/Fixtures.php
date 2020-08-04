@@ -73,7 +73,12 @@ class Fixtures
     public const PSALM_SONARQUBE  = self::ROOT_ORIG . '/psalm/sonarqube.json';
     public const PSALM_XML        = self::ROOT_ORIG . '/psalm/xml.xml';
 
-    public const PHP_DEPEND_XML = self::ROOT_ORIG . '/phpdepend/pdepend.xml';
+    public const PHP_DEPEND_XML     = self::ROOT_ORIG . '/pdepend/pdepend-old.xml';
+    public const PHP_SUMMARY_XML    = self::ROOT_ORIG . '/pdepend/summary.xml';
+    public const PHP_DEPENDENCY_XML = self::ROOT_ORIG . '/pdepend/dependency.xml';
+    public const PHP_JDEPEND_XML    = self::ROOT_ORIG . '/pdepend/jdepend.xml';
 
-    public const PHP_METRICS_XML = self::ROOT_ORIG . '/phpmetrics/phpmetrics.xml';
+    public const PHP_METRICS_XML     = self::ROOT_ORIG . '/phpmetrics/phpmetrics.xml';
+    public const PHP_METRICS_JSON    = self::ROOT_ORIG . '/phpmetrics/phpmetrics.json';
+    public const PHP_METRICS_PMD_XML = self::ROOT_ORIG . '/phpmetrics/pmd.xml';
 }

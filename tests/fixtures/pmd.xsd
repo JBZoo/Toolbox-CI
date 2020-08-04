@@ -28,7 +28,7 @@
         <xs:simpleContent>
             <xs:extension base="xs:string">
                 <xs:attribute name="beginline" type="xs:integer" use="required"/>
-                <xs:attribute name="endline" type="xs:integer" use="required"/>
+                <xs:attribute name="endline" type="xs:integer" use="optional"/>
                 <xs:attribute name="begincolumn" type="xs:integer" use="optional"/>
                 <xs:attribute name="endcolumn" type="xs:integer" use="optional"/>
                 <xs:attribute name="rule" type="xs:string" use="required"/>
