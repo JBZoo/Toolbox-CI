@@ -55,7 +55,10 @@ class TeamCityTestsConverter extends AbstractConverter
             $this->tcLogger->setFlowId($this->flowId);
         }
 
-        $this->tcLogger->write('testCount', ['count' => $sourceSuite->getCasesCount()]);
+        $testCount = $sourceSuite->getCasesCount();
+        if ($testCount > 0) {
+            $this->tcLogger->write('testCount', ['count' => $testCount]);
+        }
 
         $this->renderSuite($sourceSuite);
 
