@@ -44,7 +44,7 @@ class CheckStyleConverter extends AbstractConverter
 
         foreach ($xmlAsArray['_children'] as $files) {
             foreach ($files['_children'] as $file) {
-                $relFilename = $this->cleanFilepath($file['_attrs']['name']);
+                $relFilename = $this->cleanFilepath($file['_attrs']['name'] ?? 'undefined');
                 $absFilename = $this->getFullPath($relFilename);
 
                 $suite = $sourceSuite->addSuite($relFilename);
