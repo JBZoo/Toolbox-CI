@@ -56,6 +56,7 @@ class Convert extends AbstractCommand
         $result = Factory::convert($sourceCode, $sourceFormat, $targetFormat, [
             'root_path'  => $this->getOption('root-path'),
             'suite_name' => $this->getOption('suite-name'),
+            'flow_id'    => $this->getOption('tc-flow-id'),
         ]);
 
         $this->saveResult($result);

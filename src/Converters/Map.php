@@ -148,14 +148,15 @@ class Map
     }
 
     /**
-     * @param string $sourceFormat
+     * @param string   $sourceFormat
+     * @param int|null $flowId
      * @return AbstractStatsTcConverter
      */
-    public static function getMetric(string $sourceFormat): AbstractStatsTcConverter
+    public static function getMetric(string $sourceFormat, ?int $flowId = null): AbstractStatsTcConverter
     {
         foreach (self::MAP_METRICS as $class) {
             if ($class::TYPE === $sourceFormat) {
-                return new $class();
+                return new $class([], $flowId);
             }
         }
 

@@ -75,6 +75,16 @@ class TeamCity
     }
 
     /**
+     * @param int|null $flowId
+     * @return $this
+     */
+    public function setFlowId(?int $flowId): self
+    {
+        $this->flowId = $flowId;
+        return $this;
+    }
+
+    /**
      * Returns the writer.
      *
      * @return AbstractWriter The writer instance.

@@ -19,6 +19,8 @@ use JBZoo\ToolboxCI\Converters\Factory;
 use JBZoo\ToolboxCI\Converters\Map;
 use Symfony\Component\Console\Input\InputOption;
 
+use function JBZoo\Utils\int;
+
 /**
  * Class TeamCityStats
  * @package JBZoo\ToolboxCI\Commands
@@ -47,7 +49,7 @@ class TeamCityStats extends AbstractCommand
     {
         $inputFormat = $this->getFormat();
 
-        $output = Factory::convertMetric($this->getSourceCode(), $inputFormat);
+        $output = Factory::convertMetric($this->getSourceCode(), $inputFormat, int($this->getOption('tc-flow-id')));
 
         $this->saveResult($output);
 

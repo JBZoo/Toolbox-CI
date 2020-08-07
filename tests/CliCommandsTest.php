@@ -20,6 +20,8 @@ use JBZoo\ToolboxCI\Commands\ConvertMap;
 use JBZoo\ToolboxCI\Commands\TeamCityStats;
 use JBZoo\ToolboxCI\Converters\CheckStyleConverter;
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
+use JBZoo\ToolboxCI\Converters\PhpLocStatsTcConverter;
+use JBZoo\ToolboxCI\Converters\TeamCityTestsConverter;
 use JBZoo\Utils\Cli;
 use JBZoo\Utils\Sys;
 use Symfony\Component\Console\Application;
@@ -74,6 +76,31 @@ class CliCommandsTest extends PHPUnit
         ]);
 
         isSame("Warning: File \"/undefined/file.xml\" not found\n", $output);
+    }
+
+    public function testConvertStatsCustomFlowId()
+    {
+        $output = $this->task('teamcity:stats', [
+            'input-file'   => Fixtures::PHPLOC_JSON,
+            'input-format' => PhpLocStatsTcConverter::TYPE,
+            'tc-flow-id'   => 10000
+        ]);
+
+        isContain(" flowId='10000'", $output);
+    }
+
+    public function testConvertCustomFlowId()
+    {
+        $output = $this->task('convert', [
+            'input-format'  => CheckStyleConverter::TYPE,
+            'output-format' => TeamCityTestsConverter::TYPE,
+            'input-file'    => Fixtures::PSALM_CHECKSTYLE,
+            'suite-name'    => "Test Suite",
+            'root-path'     => "src",
+            'tc-flow-id'    => "10101",
+        ]);
+
+        isContain(" flowId='10101'", $output);
     }
 
     public function testConvertUndefinedFile()

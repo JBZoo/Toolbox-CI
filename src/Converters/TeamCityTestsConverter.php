@@ -51,6 +51,10 @@ class TeamCityTestsConverter extends AbstractConverter
      */
     public function fromInternal(SourceSuite $sourceSuite): string
     {
+        if ($this->flowId > 0) {
+            $this->tcLogger->setFlowId($this->flowId);
+        }
+
         $this->tcLogger->write('testCount', ['count' => $sourceSuite->getCasesCount()]);
 
         $this->renderSuite($sourceSuite);

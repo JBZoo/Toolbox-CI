@@ -49,7 +49,8 @@ abstract class AbstractCommand extends Command
             ->addOption('output-file', 'O', InputOption::VALUE_OPTIONAL, "Use CLI output (STDOUT, pipeline) " .
                 "OR use the option to define filename with result")
             ->addOption('root-path', 'R', InputOption::VALUE_OPTIONAL, 'If option is set ' .
-                'all absolute file paths will be converted to relative');
+                'all absolute file paths will be converted to relative')
+            ->addOption('tc-flow-id', 'F', InputOption::VALUE_OPTIONAL, 'Custom flowId for TeamCity output');
     }
 
     /**

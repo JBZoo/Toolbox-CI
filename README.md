@@ -29,6 +29,7 @@ Options:
   -I, --input-file[=INPUT-FILE]      Use CLI input (STDIN, pipeline) OR use the option to define filename of source report
   -O, --output-file[=OUTPUT-FILE]    Use CLI output (STDOUT, pipeline) OR use the option to define filename with result
   -R, --root-path[=ROOT-PATH]        If option is set all absolute file paths will be converted to relative
+  -F, --tc-flow-id[=TC-FLOW-ID]      Custom flowId for TeamCity output
   -h, --help                         Display this help message
   -q, --quiet                        Do not output any message
   -V, --version                      Display this application version

@@ -37,6 +37,11 @@ abstract class AbstractConverter
     protected $rootSuiteName;
 
     /**
+     * @var int|null
+     */
+    protected $flowId;
+
+    /**
      * @param string $source
      * @return SourceSuite
      * @phan-suppress PhanUnusedPublicMethodParameter
@@ -75,6 +80,16 @@ abstract class AbstractConverter
     public function setRootSuiteName(?string $rootSuiteName): self
     {
         $this->rootSuiteName = $rootSuiteName;
+        return $this;
+    }
+
+    /**
+     * @param int $flowId
+     * @return $this
+     */
+    public function setFlowId(int $flowId)
+    {
+        $this->flowId = $flowId;
         return $this;
     }
 

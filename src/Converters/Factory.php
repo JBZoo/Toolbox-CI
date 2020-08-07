@@ -47,6 +47,7 @@ class Factory
             return Map::getConverter($targetFormat, Map::OUTPUT)
                 ->setRootPath($params->get('root_path'))
                 ->setRootSuiteName($params->get('suite_name'))
+                ->setFlowId($params->getInt('flow_id'))
                 ->fromInternal($sourceCode);
         }
 
@@ -54,18 +55,19 @@ class Factory
     }
 
     /**
-     * @param string $sourceCode
-     * @param string $sourceFormat
+     * @param string   $sourceCode
+     * @param string   $sourceFormat
+     * @param int|null $flowId
      * @return string
      */
-    public static function convertMetric(string $sourceCode, string $sourceFormat): string
+    public static function convertMetric(string $sourceCode, string $sourceFormat, ?int $flowId = null): string
     {
         $sourceCode = trim($sourceCode);
         if ('' === $sourceCode) {
             return '';
         }
 
-        $tcStatsConverter = Map::getMetric($sourceFormat);
+        $tcStatsConverter = Map::getMetric($sourceFormat, $flowId);
 
         return $tcStatsConverter->fromInternalMetric($tcStatsConverter->toInternalMetric($sourceCode));
     }
