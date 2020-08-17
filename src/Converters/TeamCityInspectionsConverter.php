@@ -36,6 +36,11 @@ class TeamCityInspectionsConverter extends AbstractConverter
     private $tcLogger;
 
     /**
+     * @var string
+     */
+    private $globalPrefix = '';
+
+    /**
      * TeamCityTestsConverter constructor.
      * @param array               $params
      * @param int|null            $flowId
@@ -55,11 +60,7 @@ class TeamCityInspectionsConverter extends AbstractConverter
             $this->tcLogger->setFlowId($this->flowId);
         }
 
-        $testCount = $sourceSuite->getCasesCount();
-        if ($testCount > 0) {
-            $this->tcLogger->write('testCount', ['count' => $testCount]);
-        }
-
+        $this->globalPrefix = trim($sourceSuite->name) ?: TeamCity::DEFAULT_INSPECTION_ID;
         $this->renderSuite($sourceSuite);
 
         $buffer = $this->tcLogger->getWriter();
@@ -75,25 +76,12 @@ class TeamCityInspectionsConverter extends AbstractConverter
      */
     private function renderSuite(SourceSuite $sourceSuite): void
     {
-        $params = [];
-        if ($sourceSuite->file) {
-            $params = ['locationHint' => "php_qn://{$sourceSuite->file}::\\{$sourceSuite->name}"];
-        }
-
-        if ($sourceSuite->name) {
-            $this->tcLogger->testSuiteStarted($sourceSuite->name, $params);
-        }
-
         foreach ($sourceSuite->getCases() as $case) {
             $this->renderTestCase($case, $sourceSuite->name);
         }
 
         foreach ($sourceSuite->getSuites() as $suite) {
             $this->renderSuite($suite);
-        }
-
-        if ($sourceSuite->name) {
-            $this->tcLogger->testSuiteFinished($sourceSuite->name);
         }
     }
 
@@ -104,71 +92,49 @@ class TeamCityInspectionsConverter extends AbstractConverter
      */
     private function renderTestCase(SourceCase $case, string $suiteName): void
     {
-        $logger = $this->tcLogger;
-
-        $params = [];
-        if ($case->file && $case->class) {
-            $params = ['locationHint' => "php_qn://{$case->file}::\\{$case->class}::{$case->name}"];
-        } elseif ($case->file) {
-            $params = ['locationHint' => "php_qn://{$case->file}"];
-        }
-
-        $logger->testStarted($case->name, $params);
-
-        if ($skippedOutput = $case->skipped) {
-            $logger->testSkipped($case->name, $skippedOutput->message, $skippedOutput->details, $case->time);
-        } elseif ($warningOutput = $case->warning) {
-            $messageData = $warningOutput->parseDescription();
-            $title = "{$suiteName} / {$case->name}";
-            $message = $messageData->get('message') ?? $warningOutput->message ?: '';
-            $details = $messageData->get('description') ?? $warningOutput->details ?: '';
-
-            if (strpos($details, $message) !== false) {
-                $message = null;
-            }
-
-            if (strpos($case->name, $suiteName) !== false) {
-                $title = $case->name;
-            }
-
-            $logger->addDefaultInspectionType();
-            $logger->addInspectionIssue(
-                TeamCity::DEFAULT_INSPECTION_ID,
-                $this->cleanFilepath((string)$case->file),
-                $case->line,
-                trim(implode("\n", array_unique(array_filter([
-                    str_repeat('-', 120),
-                    $title,
-                    $message,
-                    $details
-                ]))))
-            );
+        if ($case->failure) {
+            $severity = TeamCity::SEVERITY_ERROR;
+            $failureObject = $case->failure;
+        } elseif ($case->error) {
+            $severity = TeamCity::SEVERITY_ERROR;
+            $failureObject = $case->error;
+        } elseif ($case->warning) {
+            $severity = TeamCity::SEVERITY_WARNING;
+            $failureObject = $case->warning;
+        } elseif ($case->skipped) {
+            $severity = TeamCity::SEVERITY_WARNING_WEAK;
+            $failureObject = $case->skipped;
         } else {
-            $failureObject = $case->failure ?? $case->error;
-            if ($failureObject) {
-                $params = [
-                    'message'  => $failureObject->message,
-                    'details'  => $failureObject->details,
-                    'duration' => $case->time,
-                ];
-
-                $messageData = $failureObject->parseDescription();
-                $params['actual'] = $messageData->get('actual');
-                $params['expected'] = $messageData->get('expected');
-                $params['details'] = $messageData->get('description') ?? $params['details'];
-                $params['message'] = $messageData->get('message') ?? $params['message'];
-                $logger->testFailed($case->name, $params);
-            }
+            return;
         }
 
-        if ($case->stdOut) {
-            $logger->getWriter()->write($case->stdOut);
+        $messageData = $failureObject->parseDescription();
+        $title = "{$suiteName} / {$case->name}";
+        $message = $messageData->get('message') ?? $failureObject->message ?: '';
+        $details = $messageData->get('description') ?? $failureObject->details ?: '';
+
+        if (strpos($details, $message) !== false) {
+            $message = null;
         }
 
-        if ($case->errOut) {
-            $logger->getWriter()->write($case->errOut);
+        if (strpos($case->name, $suiteName) !== false) {
+            $title = $case->name;
         }
 
-        $logger->testFinished($case->name, $case->time);
+        $inspectionId = "{$this->globalPrefix}:" . ($failureObject->type ?: $severity);
+
+        $this->tcLogger->addInspectionType($inspectionId, $inspectionId, $this->globalPrefix);
+        $this->tcLogger->addInspectionIssue(
+            $inspectionId,
+            $this->cleanFilepath((string)$case->file),
+            $case->line,
+            trim(implode("\n", array_unique(array_filter([
+                str_repeat('-', 120),
+                $title,
+                $message,
+                $details
+            ])))),
+            $severity
+        );
     }
 }
