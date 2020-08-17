@@ -27,11 +27,12 @@ class Map
     public const OUTPUT = 'output';
 
     private const MAP_TESTS = [
-        JUnitConverter::class         => [self::INPUT => true, self::OUTPUT => true],
-        TeamCityTestsConverter::class => [self::INPUT => false, self::OUTPUT => true],
-        PhpMdJsonConverter::class     => [self::INPUT => true, self::OUTPUT => false],
-        CheckStyleConverter::class    => [self::INPUT => true, self::OUTPUT => false],
-        PsalmJsonConverter::class     => [self::INPUT => true, self::OUTPUT => false],
+        JUnitConverter::class               => [self::INPUT => true, self::OUTPUT => true],
+        TeamCityTestsConverter::class       => [self::INPUT => false, self::OUTPUT => true],
+        PhpMdJsonConverter::class           => [self::INPUT => true, self::OUTPUT => false],
+        CheckStyleConverter::class          => [self::INPUT => true, self::OUTPUT => false],
+        PsalmJsonConverter::class           => [self::INPUT => true, self::OUTPUT => false],
+        TeamCityInspectionsConverter::class => [self::INPUT => false, self::OUTPUT => true],
     ];
 
     private const MAP_METRICS = [
@@ -122,7 +123,7 @@ class Map
             array_unshift($rows[$key], $key);
         }
 
-        array_unshift($header, '');
+        array_unshift($header, 'Source/Target');
 
         return $table->render($header, $rows);
     }

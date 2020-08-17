@@ -22,13 +22,13 @@ use JBZoo\ToolboxCI\Formats\TeamCity\Writers\AbstractWriter;
 use JBZoo\ToolboxCI\Formats\TeamCity\Writers\Buffer;
 
 /**
- * Class TeamCityTestsConverter
+ * Class TeamCityInspectionsConverter
  * @package JBZoo\ToolboxCI\Converters
  */
-class TeamCityTestsConverter extends AbstractConverter
+class TeamCityInspectionsConverter extends AbstractConverter
 {
-    public const TYPE = 'tc-tests';
-    public const NAME = 'TeamCity - Tests';
+    public const TYPE = 'tc-inspections';
+    public const NAME = 'TeamCity - Inspections';
 
     /**
      * @var TeamCity
@@ -85,7 +85,7 @@ class TeamCityTestsConverter extends AbstractConverter
         }
 
         foreach ($sourceSuite->getCases() as $case) {
-            $this->renderTestCase($case);
+            $this->renderTestCase($case, $sourceSuite->name);
         }
 
         foreach ($sourceSuite->getSuites() as $suite) {
@@ -99,9 +99,10 @@ class TeamCityTestsConverter extends AbstractConverter
 
     /**
      * @param SourceCase $case
+     * @param string     $suiteName
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    private function renderTestCase(SourceCase $case): void
+    private function renderTestCase(SourceCase $case, string $suiteName): void
     {
         $logger = $this->tcLogger;
 
@@ -116,8 +117,34 @@ class TeamCityTestsConverter extends AbstractConverter
 
         if ($skippedOutput = $case->skipped) {
             $logger->testSkipped($case->name, $skippedOutput->message, $skippedOutput->details, $case->time);
+        } elseif ($warningOutput = $case->warning) {
+            $messageData = $warningOutput->parseDescription();
+            $title = "{$suiteName} / {$case->name}";
+            $message = $messageData->get('message') ?? $warningOutput->message ?: '';
+            $details = $messageData->get('description') ?? $warningOutput->details ?: '';
+
+            if (strpos($details, $message) !== false) {
+                $message = null;
+            }
+
+            if (strpos($case->name, $suiteName) !== false) {
+                $title = $case->name;
+            }
+
+            $logger->addDefaultInspectionType();
+            $logger->addInspectionIssue(
+                TeamCity::DEFAULT_INSPECTION_ID,
+                $this->cleanFilepath((string)$case->file),
+                $case->line,
+                trim(implode("\n", array_unique(array_filter([
+                    str_repeat('-', 120),
+                    $title,
+                    $message,
+                    $details
+                ]))))
+            );
         } else {
-            $failureObject = $case->failure ?? $case->error ?? $case->warning;
+            $failureObject = $case->failure ?? $case->error;
             if ($failureObject) {
                 $params = [
                     'message'  => $failureObject->message,

@@ -23,8 +23,8 @@ Usage:
   convert [options]
 
 Options:
-  -S, --input-format=INPUT-FORMAT    Source format. Available options: checkstyle, junit, phpmd-json, psalm-json, tc-tests
-  -T, --output-format=OUTPUT-FORMAT  Target format. Available options: checkstyle, junit, phpmd-json, psalm-json, tc-tests
+  -S, --input-format=INPUT-FORMAT    Source format. Available options: checkstyle, junit, phpmd-json, psalm-json, tc-inspections, tc-tests
+  -T, --output-format=OUTPUT-FORMAT  Target format. Available options: checkstyle, junit, phpmd-json, psalm-json, tc-inspections, tc-tests
   -N, --suite-name=SUITE-NAME        Set name of root suite
   -I, --input-file[=INPUT-FILE]      Use CLI input (STDIN, pipeline) OR use the option to define filename of source report
   -O, --output-file[=OUTPUT-FILE]    Use CLI output (STDOUT, pipeline) OR use the option to define filename with result
@@ -48,13 +48,14 @@ Options:
 php ./vendor/bin/toolbox-ci convert:map
 ```
 
-|                  | CheckStyle.xml | JUnit.xml | PHPmd.json | Psalm.json | TeamCity - Tests |
-|:-----------------|:--------------:|:---------:|:----------:|:----------:|:----------------:|
-| CheckStyle.xml   |       -        |    Yes    |     -      |     -      |       Yes        |
-| JUnit.xml        |       -        |    Yes    |     -      |     -      |       Yes        |
-| PHPmd.json       |       -        |    Yes    |     -      |     -      |       Yes        |
-| Psalm.json       |       -        |    Yes    |     -      |     -      |       Yes        |
-| TeamCity - Tests |       -        |     -     |     -      |     -      |        -         |
+| Source/Target          | CheckStyle.xml | JUnit.xml | PHPmd.json | Psalm.json | TeamCity - Inspections | TeamCity - Tests |
+|:-----------------------|:--------------:|:---------:|:----------:|:----------:|:----------------------:|:----------------:|
+| CheckStyle.xml         |       -        |    Yes    |     -      |     -      |          Yes           |       Yes        |
+| JUnit.xml              |       -        |    Yes    |     -      |     -      |          Yes           |       Yes        |
+| PHPmd.json             |       -        |    Yes    |     -      |     -      |          Yes           |       Yes        |
+| Psalm.json             |       -        |    Yes    |     -      |     -      |          Yes           |       Yes        |
+| TeamCity - Inspections |       -        |     -     |     -      |     -      |           -            |        -         |
+| TeamCity - Tests       |       -        |     -     |     -      |     -      |           -            |        -         |
 
 
 
