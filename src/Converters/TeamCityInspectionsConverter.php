@@ -92,6 +92,9 @@ class TeamCityInspectionsConverter extends AbstractConverter
      */
     private function renderTestCase(SourceCase $case, string $suiteName): void
     {
+        $failureObject = null;
+        $severity = null;
+
         if ($case->failure) {
             $severity = TeamCity::SEVERITY_ERROR;
             $failureObject = $case->failure;
@@ -104,7 +107,13 @@ class TeamCityInspectionsConverter extends AbstractConverter
         } elseif ($case->skipped) {
             $severity = TeamCity::SEVERITY_WARNING_WEAK;
             $failureObject = $case->skipped;
-        } else {
+        }
+
+        if (null === $failureObject) {
+            return;
+        }
+
+        if (null === $severity) {
             return;
         }
 
@@ -122,7 +131,7 @@ class TeamCityInspectionsConverter extends AbstractConverter
         }
 
         $inspectionId = $this->globalPrefix ?: TeamCity::DEFAULT_INSPECTION_ID;
-        $inspectionName = $failureObject->type ?: $severity ?: $inspectionId;
+        $inspectionName = $failureObject->type ?: $severity;
 
         $this->tcLogger->addInspectionType($inspectionId, $inspectionName, $this->globalPrefix);
         $this->tcLogger->addInspectionIssue(
