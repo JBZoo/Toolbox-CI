@@ -21,6 +21,8 @@ use JBZoo\ToolboxCI\Commands\TeamCityStats;
 use JBZoo\ToolboxCI\Converters\CheckStyleConverter;
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
 use JBZoo\ToolboxCI\Converters\PhpLocStatsTcConverter;
+use JBZoo\ToolboxCI\Converters\PhpMdJsonConverter;
+use JBZoo\ToolboxCI\Converters\TeamCityInspectionsConverter;
 use JBZoo\ToolboxCI\Converters\TeamCityTestsConverter;
 use JBZoo\Utils\Cli;
 use JBZoo\Utils\Sys;
@@ -101,6 +103,26 @@ class CliCommandsTest extends PHPUnit
         ]);
 
         isContain(" flowId='10101'", $output);
+    }
+
+    public function testConvertToTcInspections()
+    {
+        $output = $this->task('convert', [
+            'input-format'  => PhpMdJsonConverter::TYPE,
+            'output-format' => TeamCityInspectionsConverter::TYPE,
+            'input-file'    => Fixtures::PHPMD_JSON,
+        ]);
+        isContain("##teamcity[inspectionType id='PHPmd' name='UnusedFormalParameter' " .
+            "category='PHPmd' description='Issues found while checking coding standards'", $output);
+
+        $output = $this->task('convert', [
+            'input-format'  => PhpMdJsonConverter::TYPE,
+            'output-format' => TeamCityInspectionsConverter::TYPE,
+            'input-file'    => Fixtures::PHPMD_JSON,
+            'suite-name'    => "Test Suite",
+        ]);
+        isContain("##teamcity[inspectionType id='Test Suite' name='UnusedFormalParameter' " .
+            "category='Test Suite' description='Issues found while checking coding standards'", $output);
     }
 
     public function testConvertUndefinedFile()

@@ -113,7 +113,7 @@ class TeamCityInspectionsConverter extends AbstractConverter
         $message = $messageData->get('message') ?? $failureObject->message ?: '';
         $details = $messageData->get('description') ?? $failureObject->details ?: '';
 
-        if (strpos($details, $message) !== false) {
+        if ($details && $message && strpos($details, $message) !== false) {
             $message = null;
         }
 
@@ -121,9 +121,10 @@ class TeamCityInspectionsConverter extends AbstractConverter
             $title = $case->name;
         }
 
-        $inspectionId = "{$this->globalPrefix}:" . ($failureObject->type ?: $severity);
+        $inspectionId = $this->globalPrefix ?: TeamCity::DEFAULT_INSPECTION_ID;
+        $inspectionName = $failureObject->type ?: $severity ?: $inspectionId;
 
-        $this->tcLogger->addInspectionType($inspectionId, $inspectionId, $this->globalPrefix);
+        $this->tcLogger->addInspectionType($inspectionId, $inspectionName, $this->globalPrefix);
         $this->tcLogger->addInspectionIssue(
             $inspectionId,
             $this->cleanFilepath((string)$case->file),
