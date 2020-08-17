@@ -43,6 +43,7 @@ class ConverterTeamCityInspectionsTest extends PHPUnit
     public function testToInternalPhpMd()
     {
         $source = (new PhpMdJsonConverter())
+            ->setRootPath('/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/vendor/povils/phpmnd/')
             ->toInternal(file_get_contents(Fixtures::PHPMD_JSON));
 
         $actual = (new TeamCityInspectionsConverter(['show-datetime' => false]))
