@@ -36,7 +36,7 @@ class ConverterTeamCityInspectionsTest extends PHPUnit
         $actual = (new TeamCityInspectionsConverter(['show-datetime' => false]))
             ->setFlowId(1)
             ->fromInternal($source);
-
+        echo $actual;
         isSame(
             "\n" . implode("\n\n", [
                 "##teamcity[inspectionType id='CheckStyle:PSR12.Properties.ConstantVisibility.NotFound' name='PSR12.Properties.ConstantVisibility.NotFound' category='CheckStyle' description='Issues found while checking coding standards' flowId='1']",
@@ -60,7 +60,7 @@ class ConverterTeamCityInspectionsTest extends PHPUnit
         $actual = (new TeamCityInspectionsConverter(['show-datetime' => false]))
             ->setFlowId(1)
             ->fromInternal($source);
-
+        echo $actual;
         isSame(
             "\n" . implode("\n\n", [
                 "##teamcity[inspectionType id='CheckStyle:PhanPossiblyFalseTypeMismatchProperty' name='PhanPossiblyFalseTypeMismatchProperty' category='CheckStyle' description='Issues found while checking coding standards' flowId='1']",
@@ -88,7 +88,7 @@ class ConverterTeamCityInspectionsTest extends PHPUnit
         $actual = (new TeamCityInspectionsConverter(['show-datetime' => false]))
             ->setFlowId(1)
             ->fromInternal($source);
-
+        echo $actual;
         isSame(
             "\n" . implode("\n\n", [
                 "##teamcity[inspectionType id='CodingStandardIssues:JBZoo\PHPUnit\ExampleTest' name='JBZoo\PHPUnit\ExampleTest' category='CodingStandardIssues' description='Issues found while checking coding standards' flowId='1']",
@@ -114,7 +114,7 @@ class ConverterTeamCityInspectionsTest extends PHPUnit
         $actual = (new TeamCityInspectionsConverter(['show-datetime' => false]))
             ->setFlowId(1)
             ->fromInternal($source);
-
+        echo $actual;
         isSame(
             "\n" . implode("\n\n", [
                 "##teamcity[inspectionType id='CodingStandardIssues:JBZoo\PHPUnit\ExampleTest' name='JBZoo\PHPUnit\ExampleTest' category='CodingStandardIssues' description='Issues found while checking coding standards' flowId='1']",
