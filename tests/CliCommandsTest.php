@@ -112,8 +112,10 @@ class CliCommandsTest extends PHPUnit
             'output-format' => TeamCityInspectionsConverter::TYPE,
             'input-file'    => Fixtures::PHPMD_JSON,
         ]);
-        isContain("##teamcity[inspectionType id='PHPmd' name='UnusedFormalParameter' " .
-            "category='PHPmd' description='Issues found while checking coding standards'", $output);
+        isContain("##teamcity[inspectionType id='PHPmd:UnusedFormalParameter' " .
+            "name='UnusedFormalParameter' " .
+            "category='PHPmd' " .
+            "description='Issues found while checking coding standards'", $output);
 
         $output = $this->task('convert', [
             'input-format'  => PhpMdJsonConverter::TYPE,
@@ -121,8 +123,10 @@ class CliCommandsTest extends PHPUnit
             'input-file'    => Fixtures::PHPMD_JSON,
             'suite-name'    => "Test Suite",
         ]);
-        isContain("##teamcity[inspectionType id='Test Suite' name='UnusedFormalParameter' " .
-            "category='Test Suite' description='Issues found while checking coding standards'", $output);
+        isContain("inspectionType id='Test Suite:UnusedFormalParameter' " .
+            "name='UnusedFormalParameter' " .
+            "category='Test Suite' " .
+            "description='Issues found while checking coding standards'", $output);
     }
 
     public function testConvertUndefinedFile()

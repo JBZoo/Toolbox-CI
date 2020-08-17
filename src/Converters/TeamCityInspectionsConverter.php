@@ -130,8 +130,8 @@ class TeamCityInspectionsConverter extends AbstractConverter
             $title = $case->name;
         }
 
-        $inspectionId = $this->globalPrefix ?: TeamCity::DEFAULT_INSPECTION_ID;
-        $inspectionName = $failureObject->type ?: $severity;
+        $inspectionName = $case->class ?: $case->classname ?: $failureObject->type ?: $severity;
+        $inspectionId = ($this->globalPrefix ?: TeamCity::DEFAULT_INSPECTION_ID) . ':' . $inspectionName;
 
         $this->tcLogger->addInspectionType($inspectionId, $inspectionName, $this->globalPrefix);
         $this->tcLogger->addInspectionIssue(
