@@ -39,6 +39,7 @@ class Map
         PhpDependStatsTcConverter::class,
         PhpMetricsStatsTcConverter::class,
         PhpUnitCloverStatsTcConverter::class,
+        JUnitStatsTcConverter::class,
     ];
 
     /**

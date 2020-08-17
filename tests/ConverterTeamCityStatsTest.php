@@ -15,6 +15,7 @@
 
 namespace JBZoo\PHPUnit;
 
+use JBZoo\ToolboxCI\Converters\JUnitStatsTcConverter;
 use JBZoo\ToolboxCI\Converters\PhpDependStatsTcConverter;
 use JBZoo\ToolboxCI\Converters\PhpLocStatsTcConverter;
 use JBZoo\ToolboxCI\Converters\PhpMetricsStatsTcConverter;
@@ -191,6 +192,24 @@ class ConverterTeamCityStatsTest extends PHPUnit
             "\n##teamcity[buildStatisticValue key='Coverage / Lines (PHPUnit:LinesOfCode)' value='4542' flowId='1']\n",
             "\n##teamcity[buildStatisticValue key='Coverage / Lines Non-Comment (PHPUnit:NonCommentLinesOfCode)' value='2869' flowId='1']\n",
             "\n##teamcity[buildStatisticValue key='Coverage / Method-level, % (PHPUnit:CodeCoverageM)' value='71.428571' flowId='1']\n",
+        ]), $output);
+    }
+
+    public function testJUnitXml()
+    {
+        $converter = (new JUnitStatsTcConverter(['show-datetime' => false], 1));
+
+        $sourceCode = $converter->toInternalMetric(file_get_contents(Fixtures::PHPUNIT_JUNIT_NESTED));
+        $output = $converter->fromInternalMetric($sourceCode);
+
+        isSame(implode('', [
+            "\n##teamcity[buildStatisticValue key='Tests / Assertions (JUnit:assertions)' value='8' flowId='1']\n",
+            "\n##teamcity[buildStatisticValue key='Tests / Count (JUnit:tests)' value='14' flowId='1']\n",
+            "\n##teamcity[buildStatisticValue key='Tests / Errors (JUnit:errors)' value='3' flowId='1']\n",
+            "\n##teamcity[buildStatisticValue key='Tests / Failures (JUnit:failure)' value='4' flowId='1']\n",
+            "\n##teamcity[buildStatisticValue key='Tests / Skipped (JUnit:skipped)' value='2' flowId='1']\n",
+            "\n##teamcity[buildStatisticValue key='Tests / Time (JUnit:time)' value='10.51172' flowId='1']\n",
+            "\n##teamcity[buildStatisticValue key='Tests / Warnings (JUnit:warnings)' value='1' flowId='1']\n",
         ]), $output);
     }
 }
