@@ -33,6 +33,7 @@ class Map
         CheckStyleConverter::class          => [self::INPUT => true, self::OUTPUT => false],
         PsalmJsonConverter::class           => [self::INPUT => true, self::OUTPUT => false],
         TeamCityInspectionsConverter::class => [self::INPUT => false, self::OUTPUT => true],
+        PhpMndConverter::class              => [self::INPUT => true, self::OUTPUT => false],
     ];
 
     private const MAP_METRICS = [

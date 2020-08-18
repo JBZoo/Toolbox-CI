@@ -56,7 +56,7 @@ class CheckStyleConverter extends AbstractConverter
 
                     $line = $error->get('line');
                     $column = $error->get('column');
-                    $source = $error->get('source') ?? 'ERROR';
+                    $type = $error->get('source') ?? 'ERROR';
 
                     $caseName = $line > 0 ? "{$relFilename} line {$line}" : $relFilename;
                     $caseName = $column > 0 ? "{$caseName}, column {$column}" : $caseName;
@@ -65,9 +65,9 @@ class CheckStyleConverter extends AbstractConverter
                     $case->file = $absFilename;
                     $case->line = $line ?: null;
                     $case->column = $column ?: null;
-                    $case->class = $source;
-                    $case->classname = $source;
-                    $case->failure = new SourceCaseOutput($source, $error->get('message'), self::getDetails($error));
+                    $case->class = $type;
+                    $case->classname = $type;
+                    $case->failure = new SourceCaseOutput($type, $error->get('message'), self::getDetails($error));
                 }
             }
         }

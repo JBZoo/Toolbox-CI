@@ -1,38 +1,14 @@
 <?xml version="1.0"?>
 <phpmnd version="2.3.0" fileCount="20" errorCount="20">
     <files>
-        <file path="tests/FilterTest.php" errors="1">
-            <entry line="208" start="30" end="33">
-                <snippet><![CDATA[            return $value === 123;]]></snippet>
-                <suggestions/>
-            </entry>
-        </file>
-        <file path="tests/CliTest.php" errors="1">
-            <entry line="107" start="44" end="46">
-                <snippet><![CDATA[        isTrue(Cli::getNumberOfColumns() >= 80);]]></snippet>
-                <suggestions/>
-            </entry>
-        </file>
-        <file path="src/Dates.php" errors="2">
-            <entry line="112" start="23" end="28">
-                <snippet><![CDATA[        return $time > 10000;]]></snippet>
-                <suggestions/>
-            </entry>
-            <entry line="212" start="23" end="24">
-                <snippet><![CDATA[        if ($seconds < 2) {]]></snippet>
-                <suggestions/>
-            </entry>
-        </file>
-        <file path="src/Http.php" errors="1">
-            <entry line="166" start="45" end="46">
-                <snippet><![CDATA[                    if (count($exploded) === 2) {]]></snippet>
-                <suggestions/>
-            </entry>
-        </file>
         <file path="src/IP.php" errors="3">
             <entry line="81" start="36" end="37">
                 <snippet><![CDATA[            while (count($blocks) < 4) {]]></snippet>
-                <suggestions/>
+                <suggestions>
+                    <suggestion>Env::VAR_INT</suggestion>
+                    <suggestion>FS::PERM_ALL_READ</suggestion>
+                    <suggestion>Url::URL_JOIN_QUERY</suggestion>
+                </suggestions>
             </entry>
             <entry line="137" start="" end="10">
                 <snippet><![CDATA[        } elseif (($ipAddressLong & 0xC0000000) === 0x80000000) {]]></snippet>
@@ -43,59 +19,49 @@
                 <suggestions/>
             </entry>
         </file>
-        <file path="src/Timer.php" errors="5">
+
+        <file path="tests/CliTest.php" errors="1">
+            <entry line="107" start="44" end="46">
+                <snippet><![CDATA[        isTrue(Cli::getNumberOfColumns() >= 80);]]></snippet>
+                <suggestions>
+                    <suggestion>Cli::DEFAULT_WIDTH</suggestion>
+                    <suggestion>Url::PORT_HTTP</suggestion>
+                </suggestions>
+            </entry>
+        </file>
+
+        <file path="src/Timer.php" errors="1">
             <entry line="49" start="56" end="57">
                 <snippet><![CDATA[                return $time . ' ' . $unit . ($time === 1.0 ? '' : 's');]]></snippet>
                 <suggestions/>
             </entry>
-            <entry line="67" start="31" end="33">
-                <snippet><![CDATA[        if (!$time || $time >= 10 || $time >= 100) {]]></snippet>
+        </file>
+
+        <file path="src/Dates.php" errors="2">
+            <entry line="112" start="23" end="28">
+                <snippet><![CDATA[        return $time > 10000;]]></snippet>
                 <suggestions/>
             </entry>
-            <entry line="67" start="46" end="49">
-                <snippet><![CDATA[        if (!$time || $time >= 10 || $time >= 100) {]]></snippet>
-                <suggestions/>
-            </entry>
-            <entry line="69" start="26" end="28">
-                <snippet><![CDATA[        } elseif ($time < 10 && $time >= 0.1) {]]></snippet>
-                <suggestions/>
-            </entry>
-            <entry line="69" start="41" end="44">
-                <snippet><![CDATA[        } elseif ($time < 10 && $time >= 0.1) {]]></snippet>
-                <suggestions/>
+            <entry line="212" start="23" end="24">
+                <snippet><![CDATA[        if ($seconds < 2) {]]></snippet>
+                <suggestions>
+                    <suggestion>Env::VAR_BOOL</suggestion>
+                    <suggestion>Cli::STDERR</suggestion>
+                    <suggestion>FS::PERM_ALL_WRITE</suggestion>
+                    <suggestion>Url::URL_JOIN_PATH</suggestion>
+                </suggestions>
             </entry>
         </file>
-        <file path="src/Ser.php" errors="1">
-            <entry line="162" start="25" end="26">
-                <snippet>
-                    <![CDATA[        return $length < 4 || $data[1] !== ':' || ($data[$length - 1] !== ';' && $data[$length - 1] !== '}');]]></snippet>
-                <suggestions/>
-            </entry>
-        </file>
-        <file path="src/Image.php" errors="6">
-            <entry line="135" start="41" end="42">
-                <snippet><![CDATA[        } elseif ((count($origColor) === 3 || count($origColor) === 4)) {]]></snippet>
-                <suggestions/>
-            </entry>
-            <entry line="135" start="68" end="69">
-                <snippet><![CDATA[        } elseif ((count($origColor) === 3 || count($origColor) === 4)) {]]></snippet>
-                <suggestions/>
-            </entry>
-            <entry line="139" start="31" end="32">
-                <snippet><![CDATA[        if (count($result) !== 4) {]]></snippet>
-                <suggestions/>
-            </entry>
-            <entry line="158" start="31" end="32">
-                <snippet><![CDATA[        if (strlen($color) === 6) {]]></snippet>
-                <suggestions/>
-            </entry>
-            <entry line="160" start="37" end="38">
-                <snippet><![CDATA[        } elseif (strlen($color) === 3) {]]></snippet>
-                <suggestions/>
-            </entry>
-            <entry line="261" start="34" end="37">
-                <snippet><![CDATA[                if ($minAlpha !== 127) {]]></snippet>
-                <suggestions/>
+
+        <file path="src/Http.php" errors="1">
+            <entry line="166" start="45" end="46">
+                <snippet><![CDATA[                    if (count($exploded) === 2) {]]></snippet>
+                <suggestions>
+                    <suggestion>Env::VAR_BOOL</suggestion>
+                    <suggestion>Cli::STDERR</suggestion>
+                    <suggestion>FS::PERM_ALL_WRITE</suggestion>
+                    <suggestion>Url::URL_JOIN_PATH</suggestion>
+                </suggestions>
             </entry>
         </file>
     </files>

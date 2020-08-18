@@ -145,9 +145,14 @@ abstract class AbstractConverter
             return null;
         }
 
-        $line = (int)$line > 0 ? ":{$line}" : '';
-        $column = (int)$column > 0 ? ":{$column}" : '';
+        $printLine = (int)$line > 1 ? ":{$line}" : '';
 
-        return $filename . $line . $column;
+        if ($printLine !== '') {
+            $printColumn = (int)$column > 1 ? ":{$column}" : '';
+        } else {
+            $printColumn = '';
+        }
+
+        return $filename . $printLine . $printColumn;
     }
 }
