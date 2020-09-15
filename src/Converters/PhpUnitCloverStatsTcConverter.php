@@ -85,7 +85,8 @@ class PhpUnitCloverStatsTcConverter extends AbstractStatsTcConverter
 
         $data['CRAPTotal'] = $crapSummary;
         $data['CRAPAmount'] = $crapAmount;
-        $data['CRAPMaximum'] = count($crapValues) > 0 ? max($crapValues) : 0;
+        /** @phan-suppress-next-line PhanPartialTypeMismatchArgumentInternal */
+        $data['CRAPMaximum'] = count($crapValues) > 0 ? max($crapValues) : 0.0;
         $data['CRAPAverage'] = self::percent($crapSummary, $crapValuesCount) / 100;
         $data['CRAPPercent'] = self::percent($crapAmount, $crapValuesCount);
 
