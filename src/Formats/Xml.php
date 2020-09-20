@@ -62,11 +62,17 @@ class Xml
         $domElement = $domElement ?? $document;
 
         if ($xmlAsArray['_text'] !== null) {
-            $domElement->appendChild($document->createTextNode($xmlAsArray['_text']));
+            $newNode = $document->createTextNode($xmlAsArray['_text']);
+            if ($newNode !== false) {
+                $domElement->appendChild($newNode);
+            }
         }
 
         if ($xmlAsArray['_cdata'] !== null) {
-            $domElement->appendChild($document->createCDATASection($xmlAsArray['_cdata']));
+            $newNode = $document->createCDATASection($xmlAsArray['_cdata']);
+            if ($newNode !== false) {
+                $domElement->appendChild($newNode);
+            }
         }
 
         if ($domElement instanceof \DOMElement) {
@@ -76,11 +82,11 @@ class Xml
         }
 
         foreach ($xmlAsArray['_children'] as $mixedElement) {
-            $node = $document->createElement($mixedElement['_node']);
-            $domElement->appendChild($node);
-
-            /** @phan-suppress-next-line PhanPossiblyFalseTypeArgument */
-            self::array2Dom($mixedElement, $node, $document);
+            $newNode = $document->createElement($mixedElement['_node']);
+            if ($newNode !== false) {
+                $domElement->appendChild($newNode);
+                self::array2Dom($mixedElement, $newNode, $document);
+            }
         }
 
         return $document;

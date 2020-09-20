@@ -41,17 +41,18 @@ class JUnit
 
     /**
      * @return \DOMDocument
-     * @phan-suppress PhanPossiblyNonClassMethodCall
      */
     public function getDom(): \DOMDocument
     {
         $document = Xml::createDomDocument();
 
         $testSuites = $document->createElement('testsuites');
-        $document->appendChild($testSuites);
+        if ($testSuites !== false) {
+            $document->appendChild($testSuites);
 
-        foreach ($this->testSuites as $testSuite) {
-            $testSuites->appendChild($testSuite->toXML($document));
+            foreach ($this->testSuites as $testSuite) {
+                $testSuites->appendChild($testSuite->toXML($document));
+            }
         }
 
         return $document;
