@@ -109,11 +109,8 @@ class TeamCityInspectionsConverter extends AbstractConverter
             $failureObject = $case->skipped;
         }
 
-        if (null === $failureObject) {
-            return;
-        }
-
-        if (null === $severity) {
+        /** @phpstan-ignore-next-line */
+        if (!$failureObject || !$severity) {
             return;
         }
 
