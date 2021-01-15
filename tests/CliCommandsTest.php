@@ -38,6 +38,10 @@ class CliCommandsTest extends PHPUnit
 {
     public function testConvertCommandReadMe()
     {
+        if (!Sys::isPHP('7.2')) {
+            skip('Old help text is different for different libs/php versions');
+        }
+
         $helpMessage = $this->taskReal('convert', ['help' => null]);
         $helpMessage = implode("\n", [
             '',
