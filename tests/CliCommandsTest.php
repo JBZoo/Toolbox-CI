@@ -241,7 +241,7 @@ class CliCommandsTest extends PHPUnit
             ]),
             $params,
             $rootDir,
-            0
+            false
         );
     }
 }

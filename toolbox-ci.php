@@ -35,7 +35,7 @@ foreach ($vendorPaths as $file) {
 
 require JBZOO_COMPOSER_GRAPH;
 
-$application = new Application();
+$application = new Application('JBZoo/Toolbox-CI', '@git-version@');
 $application->add(new Convert());
 $application->add(new ConvertMap());
 $application->add(new TeamCityStats());
