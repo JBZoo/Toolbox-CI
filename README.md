@@ -9,6 +9,10 @@
 
 ```sh
 composer require jbzoo/toolbox-ci
+
+# OR use phar file.
+# Replace <VERSION> to the latest version. See releases page or badge above
+wget https://github.com/JBZoo/Toolbox-CI/releases/download/<VERSION>/toolbox-ci.phar
 ```
 
 
