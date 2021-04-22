@@ -13,6 +13,8 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
+declare(strict_types=1);
+
 namespace JBZoo\ToolboxCI\Formats\Source;
 
 use JBZoo\ToolboxCI\Formats\AbstractNode;

@@ -13,6 +13,8 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
+declare(strict_types=1);
+
 use JBZoo\ToolboxCI\Commands\Convert;
 use JBZoo\ToolboxCI\Commands\ConvertMap;
 use JBZoo\ToolboxCI\Commands\TeamCityStats;

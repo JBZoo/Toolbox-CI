@@ -13,6 +13,8 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
+declare(strict_types=1);
+
 namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
@@ -37,7 +39,7 @@ class ConverterJUnitTest extends PHPUnit
         $suite2->addCase('Test #2.1')->setTime(3);
         $suite2->addCase('Test #2.2')->setTime(4);
         $suite2->addCase('Test #2.3')->setTime(5);
-        $actual = (new JUnitConverter())->toInternal($junit)->toArray();
+        $actual = (new JUnitConverter())->toInternal((string)$junit)->toArray();
 
 
         $collection = new SourceSuite();

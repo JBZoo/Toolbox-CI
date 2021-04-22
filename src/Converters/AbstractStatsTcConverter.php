@@ -13,6 +13,8 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
+declare(strict_types=1);
+
 namespace JBZoo\ToolboxCI\Converters;
 
 use JBZoo\ToolboxCI\Formats\Metric\Metrics;
@@ -61,7 +63,7 @@ abstract class AbstractStatsTcConverter extends AbstractConverter
                 continue;
             }
 
-            if (is_float($value) || strpos($value, '.') !== false) {
+            if (is_float($value) || strpos((string)$value, '.') !== false) {
                 $metrics->add($key, float($value, 6));
             } else {
                 $metrics->add($key, int($value));
