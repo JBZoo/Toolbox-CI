@@ -1,10 +1,10 @@
 {
-    "name"              : "jbzoo/toolbox-ci",
-    "type"              : "library",
-    "description"       : "Toolbox for continuous integration system",
-    "license"           : "MIT",
+    "name"         : "jbzoo/toolbox-ci",
+    "type"         : "library",
+    "description"  : "Toolbox for continuous integration system",
+    "license"      : "MIT",
 
-    "authors"           : [
+    "authors"      : [
         {
             "name"  : "Denis Smetannikov",
             "email" : "admin@jbzoo.com",
@@ -12,38 +12,38 @@
         }
     ],
 
-    "require"           : {
+    "require"      : {
         "php"             : ">=7.2",
         "ext-dom"         : "*",
         "ext-simplexml"   : "*",
 
-        "jbzoo/data"      : "^4.1.3",
-        "jbzoo/utils"     : "^4.2.3",
+        "jbzoo/data"      : "^4.2.1",
+        "jbzoo/utils"     : "^4.3.0",
         "symfony/console" : ">=4.4"
     },
 
-    "require-dev"       : {
-        "jbzoo/toolbox-dev" : "^2.6.2"
+    "require-dev"  : {
+        "jbzoo/toolbox-dev"         : "^2.10.0",
+        "roave/security-advisories" : "dev-master"
     },
 
-    "autoload"          : {
+    "autoload"     : {
         "psr-4" : {
             "JBZoo\\ToolboxCI\\" : "src"
         }
     },
 
-    "autoload-dev"      : {
+    "autoload-dev" : {
         "classmap" : ["tests"]
     },
 
-    "bin"               : ["toolbox-ci"],
-    "minimum-stability" : "dev",
-    "prefer-stable"     : true,
-    "config"            : {
+    "bin"          : ["toolbox-ci"],
+
+    "config"       : {
         "optimize-autoloader" : true
     },
 
-    "extra"             : {
+    "extra"        : {
         "branch-alias" : {
             "dev-master" : "1.x-dev"
         }

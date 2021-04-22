@@ -13,6 +13,8 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
+declare(strict_types=1);
+
 namespace JBZoo\PHPUnit;
 
 use JBZoo\ToolboxCI\Commands\Convert;
@@ -241,7 +243,7 @@ class CliCommandsTest extends PHPUnit
             ]),
             $params,
             $rootDir,
-            0
+            false
         );
     }
 }
