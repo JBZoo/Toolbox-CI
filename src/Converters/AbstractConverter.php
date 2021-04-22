@@ -13,6 +13,8 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
+declare(strict_types=1);
+
 namespace JBZoo\ToolboxCI\Converters;
 
 use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
@@ -87,7 +89,7 @@ abstract class AbstractConverter
      * @param int $flowId
      * @return $this
      */
-    public function setFlowId(int $flowId)
+    public function setFlowId(int $flowId): self
     {
         $this->flowId = $flowId;
         return $this;

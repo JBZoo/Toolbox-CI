@@ -13,6 +13,8 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
+declare(strict_types=1);
+
 namespace JBZoo\ToolboxCI\Formats\TeamCity;
 
 /**
@@ -73,7 +75,7 @@ class Helper
 
         $result = "\n##teamcity[{$eventName}";
         foreach ($params as $propertyName => $propertyValue) {
-            $escapedValue = self::escapeValue($propertyValue);
+            $escapedValue = self::escapeValue((string)$propertyValue);
             if (is_int($propertyName)) {
                 $result .= " '{$escapedValue}'"; // Value without name; skip the key and dump just the value
             } else {

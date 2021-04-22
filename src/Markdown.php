@@ -13,6 +13,8 @@
  * @link       https://github.com/JBZoo/Toolbox-CI
  */
 
+declare(strict_types=1);
+
 namespace JBZoo\ToolboxCI;
 
 /**
@@ -77,11 +79,9 @@ class Markdown
         }
 
         // all columns must be at least 3 wide for the markdown to work
-        $widths = array_map(static function (int $width) {
+        return array_map(static function (int $width) {
             return $width >= self::CELL_MIN_LENGTH ? $width : self::CELL_MIN_LENGTH;
         }, $widths);
-
-        return $widths;
     }
 
     /**
@@ -112,9 +112,7 @@ class Markdown
             $result .= ' | ';
         }
 
-        $result = rtrim($result, ' ') . PHP_EOL . $this->renderAlignments($widths) . PHP_EOL;
-
-        return $result;
+        return rtrim($result, ' ') . PHP_EOL . $this->renderAlignments($widths) . PHP_EOL;
     }
 
     /**
