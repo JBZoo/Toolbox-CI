@@ -63,7 +63,7 @@ php ./vendor/bin/toolbox-ci convert:map
 ### Unit tests and check code style
 
 ```sh
-make update
+make build
 make test-all
 ```
 
