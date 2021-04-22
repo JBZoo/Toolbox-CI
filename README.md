@@ -9,6 +9,10 @@
 
 ```sh
 composer require jbzoo/toolbox-ci
+
+# OR use phar file.
+# Replace <VERSION> to the latest version. See releases page or badge above
+wget https://github.com/JBZoo/Toolbox-CI/releases/download/<VERSION>/toolbox-ci.phar
 ```
 
 
@@ -63,7 +67,7 @@ php ./vendor/bin/toolbox-ci convert:map
 ### Unit tests and check code style
 
 ```sh
-make update
+make build
 make test-all
 ```
 

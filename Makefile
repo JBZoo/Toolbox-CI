@@ -11,10 +11,16 @@
 # @link       https://github.com/JBZoo/Toolbox-CI
 #
 
+.PHONY: build
 
 ifneq (, $(wildcard ./vendor/jbzoo/codestyle/src/init.Makefile))
     include ./vendor/jbzoo/codestyle/src/init.Makefile
 endif
+
+build: ##@Project Install all 3rd party dependencies
+	$(call title,"Install/Update all 3rd party dependencies")
+	@composer install --optimize-autoloader --no-progress
+	@make build-phar
 
 
 update: ##@Project Install/Update all 3rd party dependencies
