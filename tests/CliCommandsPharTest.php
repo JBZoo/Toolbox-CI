@@ -49,7 +49,7 @@ class CliCommandsPharTest extends CliCommandsTest
         return Cli::exec(
             implode(' ', [
                 Sys::getBinary(),
-                "{$rootDir}/build/toolbox-ci.phar",
+                "{$rootDir}/build/toolbox-ci.phar --no-ansi",
                 $action,
             ]),
             $params,

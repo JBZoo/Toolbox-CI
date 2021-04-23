@@ -234,12 +234,11 @@ class CliCommandsTest extends PHPUnit
     public function taskReal(string $action, array $params = []): string
     {
         $rootDir = PROJECT_ROOT;
-        $params['--no-ansi'] = true;
 
         return Cli::exec(
             implode(' ', [
                 Sys::getBinary(),
-                "{$rootDir}/toolbox-ci.php",
+                "{$rootDir}/toolbox-ci.php --no-ansi",
                 $action,
             ]),
             $params,
