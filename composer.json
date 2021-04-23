@@ -1,6 +1,6 @@
 {
     "name"         : "jbzoo/toolbox-ci",
-    "type"         : "library",
+    "type"         : "project",
     "description"  : "Toolbox for continuous integration system",
     "license"      : "MIT",
 

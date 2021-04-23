@@ -40,23 +40,23 @@ class CliCommandsTest extends PHPUnit
 {
     public function testConvertCommandReadMe()
     {
-        if (!Sys::isPHP('7.2')) {
+        if (version_compare(PHP_VERSION, '7.3.0') < 0) {
+            $helpMessage = $this->taskReal('convert', ['help' => null]);
+            $helpMessage = implode("\n", [
+                '',
+                '### Usage',
+                '',
+                '```',
+                '$ php ./vendor/bin/toolbox-ci convert --help',
+                $helpMessage,
+                '```',
+                '',
+            ]);
+
+            isFileContains($helpMessage, PROJECT_ROOT . '/README.md');
+        } else {
             skip('Old help text is different for different libs/php versions');
         }
-
-        $helpMessage = $this->taskReal('convert', ['help' => null]);
-        $helpMessage = implode("\n", [
-            '',
-            '### Usage',
-            '',
-            '```',
-            '$ php ./vendor/bin/toolbox-ci convert --help',
-            $helpMessage,
-            '```',
-            '',
-        ]);
-
-        isFileContains($helpMessage, PROJECT_ROOT . '/README.md');
     }
 
     public function testConvertCommandMapReadMe()
@@ -238,7 +238,7 @@ class CliCommandsTest extends PHPUnit
         return Cli::exec(
             implode(' ', [
                 Sys::getBinary(),
-                "{$rootDir}/toolbox-ci.php",
+                "{$rootDir}/toolbox-ci.php --no-ansi",
                 $action,
             ]),
             $params,

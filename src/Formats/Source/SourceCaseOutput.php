@@ -65,7 +65,7 @@ class SourceCaseOutput
         $text = (string)$this->details;
         $result['description'] = $text;
 
-        $lines = (array)explode("\n", $text);
+        $lines = explode("\n", $text);
         if (array_key_exists(1, $lines)) {
             $result['message'] = $lines[1];
             unset($lines[0], $lines[1]);

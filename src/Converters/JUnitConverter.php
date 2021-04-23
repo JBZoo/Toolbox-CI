@@ -102,7 +102,7 @@ class JUnitConverter extends AbstractConverter
                     $junitCase->addSystemOut("{$sourceCase->stdOut}\n{$sourceCase->errOut}");
                 } elseif ($sourceCase->stdOut && !$sourceCase->errOut) {
                     $junitCase->addSystemOut($sourceCase->stdOut);
-                } elseif (!$sourceCase->stdOut && $sourceCase->errOut) {
+                } elseif ($sourceCase->errOut) {
                     $junitCase->addSystemOut($sourceCase->errOut);
                 }
 
