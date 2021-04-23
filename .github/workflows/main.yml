@@ -34,7 +34,6 @@ jobs:
     strategy:
       matrix:
         php-version: [ 7.2, 7.3, 7.4 ]
-        coverage: [ xdebug, none ]
         experimental: [ false ]
         include:
           - php-version: "8.0"
@@ -49,7 +48,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          coverage: ${{ matrix.coverage }}
+          coverage: xdebug
           tools: composer
 
       - name: Build the Project
