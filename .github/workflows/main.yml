@@ -29,7 +29,7 @@ env:
 
 jobs:
   phpunit:
-    name: PHPUnit
+    name: Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:

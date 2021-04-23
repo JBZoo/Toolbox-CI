@@ -77,31 +77,27 @@
         },
         {
             "name": "jbzoo/utils",
-            "version": "4.3.0",
+            "version": "4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JBZoo/Utils.git",
-                "reference": "4b3452902e0d617012cee087e31ffb74b96f2c69"
+                "reference": "2a5b662efe95239aed7f04d120d6f713153ae645"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JBZoo/Utils/zipball/4b3452902e0d617012cee087e31ffb74b96f2c69",
-                "reference": "4b3452902e0d617012cee087e31ffb74b96f2c69",
+                "url": "https://api.github.com/repos/JBZoo/Utils/zipball/2a5b662efe95239aed7f04d120d6f713153ae645",
+                "reference": "2a5b662efe95239aed7f04d120d6f713153ae645",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-filter": "*",
                 "ext-posix": "*",
-                "jbzoo/toolbox-ci": "^1.3.5",
                 "php": ">=7.2"
             },
             "require-dev": {
-                "jbzoo/codestyle": "^2.10.0",
-                "jbzoo/data": "^4.1.3",
-                "jbzoo/phpunit": "^4.7.0",
-                "symfony/polyfill-mbstring": "^1.22.1",
-                "symfony/process": "^5.2.4"
+                "jbzoo/toolbox-dev": "^2.11.0",
+                "symfony/process": ">=4.4"
             },
             "suggest": {
                 "ext-gd": "To use Image helper",
@@ -173,9 +169,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JBZoo/Utils/issues",
-                "source": "https://github.com/JBZoo/Utils/tree/4.3.0"
+                "source": "https://github.com/JBZoo/Utils/tree/4.4.0"
             },
-            "time": "2021-04-20T23:38:15+00:00"
+            "time": "2021-04-23T17:32:22+00:00"
         },
         {
             "name": "psr/container",
