@@ -53,6 +53,8 @@ class CliCommandsTest extends PHPUnit
                 '',
             ]);
 
+            dump($helpMessage);
+
             isFileContains($helpMessage, PROJECT_ROOT . '/README.md');
         } else {
             skip('Old help text is different for different libs/php versions');
