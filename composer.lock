@@ -1530,20 +1530,19 @@
         },
         {
             "name": "jbzoo/codestyle",
-            "version": "2.12.0",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JBZoo/Codestyle.git",
-                "reference": "7597e91c3c79bbdb1d827dc1bb25214311a3aa07"
+                "reference": "ff97d5dafd63870a9ceba34243f2018c451b2cff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JBZoo/Codestyle/zipball/7597e91c3c79bbdb1d827dc1bb25214311a3aa07",
-                "reference": "7597e91c3c79bbdb1d827dc1bb25214311a3aa07",
+                "url": "https://api.github.com/repos/JBZoo/Codestyle/zipball/ff97d5dafd63870a9ceba34243f2018c451b2cff",
+                "reference": "ff97d5dafd63870a9ceba34243f2018c451b2cff",
                 "shasum": ""
             },
             "require": {
-                "maglnet/composer-require-checker": ">=2.0.0",
                 "nikic/php-parser": ">=4.10.4",
                 "php": ">=7.2",
                 "phpcompatibility/php-compatibility": ">=9.3.5",
@@ -1557,9 +1556,9 @@
                 "symfony/yaml": ">=4.4.16"
             },
             "require-dev": {
-                "jbzoo/phpunit": "^4.8.0",
+                "jbzoo/phpunit": "^4.9.0",
                 "jbzoo/toolbox-ci": "^1.4.0",
-                "jbzoo/utils": "^4.3.0",
+                "jbzoo/utils": "^4.4.0",
                 "phpbench/phpbench": "^0.17.1"
             },
             "type": "library",
@@ -1595,9 +1594,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JBZoo/Codestyle/issues",
-                "source": "https://github.com/JBZoo/Codestyle/tree/2.12.0"
+                "source": "https://github.com/JBZoo/Codestyle/tree/2.13.0"
             },
-            "time": "2021-04-23T14:13:51+00:00"
+            "time": "2021-04-23T20:32:22+00:00"
         },
         {
             "name": "jbzoo/jbdump",
@@ -1966,80 +1965,6 @@
                 }
             ],
             "time": "2021-03-07T00:25:34+00:00"
-        },
-        {
-            "name": "maglnet/composer-require-checker",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maglnet/ComposerRequireChecker.git",
-                "reference": "2d0ed3c76913a24bee08e324446aa47dd1ab37fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/maglnet/ComposerRequireChecker/zipball/2d0ed3c76913a24bee08e324446aa47dd1ab37fb",
-                "reference": "2d0ed3c76913a24bee08e324446aa47dd1ab37fb",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "ext-phar": "*",
-                "nikic/php-parser": "^4.0",
-                "php": "^7.1",
-                "symfony/console": "^3.4.17 | ^4.1.6",
-                "webmozart/glob": "^4.1"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "^1.6",
-                "phpstan/phpstan": "^0.10.3",
-                "phpunit/phpunit": "^6.0"
-            },
-            "bin": [
-                "bin/composer-require-checker"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ComposerRequireChecker\\": "src/ComposerRequireChecker"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marco Pivetta",
-                    "email": "ocramius@gmail.com",
-                    "homepage": "http://ocramius.github.io/"
-                },
-                {
-                    "name": "Matthias Glaub",
-                    "email": "magl@magl.net",
-                    "homepage": "http://magl.net"
-                }
-            ],
-            "description": "CLI tool to analyze composer dependencies and verify that no unknown symbols are used in the sources of a package",
-            "homepage": "https://github.com/maglnet/ComposerRequireChecker",
-            "keywords": [
-                "analysis",
-                "cli",
-                "composer",
-                "dependency",
-                "imports",
-                "require",
-                "requirements"
-            ],
-            "support": {
-                "issues": "https://github.com/maglnet/ComposerRequireChecker/issues",
-                "source": "https://github.com/maglnet/ComposerRequireChecker/tree/2.0.0"
-            },
-            "time": "2019-03-19T20:16:54+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -5997,57 +5922,6 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
-        },
-        {
-            "name": "webmozart/glob",
-            "version": "4.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webmozarts/glob.git",
-                "reference": "3cbf63d4973cf9d780b93d2da8eec7e4a9e63bbe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/glob/zipball/3cbf63d4973cf9d780b93d2da8eec7e4a9e63bbe",
-                "reference": "3cbf63d4973cf9d780b93d2da8eec7e4a9e63bbe",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.3|^7.0",
-                "webmozart/path-util": "^2.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.6",
-                "sebastian/version": "^1.0.1",
-                "symfony/filesystem": "^2.5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Webmozart\\Glob\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@gmail.com"
-                }
-            ],
-            "description": "A PHP implementation of Ant's glob.",
-            "support": {
-                "issues": "https://github.com/webmozarts/glob/issues",
-                "source": "https://github.com/webmozarts/glob/tree/4.1.0"
-            },
-            "time": "2015-12-29T11:14:33+00:00"
         },
         {
             "name": "webmozart/path-util",
