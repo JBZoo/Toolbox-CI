@@ -53,8 +53,6 @@ class CliCommandsTest extends PHPUnit
                 '',
             ]);
 
-            dump($helpMessage);
-
             isFileContains($helpMessage, PROJECT_ROOT . '/README.md');
         } else {
             skip('Old help text is different for different libs/php versions');
@@ -236,6 +234,7 @@ class CliCommandsTest extends PHPUnit
     public function taskReal(string $action, array $params = []): string
     {
         $rootDir = PROJECT_ROOT;
+        $params['--no-ansi'] = true;
 
         return Cli::exec(
             implode(' ', [
