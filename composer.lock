@@ -858,87 +858,6 @@
             "time": "2020-12-24T20:19:03+00:00"
         },
         {
-            "name": "composer/semver",
-            "version": "3.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/semver.git",
-                "reference": "a02fdf930a3c1c3ed3a49b5f63859c0c20e10464"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/a02fdf930a3c1c3ed3a49b5f63859c0c20e10464",
-                "reference": "a02fdf930a3c1c3ed3a49b5f63859c0c20e10464",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.2 || ^7.0 || ^8.0"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^0.12.54",
-                "symfony/phpunit-bridge": "^4.2 || ^5"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Composer\\Semver\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nils Adermann",
-                    "email": "naderman@naderman.de",
-                    "homepage": "http://www.naderman.de"
-                },
-                {
-                    "name": "Jordi Boggiano",
-                    "email": "j.boggiano@seld.be",
-                    "homepage": "http://seld.be"
-                },
-                {
-                    "name": "Rob Bast",
-                    "email": "rob.bast@gmail.com",
-                    "homepage": "http://robbast.nl"
-                }
-            ],
-            "description": "Semver library that offers utilities, version constraint parsing and validation.",
-            "keywords": [
-                "semantic",
-                "semver",
-                "validation",
-                "versioning"
-            ],
-            "support": {
-                "irc": "irc://irc.freenode.org/composer",
-                "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.2.4"
-            },
-            "funding": [
-                {
-                    "url": "https://packagist.com",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/composer",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-11-13T08:59:24+00:00"
-        },
-        {
             "name": "doctrine/annotations",
             "version": "1.12.1",
             "source": {
@@ -1615,26 +1534,25 @@
         },
         {
             "name": "jbzoo/codestyle",
-            "version": "2.10.0",
+            "version": "2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JBZoo/Codestyle.git",
-                "reference": "fdf154a66085047b74722c4d0c1a57357f2b55f1"
+                "reference": "7597e91c3c79bbdb1d827dc1bb25214311a3aa07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JBZoo/Codestyle/zipball/fdf154a66085047b74722c4d0c1a57357f2b55f1",
-                "reference": "fdf154a66085047b74722c4d0c1a57357f2b55f1",
+                "url": "https://api.github.com/repos/JBZoo/Codestyle/zipball/7597e91c3c79bbdb1d827dc1bb25214311a3aa07",
+                "reference": "7597e91c3c79bbdb1d827dc1bb25214311a3aa07",
                 "shasum": ""
             },
             "require": {
                 "maglnet/composer-require-checker": ">=2.0.0",
-                "nette/neon": ">=3.2.2",
                 "nikic/php-parser": ">=4.10.4",
                 "php": ">=7.2",
                 "phpcompatibility/php-compatibility": ">=9.3.5",
                 "phpmetrics/phpmetrics": ">=2.7.4",
-                "phpstan/phpstan": ">=0.12.83",
+                "phpstan/phpstan": ">=0.12.84",
                 "phpstan/phpstan-strict-rules": ">=0.12.9",
                 "povils/phpmnd": ">=2.4.0",
                 "psalm/phar": ">=4.7.0",
@@ -1643,11 +1561,9 @@
                 "symfony/yaml": ">=4.4.16"
             },
             "require-dev": {
-                "jbzoo/composer-diff": "^1.1.2",
-                "jbzoo/composer-graph": "^1.0.4",
-                "jbzoo/phpunit": "^4.6.2",
-                "jbzoo/toolbox-ci": "^1.3.5",
-                "jbzoo/utils": "^4.2.3",
+                "jbzoo/phpunit": "^4.8.0",
+                "jbzoo/toolbox-ci": "^1.4.0",
+                "jbzoo/utils": "^4.3.0",
                 "phpbench/phpbench": "^0.17.1"
             },
             "type": "library",
@@ -1683,145 +1599,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JBZoo/Codestyle/issues",
-                "source": "https://github.com/JBZoo/Codestyle/tree/2.10.0"
+                "source": "https://github.com/JBZoo/Codestyle/tree/2.12.0"
             },
-            "time": "2021-04-15T19:26:13+00:00"
-        },
-        {
-            "name": "jbzoo/composer-diff",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/JBZoo/Composer-Diff.git",
-                "reference": "a05c0535841e147da67d16f7637befc823620af7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/JBZoo/Composer-Diff/zipball/a05c0535841e147da67d16f7637befc823620af7",
-                "reference": "a05c0535841e147da67d16f7637befc823620af7",
-                "shasum": ""
-            },
-            "require": {
-                "composer/semver": ">=1.0",
-                "ext-filter": "*",
-                "ext-json": "*",
-                "jbzoo/data": "^4.2.0",
-                "php": ">=7.2",
-                "symfony/console": ">=4.4",
-                "symfony/process": ">=4.4"
-            },
-            "require-dev": {
-                "jbzoo/codestyle": "^2.10.0",
-                "jbzoo/phpunit": "^4.7.0",
-                "jbzoo/toolbox-ci": "^1.3.5",
-                "jbzoo/utils": "^4.3.0",
-                "php-coveralls/php-coveralls": "^2.4.3",
-                "roave/security-advisories": "dev-master",
-                "symfony/var-dumper": "^4.4|^5.2.5"
-            },
-            "bin": [
-                "composer-diff"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "JBZoo\\ComposerDiff\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Denis Smetannikov",
-                    "email": "admin@jbzoo.com",
-                    "role": "lead"
-                },
-                {
-                    "name": "David Jonas",
-                    "homepage": "https://github.com/davidrjonas",
-                    "role": "Original Idea"
-                }
-            ],
-            "description": "See what has changed after a composer update.",
-            "keywords": [
-                "composer",
-                "composer diff",
-                "composer-diff",
-                "composer.json",
-                "composer.lock",
-                "diff",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/JBZoo/Composer-Diff/issues",
-                "source": "https://github.com/JBZoo/Composer-Diff/tree/1.4.0"
-            },
-            "time": "2021-04-21T11:39:02+00:00"
-        },
-        {
-            "name": "jbzoo/composer-graph",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/JBZoo/Composer-Graph.git",
-                "reference": "ffea561d7d9b0d5b764f39ca284883a8f79050a1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/JBZoo/Composer-Graph/zipball/ffea561d7d9b0d5b764f39ca284883a8f79050a1",
-                "reference": "ffea561d7d9b0d5b764f39ca284883a8f79050a1",
-                "shasum": ""
-            },
-            "require": {
-                "jbzoo/data": "^4.1.3",
-                "jbzoo/mermaid-php": "^2.2.0",
-                "jbzoo/utils": "^4.2.3",
-                "php": ">=7.2",
-                "symfony/console": ">=4.4",
-                "symfony/polyfill-php80": "^1.22.1"
-            },
-            "require-dev": {
-                "jbzoo/toolbox-dev": "^2.9.2",
-                "symfony/process": ">=4.4"
-            },
-            "bin": [
-                "composer-graph"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "JBZoo\\ComposerGraph\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Denis Smetannikov",
-                    "email": "admin@jbzoo.com",
-                    "role": "lead"
-                }
-            ],
-            "description": "Render composer.json dependencies ad graph",
-            "support": {
-                "issues": "https://github.com/JBZoo/Composer-Graph/issues",
-                "source": "https://github.com/JBZoo/Composer-Graph/tree/1.2.0"
-            },
-            "time": "2021-04-15T13:05:57+00:00"
+            "time": "2021-04-23T14:13:51+00:00"
         },
         {
             "name": "jbzoo/jbdump",
@@ -1898,73 +1678,17 @@
             "time": "2021-03-31T09:21:47+00:00"
         },
         {
-            "name": "jbzoo/mermaid-php",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/JBZoo/Mermaid-PHP.git",
-                "reference": "42fbb127a46e7c68130065887d11bc96f93f895c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/JBZoo/Mermaid-PHP/zipball/42fbb127a46e7c68130065887d11bc96f93f895c",
-                "reference": "42fbb127a46e7c68130065887d11bc96f93f895c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.2"
-            },
-            "require-dev": {
-                "jbzoo/toolbox-dev": "^2.9.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "JBZoo\\MermaidPHP\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Denis Smetannikov",
-                    "email": "admin@jbzoo.com",
-                    "role": "lead"
-                }
-            ],
-            "description": "Generate diagrams and flowcharts with the help of the mermaid script language",
-            "keywords": [
-                "diagrams",
-                "flowcharts",
-                "mermaid",
-                "mermaid-js"
-            ],
-            "support": {
-                "issues": "https://github.com/JBZoo/Mermaid-PHP/issues",
-                "source": "https://github.com/JBZoo/Mermaid-PHP/tree/2.2.0"
-            },
-            "time": "2021-04-15T12:39:56+00:00"
-        },
-        {
             "name": "jbzoo/phpunit",
-            "version": "4.7.0",
+            "version": "4.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JBZoo/PHPUnit.git",
-                "reference": "bce75b537129d814591aed5a0cef08e88aacf87b"
+                "reference": "4add7287a2487dbcaa86e1a970847e79cd3319ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JBZoo/PHPUnit/zipball/bce75b537129d814591aed5a0cef08e88aacf87b",
-                "reference": "bce75b537129d814591aed5a0cef08e88aacf87b",
+                "url": "https://api.github.com/repos/JBZoo/PHPUnit/zipball/4add7287a2487dbcaa86e1a970847e79cd3319ee",
+                "reference": "4add7287a2487dbcaa86e1a970847e79cd3319ee",
                 "shasum": ""
             },
             "require": {
@@ -1979,18 +1703,18 @@
             },
             "require-dev": {
                 "guzzlehttp/guzzle": ">=7.3.0",
-                "jbzoo/codestyle": "^2.9.4",
-                "jbzoo/composer-graph": "^1.0.4",
-                "jbzoo/data": "^4.1.3",
-                "jbzoo/http-client": "^3.4.2",
+                "jbzoo/codestyle": "^2.12.0",
+                "jbzoo/composer-graph": "^1.2.0",
+                "jbzoo/data": "^4.2.1",
+                "jbzoo/http-client": "^3.5.0",
                 "jbzoo/jbdump": "^1.5.6",
-                "jbzoo/toolbox-ci": "^1.3.5",
-                "jbzoo/toolbox-dev": "^2.9.1",
-                "jbzoo/utils": "^4.2.3",
+                "jbzoo/toolbox-ci": "^1.4.0",
+                "jbzoo/toolbox-dev": "^2.10.0",
+                "jbzoo/utils": "^4.3.0",
                 "symfony/process": ">=5.2.4"
             },
             "suggest": {
-                "jbzoo/utils": "^4.2.3 to use all functionality"
+                "jbzoo/utils": "^4.2.3 to use all functionals"
             },
             "type": "library",
             "extra": {
@@ -2032,32 +1756,30 @@
             ],
             "support": {
                 "issues": "https://github.com/JBZoo/PHPUnit/issues",
-                "source": "https://github.com/JBZoo/PHPUnit/tree/4.7.0"
+                "source": "https://github.com/JBZoo/PHPUnit/tree/4.9.0"
             },
-            "time": "2021-04-20T22:56:30+00:00"
+            "time": "2021-04-23T15:26:29+00:00"
         },
         {
             "name": "jbzoo/toolbox-dev",
-            "version": "2.10.0",
+            "version": "2.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JBZoo/Toolbox-Dev.git",
-                "reference": "a44c02232a8fca92e93cbed31c551087667a5a20"
+                "reference": "ed39c839334993872843e8260de79fe577487ffd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JBZoo/Toolbox-Dev/zipball/a44c02232a8fca92e93cbed31c551087667a5a20",
-                "reference": "a44c02232a8fca92e93cbed31c551087667a5a20",
+                "url": "https://api.github.com/repos/JBZoo/Toolbox-Dev/zipball/ed39c839334993872843e8260de79fe577487ffd",
+                "reference": "ed39c839334993872843e8260de79fe577487ffd",
                 "shasum": ""
             },
             "require": {
                 "fakerphp/faker": "^1.14.1",
-                "jbzoo/codestyle": "^2.10.0",
-                "jbzoo/composer-diff": "^1.1.2",
-                "jbzoo/composer-graph": "^1.1.1",
+                "jbzoo/codestyle": "^2.12.0",
                 "jbzoo/jbdump": "^1.5.6",
-                "jbzoo/phpunit": "^4.6.2",
-                "jbzoo/toolbox-ci": "^1.3.5",
+                "jbzoo/phpunit": "^4.9.0",
+                "jbzoo/toolbox-ci": "^1.4.0",
                 "php": ">=7.2",
                 "php-coveralls/php-coveralls": "^2.4.3",
                 "phpbench/phpbench": "^0.17.1",
@@ -2091,9 +1813,9 @@
             "description": "Developer toolbox only for JBZoo libs on github+travis",
             "support": {
                 "issues": "https://github.com/JBZoo/Toolbox-Dev/issues",
-                "source": "https://github.com/JBZoo/Toolbox-Dev/tree/2.10.0"
+                "source": "https://github.com/JBZoo/Toolbox-Dev/tree/2.11.0"
             },
-            "time": "2021-04-15T20:04:56+00:00"
+            "time": "2021-04-23T15:32:13+00:00"
         },
         {
             "name": "lstrojny/functional-php",
@@ -2380,71 +2102,6 @@
                 }
             ],
             "time": "2020-11-13T09:40:50+00:00"
-        },
-        {
-            "name": "nette/neon",
-            "version": "v3.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/neon.git",
-                "reference": "e4ca6f4669121ca6876b1d048c612480e39a28d5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/neon/zipball/e4ca6f4669121ca6876b1d048c612480e39a28d5",
-                "reference": "e4ca6f4669121ca6876b1d048c612480e39a28d5",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "nette/tester": "^2.0",
-                "phpstan/phpstan": "^0.12",
-                "tracy/tracy": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0-only",
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
-                }
-            ],
-            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
-            "homepage": "https://ne-on.org",
-            "keywords": [
-                "export",
-                "import",
-                "neon",
-                "nette",
-                "yaml"
-            ],
-            "support": {
-                "issues": "https://github.com/nette/neon/issues",
-                "source": "https://github.com/nette/neon/tree/v3.2.2"
-            },
-            "time": "2021-02-28T12:30:32+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -4135,12 +3792,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "593c4de369ca852cf3b86037f19435d47c136448"
+                "reference": "3c97c13698c448fdbbda20acb871884a2d8f45b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/593c4de369ca852cf3b86037f19435d47c136448",
-                "reference": "593c4de369ca852cf3b86037f19435d47c136448",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/3c97c13698c448fdbbda20acb871884a2d8f45b1",
+                "reference": "3c97c13698c448fdbbda20acb871884a2d8f45b1",
                 "shasum": ""
             },
             "conflict": {
@@ -4271,7 +3928,7 @@
                 "onelogin/php-saml": "<2.10.4",
                 "oneup/uploader-bundle": "<1.9.3|>=2,<2.1.5",
                 "openid/php-openid": "<2.3",
-                "openmage/magento-lts": "<19.4.8|>=20,<20.0.4",
+                "openmage/magento-lts": "<=19.4.12|>=20,<=20.0.8",
                 "orchid/platform": ">=9,<9.4.4",
                 "oro/crm": ">=1.7,<1.7.4",
                 "oro/platform": ">=1.7,<1.7.4",
@@ -4280,7 +3937,7 @@
                 "paragonie/random_compat": "<2",
                 "passbolt/passbolt_api": "<2.11",
                 "paypal/merchant-sdk-php": "<3.12",
-                "pear/archive_tar": "<1.4.12",
+                "pear/archive_tar": "<1.4.13",
                 "personnummer/personnummer": "<3.0.2",
                 "phpfastcache/phpfastcache": ">=5,<5.0.13",
                 "phpmailer/phpmailer": "<6.1.6",
@@ -4473,7 +4130,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-16T20:01:44+00:00"
+            "time": "2021-04-22T17:19:04+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

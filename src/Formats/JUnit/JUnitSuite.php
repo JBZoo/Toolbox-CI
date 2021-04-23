@@ -228,7 +228,7 @@ class JUnitSuite extends AbstractNode
             $result += $testSuite->getTime();
         }
 
-        $result += (float)array_reduce($this->testCases, static function (float $acc, JUnitCase $testCase) {
+        $result += array_reduce($this->testCases, static function (float $acc, JUnitCase $testCase) {
             return $acc + (float)$testCase->getTime();
         }, 0.0);
 
