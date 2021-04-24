@@ -44,8 +44,6 @@ class CliCommandsTest extends PHPUnit
             $helpMessage = $this->taskReal('convert', ['help' => null]);
             $helpMessage = implode("\n", [
                 '',
-                '### Usage',
-                '',
                 '```',
                 '$ php ./vendor/bin/toolbox-ci convert --help',
                 $helpMessage,
@@ -63,8 +61,6 @@ class CliCommandsTest extends PHPUnit
     {
         $helpMessage = $this->task('convert:map');
         $helpMessage = implode("\n", [
-            '',
-            '### Available directions',
             '',
             '```sh',
             'php ./vendor/bin/toolbox-ci convert:map',

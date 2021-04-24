@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4860e4ceb3a1fea9d2529b9a4ed7aa8a",
+    "content-hash": "702229d25bc163df73b9903bac441164",
     "packages": [
         {
             "name": "jbzoo/data",
@@ -1671,6 +1671,62 @@
                 "source": "https://github.com/JBZoo/JBDump/tree/1.5.6"
             },
             "time": "2021-03-31T09:21:47+00:00"
+        },
+        {
+            "name": "jbzoo/mermaid-php",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JBZoo/Mermaid-PHP.git",
+                "reference": "42fbb127a46e7c68130065887d11bc96f93f895c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JBZoo/Mermaid-PHP/zipball/42fbb127a46e7c68130065887d11bc96f93f895c",
+                "reference": "42fbb127a46e7c68130065887d11bc96f93f895c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "jbzoo/toolbox-dev": "^2.9.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JBZoo\\MermaidPHP\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Denis Smetannikov",
+                    "email": "admin@jbzoo.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "Generate diagrams and flowcharts with the help of the mermaid script language",
+            "keywords": [
+                "diagrams",
+                "flowcharts",
+                "mermaid",
+                "mermaid-js"
+            ],
+            "support": {
+                "issues": "https://github.com/JBZoo/Mermaid-PHP/issues",
+                "source": "https://github.com/JBZoo/Mermaid-PHP/tree/2.2.0"
+            },
+            "time": "2021-04-15T12:39:56+00:00"
         },
         {
             "name": "jbzoo/phpunit",

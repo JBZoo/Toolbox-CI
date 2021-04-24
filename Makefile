@@ -25,9 +25,7 @@ build: ##@Project Install all 3rd party dependencies
 
 
 update: ##@Project Install/Update all 3rd party dependencies
-	$(call title,"Install/Update all 3rd party dependencies")
-	@echo "Composer flags: $(JBZOO_COMPOSER_UPDATE_FLAGS)"
-	@composer update $(JBZOO_COMPOSER_UPDATE_FLAGS)
+	@make update-extend
 	@make create-symlink
 
 
@@ -42,12 +40,12 @@ create-symlink: ##@Project Create Symlink (alias for testing)
 
 
 test-example:
-	@-php ./vendor/phpunit/phpunit/phpunit        \
+	@-$(PHP_BIN) ./vendor/phpunit/phpunit/phpunit \
         --configuration ./phpunit.xml.dist        \
         ./tests/ExampleTest.php                   \
         --order-by=default
 	@cp ./build/coverage_junit/main.xml ./tests/fixtures/phpunit/junit.xml
-	@-php ./vendor/phpunit/phpunit/phpunit        \
+	@-$(PHP_BIN) ./vendor/phpunit/phpunit/phpunit \
         --configuration ./phpunit.xml.dist        \
         ./tests/ExampleTest.php                   \
         --order-by=default                        \

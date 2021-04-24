@@ -17,6 +17,10 @@ declare(strict_types=1);
 
 namespace JBZoo\PHPUnit;
 
+use JBZoo\MermaidPHP\Graph;
+use JBZoo\MermaidPHP\Helper;
+use JBZoo\MermaidPHP\Link;
+use JBZoo\MermaidPHP\Node;
 use JBZoo\ToolboxCI\Converters\Map;
 
 /**
@@ -58,5 +62,59 @@ class ToolboxCIReadmeTest extends AbstractReadmeTest
     public function testMapTable()
     {
         isContain(Map::getMarkdownTable(), self::getReadme());
+    }
+
+    public function testBuildGraphManually()
+    {
+        $sources = [];
+        foreach (Map::MAP_TESTS as $handler => $directions) {
+            if ($directions[Map::INPUT]) {
+                $sources[$handler::TYPE] = $handler::NAME;
+            }
+        }
+
+        $targets = [];
+        foreach (Map::MAP_TESTS as $handler => $directions) {
+            if ($directions[Map::OUTPUT]) {
+                $targets[$handler::TYPE] = $handler::NAME;
+            }
+        }
+
+        $graph = (new Graph([
+            'abc_order' => true,
+            'title'     => 'Direction Graph',
+            'direction' => Graph::LEFT_RIGHT,
+        ]))
+            ->addStyle('linkStyle default interpolate basis');
+
+        $graph->addNode($toolbox = new Node('toolbox-ci', 'Toolbox-CI', Node::CIRCLE));
+
+        foreach ($sources as $sourceType => $sourceName) {
+            $node = new Node($sourceType, $sourceName);
+            $graph->addNode($node);
+            $graph->addLink(new Link($node, $toolbox, '', Link::THICK));
+        }
+
+        foreach ($targets as $targetType => $targetName) {
+            $node = new Node($targetType, $targetName);
+            $graph->addNode($node);
+            $graph->addLink(new Link($toolbox, $node, '', Link::THICK));
+        }
+
+        file_put_contents(__DIR__ . '/../build/directions.html', $graph->renderHtml(['version' => '8.9.2']));
+
+        $url = str_replace(
+            "https://mermaid-js.github.io/mermaid-live-editor/#/edit/",
+            "https://mermaid.ink/img/",
+            Helper::getLiveEditorUrl($graph)
+        );
+
+        $tmpl = implode("\n", [
+            '<p align="center">',
+            "  <img src=\"{$url}\">",
+            '</p>',
+        ]);
+
+        isFileContains($tmpl, PROJECT_ROOT . '/README.md');
     }
 }

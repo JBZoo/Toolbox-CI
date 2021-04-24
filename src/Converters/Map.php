@@ -28,7 +28,7 @@ class Map
     public const INPUT  = 'input';
     public const OUTPUT = 'output';
 
-    private const MAP_TESTS = [
+    public const MAP_TESTS = [
         JUnitConverter::class               => [self::INPUT => true, self::OUTPUT => true],
         TeamCityTestsConverter::class       => [self::INPUT => false, self::OUTPUT => true],
         PhpMdJsonConverter::class           => [self::INPUT => true, self::OUTPUT => false],
@@ -38,7 +38,7 @@ class Map
         PhpMndConverter::class              => [self::INPUT => true, self::OUTPUT => false],
     ];
 
-    private const MAP_METRICS = [
+    public const MAP_METRICS = [
         PhpLocStatsTcConverter::class,
         PhpDependStatsTcConverter::class,
         PhpMetricsStatsTcConverter::class,
