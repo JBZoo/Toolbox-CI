@@ -1530,16 +1530,16 @@
         },
         {
             "name": "jbzoo/codestyle",
-            "version": "2.13.0",
+            "version": "2.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JBZoo/Codestyle.git",
-                "reference": "ff97d5dafd63870a9ceba34243f2018c451b2cff"
+                "reference": "2867f5730fe0b64f63b84f1e733dc6aaaf2b7797"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JBZoo/Codestyle/zipball/ff97d5dafd63870a9ceba34243f2018c451b2cff",
-                "reference": "ff97d5dafd63870a9ceba34243f2018c451b2cff",
+                "url": "https://api.github.com/repos/JBZoo/Codestyle/zipball/2867f5730fe0b64f63b84f1e733dc6aaaf2b7797",
+                "reference": "2867f5730fe0b64f63b84f1e733dc6aaaf2b7797",
                 "shasum": ""
             },
             "require": {
@@ -1557,7 +1557,7 @@
             },
             "require-dev": {
                 "jbzoo/phpunit": "^4.9.0",
-                "jbzoo/toolbox-ci": "^1.4.0",
+                "jbzoo/toolbox-ci": "^1.6.0",
                 "jbzoo/utils": "^4.4.0",
                 "phpbench/phpbench": "^0.17.1"
             },
@@ -1594,9 +1594,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JBZoo/Codestyle/issues",
-                "source": "https://github.com/JBZoo/Codestyle/tree/2.13.0"
+                "source": "https://github.com/JBZoo/Codestyle/tree/2.14.0"
             },
-            "time": "2021-04-23T20:32:22+00:00"
+            "time": "2021-04-25T22:47:37+00:00"
         },
         {
             "name": "jbzoo/jbdump",
