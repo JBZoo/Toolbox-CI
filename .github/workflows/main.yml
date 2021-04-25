@@ -31,10 +31,14 @@ jobs:
   phpunit:
     name: Tests
     runs-on: ubuntu-latest
+    env:
+      JBZOO_COMPOSER_UPDATE_FLAGS: ${{ matrix.composer_flags }}
     strategy:
       matrix:
         php-version: [ 7.2, 7.3, 7.4 ]
         experimental: [ false ]
+        composer_flags: [ "--prefer-lowest", "" ]
+        build-way: [ "build", "update build-phar" ]
         include:
           - php-version: "8.0"
             experimental: true
@@ -55,7 +59,7 @@ jobs:
 
       - name: Build the Project
         continue-on-error: ${{ matrix.experimental }}
-        run: make build --no-print-directory
+        run: make ${{ matrix.build-way }} --no-print-directory
 
       - name: 🧪 PHPUnit Tests
         continue-on-error: ${{ matrix.experimental }}

@@ -27,8 +27,8 @@ Usage:
   convert [options]
 
 Options:
-  -S, --input-format=INPUT-FORMAT    Source format. Available options: checkstyle, junit, phpmd-json, phpmnd, psalm-json, tc-inspections, tc-tests
-  -T, --output-format=OUTPUT-FORMAT  Target format. Available options: checkstyle, junit, phpmd-json, phpmnd, psalm-json, tc-inspections, tc-tests
+  -S, --input-format=INPUT-FORMAT    Source format. Available options: checkstyle, github, junit, phpmd-json, phpmnd, psalm-json, tc-inspections, tc-tests
+  -T, --output-format=OUTPUT-FORMAT  Target format. Available options: checkstyle, github, junit, phpmd-json, phpmnd, psalm-json, tc-inspections, tc-tests
   -N, --suite-name=SUITE-NAME        Set name of root suite
   -I, --input-file[=INPUT-FILE]      Use CLI input (STDIN, pipeline) OR use the option to define filename of source report
   -O, --output-file[=OUTPUT-FILE]    Use CLI output (STDOUT, pipeline) OR use the option to define filename with result
@@ -46,23 +46,25 @@ Options:
 
 ### Available Directions
 
-<p align="center">
-  <img src="https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFI7XG4gICAgY2hlY2tzdHlsZShcIkNoZWNrU3R5bGUueG1sXCIpO1xuICAgIGp1bml0KFwiSlVuaXQueG1sXCIpO1xuICAgIHBocG1kLWpzb24oXCJQSFBtZC5qc29uXCIpO1xuICAgIHBocG1uZChcIlBIUG1uZC54bWxcIik7XG4gICAgcHNhbG0tanNvbihcIlBzYWxtLmpzb25cIik7XG4gICAgdGMtaW5zcGVjdGlvbnMoXCJUZWFtQ2l0eSAtIEluc3BlY3Rpb25zXCIpO1xuICAgIHRjLXRlc3RzKFwiVGVhbUNpdHkgLSBUZXN0c1wiKTtcbiAgICB0b29sYm94LWNpKChcIlRvb2xib3gtQ0lcIikpO1xuXG4gICAgY2hlY2tzdHlsZSA9PT4gdG9vbGJveC1jaTtcbiAgICBqdW5pdCA9PT4gdG9vbGJveC1jaTtcbiAgICBwaHBtZC1qc29uID09PiB0b29sYm94LWNpO1xuICAgIHBocG1uZCA9PT4gdG9vbGJveC1jaTtcbiAgICBwc2FsbS1qc29uID09PiB0b29sYm94LWNpO1xuICAgIHRvb2xib3gtY2kgPT0+IGp1bml0O1xuICAgIHRvb2xib3gtY2kgPT0+IHRjLWluc3BlY3Rpb25zO1xuICAgIHRvb2xib3gtY2kgPT0+IHRjLXRlc3RzO1xuXG5saW5rU3R5bGUgZGVmYXVsdCBpbnRlcnBvbGF0ZSBiYXNpczsiLCJtZXJtYWlkIjp7InRoZW1lIjoiZm9yZXN0In19">
+<p align="center"><!-- Auto-created image via JBZoo\PHPUnit\ToolboxCIReadmeTest__testBuildGraphManually -->
+  <img src="https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggTFI7XG4gICAgY2hlY2tzdHlsZShcIkNoZWNrU3R5bGUueG1sXCIpO1xuICAgIGdpdGh1YihcIkdpdEh1YlwiKTtcbiAgICBqdW5pdChcIkpVbml0LnhtbFwiKTtcbiAgICBwaHBtZC1qc29uKFwiUEhQbWQuanNvblwiKTtcbiAgICBwaHBtbmQoXCJQSFBtbmQueG1sXCIpO1xuICAgIHBzYWxtLWpzb24oXCJQc2FsbS5qc29uXCIpO1xuICAgIHRjLWluc3BlY3Rpb25zKFwiVGVhbUNpdHkgLSBJbnNwZWN0aW9uc1wiKTtcbiAgICB0Yy10ZXN0cyhcIlRlYW1DaXR5IC0gVGVzdHNcIik7XG4gICAgdG9vbGJveC1jaSgoXCJUb29sYm94LUNJXCIpKTtcblxuICAgIGNoZWNrc3R5bGUgPT0+IHRvb2xib3gtY2k7XG4gICAganVuaXQgPT0+IHRvb2xib3gtY2k7XG4gICAgcGhwbWQtanNvbiA9PT4gdG9vbGJveC1jaTtcbiAgICBwaHBtbmQgPT0+IHRvb2xib3gtY2k7XG4gICAgcHNhbG0tanNvbiA9PT4gdG9vbGJveC1jaTtcbiAgICB0b29sYm94LWNpID09PiBnaXRodWI7XG4gICAgdG9vbGJveC1jaSA9PT4ganVuaXQ7XG4gICAgdG9vbGJveC1jaSA9PT4gdGMtaW5zcGVjdGlvbnM7XG4gICAgdG9vbGJveC1jaSA9PT4gdGMtdGVzdHM7XG5cbmxpbmtTdHlsZSBkZWZhdWx0IGludGVycG9sYXRlIGJhc2lzOyIsIm1lcm1haWQiOnsidGhlbWUiOiJmb3Jlc3QifX0=">
 </p>
 
 ```sh
 php ./vendor/bin/toolbox-ci convert:map
 ```
 
-| Source/Target          | CheckStyle.xml | JUnit.xml | PHPmd.json | PHPmnd.xml | Psalm.json | TeamCity - Inspections | TeamCity - Tests |
-|:-----------------------|:--------------:|:---------:|:----------:|:----------:|:----------:|:----------------------:|:----------------:|
-| CheckStyle.xml         |       -        |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| JUnit.xml              |       -        |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| PHPmd.json             |       -        |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| PHPmnd.xml             |       -        |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| Psalm.json             |       -        |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| TeamCity - Inspections |       -        |     -     |     -      |     -      |     -      |           -            |        -         |
-| TeamCity - Tests       |       -        |     -     |     -      |     -      |     -      |           -            |        -         |
+| Source/Target          | CheckStyle.xml | GitHub | JUnit.xml | PHPmd.json | PHPmnd.xml | Psalm.json | TeamCity - Inspections | TeamCity - Tests |
+|:-----------------------|:--------------:|:------:|:---------:|:----------:|:----------:|:----------:|:----------------------:|:----------------:|
+| CheckStyle.xml         |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| GitHub                 |       -        |   -    |     -     |     -      |     -      |     -      |           -            |        -         |
+| JUnit.xml              |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| PHPmd.json             |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| PHPmnd.xml             |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| Psalm.json             |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| TeamCity - Inspections |       -        |   -    |     -     |     -      |     -      |     -      |           -            |        -         |
+| TeamCity - Tests       |       -        |   -    |     -     |     -      |     -      |     -      |           -            |        -         |
+
 
 
 

@@ -61,7 +61,7 @@ class ToolboxCIReadmeTest extends AbstractReadmeTest
 
     public function testMapTable()
     {
-        isContain(Map::getMarkdownTable(), self::getReadme());
+        isFileContains(Map::getMarkdownTable(), PROJECT_ROOT . '/README.md');
     }
 
     public function testBuildGraphManually()
@@ -110,7 +110,7 @@ class ToolboxCIReadmeTest extends AbstractReadmeTest
         );
 
         $tmpl = implode("\n", [
-            '<p align="center">',
+            '<p align="center"><!-- Auto-created image via ' . getTestName(true) . ' -->',
             "  <img src=\"{$url}\">",
             '</p>',
         ]);
