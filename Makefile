@@ -25,7 +25,8 @@ build: ##@Project Install all 3rd party dependencies
 
 
 update: ##@Project Install/Update all 3rd party dependencies
-	@make update-extend
+	@echo "Composer flags: $(JBZOO_COMPOSER_UPDATE_FLAGS)"
+	@composer update $(JBZOO_COMPOSER_UPDATE_FLAGS)
 	@make create-symlink
 
 
