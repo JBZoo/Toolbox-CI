@@ -19,6 +19,7 @@ namespace JBZoo\ToolboxCI\Converters;
 
 use JBZoo\ToolboxCI\Formats\GithubActions\GithubActions;
 use JBZoo\ToolboxCI\Formats\GithubActions\GithubCase;
+use JBZoo\ToolboxCI\Formats\GithubActions\GithubSuite;
 use JBZoo\ToolboxCI\Formats\Source\SourceCase;
 use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
 
@@ -28,8 +29,8 @@ use JBZoo\ToolboxCI\Formats\Source\SourceSuite;
  */
 class GithubCliConverter extends AbstractConverter
 {
-    public const TYPE = 'github';
-    public const NAME = 'GitHub';
+    public const TYPE = 'github-cli';
+    public const NAME = 'GitHub Actions - CLI';
 
     /**
      * @inheritDoc
@@ -37,15 +38,21 @@ class GithubCliConverter extends AbstractConverter
     public function fromInternal(SourceSuite $sourceSuite): string
     {
         $ghActions = new GithubActions();
-        $this->renderSuite($sourceSuite, $ghActions);
+
+        if ($this->rootSuiteName) {
+            $this->renderSuite($sourceSuite, $ghActions->addSuite($this->rootSuiteName));
+        } else {
+            $this->renderSuite($sourceSuite, $ghActions);
+        }
+
         return (string)$ghActions;
     }
 
     /**
-     * @param SourceSuite   $sourceSuite
-     * @param GithubActions $ghActions
+     * @param SourceSuite               $sourceSuite
+     * @param GithubActions|GithubSuite $ghActions
      */
-    private function renderSuite(SourceSuite $sourceSuite, GithubActions $ghActions): void
+    private function renderSuite(SourceSuite $sourceSuite, $ghActions): void
     {
         foreach ($sourceSuite->getCases() as $sourceCase) {
             $this->renderTestCase($sourceCase, $ghActions);
@@ -57,10 +64,10 @@ class GithubCliConverter extends AbstractConverter
     }
 
     /**
-     * @param SourceCase    $sourceCase
-     * @param GithubActions $ghActions
+     * @param SourceCase                $sourceCase
+     * @param GithubActions|GithubSuite $ghActions
      */
-    private function renderTestCase(SourceCase $sourceCase, GithubActions $ghActions): void
+    private function renderTestCase(SourceCase $sourceCase, $ghActions): void
     {
         if (null !== $sourceCase->stdOut) {
             $level = GithubCase::LEVEL_ERROR;

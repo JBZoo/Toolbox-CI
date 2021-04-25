@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 namespace JBZoo\PHPUnit;
 
+use JBZoo\ToolboxCI\Converters\CheckStyleConverter;
 use JBZoo\ToolboxCI\Converters\GithubCliConverter;
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
 use JBZoo\ToolboxCI\Formats\GithubActions\GithubActions;
@@ -79,6 +80,27 @@ class ConverterGithubTest extends PHPUnit
             "::error file={$file},line=90::Some echo output",
             "::error file={$file},line=96::JBZoo\PHPUnit\ExampleTest::testCompareArrays%0AFailed asserting that two arrays are identical.%0A--- Expected%0A+++ Actual%0A@@ @@%0A-Array &0 ()%0A+Array &0 (%0A+    0 => 1%0A+)%0A%0Avendor/jbzoo/phpunit/src/functions/aliases.php:197%0Atests/ExampleTest.php:98",
             "::error file={$file},line=101::JBZoo\PHPUnit\ExampleTest::testCompareString%0AFailed asserting that two strings are identical.%0A--- Expected%0A+++ Actual%0A@@ @@%0A-'132'%0A+'123'%0A%0Avendor/jbzoo/phpunit/src/functions/aliases.php:197%0Atests/ExampleTest.php:103",
+        ]), $targetSource);
+    }
+
+    public function testCodeStyle()
+    {
+        $pathPrefix = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci';
+
+        $sourceCode = (new CheckStyleConverter())
+            ->setRootPath($pathPrefix)
+            ->toInternal(file_get_contents(Fixtures::PHPCS_CODESTYLE));
+        $targetSource = (new GithubCliConverter())
+            ->setRootPath($pathPrefix)
+            ->setRootSuiteName('Tests')
+            ->fromInternal($sourceCode);
+
+        isSame(implode("\n", [
+            "::group::Tests",
+            "::error file=src/JUnit/JUnitXml.php,line=24,col=5::Visibility must be declared on all constants if your project supports PHP 7.1 or later%0A%0AVisibility must be declared on all constants if your project supports PHP 7.1 or later%0ARule     : PSR12.Properties.ConstantVisibility.NotFound%0AFile Path: src/JUnit/JUnitXml.php:24:5%0ASeverity : warning",
+            "::error file=src/JUnit/JUnitXml.php,line=44,col=35::Opening brace should be on a new line%0A%0AOpening brace should be on a new line%0ARule     : Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine%0AFile Path: src/JUnit/JUnitXml.php:44:35%0ASeverity : error",
+            "::error file=src/JUnit/JUnitXml.php,line=50,col=1::Expected 1 newline at end of file; 0 found%0A%0AExpected 1 newline at end of file; 0 found%0ARule     : PSR2.Files.EndFileNewline.NoneFound%0AFile Path: src/JUnit/JUnitXml.php:50%0ASeverity : error",
+            "::endgroup::"
         ]), $targetSource);
     }
 

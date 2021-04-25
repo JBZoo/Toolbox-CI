@@ -90,13 +90,13 @@ class ToolboxCIReadmeTest extends AbstractReadmeTest
         $graph->addNode($toolbox = new Node('toolbox-ci', 'Toolbox-CI', Node::CIRCLE));
 
         foreach ($sources as $sourceType => $sourceName) {
-            $node = new Node($sourceType, $sourceName);
+            $node = new Node($sourceType . "_src", $sourceName);
             $graph->addNode($node);
             $graph->addLink(new Link($node, $toolbox, '', Link::THICK));
         }
 
         foreach ($targets as $targetType => $targetName) {
-            $node = new Node($targetType, $targetName);
+            $node = new Node($targetType . "_target", $targetName);
             $graph->addNode($node);
             $graph->addLink(new Link($toolbox, $node, '', Link::THICK));
         }

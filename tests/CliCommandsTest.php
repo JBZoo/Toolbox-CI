@@ -21,6 +21,7 @@ use JBZoo\ToolboxCI\Commands\Convert;
 use JBZoo\ToolboxCI\Commands\ConvertMap;
 use JBZoo\ToolboxCI\Commands\TeamCityStats;
 use JBZoo\ToolboxCI\Converters\CheckStyleConverter;
+use JBZoo\ToolboxCI\Converters\GithubCliConverter;
 use JBZoo\ToolboxCI\Converters\JUnitConverter;
 use JBZoo\ToolboxCI\Converters\PhpLocStatsTcConverter;
 use JBZoo\ToolboxCI\Converters\PhpMdJsonConverter;
