@@ -1,0 +1,47 @@
+#
+# JBZoo Toolbox - Toolbox-CI
+#
+# This file is part of the JBZoo Toolbox project.
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+#
+# @package    Toolbox-CI
+# @license    MIT
+# @copyright  Copyright (C) JBZoo.com, All rights reserved.
+# @link       https://github.com/JBZoo/Toolbox-CI
+#
+
+name: Test Output
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testinputs
+        run: |
+            echo "::group::My title"
+            echo "::add-mask::Mona The Octocat 11"
+            echo "::debug::Set the Octocat variable"
+            echo "::warning file=Makefile,line=14,col=9::Missing semicolon 1"
+            echo "::error file=README.md,line=47,col=15::Missing semicolon 2"
+            echo "::debug::Set the Octocat variable 10"
+            echo "::warning file=Makefile,line=20::Missing semicolon 3"
+            echo "::error file=README.md::Missing semicolon 4"
+            echo "::endgroup::"
+            echo "000"
+            echo "::group::Nested 1"
+            echo "111"
+            echo "::group::Nested 2"
+            echo "222"
+            echo "::endgroup::"
+            echo "::group::Nested 3"
+            echo "333"
+            echo "::endgroup::"
+            echo "444"
+            echo "::endgroup::"
