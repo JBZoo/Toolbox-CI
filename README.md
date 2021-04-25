@@ -27,8 +27,8 @@ Usage:
   convert [options]
 
 Options:
-  -S, --input-format=INPUT-FORMAT    Source format. Available options: checkstyle, github, junit, phpmd-json, phpmnd, psalm-json, tc-inspections, tc-tests
-  -T, --output-format=OUTPUT-FORMAT  Target format. Available options: checkstyle, github, junit, phpmd-json, phpmnd, psalm-json, tc-inspections, tc-tests
+  -S, --input-format=INPUT-FORMAT    Source format. Available options: checkstyle, github-cli, junit, phpmd-json, phpmnd, psalm-json, tc-inspections, tc-tests
+  -T, --output-format=OUTPUT-FORMAT  Target format. Available options: checkstyle, github-cli, junit, phpmd-json, phpmnd, psalm-json, tc-inspections, tc-tests
   -N, --suite-name=SUITE-NAME        Set name of root suite
   -I, --input-file[=INPUT-FILE]      Use CLI input (STDIN, pipeline) OR use the option to define filename of source report
   -O, --output-file[=OUTPUT-FILE]    Use CLI output (STDOUT, pipeline) OR use the option to define filename with result
@@ -54,16 +54,16 @@ Options:
 php ./vendor/bin/toolbox-ci convert:map
 ```
 
-| Source/Target          | CheckStyle.xml | GitHub | JUnit.xml | PHPmd.json | PHPmnd.xml | Psalm.json | TeamCity - Inspections | TeamCity - Tests |
-|:-----------------------|:--------------:|:------:|:---------:|:----------:|:----------:|:----------:|:----------------------:|:----------------:|
-| CheckStyle.xml         |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| GitHub                 |       -        |   -    |     -     |     -      |     -      |     -      |           -            |        -         |
-| JUnit.xml              |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| PHPmd.json             |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| PHPmnd.xml             |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| Psalm.json             |       -        |  Yes   |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
-| TeamCity - Inspections |       -        |   -    |     -     |     -      |     -      |     -      |           -            |        -         |
-| TeamCity - Tests       |       -        |   -    |     -     |     -      |     -      |     -      |           -            |        -         |
+| Source/Target          | CheckStyle.xml | GitHub Actions - CLI | JUnit.xml | PHPmd.json | PHPmnd.xml | Psalm.json | TeamCity - Inspections | TeamCity - Tests |
+|:-----------------------|:--------------:|:--------------------:|:---------:|:----------:|:----------:|:----------:|:----------------------:|:----------------:|
+| CheckStyle.xml         |       -        |         Yes          |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| GitHub Actions - CLI   |       -        |          -           |     -     |     -      |     -      |     -      |           -            |        -         |
+| JUnit.xml              |       -        |         Yes          |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| PHPmd.json             |       -        |         Yes          |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| PHPmnd.xml             |       -        |         Yes          |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| Psalm.json             |       -        |         Yes          |    Yes    |     -      |     -      |     -      |          Yes           |       Yes        |
+| TeamCity - Inspections |       -        |          -           |     -     |     -      |     -      |     -      |           -            |        -         |
+| TeamCity - Tests       |       -        |          -           |     -     |     -      |     -      |     -      |           -            |        -         |
 
 
 
