@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "702229d25bc163df73b9903bac441164",
+    "content-hash": "3cedd79cdaa8d19435999e24998712e7",
     "packages": [
         {
             "name": "jbzoo/data",
