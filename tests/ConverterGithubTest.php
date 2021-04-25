@@ -36,9 +36,10 @@ class ConverterGithubTest extends PHPUnit
             ->setRootPath($pathPrefix)
             ->toInternal(file_get_contents(Fixtures::PHPUNIT_JUNIT_SIMPLE));
         $targetSource = (new GithubCliConverter())
+            ->setRootPath($pathPrefix)
             ->fromInternal($sourceCode);
 
-        $file = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci1/tests/ExampleTest.php';
+        $file = 'tests/ExampleTest.php';
 
         isSame(implode("\n", [
             "::error file={$file},line=33::JBZoo\PHPUnit\ExampleTest::testInValid%0AFailed asserting that false is true.%0A%0Avendor/jbzoo/phpunit/src/functions/aliases.php:107%0Atests/ExampleTest.php:35",
@@ -61,9 +62,10 @@ class ConverterGithubTest extends PHPUnit
             ->setRootPath($pathPrefix)
             ->toInternal(file_get_contents(Fixtures::PHPUNIT_JUNIT_NESTED));
         $targetSource = (new GithubCliConverter())
+            ->setRootPath($pathPrefix)
             ->fromInternal($sourceCode);
 
-        $file = '/Users/smetdenis/Work/projects/jbzoo-toolbox-ci/tests/ExampleTest.php';
+        $file = 'tests/ExampleTest.php';
 
         isSame(implode("\n", [
             "::error file={$file},line=38::JBZoo\PHPUnit\ExampleTest::testInValid%0AFailed asserting that false is true.%0A%0Avendor/jbzoo/phpunit/src/functions/aliases.php:107%0Atests/ExampleTest.php:40",

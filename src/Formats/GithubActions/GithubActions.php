@@ -88,7 +88,7 @@ class GithubActions
         }
 
         return str_replace(
-            ["\n", getcwd() . DIRECTORY_SEPARATOR],
+            ["\n", "\r"],
             ['%0A', ''],
             trim($message)
         );

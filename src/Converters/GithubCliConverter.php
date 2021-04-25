@@ -92,7 +92,7 @@ class GithubCliConverter extends AbstractConverter
             $case->line = $sourceCase->line;
             $case->column = $sourceCase->column;
             $case->level = $level;
-            $case->message = $message;
+            $case->message = $this->cleanFilepath($message);
         }
     }
 }
